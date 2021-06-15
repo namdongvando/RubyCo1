@@ -1,0 +1,67 @@
+<div class="row " ng-controller="mnewsController" >
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-header">
+                <h3 class="box-title">Danh Sách Bài Viết</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding ">
+                <div class="table-responsive" >
+                    <table class="table dataTable table-hover table-bordered" id="dataTable" >
+                        <thead>
+                            <tr>
+                                <th style="width: 50px">#</th>
+                                <th >Tên Trang</th>
+                                <th style="width: 150px">Danh mục cha</th>
+                                <th style="width: 100px">Hiển Thị</th>
+                                <th style="width: 100px">Loại Trang</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="itemPage in getPagesByGroup('0')"  >
+                            <tr>
+                                <td>{{itemPage.idPa}}</td>
+                                <td>
+                                    <a href="/mnews/newsbypages/{{itemPage.idPa}}" >--|{{itemPage.Name}}</a>
+                                </td>
+                                <td>
+                                    <span >{{itemPage.idGroupName}}</span>
+                                </td>
+                                <td  >
+                                    {{itemPage.isShow==0?"Ẩn":"Hiện"}}
+                                </td  >
+                                <td  >{{itemPage.TypeName}}</td>
+                            </tr>
+                            <tr ng-repeat="itemPage1 in getPagesByGroup(itemPage.idPa)"  >
+                                <td style="width: 50px;">{{itemPage1.idPa}}</td>
+                                <td>
+                                    <a href="/mnews/newsbypages/{{itemPage1.idPa}}" >--|--|{{itemPage1.Name}}</a>
+                                </td>
+                                <td style="width: 150px">
+                                    <span >{{itemPage1.idGroupName}}</span>
+                                </td>
+                                <td style="width: 150px" >
+                                    {{itemPage1.isShow==0?"Ẩn":"Hiện"}}
+                                </td  >
+                                <td style="width: 150px" >{{itemPage1.TypeName}}</td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên Trang</th>
+                                <th>Nhóm</th>
+                                <th>Hiển Thị</th>
+                                <th>Loại Trang</th>
+                            </tr>
+                        </tfoot>
+
+                    </table>
+
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

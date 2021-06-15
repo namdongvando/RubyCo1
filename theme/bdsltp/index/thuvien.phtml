@@ -1,0 +1,42 @@
+<?php
+$path = "public/img/images/thuvien/";
+$io = new lib\redDirectory();
+$a = [];
+$listImg = $io->redDirectoryByPath($path, $a);
+?>
+
+<div class="container">
+    <h2 class="title-pannel text-left" ><span>Thư Viện Hình Ảnh</span></h2>
+    <div class="margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+            <div class="row">
+                <div class="content-page">
+                    <div class="filter-v1">
+                        <div class="thongtincanbiet row mix-grid thumbnails">
+                            <?php
+                            if ($a) {
+                                foreach ($a as $k => $imgName) {
+                                    $fullPath = $path . $imgName;
+                                    ?>
+                                    <div class="col-md-3 col-sm-4 mix category_1 mix_all" style="display: block; opacity: 1; ">
+                                        <div class="mix-inner ">
+                                            <img alt="<?php echo $fullPath ?>" data-src="<?php echo $fullPath ?>" src="/public/loading.svg" class="lazy hinhcol4  img-responsive">
+                                            <div class="mix-details">
+                                                <a class="mix-link"><i class="fa fa-link"></i></a>
+                                                <a data-rel="fancybox-button" title="<?php echo $_v->Name; ?>" href="<?php echo $fullPath; ?>" class="mix-preview fancybox-button"><i class="fa fa-search"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+</div>

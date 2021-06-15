@@ -1,0 +1,106 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$dir = new lib\redDirectory();
+$io = new lib\io();
+$fileCat = "data/category/cat.json";
+if (isset($_POST["SaveJsoncat"])) {
+    $Content = json_encode($_POST["name"]);
+    $b = $io->writeFile($fileCat, $Content);
+}
+
+
+$a = [];
+$dirPath = "data/product/";
+$dir->redDirectoryByPath($dirPath, $a);
+$b = $io->readFile($fileCat);
+$b = json_decode($b, JSON_OBJECT_AS_ARRAY);
+$Category = new \Model\Category();
+$Cats = $Category->getCategorys(false);
+?>
+
+<div class="row ">
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-book"></i>
+                <h3 class="box-title">Danh Mục Sản Phẩm ()</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group bakco-categorymenu">
+                    </div>
+                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                </div><!-- /. tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding ">
+
+                <div class="col-md-4"  >
+                    <form action="" method="POST" enctype="multipart/form-data" >
+                        <?php
+                        if ($a)
+                            foreach ($a as $key => $value) {
+                                $b[$value] = isset($b[$value]) ? $b[$value] : 0;
+                                ?> 
+                                <div class="col-md-12 form-group">
+                                    <label for=""><?php echo $value ?></label>
+                                    <input type="text" data-link="/laytin/importbycatid/<?php echo $value ?>" class="ajaxClass form-control" value="<?php echo isset($b[$value]) ? $b[$value] : 0 ?>" name="name[<?php echo $value ?>]" >
+                                    <input type="button" data-link="/laytin/importbyname/" data-method="post" data-datapost='{"catid":"<?php echo $b[$value]; ?>","fileName":"<?php echo $value; ?>"}' class="btnajaxClass btn btn-success" value="rawdata" >
+                                </div>
+                                <?php
+                            }
+                        ?>
+                        <input value="save" type="submit" name="SaveJsoncat" >
+                        <!--<input value="Drove Data" type="button" id="SaveJsoncat" name="SaveJsoncat" >-->
+
+                    </form>
+                </div>
+                <div class="col-md-4" >
+                    <table class="table table-responsive" >
+                        <?php
+                        foreach ($Cats as $key => $value) {
+                            $value = new \Model\Category($value);
+                            ?> 
+                            <tr> 
+                                <td><?php echo $value->catID ?></td>
+                                <td><?php echo $value->Path ?></td>
+                                <td><?php echo $value->catName ?></td>
+                                <td><?php echo $value->parentCatID ?></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </table>
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
+<script src="/public/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script type="text/javascript" >
+    $(function() {
+        $(".btnajaxClass").click(function() {
+            var data = $(this).data();
+            console.log(data);
+            $.ajax({url: data.link, method: data.method, data: $.param(data.datapost), success: function(res) {
+                    console.log(res);
+                }});
+        });
+        $("#SaveJsoncat").click(function() {
+            $(".ajaxClass").each(function() {
+                var data = $(this).data();
+                $.ajax({url: data.link, success: function(result) {
+                        console.log(result);
+                    }});
+            });
+
+        });
+    });
+
+</script>

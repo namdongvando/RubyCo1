@@ -1,0 +1,177 @@
+<?php
+$a = new Model_Adapter();
+ob_start();
+$_Pages = new Module\pages\Model\pages();
+?>
+<form action="/pages/index/addpage/" method="POST" enctype="multipart/form-data" > 
+    <div class="row "  ng-controller="editpageController" ng-init='editpageInit()' >
+        <section class="col-md-12" >
+            <div class="box box-solid ">
+                <div class="box-header ">
+                    <a href="/pages/index/" class="btn btn-sm btn-primary pull-left" style="margin-right: 10px;" >
+                        <i class="fa fa-arrow-left" ></i>
+                    </a>
+                    <h3 class="box-title">Quản Lý Trang </h3>
+                    <div class="btn-group btn-group-sm pull-right" >
+                        <button type="submit" name="AddPage" class=" btn btn-success btn-sm" >Lưu</button>
+                    </div>
+                    <hr>
+                    <!-- tools box -->
+                </div><!-- /.box-header -->
+                <div class="box-body ">
+                    <div class="col-md-3" >
+                        <div class="row" >
+                            <div class="form-group ">
+                                <label for="">__Name___</label>
+                                <input type="text" value="{{itemPage.Name}}" class="form-control" name="Pages[Name]" >
+                            </div>
+
+                            <div class="form-group ">
+                                <input type="text" value="{{itemPage.Urlimages}}" class="hidden" name="Urlimages" >
+                                <img src="{{itemPage.Urlimages}}" style="height: 100px;" class="img img-responsive" >
+                                <input type="file" class="form-control" name="Fileimages" >
+                            </div>
+                            <div class="form-group ">
+                                <label for="">__isShow___</label>
+                                <input type="text" value="{{itemPage.isShow}}" class="form-control" name="Pages[isShow]" >
+                            </div>
+
+                            <div class="form-group hidden">
+                                <label for="">__Type___</label>
+                                <input type="text" value="{{itemPage.Type}}" class="form-control" name="Pages[Type]" >
+                            </div>
+
+                            <div class="form-group hidden ">
+                                <label for="">__idPa___</label>
+                                <input type="text" value="{{itemPage.idPa}}" class="form-control" name="Pages[idPa]" >
+                            </div>
+                            <div class="form-group ">
+                                <label for="">__idGroup___</label>
+                                <input type="text" value="{{itemPage.idGroup}}" class="form-control" name="Pages[idGroup]" >
+                            </div>
+                            <div class="form-group hidden">
+                                <label for="">__Alias___</label>
+                                <input type="text" value="{{itemPage.Alias}}" class="form-control" name="Pages[Alias]" >
+                            </div>
+                            <div class="form-group ">
+                                <label for="">__OrderBy___</label>
+                                <input type="text" value="{{itemPage.OrderBy}}" class="form-control" name="Pages[OrderBy]" >
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-9" >
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a target="_self" href="#home" aria-controls="home" role="tab" data-toggle="tab">__Summary___</a>
+                                </li>
+                                <li role="presentation">
+                                    <a target="_self" href="#tab" aria-controls="tab" role="tab" data-toggle="tab">__Content___</a>
+                                </li>
+                                <li role="presentation">
+                                    <a target="_self" href="#cauhinh" aria-controls="tab" role="tab" data-toggle="tab">Cấu Hình</a>
+                                </li>
+                                <li role="presentation">
+                                    <a target="_self" href="#seo" aria-controls="tab" role="tab" data-toggle="tab">Thông tin SEO</a>
+                                </li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                    <textarea class="editor" id="Summary"  name="Pages[Summary]" >{{itemPage.Summary}}</textarea>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="seo">
+
+                                    <div class="panel " >
+                                        <div class="col-md-12" >
+                                            <div class="form-group ">
+                                                <label for="">__Title___</label>
+                                                <textarea class="form-control"  name="Pages[Title]" >{{itemPage.Title}}</textarea>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="">__Des___</label>
+                                                <textarea class="form-control"  name="Pages[Des]" >{{itemPage.Des}}</textarea>
+                                            </div>
+
+                                            <div class="form-group ">
+                                                <label for="">__Keyword___</label>
+                                                <textarea class="form-control"  name="Pages[Keyword]" >{{itemPage.Keyword}}</textarea>
+                                            </div>        
+                                        </div>
+                                        <div class="clearfix" ></div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="tab">
+                                    <textarea class="editor" id="Content"  name="Pages[Content]" >{{itemPage.Content}}</textarea>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="cauhinh">
+                                    <div class="form-group hidden">
+                                        <label for="">Link</label>
+                                        <div class="form-inline" >
+                                            <input style="min-width: 90%;" id="copyLink" type="text" class="form-control" value="<?php echo $_Pages->linkPagesCurent() ?>" placeholder="...">
+                                            <button class="btn btn-success" type="button" onclick="copytext()" >Copy</button>
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered" >
+                                        <tr>
+                                            <td>Key</td>
+                                            <td>Value</td>
+                                        </tr>
+                                        <tr >
+                                            <td>
+                                                Là Thông Tin Dịch Vụ
+                                            </td>
+                                            <td>
+                                                <select class="form-control" ng-model="itemPage.Note.IsSevicer"    >
+                                                    <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0" >Không</option>
+                                                    <option ng-selected="itemPage.Note.IsSevicer == '1'" value="1" >Có</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <td>
+                                                Hiển Thị Các Dự Án Đã Làm
+                                            </td>
+                                            <td>
+                                                <select class="form-control" ng-model="itemPage.Note.IsSevicer"    >
+                                                    <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0" >Không</option>
+                                                    <option ng-selected="itemPage.Note.Show == '1'" value="1" >Có</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <textarea class="hidden form-control " name="Pages[Note]"  class="form-control"  rows="10" >{{itemPage.Note}}</textarea>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+</form>
+<script>
+    function copytext() {
+        var copyText = document.getElementById("copyLink");
+        copyText.select();
+        document.execCommand("copy");
+    }
+</script>
+<?php
+$str = ob_get_clean();
+$str = str_replace("__Name___", "Tên Trang", $str);
+$str = str_replace("__Urlimages___", "Hình", $str);
+$str = str_replace("__isShow___", "Hiển Thị", $str);
+$str = str_replace("__Type___", "Loại Trang", $str);
+$str = str_replace("__idGroup___", "Nhóm", $str);
+$str = str_replace("__Title___", "Tiêu Đề", $str);
+$str = str_replace("__Des___", "Mô Tả", $str);
+$str = str_replace("__Keyword___", "Từ Khóa", $str);
+$str = str_replace("__Summary___", "Tóm Tắt", $str);
+$str = str_replace("__Content___", "Nội Dung", $str);
+$str = str_replace("__OrderBy___", "Sắp Xếp", $str);
+echo $str;
+?>

@@ -1,0 +1,44 @@
+<?php
+$Minfor = new Module\minfor\Model\infor();
+$infors = $Minfor->infors();
+?>
+
+<div  class="no-border-radius panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Thông Tin Chung</h3>
+    </div>
+    <div class="panel-body">
+        <h3>Các cấu hình này không đổi</h3>
+        <form action="" enctype="multipart/form-data" method="POST" >
+            <table class="table table-bordered" >
+
+                <tbody>
+                    <?php
+                    foreach ($infors as $_in) {
+                        ?>
+                        <tr>
+                            <td><?php echo $_in["ID"] ?></td>
+                            <td><input class="form-control" name="Name[<?php echo $_in["ID"] ?>]" value="<?php echo $_in["Name"] ?>" > </td>
+                            <td><input class="form-control" name="Title[<?php echo $_in["ID"] ?>]" value="<?php echo $_in["Title"] ?>" > </td>
+                            <td><textarea class="form-control" name="Content[<?php echo $_in["ID"] ?>]" ><?php echo $_in["Content"] ?></textarea> </td>
+                            <td>
+                                <textarea name="Config[<?php echo $_in["ID"] ?>]" class="form-control" ><?php echo $_in["Config"] ?></textarea>
+                            </td>
+                            <td>
+                                <textarea name="dataConfig[<?php echo $_in["ID"] ?>]" class="form-control" ><?php echo $_in["dataConfig"] ?></textarea>
+                            </td>
+                            <td>
+                                <a href="/minfor/index/deleteinfor/<?php echo $_in["ID"] ?>" class="btn btn-danger" >Xóa</a>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </tbody>
+
+            </table>
+            <button name="Luu" class="btn btn-success pull-right" value="Luu"  type="submit" >Lưu</button>
+        </form>
+        <a href="/minfor/index/addinfor/" class="pull-left btn btn-primary" >Thêm</a>
+    </div>
+</div>

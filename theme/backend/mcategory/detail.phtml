@@ -1,0 +1,158 @@
+<div class="row " ng-controller="categorydetailController" ng-init="categorydetailInit(<?php echo $_Param[0] ?>)" >
+    <section class="col-md-12 " >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-book"></i>
+                <h3 class="box-title">Danh Mục ({{_CategoryDetail.catName}})</h3>
+                <!-- tools box -->
+
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div >
+                    <div class="col-md-4 connectedSortable" >
+                        <div class="box box-solid " style="margin-top: 20px;" >
+                            <div class="box-header bg-green-gradient">
+                                <h3 class="box-title">Thông Tin Chung </h3>
+                                <div class="pull-right box-tools">
+                                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div><!-- /. tools -->
+                            </div><!-- /.box-header -->
+                            <div class="box-body no-padding table-responsive" >
+                                <table class="table table-bordered" >
+                                    <tr>
+                                        <td>Mã Danh Mục</td>
+                                        <td>{{_CategoryDetail.catID}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tên Danh Mục</td>
+                                        <td>{{_CategoryDetail.catName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Danh Mục Cha</td>
+                                        <td>{{_CategoryDetail.parentCatID}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Path</td>
+                                        <td>{{_CategoryDetail.Path}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Link</td>
+                                        <td>{{_CategoryDetail.Link}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Số Thứ Tự</td>
+                                        <td>{{_CategoryDetail.Serial}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ghi Chú</td>
+                                        <td>{{_CategoryDetail.Note}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tình Trạng</td>
+                                        <td>
+                                            <small ng-show="_CategoryDetail.Public == '0'" class="label label-danger"> Ẩn</small>
+                                            <small ng-show="_CategoryDetail.Public == '1'" class="label label-success"> Hiện</small>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div><!-- /.box-body -->
+                            <div class="box-footer" >
+                                <a class="btn btn-success" href="/mcategory/edit/<?php echo $_Param[0]; ?>" class="class" id="id" >Sửa</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 connectedSortable" >
+                        <div class="box box-solid " style="margin-top: 20px;" >
+                            <div class="box-header bg-green-gradient">
+                                <a ng-show="_CategoryDetail.parentCatID > 0" class="btn btn-primary btn-xs" href="/mcategory/detail/{{_CategoryDetail.parentCatID}}"  >
+                                    <i class="fa fa-arrow-left" ></i>
+                                </a>
+                                <h3 class="box-title">Các Danh Mục Con</h3>
+                                <div class="pull-right box-tools">
+                                    <div class="btn-group bakco-categorymenu">
+                                    </div>
+                                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body no-padding table-responsive"  >
+                                <table class="table table-bordered" >
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Mã Danh Mục</th>
+                                            <th>Tên Danh Mục</th>
+                                            <th>Số Thứ Tự</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="itemCat in _ListCategoryByParent" >
+                                            <td>{{$index + 1}}</td>
+                                            <td>
+                                                <a href="/mcategory/detail/{{itemCat.catID}}"  ><b>{{itemCat.catID}}</b></a>
+                                            </td>
+                                            <td>
+                                                <a href="/mcategory/detail/{{itemCat.catID}}"  ><b>{{itemCat.catName}}</b></a>
+                                            </td>
+                                            <td>
+                                                <b>{{itemCat.Serial}}</b>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4" >
+                                                <a class="btn btn-primary" data-toggle="modal" target="_self" href='#modal-id'>Thêm Danh Mục</a>
+                                                <a class="btn btn-primary" href='/mproduct/ThemNhanSanPhan/{{_CategoryDetail.catID}}'>Thêm Sản Phẩm</a>
+                                                <a class="btn btn-primary" href='/mproduct/ThemNhanSanPhan/{{_CategoryDetail.catID}}'>Danh Sách Sản Phẩm</a>
+
+                                                <div class="modal fade" id="modal-id">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                                <h4 class="modal-title">Thêm</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="/mcategory/add/" method="POST" enctype="multipart/form-data" >
+                                                                    <div class="form-group">
+                                                                        <label >Tên Danh Mục</label>
+                                                                        <input type="hidden" name="catID" value="{{_CategoryDetail.catID}}" >
+                                                                        <input type="hidden" name="parentCatID" value="{{_CategoryDetail.catID}}" >
+                                                                        <input type="text" class="form-control" name="catName"  placeholder="Tên Danh Mục">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label >Số Thứ Tự Tăng Dần</label>
+                                                                        <input type="text" class="form-control" name="Serial"  placeholder="Số Thứ Tự Tăng Dần">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label >Ghi Chú</label>
+                                                                        <textarea name="Note" class="form-control" placeholder="Tên Danh Mục" ></textarea>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label >
+                                                                            Ẩn Hiện
+                                                                            <input type="checkbox" name="Public" value="1"  >
+                                                                        </label>
+                                                                    </div>
+                                                                    <div >
+                                                                        <button class="btn btn-success" type="submit" name="ThemDanhMuc" > Thêm</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

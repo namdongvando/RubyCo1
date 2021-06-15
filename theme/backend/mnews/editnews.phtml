@@ -1,0 +1,122 @@
+<?php
+$a = new Model_Adapter();
+$news = $data["news"];
+$_new = new \Model\news($news);
+?>
+
+<div class="row " ng-controller="editnewsController" ng-init="editnewsInit('<?php echo $_new->ID ?>')" >
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <a href="<?php echo Model\news::LinkDetail($_new->ID); ?>" class="btn btn-primary" >
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <h3 class="box-title">Bài Viết</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group bakco-categorymenu">
+                    </div>
+                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                </div><!-- /. tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding ">
+                <div >
+                    <form action="/mnews/editnews" method="POST" enctype="multipart/form-data" >
+                        <div class="col-md-9 " >
+                            <div class="form-group">
+                                <label for="">__Name___</label>
+                                <input type="text" value="<?php echo $_new->Name ?>" class="form-control" name="Name" >
+                            </div>
+
+                            <div class="form-group hidden">
+                                <label for="">__Alias___</label>
+                                <input type="text" value="<?php echo $_new->Alias ?>" class="form-control"  name="Alias" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">__Summary___</label>
+                                <textarea  class="editorMini" id="Summary" name="Summary" ><?php echo $_new->Summary ?></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">__Content___</label>
+                                <textarea  class="editor" id="Content" name="Content" ><?php echo $_new->Content ?></textarea>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3 " >
+                            <div class="form-group ">
+                                <label for=""></label>
+                                <button type="submit" class="btn btn-success btn-block" name="EditNews" >Lưu</button>
+                            </div>
+                            <div class="form-group hidden">
+                                <label for="">__ID___</label>
+                                <input type="text" value="<?php echo $_new->ID ?>" class="form-control" name="ID" >
+                            </div>
+                            <div class="form-group">
+                                <label for="">__PageID___</label>
+                                <select name="PageID" class="form-control" >
+                                    <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}" >{{optionPage.Name}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="">__title___</label>
+                                <textarea class="form-control" name="title"  ><?php echo $_new->title ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">__keyword___</label>
+                                <textarea class="form-control" name="keyword"  ><?php echo $_new->keyword ?></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="">__description___</label>
+                                <textarea class="form-control" name="description"  ><?php echo $_new->description ?></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">__AnHien___</label>
+                                <select required="required" class="form-control" ng-model="_New.AnHien"  name="AnHien" >
+                                    <option value="1" >Hiện</option>
+                                    <option value="0" >Ẩn</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group hidden">
+                                <label for="">__NgayDang___</label>
+                                <input type="text" value="{{_New.NgayDang}}" class="form-control" name="NgayDang" >
+                            </div>
+
+                            <div class="form-group">
+                                <img  style="height: 50px;" src="<?php echo $_new->UrlHinh; ?>" >
+                                <label for="">__UrlHinh___</label>
+                                <input type="file" class="form-control" name="Fileimages" >
+                                <input type="hidden" value="{{_New.UrlHinh}}" class="form-control" name="UrlHinh" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">__TinNoiBat___</label>
+                                <select required="required" class="form-control" ng-model="_New.TinNoiBat"  name="TinNoiBat" >
+                                    <option value="1" >Nổi Bật</option>
+                                    <option value="0" >Không Nổi Bật</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="">__SoLanXem___</label>
+                                <input type="text" value="{{_New.SoLanXem}}" class="form-control" name="SoLanXem" >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">__Stt___</label>
+                                <input type="text" value="{{_New.Stt}}" class="form-control" name="Stt" >
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

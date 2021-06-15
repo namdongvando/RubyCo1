@@ -1,0 +1,50 @@
+<?php
+$functionLayout = new theme\kimsanews\functionLayout();
+echo " ";
+flush();
+?>
+<!DOCTYPE html>
+<html lang="vi" ng-cloak="TRUE" ng-app="rootApp"   ng-controller="homeController" >
+    <head>
+        <?php
+        $functionLayout->gethtml();
+        flush();
+        ?>
+    </head>
+    <body class="corporate">
+
+        <?php
+        $functionLayout->header();
+        ?>
+        <div class="container"  >
+            <div class="row"  >
+                <div class="col-md-12 mb-3"  >
+                    <img src="/public/bannerdanhmuc.jpg" width="100%" class="img-fluid" alt="banner"/>
+                </div>
+                <div class="col-md-8"  >
+                    <?php
+                    include $Content;
+                    ?>
+                </div>
+                <div class="col-md-4" >
+                    <?php
+                    $functionLayout->right();
+                    ?>
+
+                </div>
+            </div>
+        </div>
+
+
+        <?php
+        $functionLayout->footer();
+        $functionLayout->js();
+        ?>
+    </body>
+
+
+</html>
+<?php
+$functionLayout->DeCodeHTML();
+flush();
+?>

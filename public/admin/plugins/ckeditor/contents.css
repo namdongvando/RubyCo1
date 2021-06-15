@@ -1,0 +1,7 @@
+@import url("/public/theme.css");
+body{
+    max-width: 1200px;
+    margin: auto;
+    padding: 15px;
+
+}

@@ -1,0 +1,45 @@
+<?php
+$bk = new theme\backend\backend();
+$a = new Model_Adapter();
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Quản trị</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <?php
+        $bk->head();
+        ?>
+        <script src="/public/partials/loaderpartials/backend/backendconfig.js" type="text/javascript" ></script>
+
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini" ng-cloak="TRUE" ng-app="rootApp"  >
+        <div class="wrapper">
+            <?php
+            $bk->Menu();
+            ?>
+            <div class="content-wrapper" style="padding: 0px;" >
+                <?php
+                $bk->Breadcrumb();
+                ?>
+                <div class="clearfix" ></div>
+                <section class="content" style="padding: 0px;" >
+                    <?php
+                    include $Content;
+                    ?>
+                </section>
+            </div>
+            <?php
+            $bk->Footer();
+            ?>
+
+        </div><!-- ./wrapper -->
+        <?php
+        $bk->js();
+        ?>
+
+    </body>
+</html>

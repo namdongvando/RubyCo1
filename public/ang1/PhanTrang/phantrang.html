@@ -1,0 +1,28 @@
+﻿<ul class="no-margin  pagination ">
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">{{pagesIndex}} <b class="caret"></b></a>
+        <ul class="dropdown-menu" style="left:auto;max-width: 50px;min-width:50px;overflow:auto;" >
+            <li ng-class="(pagesIndex== i) ? 'active' : ''" ng-repeat="i in  getArrayInt(pagesTotal) track by $index">
+                <a ng-href="{{LinkPhanTrang(i,pagesNumber)}}" ng-click="onClick(seachProduct, i, pagesNumber)">
+                    {{i}}
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li><a>{{pagesIndex}}/{{pagesTotal}}</a></li>
+    <li>
+        <a ng-href="{{LinkPhanTrang(1,pagesNumber)}}" ng-click="onClick(seachProduct, 1, pagesNumber)">
+            <i class="fa fa-angle-double-left"></i>
+        </a>
+    </li>
+    <li ng-class="(pagesIndex== i) ? 'active' : ''" ng-repeat="i in  getArray(pagesIndex, pagesTotal) track by $index">
+        <a ng-href="{{LinkPhanTrang(i,pagesNumber)}}" ng-click="onClick(seachProduct, i, pagesNumber)">
+            {{i}}
+        </a>
+    </li>
+    <li>
+        <a ng-href="{{LinkPhanTrang(pagesTotal,pagesNumber)}}" ng-click="onClick(seachProduct, pagesTotal, pagesNumber)">
+            <i class="fa fa-angle-double-right"></i>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,74 @@
+<?php
+$params = parse_ini_file(__DIR__ . '/../../../theme/home/config/vi.ini', true);
+$a = new Model_Adapter();
+$plang = [];
+$dem = 0;
+foreach ($params as $k => $value) {
+    $plang[$dem]["key"] = $k;
+    $plang[$dem]["value"] = $value;
+    $dem++;
+}
+$b = $a->_encode($plang);
+?>
+<div class="clearfix" ></div>
+<div class="row " ng-controller="languageController" ng-init='languageInit(<?php echo $b; ?>)'  >
+    <section class="col-md-3 connectedSortable" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Ngôn Ngữ </h3>
+            </div>
+            <div class="box-body">
+                <ul class="todo-list" >
+                    <li style="cursor: pointer"   >
+                        Tiếng Việt
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="col-md-9 connectedSortable" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Ngôn Ngữ</h3>
+            </div>
+            <div class="box-body table-responsive">
+                <form action="/mtheme/language/" method="POST" >
+                    <table class="table table-bordered" >
+                        <tr>
+                            <td>#</td>
+                            <td>
+                                Key
+                            </td>
+                            <td>
+                                Value
+                            </td>
+                        </tr>
+                        <tr ng-repeat='lang in _Langs' >
+                            <td>{{$index + 1}}</td>
+                            <td>
+                                <input class="form-control" required="required" ng-model="lang.key" value="{{lang.key}}" >
+                            </td>
+                            <td>
+                                <input class="form-control" required="required" name="Lang[{{lang.key}}]" value="{{lang.value}}" >
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="7" >
+                                <button type="button" ng-click="AddItemLanguage('<?php echo $_Param[0] ?>')" class="btn btn-success pull-right" >Thêm Menu</button>
+                                <button  name="SaveLang"  type="submit" class="btn btn-success" >Lưu</button>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </form>
+
+
+            </div>
+        </div>
+    </section>
+
+</div>
+

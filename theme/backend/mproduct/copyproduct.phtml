@@ -1,0 +1,164 @@
+<?php
+$_product = $data["p"];
+$Product = new \Model\Products($_product);
+
+$_product["CatName"] = $Product->CatName($_product["catID"]);
+?>
+<div class="box box-solid " ng-controller="editproductController" ng-init="editproductInit('<?php echo $_product["ID"] ?>')"  >
+    <div class="box-header bg-green-gradient">
+        <a class="btn btn-primary" href="/mproduct/detailproduct/<?php echo $_product["ID"] ?>"><i class="fa fa-angle-left" ></i></a>
+        <h3 class="box-title">Danh Mục Sản Phẩm</h3>
+        <!-- tools box -->
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <form action="/mproduct/addproduct/" method="POST" enctype="multipart/form-data" > 
+            <div class="col-md-9" >
+                <div class="form-group">
+                    <label >Tên Sản Phẩm</label>
+                    <input type="text" ng-model="_Product.nameProduct"    class="form-control" name="nameProduct" >
+                    <input type="hidden" value="vi" class="form-control" name="lang" >
+                </div>
+                
+                <div class="form-group hidden">
+                    <label >Username</label>
+                    <input type="text" value="<?php echo $_product["Username"] ?>" class="form-control" name="Username" >
+                </div>
+                <div class="row" >
+                    <div class="col-md-6" >
+                        <div class="form-group">
+                            <label >Giá Bán {{_Product.Price|number:0}}</label>
+                            <input type="text" ng-model="_Product.Price" class="form-control"  >
+                            <input type="hidden" value="{{_Product.Price}}" class="form-control" name="Price" >
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <div class="form-group">
+                            <label >Giá Bán {{_Product.oldPrice|number:0}}</label>
+                            <input type="text" ng-model="_Product.oldPrice"  class="form-control"  >
+                            <input type="hidden" value="{{_Product.oldPrice}}" class="form-control" name="oldPrice" >
+                        </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a target="_sefl" href="#home" aria-controls="home" role="tab" data-toggle="tab">Mô Tả Sản Phẩm</a>
+                        </li>
+                        <li role="presentation">
+                            <a target="_sefl" href="#tab" aria-controls="tab" role="tab" data-toggle="tab">Thông Tin Sản Phẩm</a>
+                        </li>
+                        <li role="presentation">
+                            <a target="_sefl" href="#GhiChu" aria-controls="GhiChu" role="tab" data-toggle="tab">Ghi Chú</a>
+                        </li>
+                        <li role="presentation">
+                            <a target="_sefl" href="#HinhAnh" aria-controls="GhiChu" role="tab" data-toggle="tab">Hình Ảnh</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="form-group">
+                                <label >Mô Tả Ngắn</label>
+                                <textarea name="Summary" class="editor" id="Summary" ><?php echo $_product["Summary"] ?></textarea>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab">
+                            <div class="form-group">
+                                <label >Thông tin Chính</label>
+                                <textarea name="Content" class="editor" id="Content" ><?php echo $_product["Content"] ?></textarea>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="GhiChu">
+                            <div class="form-group">
+                                <label >Ghi Chú</label>
+                                <textarea name="Note" class="form-control" id="Note" ><?php echo $_product["Note"] ?></textarea>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="HinhAnh">
+                            <div class="form-group">
+                                <div>
+                                    Hình Ảnh
+                                    <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2" >
+                                        Chọn Hình
+                                        <input style="display: none" onclick="BrowseServer('Images:/sanpham/', 'UrlHinh')"  type="button" name="btnChonFile" id="btnChonFile" value="Chọn File" />
+                                        <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1" >
+                                            <img id="HinhQuanCao" src="<?php echo $Product->UrlHinh() ?>" style="height: 100px;max-width: 200px"  >
+                                        </div>
+                                    </label>
+                                    <div style="clear: both"></div>
+                                    <input readonly="" type="text"  value="<?php echo $Product->UrlHinh(); ?>" class="form-control" id="UrlHinh" name="UrlHinh" >
+                                </div>
+                                <label >Hình Sản Phẩm</label>
+                                <div class="form-group hidden">
+                                    <label>
+                                        <input type="file" name="fileImages[]" >
+                                        <img src="" style="height: 100px;" >
+                                    </label>
+
+                                    <?php
+                                    $images = $Product->getAllImges($Product->ID);
+                                    $dem = 0;
+                                    if ($images)
+                                        foreach ($images as $value) {
+                                            ?> 
+                                            <div class="col-md-3" id="hinh<?php echo $dem ?>" > 
+                                                <button type="button" ng-click="XoaHinhSanPham('<?php echo $value ?>', 'hinh<?php echo $dem ?>')" class="btn btn-danger btn-sm" ><i class="fa fa-times" ></i></button>
+                                                <label>
+                                                    <img style="height: 150px;" src="<?php echo $value ?>" >
+                                                    <input ng-selected="_Product.UrlHinh == '<?php echo $value ?>'" ng-model="_Product.UrlHinh" type="radio" value="<?php echo $value ?>" >
+                                                </label>
+                                            </div>
+                                            <?php
+                                            $dem++;
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="form-group ">
+                    <label >ID</label>
+                    <input type="text" value="{{_Product.nameProduct}}" class="form-control" name="ID" >
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <button name="ThemSanPham" class="btn btn-block btn-primary" type="submit" >Lưu</button>
+                </div>
+                <div class="form-group">
+                    <label >Danh Mục : {{_Product.CatName}}</label>
+                    <select ng-model="_Product.catID" class="form-control "  name="catID" >
+                        <option  ng-repeat="cat in _ListCategory" ng-selected="cat.catID == _Product.catID" value="{{cat.catID}}" >
+                            {{cat.catName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group hidden">
+                    <label >DateCreate </label>
+                    <input type="text" value="{{_Product.DateCreate| date : 'yyyy-mm-dd' }}" class="form-control" name="DateCreate" >
+                </div>
+                <div class="form-group hidden">
+                    <label >Number</label>
+                    <input type="text" value="{{_Product.Number}}" class="form-control" name="Number" >
+                </div>
+                <div class="form-group hidden">
+                    <label >BuyTimes</label>
+                    <input type="text" value="{{_Product.BuyTimes}}" class="form-control" name="BuyTimes" >
+                </div>
+                <div class="form-group hidden">
+                    <label >Views</label>
+                    <input type="text" value="{{_Product.Views}}" class="form-control" name="Views" >
+                </div>
+                <div class="form-group">
+                    <label >Ẩn Hiện
+                        <input type="checkbox"  value="1" ng-checked="_Product.isShow == 1" name="isShow" >
+                    </label>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>

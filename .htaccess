@@ -1,0 +1,34 @@
+RewriteEngine on
+RewriteBase /
+RewriteCond %{ENV:REDIRECT_STATUS} ^200
+RewriteRule ^ - [L]
+RewriteCond %{QUERY_STRING} ^(.*)&?fbclid=[^&]+&?(.*)$ [NC]
+RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
+RewriteCond %{QUERY_STRING} ^(.*)&?gidzl=[^&]+&?(.*)$ [NC]
+RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
+RewriteCond %{QUERY_STRING} ^(.*)&?utm_medium=[^&]+&?(.*)$ [NC]
+RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
+RewriteCond %{QUERY_STRING} ^(.*)&?utm_source=[^&]+&?(.*)$ [NC]
+RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
+RewriteCond %{QUERY_STRING} ^(.*)&?utm_campaign=[^&]+&?(.*)$ [NC]
+RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
+RewriteCond %{QUERY_STRING} ^(.*)&?zarsrc=[^&]+&?(.*)$ [NC]
+RewriteRule ^(.*)$ /$1?%1%2 [R=301,L]
+RewriteRule fonts -  [L]
+RewriteRule public -  [L]
+RewriteRule confix -  [L]
+RewriteRule robots.txt -  [L]
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
+
+RewriteRule page-(.*)\/(.*).html index.php?path=$1 [L]
+RewriteRule (.*)\/(.*).html index.php?ctrl=index&action=chitietsanpham&param=$1&alias=$2 [L]
+RewriteRule ^tim-kiem index.php?ctrl=timkiem&action=index&param=$1 [L]
+RewriteRule lien-he.html  index.php?ctrl=index&action=lienhe&param=1 [L]
+RewriteRule thu-vien.html  index.php?ctrl=index&action=thuvien&param=1 [L]
+
+RewriteRule category/(.*)/p-(.*)/ index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
+RewriteRule category/(.*)/p-(.*) index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
+RewriteRule san-pham\.html  index.php?ctrl=index&action=sanpham&param=1 [L]
+
+RewriteRule (.*)  index.php?path=$1 [L]

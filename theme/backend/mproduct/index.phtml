@@ -1,0 +1,88 @@
+<ol class="breadcrumb" >
+    <li><a href="/backend/"  >Trang Chủ</a></li>
+    <li>Danh Sách Sản Phẩm</li>
+</ol>
+<div class="container-fluid " ng-controller="mproductController" ng-init='GetProductPT({seach:""}, 1, 10)' >
+    <section class="">
+        <div class="box box-solid ">
+            <div class="box-header bg-blue">
+                <i class="fa fa-list-ol"></i>
+                <h3 class="box-title">Danh Sách Sản Phẩm</h3>
+                <div class="box-tools">
+                    <a href="/mproduct/addproduct/" class="btn btn-success"  >Thêm Sản Phẩm</a>
+                </div>
+            </div>
+            <div class="box-body connectedSortable">
+                <div   >
+                    <table class="table table-bordered"  >
+                        <thead>
+                            <tr>
+                                <td colspan="7">
+                                    <div class="input-group pull-left">
+                                        <input type="text" style="width: 200px" ng-model="seach" class="form-control input-sm pull-right" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    <span>
+                                        <phan-trang class='pull-right' pages-index="_listProductNoPrice.pageIndex"
+                                                    pages-number="_listProductNoPrice.pageNumber"
+                                                    pages-total="_listProductNoPrice.pageTotal"
+                                                    pages-params='{"seach":seach}'
+                                                    on-click="TimKiemUser(Params, pagesIndex, pagesNumber)"></phan-trang>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="bg-blue" >
+                                <th>#</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th style="width: 100px;">Giá</th>
+                                <th style="width: 100px;" >Số Lần Xem</th>
+                                <th style="width: 100px;" >Hiển Thị</th>
+                                <th style="width: 100px;" >Ngày Đăng</th>
+                                <th style="width: 50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="curentproduct in _listProductNoPrice.data" >
+                                <th>{{$index + 1}}</th>
+                                <th><a href="/mproduct/editproduct/{{curentproduct.ID}}" >{{curentproduct.nameProduct}}</a></th>
+                                <th>{{curentproduct.Price}}</th>
+                                <th>{{curentproduct.Views}}</th>
+                                <th>{{curentproduct.isShow}}</th>
+                                <th style="white-space: nowrap;" >{{curentproduct.DateCreate| date : 'dd-MM-yyyy'}}</th>
+                                <th style="width: 150px;" >
+                                    <div class="btn-group " style="white-space: nowrap" >
+                                        <a class="btn btn-sm btn-primary" href="/mproduct/copyproduct/{{curentproduct.ID}}">Copy</a>
+                                        <a class="btn btn-sm btn-primary" href="/mproduct/editproduct/{{curentproduct.ID}}">Sửa</a>
+                                        <a class="btn btn-sm btn-danger" target="_self" data-toggle="modal" href='#xoasanpham{{curentproduct.ID}}'>Xóa</a>
+                                    </div>
+                                    <div class="modal fade" id="xoasanpham{{curentproduct.ID}}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-red">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title">Thông báo!</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <center>Bạn có muốn xóa sản phẩm này không?</center>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                                                    <a href="/mproduct/deleteproduct/{{curentproduct.ID}}" class="btn btn-primary" >Đồng Ý</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+
+</div>
+
+

@@ -1,0 +1,59 @@
+<?php
+$Produc = new Model\Products();
+$number = 30;
+$Pages = !empty($_GET["pages"]) ? intval($_GET["pages"]) : 1;
+$Pages = max($Pages, 1);
+$keyword = $_GET["keyword"];
+$DSSP = $Produc->getProductsByName($keyword, $Pages, $number, $sum);
+?>
+<div class="content-page" style="background-color: #fff;" >
+    <div >
+        <div class="category-featured fashion">
+            <div class="product-featured clearfix">
+                <div class="row">
+                    <h3 class="text-left" style="padding: 15px;font-size: 18px;" >Kết quả tìm kiếm "<?php echo $_GET["keyword"] ?>"</h3>
+                    <div class="col-right-tab">
+                        <div class="product-featured-tab-content">
+                            <ul class="product-list row"  >
+                                <?php
+                                if ($DSSP)
+                                    foreach ($DSSP as $SP) {
+                                        $_SP = new \Model\Products($SP);
+                                        ?> 
+                                        <li class="col-sm-4"  >
+                                            <div class="right-block"  >
+                                                <h3 class="product-name" style="height: 40px;" >
+                                                    <a href="<?php echo $_SP->linkProduct() ?>"><?php echo $_SP->nameProduct ?></a>
+                                                </h3>
+                                                <div class="content_price">
+                                                    <span class="price product-price"><?php echo $_SP->Price() ?></span>
+                                                </div>
+                                            </div>
+                                            <div class="left-block">
+                                                <a href="<?php echo $_SP->linkProduct() ?>">
+                                                    <img  class="img-product img-responsive" alt="<?php echo $_SP->nameProduct ?>" src="<?php echo $_SP->UrlHinh() ?>" />
+                                                </a>
+                                                <div class="add-to-cart">
+                                                    <a title="Thêm Giỏ Hàng" href="/cart/index/addproduct/<?php echo $_SP->ID ?>">Thêm Giỏ Hàng</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
+                                ?>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+                <?php
+                $link  = "/timkiem/?keyword={$keyword}&pages=[i]";
+                $tong = ceil($sum/$number);
+                echo $Produc->PhanTrang($tong, $Pages, $link);
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

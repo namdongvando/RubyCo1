@@ -1,0 +1,66 @@
+<div class="clearfix" ></div>
+<div class="row " ng-controller="mthemeController"  >
+    <section class="col-md-3 connectedSortable" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Quản Lý Menu</h3>
+            </div>
+            <div class="box-body">
+                <ul class="todo-list" >
+                    <li style="cursor: pointer" ng-repeat="item11 in _Themes" ng-click="clickChonTheme(item11.Theme)"  >
+                        {{item11.Theme}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="box box-solid   ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Trang Chủ</h3>
+            </div>
+            <div class="box-body">
+                <ul class="todo-list" >
+                    <li style="cursor: pointer" ng-repeat="item11 in _Themes"   >
+                        <a href="/mtheme/mhome/{{item11.Theme}}"  >
+                            {{item11.Theme}}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="box box-solid hidden ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Ngôn Ngữ</h3>
+            </div>
+            <div class="box-body">
+                <ul class="todo-list" >
+                    <li style="cursor: pointer" ng-repeat="item11 in _Themes"   >
+                        <a href="/mtheme/language/{{item11.Theme}}"  >
+                            {{item11.Theme}}
+                        </a>
+                    </li> 
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="col-md-9 connectedSortable" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Menu of Theme</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered" >
+                    <tr ng-repeat="menu in _MenuByTheme" >
+                        <td>{{menu.IDMenu}}</td>
+                        <td><a href="/mtheme/thememenu/{{menu.Theme}}/{{menu.Groups}}" >{{menu.Groups}}</a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</div>

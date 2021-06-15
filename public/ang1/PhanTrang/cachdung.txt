@@ -1,0 +1,6 @@
+﻿    <phan-trang pages-index="_Users.pageIndex"
+                        pages-number="_Users.pageSize"
+                        pages-total="pagesCount"
+                        pages-link="/Quanlytaikhoan#!/list/[i]/[j]"
+                        pages-params='{"seach":seach}'
+                        on-click="TimKiemUser(Params, pagesIndex, pagesNumber)"></phan-trang>

@@ -1,0 +1,143 @@
+.Mau1 .item .post-desc .post-title{
+    background-color: #0088CC;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.Mau1 .item .post-desc{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+}
+.Mau1 .item .post{
+    position: relative;
+    margin-bottom: 15px;
+}
+.Mau1{
+    margin-top: 80px;
+}
+.Mua1-title{
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+.Mau1-body{
+    padding-top: 50px;
+    margin-bottom: 30px;
+    background-color: #0088CC;
+    background-attachment: fixed;
+    min-height: 450px;
+}
+.Mau1-body .post img{
+    height: 220px;
+}
+.Mau1-body .post{
+    display: table;
+    margin: auto;
+}
+.Mau1-Summary{
+    margin-bottom: 20px;
+}
+.Mau1 .post-title a{
+    color: #fff;;
+}
+.Mau2{
+    margin-top: 100px;
+    padding-bottom: 100px;
+    margin-bottom: 100px;
+}
+.Mau2-body .item{
+    margin-top: 40px;
+    min-height: 120px;
+}
+.Mua2-title{
+    color: #0088CC;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+.Mua2-title span{
+    color: #fff;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    background: #00638c;
+    position: relative;
+}
+.Mua2-title span::before{
+
+    width: 36px;
+    height: 54px;
+    display: block;
+    content: "";
+    background: url(../icon/ribbon-left.png) no-repeat center;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+   
+}
+.Mua2-title span::after{
+    width: 36px;
+    height: 54px;
+    display: block;
+    content: "";
+    background: url(../icon/ribbon-right.png) no-repeat center;
+    position: absolute;
+    top: 4px;
+    right: -25px;
+}
+.Mau2 .post-thumb img{
+    height: 120px;
+}
+.Mau2 .post-title a{
+    color: #0088CC;
+    font-weight: bold;
+}
+
+
+
+.Mau3-title span{
+    border-bottom: 3px solid #0088CC;
+    padding: 20px;
+}
+.Mau3-title {
+    padding: 20px; 
+    font-size: 30px;
+    font-weight: bold;
+    color: #0088CC;
+    margin-bottom: 40px;    
+
+}
+
+.Mau3 .tin-phu img{
+    height: 268px;
+    max-height: 268px;
+}
+.Mau3 .tin-chinh img{
+    height: 547px;
+    max-height: 547px;
+}
+.Mau3 .tin-chinh, .Mau3 .tin-phu{
+    position: relative;
+}
+.Mau3 .tin-chinh, .Mau3 .tin-phu{
+    position: relative;
+    overflow: hidden;
+}
+
+.Mau3 .tin-chinh .tieu_de, .Mau3 .tin-phu .tieu_de_phu{
+    position: absolute;
+    bottom: -100%;
+    background-color: rgba(0, 136, 204, 0.8);
+    width: 100%;
+    padding: 10px;
+    color: #fff;
+    font-weight: bold;
+}
+.Mau3 .tin-chinh:hover .tieu_de, .Mau3 .tin-phu:hover .tieu_de_phu{
+    bottom: 0px;
+}
+
+

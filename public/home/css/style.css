@@ -1,0 +1,8 @@
+.bg_logo{
+    background-color: #fff;
+    display: block;
+    padding: 0 10px;
+}
+#navbar>ul.nav.navbar-nav > li> a{
+    font-weight: bold;
+}

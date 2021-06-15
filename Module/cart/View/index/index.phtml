@@ -1,0 +1,70 @@
+<div class="columns-container">
+    <div class="container" id="columns">
+        <h2 class="page-heading no-line text-center">
+            <span class="page-heading-title2">Giỏ Hàng</span>
+        </h2>
+        <p>Chúng Tôi sẽ liên lạc với bạn khi bạn tạo đơn hàng.</p>
+        <div class="page-content page-order">
+            <div class="order-detail-content table-responsive">
+                <table class="table   table-bordered table-responsive cart_summary">
+                    <thead>
+                        <tr>
+                            <th class="cart_product">Sản Phẩm</th>
+                            <th>Mô Tả</th>
+                            <th>Tình Trạng</th>
+                            <th>Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Thành Tiền</th>
+                            <th  class="action"><a href="/cart/index/clearcart/"  ><i class="fa fa-trash-o"></i></a></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $Cart = new Module\cart\Model\Cart();
+                        if ($Cart->countProduct2Cart() > 0) {
+                            $Products = $Cart->Products();
+                            foreach ($Products as $SanPham) {
+                                $_P = new Model\Products($SanPham);
+                                ?> 
+                                <tr>
+                                    <td class="cart_product">
+                                        <a href="#"><img src="<?php echo $_P->UrlHinh() ?>" alt="<?php echo $_P->nameProduct ?>"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <small class="cart_ref">ID : #<?php echo $_P->ID ?></small><br>
+                                        <p class="product-name"><a href="#"><?php echo $_P->nameProduct ?> </a></p>
+                                        <p class="product-name"><?php echo strip_tags($_P->Summary); ?> </p>
+                                    </td>
+                                    <td class="cart_avail"><span class="label label-success">Còn Hàng</span></td>
+                                    <td class="price"><span><?php echo $_P->Price(); ?></span></td>
+                                    <td class="qty">
+                                        <input class="form-control input-sm" type="text" value="<?php echo $_P->Number ?>">
+                                        <a href="/cart/index/plusNumberProduct/<?php echo $_P->ID ?>"><i class="fa fa-caret-up"></i></a>
+                                        <a href="/cart/index/minuNumberProduct/<?php echo $_P->ID ?>"><i class="fa fa-caret-down"></i></a>
+                                    </td>
+                                    <td class="price">
+                                        <span><?php $ThanhTien = $_P->Price * $_P->Number; ?>
+                                            <?php echo $_P->showPrice($ThanhTien); ?>
+                                        </span>
+                                    </td>
+                                    <td class="action">
+                                        <a href="/cart/index/removeproduct/<?php echo $_P->ID ?>">Delete item</a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+
+
+                    </tbody>
+                </table>
+                 
+            </div>
+            <div class="cart_navigation">
+                <a class="prev-btn" href="/">Tiếp Tục Mua Hàng</a>
+                <a class="next-btn" href="/cart/taodonhang">Đặt Hàng</a>
+            </div>
+        </div>
+    </div>
+</div>

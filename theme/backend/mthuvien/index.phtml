@@ -1,0 +1,22 @@
+<style type="text/css">
+    #ckfinder {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+</style>
+<div id="ckfinder" ></div>
+<script type="text/javascript" >
+    if (typeof (CKFinderStartupPath) == "undefined")
+        var CKFinderStartupPath = "Images:/thuvien/";
+    CKFinder.config.startupPath = CKFinderStartupPath;
+    CKFinder.config.startupFolderExpanded = true;
+    CKFinder.config.rememberLastFolder = true;
+    var finder = new CKFinder("ckfinder");
+    CKFinder.config.height = "600";
+    finder.basePath = CKFinderStartupPath;
+    finder.create();
+</script>

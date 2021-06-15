@@ -1,0 +1,89 @@
+<div class="row " ng-controller="mproductController" ng-init="getProductByName('<?php echo $_REQUEST["keyword"] ?>')" >
+    <section class="col-md-12 connectedSortable">
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-calendar"></i>
+                <h3 class="box-title">Danh Sách Sản Phẩm</h3>
+            </div>
+            <div class="box-body connectedSortable">
+                <div  >
+                    <table class="table table-bordered"  >
+                        <thead>
+                            <tr>
+                                <th>Hình</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th style="width: 100px;">Giá</th>
+                                <th style="width: 100px;" >Số Lần Xem</th>
+                                <th style="width: 100px;" >Hiển Thị</th>
+                                <th style="width: 100px;" >Ngày Đăng</th>
+                                <th style="width: 50px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="curentproduct in _listProductByName| filter : seachProduct" >
+                                <th style="width: 60px" >
+                                    <img class="img img-responsive" style="height: 50px;" src="{{curentproduct.Image}}" >
+                                </th>
+                                <th>
+                                    <a href="/mproduct/detailproduct/{{curentproduct.ID}}" >{{curentproduct.nameProduct}}</a>
+                                    <br>
+                                    <a href="/mcategory/detail/{{curentproduct.Category.catID}}" ><i>{{curentproduct.Category.catName}}</i></a>
+                                </th>
+                                <th>
+                                    {{curentproduct.Price|number:0}}
+                                    <input  ng-model="curentproduct.Price" >
+                                    <button type="button" name="Luu" ng-click="savePriceProduct(curentproduct)" >Lưu</button>
+                                </th>
+                                <th>{{curentproduct.Views}}</th>
+                                <th>{{curentproduct.isShow}}</th>
+                                <th style="white-space: nowrap;" >{{curentproduct.DateCreate| date : 'dd-MM-yyyy'}}</th>
+                                <th style="width: 150px;" >
+                                    <div class="btn-group " style="white-space: nowrap" >
+                                        <a class="btn btn-sm btn-primary" href="/mproduct/copyproduct/{{curentproduct.ID}}">Copy</a>
+                                        <a class="btn btn-sm btn-primary" href="/mproduct/editproduct/{{curentproduct.ID}}">Sửa</a>
+                                        <a class="btn btn-sm btn-danger" target="_self" data-toggle="modal" href='#xoasanpham{{curentproduct.ID}}'>Xóa</a>
+                                    </div>
+                                    <div class="modal fade" id="xoasanpham{{curentproduct.ID}}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-red">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title">Thông báo!</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <center>Bạn có muốn xóa sản phẩm này không?</center> 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                                                    <a href="/mproduct/deleteproduct/{{curentproduct.ID}}" class="btn btn-primary" >Đồng Ý</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Giá</th>
+                                <th>Số Lần Xem</th>
+                                <th>Hiển Thị</th>
+                                <th style="width: 100px;" >Ngày Đăng</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+
+                    </table>    
+                </div>
+                <div>
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+    <section class="col-md-12 connectedSortable" >
+    </section>
+</div>
+
+

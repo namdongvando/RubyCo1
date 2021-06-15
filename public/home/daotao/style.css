@@ -1,0 +1,24 @@
+#nav-top-menu{
+    background-color: #0063dc;
+}
+#navbar>.navbar-nav>li>a{
+    color: #fff !important;
+    padding: 0 25px;
+}
+#nav-top-menu,.option5 .box-vertical-megamenus .title,
+.option5 #main-menu .navbar{
+    background-color: #0082C8;
+    border-top: 1px solid #0082C8;
+}
+.option5 #main-menu{
+    padding-left: 15px;
+}
+#main-menu .navbar .navbar-nav>li:hover, #main-menu .navbar .navbar-nav>li.active{
+    background: #0f98e2;
+    background-color: #0f98e2;
+}
+.bx-wrapper .bx-viewport{
+    border: 5px solid #fff;
+    border-top: 0px solid #fff;
+    border-bottom: 0px solid #fff;
+}

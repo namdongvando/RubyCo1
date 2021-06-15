@@ -1,0 +1,68 @@
+<form action="" enctype="multipart/form-data" method="POST" >
+    <div class="form-group">
+        <label for="">Tên Controller</label>
+        <input type="text" class="form-control" name="Name" >
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" name="taofile">
+    </div>
+</form>
+<table class="table table-bordered" >
+    <thead>
+        <?php
+        $listPath = [];
+        $readDir = "public/partials/backend/";
+        if (is_dir($readDir)) {
+            if ($dh = opendir($readDir)) {
+                while (($file = readdir($dh)) !== false) {
+                    if ($file != "." && $file != "..") {
+                        ?> 
+                        <tr>
+                            <th>#</th>
+                            <th>
+                                <?php
+                                echo $file;
+                                $listPath[] = array("Key" => $readDir . $file, "Name" => $file);
+                                ?>
+                            </th>
+                            <th>Tên directive</th>
+                        </tr>
+                        <?php
+                    }
+                }
+                closedir($dh);
+            }
+        }
+        $readDir = "public/partials/mnews/";
+        if (is_dir($readDir)) {
+            if ($dh = opendir($readDir)) {
+                while (($file = readdir($dh)) !== false) {
+                    if ($file != "." && $file != "..") {
+                        ?> 
+                        <tr>
+                            <th>#</th>
+                            <th>
+                                <?php
+                                echo $file;
+                                $listPath[] = array("Key" => $readDir . $file, "Name" => $file);
+                                ?>
+                            </th>
+                            <th>Tên directive</th>
+                        </tr>
+                        <?php
+                    }
+                }
+                closedir($dh);
+            }
+        }
+        ?>
+    </thead>
+</table>
+<?php
+$a = new Model_Adapter();
+$NoiDung = $a->_encode($listPath);
+$NoiDung = "var sysPath = " . $NoiDung . ";";
+$a->_createFile("public/partials/loaderpartials/mnews/sysPathMnews.js", $NoiDung);
+?>
+
+

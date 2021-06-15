@@ -1,0 +1,37 @@
+<?php
+$view_theme = $functionLayout;
+
+$Products = new Model\Products();
+$tong= 0;
+$DSProduct = $Products->ProductsAllPT(1,21,$tong);
+?>
+<div id="view-product-list" class="view-product-list">
+    <h2 class="page-heading">
+        <span class="page-heading-title">Sản Phẩm</span>
+    </h2>
+    <ul class="display-product-option">
+        <li class="view-as-grid selected">
+            <span>grid</span>
+        </li>
+        <li class="view-as-list">
+            <span>list</span>
+        </li>
+    </ul>
+    <!-- PRODUCT LIST -->
+    <ul class="row product-list grid">
+        <?php
+        if ($DSProduct)
+            foreach ($DSProduct as $_Poroduct) {
+                ?> 
+                <li class="col-sx-12 col-sm-4">
+                    <?php
+                    $view_theme->product($_Poroduct);
+                    ?>
+                </li>
+                <?php
+            }
+        ?>
+
+    </ul>
+     
+</div>

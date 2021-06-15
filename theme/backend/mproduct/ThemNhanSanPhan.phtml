@@ -1,0 +1,71 @@
+<div class="box box-solid " ng-controller="addproductController" >
+    <div class="box-header bg-green-gradient">
+        <a class="btn btn-primary" href="/mproduct/index/"><i class="fa fa-angle-left" ></i></a>
+        <h3 class="box-title">Thêm Sản Phẩm</h3>
+        <!-- tools box -->
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        <form action="" method="POST" enctype="multipart/form-data" >
+            <div class="container" >
+                <div class="row" >
+                    <div class="form-group col-md-12">
+                        Code
+                        <!--getLinkByCode-->
+                        <input type="text" class="form-control" ng-change="getLinkByCode(code)" ng-model="code"  >
+                    </div>
+                    <div class="form-group col-md-12">
+                        <input type="text" class="form-control"  ng-change="getContentBylink(linkproduct)" ng-model="linkproduct"  >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Mã Sản Phẩm</label>
+                        <input type="text" ng-model="_Name" class="form-control" required="required" name="ID" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Tên Sản Phẩm</label>
+                        <input ng-model="_Name" type="text" value="" required="required" class="form-control" name="nameProduct" >
+                        <input type="hidden" value="vi" class="form-control" name="lang" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label >Danh Mục Sản Phẩm</label>
+                        <input type="text" value="<?php echo $_Param[0]; ?>" class="form-control" name="catID" >
+                    </div>
+                    <div class="col-md-6" >
+                        <div class="form-group">
+                            <label >Giá Bán: {{_Product.Price|number:0}}</label>
+                            <input required="required" type="number" ng-model="_Product.Price" class="form-control"  >
+                            <input type="hidden" value="{{_Product.Price}}" class="form-control" name="Price" >
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <div class="form-group">
+                            <label >Giá Cũ: {{_Product.oldPrice|number:0}}</label>
+                            <input required="required" type="number" ng-model="_Product.oldPrice" class="form-control"  >
+                            <input type="hidden" value="{{_Product.oldPrice}}" class="form-control" name="oldPrice" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label >Mô Tả Ngắn</label>
+                    <textarea name="Summary" class="form-control" id="Summary" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label >Thông tin Chính</label>
+                    <textarea name="Content" class="form-control"  id="Content" ></textarea>
+                </div>
+                <div class="form-group">
+                    <label >Hình Ảnh</label>
+                    <input type="text" class="form-control" name="UrlHinh" >
+                </div>
+                <div class="form-group">
+                    <label >Ẩn Hiện
+                        <input type="checkbox"  value="1" checked="" name="isShow" >
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <button name="ThemSanPham" class="btn btn-block btn-primary" type="submit" >Thêm Sản Phẩm</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

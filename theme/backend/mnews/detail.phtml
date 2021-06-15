@@ -1,0 +1,113 @@
+<?php
+$a = new Model_Adapter();
+$_new = new \Model\news($news);
+?>
+
+<div class="row "      >
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-header  ">
+                <a href="/mnews/newsbypages/<?php echo $_new->PageID ?>" class="btn btn-primary" >
+                    <i class="fa fa-arrow-left"></i>
+                </a>
+                <a href="<?php echo Model\news::LinkEdit($_new->ID) ?>" class="btn btn-primary" >
+                    <i class="fa fa-edit"></i>
+                    Sửa
+                </a>
+                <a href="<?php echo Model\news::LinkDelete($_new->ID) ?>" class="btn btn-danger" >
+                    <i class="fa fa-times"></i>
+                    Xóa
+                </a>
+                <a href="<?php echo Model\news::LinkCopy($_new->ID) ?>" class="btn btn-primary" >
+                    <i class="fa fa-copy"></i>
+                    Copy
+                </a>
+                <h3 class="box-title">Bài Viết: <?php echo $_new->Name ?></h3>
+
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding ">
+                <div >
+                    <div class="col-md-9 " >
+
+                        <div class="form-group">
+                            <label for="">link</label>
+                            <?php echo $_new->linkNewsCurent(); ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="">__Name___:</label>
+                            <?php echo $_new->Name ?>
+                        </div>
+
+                        <div class="form-group hidden">
+                            <label for="">__Alias___:</label>
+                            <input type="text" value="<?php echo $_new->Alias ?>" class="form-control"  name="Alias" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__Summary___:</label>
+                            <?php echo $_new->Summary ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__Content___:</label>
+                            <?php echo $_new->Content ?>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 " >
+
+
+                        <div class="form-group">
+                            <label for="">__PageID___:</label>
+                            <?php echo $_new->PageID()->Name ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="">__title___:</label>
+                            <?php echo $_new->title ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="">__keyword___:</label>
+                            <?php echo $_new->keyword ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="">__description___:</label>
+                            <?php echo $_new->description ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__AnHien___:</label>
+                            <?php echo $_new->AnHien ?>
+                        </div>
+
+                        <div class="form-group hidden">
+                            <label for="">__NgayDang___:</label>
+                            <?php echo $_new->NgayDang() ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__UrlHinh___:</label>
+                            <img  style="height: 50px;" src="<?php echo $_new->UrlHinh; ?>" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__TinNoiBat___:</label>
+                            <?php echo $_new->TinNoiBat ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__SoLanXem___:</label>
+                            <?php echo $_new->SoLanXem ?>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__Stt___:</label>
+                            <?php echo $_new->Stt ?>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

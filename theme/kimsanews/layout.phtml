@@ -1,0 +1,29 @@
+<?php
+include "LoadTheme.php";
+if (!$functionLayout)
+    $functionLayout = new \theme\kimsanews\functionLayout();
+echo " ";
+
+flush();
+?>
+<!DOCTYPE html>
+<html lang="vi" ng-cloak="TRUE" ng-app="rootApp"   ng-controller="homeController">
+    <head> 
+        <?php
+        $functionLayout->gethtml();
+        flush();
+        ?>
+    </head>
+    <body>
+        <?php
+        $functionLayout->header();
+        include $Content;
+        $functionLayout->footer();
+        $functionLayout->js();
+        ?>
+    </body>
+</html>
+<?php
+$functionLayout->DeCodeHTML();
+flush();
+?>

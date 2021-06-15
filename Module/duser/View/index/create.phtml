@@ -1,0 +1,71 @@
+<?php
+$Model_Duser = new Module\duser\Model\Duser();
+$DSOption = $Model_Duser->Admins(FALSE);
+?>
+
+<div class="col-md-6" >
+    <?php
+    $Error = Model\Error::getAllError();
+    if ($Error) {
+        ?>
+        <div class="col-sm-12" >
+            <div style="position: fixed;top: 100px;right: 0px;width: 300px;z-index: 1999"  class="alert alert-<?php echo $Error["Type"] ?> alert-dismissible" >
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <?php echo $Error["Content"]; ?>
+            </div>
+
+        </div>
+        <?php
+    }
+    ?>
+    <form method="post" action="" enctype="multipart/form-data" >
+        <div class="panel panel-primary">
+            <div class="panel-heading ">
+                <h3 class="panel-title" >Thêm Tài Khoản</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="">Họ & Tên</label>
+                    <input type="text" class="form-control" name="user[Name]"  placeholder="Họ & Tên">
+                    <input type="hidden" value="" class="form-control" name="user[Urlimages]" >
+                </div>
+                <div class="form-group">
+                    <label for="">Tài Khoản</label>
+                    <input type="text" class="form-control" name="user[Username]"  placeholder="Tài Khoản">
+                </div>
+                <div class="form-group">
+                    <label for="">Mật Khẩu</label>
+                    <input type="text" class="form-control" name="user[Password]"  placeholder="Mật Khẩu">
+                </div>
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input type="email" class="form-control" name="user[Email]"  placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="">SĐT</label>
+                    <input type="text" class="form-control" name="user[Phone]"  placeholder="SĐT">
+                </div>
+                <div class="form-group  ">
+                    <label for="">Nhóm</label>
+                    <select   class="form-control" name="user[Groups]"  >
+                        <option value="0" >Admin</option>
+                        <option value="1" >Chỉnh Sửa Nội Dung</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="">Địa Chỉ</label>
+                    <textarea class="form-control" name="user[Address]"  ></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Chi Chú</label>
+                    <textarea class="form-control" name="user[Note]"  ></textarea>
+                </div>
+                <div class="form-group">
+                    <label for=""></label>
+                    <input type="submit" class="btn btn-success" name="ThemAdmin"  value="Thêm Tài Khoản" >
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

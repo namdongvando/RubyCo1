@@ -1,0 +1,67 @@
+<?php
+$_Product = new Model\Products($data["p"]);
+$a = new Model\Products();
+$Img = $a->getAllImges($_Product->ID);
+?>
+<!-- Product -->
+<div id="product" class="container">
+    <div class="primary-box row">
+        <div class="pb-left-column col-xs-12 col-sm-6">
+            <!-- product-imge-->
+            <div class="product-image">
+                <div class="product-full">
+                    <img class="img img-responsive" onerror="this.src='/public/no-image.jpg'" id="product-zoom" src='<?php echo $_Product->UrlHinh() ?>' data-zoom-image="<?php echo $_Product->UrlHinh() ?>"/>
+                </div>
+                <div class="product-img-thumb" id="gallery_01">
+                    <ul class="owl-carousel" data-items="3" data-nav="true" data-dots="false" data-margin="20" data-loop="true">
+                        <?php
+                        if ($Img)
+                            foreach ($Img as $value) {
+                                ?>
+                                <li>
+                                    <a href="#" data-image="<?php echo $value ?>" data-zoom-image="<?php echo $value ?>">
+                                        <img id="product-zoom"  src="<?php echo $value ?>" />
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                        ?>
+
+                    </ul>
+                </div>
+            </div>
+            <!-- product-imge-->
+        </div>
+        <div class="pb-right-column col-xs-12 col-sm-6">
+            <h1 class="product-name"><?php echo $_Product->nameProduct ?></h1>
+            <div class="product-desc">
+                <?php echo $_Product->Summary; ?>
+            </div>
+
+            <?php if ($_Product->Price > 0) {
+                ?>
+                <div class="form-action">
+                    <div class="button-group">
+                        <a class="btn-add-cart" href="/cart/index/addproduct/<?php echo $_Product->ID; ?>">Thêm Giỏ Hàng</a>
+                    </div>
+                </div>
+            <?php }
+            ?>
+            <div class="form-share">
+            </div>
+        </div>
+    </div>
+    <!-- tab product -->
+    <hr>
+    <div class="product-tab">
+        <div class="tab-container">
+            <div id="product-detail" class="tab-panel active">
+                <?php echo htmlspecialchars_decode($_Product->Content) ?>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ./tab product -->
+</div>
+<!-- Product -->

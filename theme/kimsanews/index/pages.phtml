@@ -1,0 +1,35 @@
+<?php
+$view_theme = new \theme\qmts\functionLayout();
+$_Pages = new \Model\pages($data["pages"]);
+$Model_News = new \Model\news();
+$newsByPage = $Model_News->NewsByPagesLimitNumber($_Pages->idPa, 9, FALSE);
+?>
+<div class="card">
+    <div class="card-header"><strong><?php echo $_Pages->Name ?></strong>  </div>
+    <div class="card-body">
+        <?php
+        if ($newsByPage)
+            foreach ($newsByPage as $_news) {
+                $_new = new \Model\news($_news);
+                ?>
+                <div class="media-object-default mb-2">
+                    <div class="media">
+                        <a href="<?php echo $_new->linkNewsCurent(); ?>"  >
+                            <img  width="100" class="d-flex mr-3" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" >
+                        </a>
+                        <div class="media-body">
+                            <a href="<?php echo $_new->linkNewsCurent(); ?>" >
+                                <h5 class="color-black mt-0 mb-0 fs-2 text-justify"><?php echo $_new->Name ?></h5>
+                            </a>
+                            <p class="color-gray" ><span ><?php echo $_new->NgayDang() ?></span>  </p>
+                            <p class="color-gray" ><?php echo $_new->Summary(); ?></p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <?php
+            }
+        ?>
+    </div>
+</div>
+

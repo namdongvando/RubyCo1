@@ -1,0 +1,180 @@
+<?php
+$Order = new Module\cart\Model\Order();
+$Product = new Model\Products();
+$_Order = $Order->orderbyid($_Param[0]);
+//$Order->GetQuery();
+$DSStatus = $Order->listStatus();
+$_Order = $_Order[0];
+if ($_Order["Status"] == 4) {
+    $_Order["Status"] = 3;
+    $Order->updateOrder($_Order);
+}
+
+//print_r($_Order);
+$_OrderDetail = $Order->orderDetailbyid($_Param[0]);
+$error = new Model\Error();
+$e = $error->getError();
+if ($e) {
+    ?>
+    <div class="alert alert-<?php echo $e["Type"] ?>">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo $e["Content"] ?>
+    </div>
+    <?php
+}
+?>
+<div class="" >
+    <div class="col-md-12 " style="padding-top: 10px;" >
+        <a href="/cart/vieworder/dsorderifame" class="btn btn-success btn-sm pull-left" >Quay lại</a>
+        <div class=" btn-group btn-group-sm pull-right" >
+            <a class="btn btn-success" data-toggle="modal" href='#modal-save' >Lưu</a>
+            <a class="btn btn-danger" data-toggle="modal" href='#modal-id' >Hủy đơn hàng</a>
+            <div class="modal modal-danger fade" id="modal-id">
+                <form action="" method="POST" enctype="multipart/form-data" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Hủy đơn hàng</h4>
+                            </div>
+                            <div class="modal-body  ">
+                                <label>Lý do hủy đơn hàng</label>
+                                <textarea required="required" class="form-control" name="note" placeholder="lý do hủy đơn hàng" ></textarea>
+                                <label>Gõ chữ "HUY" để xác nhận hủy đơn hàng</label>
+                                <input type="text" required="" class="form-control" name="huy"  >
+                                <input type="hidden" value="0" class="form-control" name="Status"  >
+                                <input type="hidden" value="<?php echo $_Param[0] ?>" class="form-control" name="CodeOrder"  >
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" name="delete" class="btn btn-success">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal fade" id="modal-save">
+                <form action="" method="POST" enctype="multipart/form-data" >
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">Xử lý đơn hàng</h4>
+                            </div>
+                            <div class="modal-body  ">
+                                <label>Comment</label>
+                                <textarea required="required" class="form-control" name="note" placeholder="Comment" ></textarea>
+                                <label>Thao tác với đơn hàng</label>
+                                <select class="form-control" name="Status" >
+                                    <?php
+                                    foreach ($DSStatus as $k => $status) {
+                                        if ($k > 0) {
+                                            ?>
+                                            <option value="<?php echo $k ?>" ><?php echo $status ?></option>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                <input type="hidden" value="<?php echo $_Param[0] ?>" class="form-control" name="CodeOrder"  >
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" name="save" class="btn btn-success">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4" >
+
+    </div>
+    <div class="col-md-4" >
+        <h2 class="text-center" >Đơn hàng</h2>
+        <div class="clearfix" ></div>
+        <table class="table table-bordered" >
+            <tbody>
+                <tr>
+                    <td>Mã đơn hàng</td>
+                    <td><?php echo $_Param[0]; ?></td>
+                </tr>
+                <tr>
+                    <td>Người đặt hàng</td>
+                    <td><?php echo $_Order["Name"] ?></td>
+                </tr>
+                <tr>
+                    <td>Sđt</td>
+                    <td><?php echo $_Order["Phone"] ?></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><?php echo $_Order["Phone"] ?></td>
+                </tr>
+                <tr>
+                    <td>Tình trạng</td>
+                    <td><?php echo $DSStatus[$_Order["Status"]]; ?></td>
+                </tr>
+                <tr>
+                    <td>Địa chỉ</td>
+                    <td><?php echo $_Order["Address"] ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="clearfix" ></div>
+    <div class="col-md-12" >
+        <h3>Danh sách sản phẩm</h3>
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Hình</th>
+                    <th>Sản phẩn</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành Tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($_OrderDetail as $k => $sp) {
+                    $_sp = $Product->ProductsByID($sp["IdProduct"]);
+                    ?>
+                    <tr>
+                        <td><?php echo $k + 1 ?></td>
+                        <td><img class="img img-responsive" style="height: 50px;"  src="<?php echo $_sp->UrlHinh(); ?>" ></td>
+                        <td>
+                            <p><a href="<?php echo $_sp->linkProduct(); ?>" target="_blank" class="btn btn-btn" ><?php echo $_sp->nameProduct; ?></a></p>
+                            <p>#<?php echo $_sp->ID; ?></p>
+                        </td>
+                        <td><?php echo $sp["Price"]; ?></td>
+                        <td><?php echo $sp["Number"]; ?></td>
+                        <td><?php echo $sp["Number"] * $sp["Price"]; ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5" class="text-right" >Tổng tiền</th>
+                    <th><?php echo $_Order["TotalPrice"] ?></th>
+
+                </tr>
+            </tfoot>
+
+        </table>
+
+    </div>
+    <div class="col-md-12" >
+        theo dõi đơn hàng
+        <div style="height: 300px;overflow: auto;" class="" >
+            <?php echo $_Order["Note"]; ?>
+        </div>
+    </div>
+
+</div>

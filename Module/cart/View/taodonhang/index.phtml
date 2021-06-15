@@ -1,0 +1,119 @@
+<!-- page wapper-->
+<div class="columns-container"  ng-controller="addressController" ng-init="GetCitys()"  >
+    <div class="container" id="columns">
+        <!-- page heading-->
+        <h2 class="page-heading">
+            <span class="page-heading-title2">Tạo Đơn Hàng</span>
+        </h2>
+        <form action="/cart/save/" id="Order" enctype="multipart/form-data" method="POST"  >
+            <div class="page-content checkout-page">
+                <h3 class="checkout-sep">Thông Tin Giao Hàng</h3>
+                <div class="box-border">
+                    <ul>
+                        <li class="row">
+                            <div class="col-sm-4">
+                                <label for="first_name_1" class="required">Họ Tên <span style="color: red;" >(*)</span></label>
+                                <input class="input form-control" required="required" type="text" ng-model="Name" name="Name" id="NameInput">
+                            </div><!--/ [col] -->
+                            <div class="col-sm-4">
+                                <label for="email_address_1" >Email</label>
+                                <input class="input form-control"  ng-model="Email" type="email" name="Email"  id="EmailInput">
+                            </div><!--/ [col] -->
+                            <div class="col-sm-4">
+                                <label for="email_address_1" class="required">SĐT <span style="color: red;" >(*)</span></label>
+                                <input class="input form-control" required="required" type="number" ng-model="Phone" name="SDT" id="SDTInput">
+                            </div><!--/ [col] -->
+                            <div>
+                                <div class="col-sm-6">
+                                    <label  class="required">Tỉnh/Thành Phố</label>
+                                    <select class="form-control"  ng-model="Tinh" ng-change="setHuyen(Tinh)" name="Tinh" >
+                                        <option ng-repeat="item in getLocationsByParent(0)" value="{{item.MaDiaChi}}" >{{item.TenDiaChi}}</option>
+                                    </select>
+                                </div><!--/ [col] -->
+                                <div class="col-sm-6">
+                                    <label class="required">Quận/Huyện</label>
+                                    <select class="form-control" ng-model="Huyen" name="Huyen" >  ;
+                                        <option ng-repeat="item in getLocationsByParent(Tinh)" value="{{item.MaDiaChi}}" >{{item.TenDiaChi}}</option>
+                                    </select>
+                                </div><!--/ [col] -->
+                                <div class="col-xs-12">
+                                    <label for="address_1" class="required">Số Nhà, Đường</label>
+                                    <input class="input form-control" type="text" ng-model="Duong" name="Duong" id="address_1">
+                                </div><!--/ [col] -->
+
+                                <textarea style="display: none;" name="Address"  >{{Duong + "," + getLocationsById(Huyen).TenDiaChi + "," + getLocationsById(Tinh).TenDiaChi}}</textarea>
+
+                            </div>
+
+                        </li><!--/ .row -->
+                    </ul>
+                </div>
+                <div class="box-border">
+                    <div class="columns-container">
+                        <div class="page-content page-order">
+                            <div class="order-detail-content">
+                                <table class="table table-bordered table-responsive cart_summary " ng-controller="addressController" >
+                                    <thead>
+                                        <tr>
+                                            <th class="cart_product">Sản Phẩm</th>
+                                            <th>Mô Tả</th>
+                                            <th>Giá</th>
+                                            <th>Số Lượng</th>
+                                            <th>Thành Tiền</th>
+                                            <th  class="action"><a href="/cart/index/clearcart/"  ><i class="fa fa-trash-o"></i></a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $Cart = new Module\cart\Model\Cart();
+                                        if ($Cart->countProduct2Cart() > 0) {
+                                            $Products = $Cart->Products();
+                                            foreach ($Products as $SanPham) {
+                                                $_P = new Model\Products($SanPham);
+                                                ?>
+                                                <tr>
+                                                    <td class="cart_product">
+                                                        <a href="#"><img src="<?php echo $_P->UrlHinh() ?>" alt="<?php echo $_P->nameProduct ?>"></a>
+                                                    </td>
+                                                    <td class="cart_description">
+                                                        <small class="cart_ref">ID : #<?php echo $_P->ID ?></small><br>
+                                                        <p class="product-name"><a href="#"><?php echo $_P->nameProduct ?> </a></p>
+                                                        <p class="product-name"><?php echo strip_tags($_P->Summary); ?> </p>
+                                                    </td>
+                                                    <td class="price"><span><?php echo $_P->Price(); ?></span></td>
+                                                    <td class="qty">
+                                                        <input class="form-control input-sm" type="text" value="<?php echo $_P->Number ?>">
+                                                        <a href="/cart/index/plusNumberProduct/<?php echo $_P->ID ?>"><i class="fa fa-caret-up"></i></a>
+                                                        <a href="/cart/index/minuNumberProduct/<?php echo $_P->ID ?>"><i class="fa fa-caret-down"></i></a>
+                                                    </td>
+                                                    <td class="price">
+                                                        <span><?php $ThanhTien = $_P->Price * $_P->Number; ?>
+                                                            <?php echo $_P->showPrice($ThanhTien); ?>
+                                                        </span>
+                                                    </td>
+                                                    <td class="action">
+                                                        <a href="/cart/index/removeproduct/<?php echo $_P->ID ?>">Delete item</a>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+
+
+                                    </tbody>
+                                </table>
+                                <div class="cart_navigation">
+                                    <button type="submit" id="button" class="btn btn-success pull-right">Đặt Hàng</button>
+                                    <a class="prev-btn" href="/">Tiếp Tục Mua Hàng</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+

@@ -1,0 +1,45 @@
+<div class="row ">
+    <section class="col-md-12 " ng-controller="madvController" ng-init="getVideo()" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-book"></i>
+                <h3 class="box-title">Quảng Cáo Trên Trang ()</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                </div><!-- /. tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body "  >
+                <div class="col-md-12 connectedSortable"  >
+                    <div class="row" >
+                        <div class="form-group" >
+                            <div class="col-md-8  ">
+                                <div>
+                                    <label class="btn btn-success"  >
+                                        Chọn Video
+                                        <input style="display: none" onclick="BrowseServer('Images:/adv/', 'UrlHinh')"  type="button" name="btnChonFile" id="btnChonFile" value="Chọn File" />
+                                    </label>
+                                </div>
+                                <input type="text" ng-model="Video.Link" id="UrlHinh" class="form-control"  >
+                            </div>
+                            <div class="col-md-4 ">
+                                <label for="">&nbsp; </label>
+                                <select class="form-control" ng-model="Video.IsShow" >
+                                    <option value="0" >Ẩn</option>
+                                    <option value="1" >Hiện</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 10px;" class="col-md-12 form-group">
+                            <label for="">&nbsp; </label>
+                            <button class="btn btn-success btn-md" ng-click="saveVideo()" >Lưu</button>
+                        </div>
+                    </div>
+  
+                </div>
+            </div> 
+        </div>
+    </section>
+</div>

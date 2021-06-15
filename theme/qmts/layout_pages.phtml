@@ -1,0 +1,31 @@
+<?php
+$functionLayout = new theme\qmts\functionLayout();
+echo " ";
+flush();
+?>
+<!DOCTYPE html>
+<html lang="en" ng-cloak="TRUE" ng-app="rootApp"   ng-controller="homeController" >
+    <head>
+        <?php
+        $functionLayout->gethtml();
+        flush();
+        ?>
+    </head>
+    <body class="corporate"  >
+        <?php
+        $functionLayout->header();
+        flush();
+        include $Content;
+        flush();
+        $functionLayout->footer();
+        flush();
+        $functionLayout->js();
+        flush();
+        ?>
+    </body>
+
+</html>
+<?php
+$functionLayout->DeCodeHTML();
+flush();
+?>

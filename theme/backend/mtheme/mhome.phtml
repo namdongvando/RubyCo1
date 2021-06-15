@@ -1,0 +1,123 @@
+<?php
+//Doc config
+$a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
+?>
+<div class="clearfix" ></div>
+<div class="row " ng-controller="mhomeController" ng-init="mhomeInit()" >
+    <section class="col-md-12 " >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Cấu Hình Thành Phần Trang Web</h3>
+            </div>
+            <div class="box-body ">
+                <form action="" method="POST" enctype="multipart/form-data" >
+                    <textarea class="form-control hidden" name="ConfigHome" >{{Home}}</textarea>
+                    <div class="box box-solid ">
+                        <div class="box-header ">
+                            <i class="fa fa-list"></i>
+                            <h3 class="box-title">Banner Động</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-md-3" >
+                                <label>Slide</label>
+                                <select ng-model="Home.HomeSlide" class="form-control" >
+                                    <option value="0" >Ẩn</option>
+                                    <option value="1" >Hiện</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row "  >
+                        <div class="col-md-3"  >
+                            <label>Mẫu Biệt Thự Đẹp</label>
+                            <select ng-model="Home.MauBietThuDep" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3"  >
+                            <label>Khách Hàng Nói Về Chúng Tôi</label>
+                            <select ng-model="Home.KhachHangNoiVeChungToi" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3"  >
+                            <label>Giới Thiệu Ngắn</label>
+                            <select ng-model="Home.GioiThieuNgan" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3"  >
+                            <label>Xậy Dụng Trọn Goi</label>
+                            <select ng-model="Home.XayDungTronGoi" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3"  >
+                            <label>Thông Tin Cần Biết</label>
+                            <select ng-model="Home.ThongTinCanBiet" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3"  >
+                            <label>Tại Sao Chọn Chúng Tôi</label>
+                            <select ng-model="Home.TaiSaoChonChungToi" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3"  >
+                            <label>Người Sáng Tạo</label>
+                            <select ng-model="Home.NguoiSangTao" class="form-control" >
+                                <option value="{{item.idPa}}" ng-repeat="item in ListPages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box box-solid ">
+                        <div class="box-header ">
+                            <i class="fa fa-list"></i>
+                            <h3 class="box-title">Danh Mục Trang Chủ</h3>
+                        </div>
+                        <div class="box-body connectedSortable">
+                            <div class="col-md-6" >
+                                <div class="col-md-12" ng-repeat="item in Home.HomeCategory track by $index" >
+                                    <button type="button" class="btn btn-xs" ng-click="removeHomeCategory($index)"  >
+                                        <i class="fa fa-minus" ></i>
+                                    </button>
+                                    <label>
+                                        {{$index + 1}} |
+                                        {{item.Name}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group hidden">
+                                    <label for="">Danh Mục Sản Phẩm</label>
+                                    <input ng-model="seach"  type="text" class="form-control"  >
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addHomeCategory(item, TypeCatId)"  ng-repeat="item in _Categorys| filter :seach"  >
+                                        {{item.catName}}
+                                    </button>
+                                </div>
+                                <div class="form-group  ">
+                                    <label for="">Danh Mục Bài Viết </label>
+                                    <input ng-model="seach"  type="text" class="form-control"  >
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addHomeCategory(item, TypePageId)"  ng-repeat="item in ListPages| filter :seach"  >
+                                        {{item.Name}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" name="SaveConfigHome" class="btn btn-success"  >Lưu</button>
+                </form>
+
+
+
+            </div>
+        </div>
+    </section>
+
+</div>
+

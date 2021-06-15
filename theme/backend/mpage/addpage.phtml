@@ -1,0 +1,148 @@
+<?php
+$a = new Model_Adapter();
+ob_start();
+$p = new \Model\pages();
+$p->idPa = $p->createID(table_prefix . "pages");
+?>
+<div class="row"  ng-controller="editpageController" ng-init='editpageInit(<?php echo $a->_encode($p); ?>)' >
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <a href="/mpage/" class="btn btn-sm btn-primary pull-left" style="margin-right: 10px;" >
+                    <i class="fa fa-arrow-left" ></i>
+                </a>
+                <h3 class="box-title">Quản Lý Trang </h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <div class="btn-group bakco-categorymenu">
+                    </div>
+                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                </div><!-- /. tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body ">
+                <form action="/mpage/addpage/" method="POST" enctype="multipart/form-data" >
+                    <div class="col-md-6" >
+                        <!--                        {{itemPage.idPa}}-->
+                        <div class="form-group">
+                            <label for="">__Name___</label>
+                            <input type="text" value="{{itemPage.Name}}" class="form-control" name="Name" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">__Title___</label>
+                            <textarea class="form-control"  name="Title" >{{itemPage.Title}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">__Des___</label>
+                            <textarea class="form-control"  name="Des" >{{itemPage.Des}}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__Keyword___</label>
+                            <textarea class="form-control"  name="Keyword" >{{itemPage.Keyword}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">__Urlimages___</label>
+                            <input type="file" class="form-control" name="Fileimages" >
+                            <input  type="text" value="{{itemPage.Urlimages}}" class="form-control hidden" name="Urlimages" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__isShow___</label>
+                            <select class="form-control" name="isShow" ng-model="itemPage.isShow" >
+                                <option value="1" >Hiện</option>
+                                <option value="0" >Ẩn</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__Type___</label>
+                            <select class="form-control" name="Type" ng-model="itemPage.Type" >
+                                <option value="1" >Danh Mục Tin</option>
+                                <option value="0" >Trang</option>
+                            </select>
+                        </div>
+                        <div class="form-group hidden ">
+                            <label for="">__idPa___</label>
+                            <input type="text" value="{{itemPage.idPa}}" class="form-control" name="idPa" >
+                        </div>
+                        <div class="form-group">
+                            <label for="">__idGroup___</label>
+                            <select class="form-control" ng-model="itemPage.idGroup" name="idGroup" >
+                                <option value="{{item.idPa}}" ng-repeat="item in _Pages" >{{item.Name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group hidden">
+                            <label for="">__Alias___</label>
+                            <input type="text" value="{{itemPage.Alias}}" class="form-control" name="Alias" >
+                        </div>
+                        <div class="form-group ">
+                            <label for="">__OrderBy___</label>
+                            <input type="text" value="{{itemPage.OrderBy}}" class="form-control" name="OrderBy" >
+                        </div>
+                        <button name="AddPage" class="btn btn-success  btn-block" >Lưu</button>
+                    </div>
+                    <div class="col-md-9 hidden" >
+                        <div class="form-group">
+                            <label for="">__Summary___</label>
+                            <textarea class="editor" id="Summary"  name="Summary" >{{itemPage.Summary}}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">__Content___</label>
+                            <textarea class="editor" id="Content"  name="Content" >{{itemPage.Content}}</textarea>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" >
+                                <h3 class="panel-title" >Cấu Hình</h3>
+                            </div>
+                            <div class="panel-body ">
+                                <table class="table table-bordered" >
+                                    <tr>
+                                        <td>Key</td>
+                                        <td>Value</td>
+                                    </tr>
+                                    <tr >
+                                        <td>
+                                            Nội Dung Thông Tin Dịch Vụ
+                                        </td>
+                                        <td>
+                                            <select class="form-control" ng-model="itemPage.Note.IsSevicer"    >
+                                                <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0" >Không Dịch Vụ</option>
+                                                <option ng-selected="itemPage.Note.IsSevicer == '1'" value="1" >Là Dịch Vụ</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <textarea class="hidden form-control" name="Note"  class="form-control"  rows="10" >{{itemPage.Note}}</textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<?php
+$str = ob_get_clean();
+
+$str = str_replace("__Name___", "Tên Trang", $str);
+$str = str_replace("__Urlimages___", "Hình", $str);
+$str = str_replace("__isShow___", "Hiển Thị", $str);
+$str = str_replace("__Type___", "Loại Trang", $str);
+$str = str_replace("__idGroup___", "Danh Mục Cha", $str);
+$str = str_replace("__Title___", "Tiêu Đề", $str);
+$str = str_replace("__Des___", "Mô Tả", $str);
+$str = str_replace("__Keyword___", "Từ Khóa", $str);
+$str = str_replace("__Summary___", "Tóm Tắt", $str);
+$str = str_replace("__Content___", "Nội Dung", $str);
+
+
+echo $str;
+?>

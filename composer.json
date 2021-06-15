@@ -1,0 +1,6 @@
+{ 
+    "require": {
+        "zendframework/zend-db": "^2.11",
+        "pfbc/pfbc": "^3.1"
+    }
+}

@@ -1,0 +1,17 @@
+<div class="row ">
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-body no-padding ">
+                <?php
+                $cat = new Model\Category();
+                $idParent = [87];
+
+                $listCat = $cat->getAllChil(87);
+                $a = implode(",", $listCat);
+                echo $a;
+                ?>
+                <textarea></textarea>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

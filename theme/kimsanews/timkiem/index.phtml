@@ -1,0 +1,51 @@
+<?php
+$Produc = new Model\Products();
+$news = new Model\news();
+$number = 30;
+$Pages = !empty($_GET["pages"]) ? intval($_GET["pages"]) : 1;
+$Pages = max($Pages, 1);
+$keyword = $_GET["keyword"];
+//var_dump($_Param[0]);
+$DSSP = $news->NewsByName($keyword, $Pages, $number, $sum);
+//$DSSP = $Produc->getProductsByName($keyword, $Pages, $number, $sum);
+?>
+<div class="content-page" style="background-color: #fff;" >
+    <div >
+        <div class="category-featured fashion">
+            <div class="product-featured clearfix">
+                <div class=" ">
+                    <h3 class="text-left" style="padding: 15px;font-size: 18px;" >Kết quả tìm kiếm "<?php echo $keyword; ?>" (<?php echo $sum; ?>)</h3>
+                    <div class="col-right-tab">
+                        <div class="product-featured-tab-content">
+                            <div class="product-list  "  >
+                                <?php
+                                if ($DSSP)
+                                    foreach ($DSSP as $SP) {
+                                        $_new = new \Model\news($SP);
+                                        ?>
+                                        <div class="media-object-default mb-2">
+                                            <div class="media">
+                                                <a href="<?php echo $_new->linkNewsCurent(); ?>"  >
+                                                    <img  width="100" class="d-flex mr-3" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" >
+                                                </a>
+                                                <div class="media-body">
+                                                    <a href="<?php echo $_new->linkNewsCurent(); ?>" >
+                                                        <h5 class="color-black mt-0 mb-0 fs-2 text-justify"><?php echo $_new->Name ?></h5>
+                                                    </a>
+                                                    <p class="color-gray" ><span ><?php echo $_new->NgayDang() ?></span>  </p>
+                                                    <p class="color-gray" ><?php echo $_new->Summary(); ?></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

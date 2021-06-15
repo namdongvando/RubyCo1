@@ -1,0 +1,269 @@
+<div class="row ">
+    <section class="col-md-12 " ng-controller="madvController"  >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-book"></i>
+                <h3 class="box-title">Quảng Cáo Trên Trang ()</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                </div><!-- /. tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body "  >
+               
+                <div class="col-md-5 connectedSortable"  >
+                    <div class="box box-solid ">
+                        <div class="box-header bg-green-gradient">
+                            <i class="fa fa-book"></i>
+                            <h3 class="box-title">Thêm Nhóm Quảng Cáo</h3>
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <!-- button with a dropdown -->
+                                <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                            </div><!-- /. tools -->
+                        </div><!-- /.box-header -->
+                        <div class="box-body connectedSortable ">
+                            <form action="/madv/addgroupadv/" method="POST" enctype="multipart/form-data" >
+                                <div class="form-group ">
+                                    <label for="">Mã Nhóm</label>
+                                    <input required="required" type="text" class="form-control" name="Group"  placeholder="Mã Nhóm">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="">Tên Nhóm</label>
+                                    <input required="required" type="text" class="form-control" name="Name"  placeholder="Tên Nhóm">
+                                </div>
+                                <button class="btn btn-success" name="AddGroup" >Thêm</button>
+                                <p>
+                                    Chức năng danh cho người phát triển web
+                                </p>
+                            </form>
+                        </div><!-- /.box-body -->
+                    </div>
+                    <div class="box box-solid ">
+                        <div class="box-header bg-green-gradient">
+                            <i class="fa fa-book"></i>
+                            <h3 class="box-title">Thông Tin Quảng Cáo</h3>
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <!-- button with a dropdown -->
+                                <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                            </div><!-- /. tools -->
+                        </div><!-- /.box-header -->
+                        <div class="box-body ">
+                            <form ng-show="false" action="/madv/addadv/" method="POST" enctype="multipart/form-data" >
+                                <div class="form-group">
+                                    <label for="">Tên Quảng Cáo</label>
+                                    <input type="text" class="form-control" name="Name"  placeholder="...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Đường Dẫn</label>
+                                    <input type="text" class="form-control" name="Link"  placeholder="...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nhóm</label>
+                                    <select class="form-control" name="Group"  >
+                                        <option ng-repeat="item in _GroupsAdv" value="{{item.Group}}" >{{item.Group}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Hình Ảnh</label>
+                                    <input class="" name="UrlImage" type="file"  > 
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nội Dung</label>
+                                    <textarea class="form-control" name="Content"  placeholder="Nội Dung Quảng Cáo"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <table class="table table-bordered" >
+                                        {{_Attribute}}
+                                        <caption>Tùy Chọn</caption>
+                                        <thead>
+                                            <tr>
+                                                <th>key</th>
+                                                <th>value</th>
+                                                <th><button class="pull-right" ng-click="clickAddAtt()" type="button" >
+                                                        <i class="fa fa-plus" ></i>
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="itematt in  _Attribute" >
+                                                <td>
+                                                    <input type="text" ng-model="itematt.key" class="form-control"  placeholder="key">
+                                                    <input type="hidden" value="{{itematt.key}}" name="DataAttribute[{{$index}}][key]" >
+                                                    <input type="hidden" value="{{itematt.value}}" name="DataAttribute[{{$index}}][value]" >
+                                                </td>
+                                                <td><input type="text" ng-model="itematt.value"  class="form-control" name="Attribute[{{itematt.key}}]"   placeholder="value">
+                                                </td>
+                                                <td>
+                                                    <button ng-click="clickRemoveAtt($index)" type="button" >
+                                                        <i class="fa fa-minus" ></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="2" ></td>
+                                                <td  >
+                                                    <button class="pull-right" ng-click="clickAddAtt()" type="button" >
+                                                        <i class="fa fa-plus" ></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-success" name="AddAdv" >Thêm Quảng Cáo</button>
+                            </form>
+
+                            <!--/ toa quản cáo-->
+                            <form ng-show="_DetailAdvs" action="/madv/addadv/" method="POST" enctype="multipart/form-data" >
+                                <div class="form-group">
+                                    <label for="">Tên Quảng Cáo</label>
+                                    <input type="text" class="form-control" ng-model="_DetailAdvs.Name" name="Name"  placeholder="Tên Quản Cáo">
+                                    <input type="hidden" class="form-control" value="{{_DetailAdvs.Group}}" name="Group"  >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Đường Dẫn</label>
+                                    <input type="text" class="form-control" ng-model="_DetailAdvs.Link" name="Link"  placeholder="...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Hình Ảnh</label>
+                                    <img src=""  >
+                                    <input class="" name="UrlImage" type="file"  > 
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nội Dung</label>
+                                    <textarea ng-model="_DetailAdvs.Content" class="form-control" name="Content"  placeholder="Nội Dung Quảng Cáo"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <table class="table table-bordered" >
+                                        <caption>Tùy Chọn</caption>
+                                        <tbody>
+                                            <tr ng-repeat="itematt in  _Attribute"  >
+                                                <td  >
+                                                    {{itematt.key}}
+                                                    <input type="hidden" value="{{itematt.key}}" name="DataAttribute[{{$index}}][key]" >
+                                                    <input type="hidden" value="{{itematt.value}}"  name="DataAttribute[{{$index}}][value]" >
+                                                </td>
+                                                <td style="background-color: {{itematt.value}}" ><input type="text" ng-model="itematt.value"  class="form-control" name="Attribute[{{itematt.key}}]"   placeholder="value"></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-success" name="AddAdv" >Tạo Quảng Cáo</button>
+                            </form>
+                            <form ng-show="_editDetailAdvs" action="/madv/editadv/" method="POST" enctype="multipart/form-data" >
+                                <div class="form-group">
+                                    <label for="">Tên Quảng Cáo</label>
+                                    <input type="text" class="form-control" ng-model="_editDetailAdvs.Name" name="Name"  placeholder="Tên Quản Cáo">
+                                    <input type="hidden" class="form-control" value="{{_editDetailAdvs.ID}}" name="ID"  >
+                                    <input type="hidden" class="form-control" value="{{_editDetailAdvs.Group}}" name="Group"  >
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Đường Dẫn</label>
+                                    <input type="text" class="form-control" ng-model="_editDetailAdvs.Link" name="Link"  placeholder="...">
+                                </div>
+                                <div class="form-group">
+                                    <p for=""><b>Hình Ảnh</b></p>
+                                    <img style="background-color: #fff;height: 100px;" src="{{_editDetailAdvs.Urlimages}}"  >
+                                    <input class="" name="UrlImage" type="file"  > 
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Nội Dung</label>
+                                    <textarea ng-model="_editDetailAdvs.Content" class="form-control" name="Content"  placeholder="Nội Dung Quảng Cáo"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <table class="table table-bordered" >
+                                        <caption>Tùy Chọn</caption>
+                                        <tbody>
+                                            <tr ng-repeat="itematt in  _Attribute"  >
+                                                <td  >
+                                                    {{itematt.key}}
+                                                    <input type="hidden" value="{{itematt.key}}" name="DataAttribute[{{$index}}][key]" >
+                                                    <input type="hidden" value="{{itematt.value}}"  name="DataAttribute[{{$index}}][value]" >
+                                                </td>
+                                                <td style="background-color: {{itematt.value}}" ><input type="text" ng-model="itematt.value"  class="form-control" name="Attribute[{{itematt.key}}]"   placeholder="value"></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-success" name="EditAdv" >Sửa Quảng Cáo</button>
+                            </form>
+                            <!--hết tao quản cáo --> 
+                        </div><!-- /.box-body -->
+                    </div>
+
+
+                </div>
+                <div class="col-md-7 connectedSortable"  >
+                    <div class="box box-solid ">
+                        <div class="box-header bg-green-gradient">
+                            <i class="fa fa-book"></i>
+                            <h3 class="box-title">Tất Cả Quảng Cáo</h3>
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <!-- button with a dropdown -->
+                                <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <!--<button class="btn btn-success btn-sm" data-widget=" remove"><i class="fa fa-times"></i></button>-->
+                            </div><!-- /. tools -->
+                        </div><!-- /.box-header -->
+                        <div class="box-body no-padding ">
+                            <table class="table table-bordered" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Group</th>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <th><input ng-model="seachAdv.Name" class="form-control" ></th>
+                                        <th>
+                                            <select class="form-control" ng-model="seachAdv.Group" >
+                                                <option value="" >Tất cả</option>
+                                                <option ng-repeat="item in _GroupsAdv" value="{{item.Group}}" >{{item.Name}}</option>
+                                            </select>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="itemAdv in _Advs| filter:seachAdv" >
+                                        <td>
+                                            <button class="btn-success btn btn-sm" ng-show="itemAdv.isShow == 0" type="button" ng-click="clickCopyQuangCao(itemAdv.ID)"  >Tạo</button>
+                                            <div class="btn-group" ng-show="itemAdv.isShow > 0" >
+                                                <button class="btn-sm btn btn-primary"  type="button" ng-click="clickSuaQuangCao(itemAdv.ID)"  >Sửa</button>
+                                                <span class="bakco-modaldelete" ng-init="modaldeleteInit('Xóa', 'Thông Báo', 'Bạn có muốn xóa quảng cáo này', '/madv/delete/'+itemAdv.ID,itemAdv.ID )" ></span>
+                                            </div>
+                                        </td>
+                                        <td>{{itemAdv.Name}}</td>
+                                        <td>{{itemAdv.Group}}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Group</th>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+
+                            Thêm Quảng Cáo
+                        </div><!-- /.box-body -->
+                    </div>
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

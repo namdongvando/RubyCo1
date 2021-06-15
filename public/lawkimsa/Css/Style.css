@@ -1,0 +1,210 @@
+
+.tabTheme .nav-tabs > li {
+    width: 50%;
+}
+.tabTheme .tab-content{
+    padding: 0px;
+    height: 370px;
+}
+
+.tabTheme .tab-content{
+    background: #fff;
+    border: 1px solid #aaa;
+    padding: 0px 15px;
+}
+.tabTheme .nav-tabs > li > a, .nav-tabs > li > a:hover, .nav-tabs > li > a:focus{
+    background: #bc9315;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+.tabTheme .nav-tabs{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #bc9315;
+    width: 100%;
+    flex-wrap: wrap
+}
+.tabTheme .nav-tabs>li>a{
+    margin-right: 0px;
+}
+.header-navigation>ul>li  a{
+    text-transform: capitalize;
+}
+.panel-theme{
+    border: 1px solid #aaa;
+}
+.panel-theme .panel-heading .panel-title{
+    font-weight: 600;
+}
+.panel-theme .panel-heading{
+    background-color: #bc9315;
+    text-transform: uppercase;
+    color: #fff;
+
+}
+.header-navigation > ul > li > a{
+    padding: 10px 15px;
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.newstitle{
+    font-size: 1.4em;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.header{
+    /*    background-color: #bc9315;*/
+    background-color: #fff;
+    box-shadow: 0 0px 0px #fff;
+
+}
+.header-navigation{
+    background-color: #2f93cd;
+
+}
+.header-navigation .dropdown-menu > li:first-child{
+
+    border-top: 2px solid #bc9315;
+}
+.header-navigation > ul > li.dropdown:hover > a:after{
+    border-bottom: 8px solid #bc9315;
+}
+.header-navigation ul > li.active > a, .header-navigation ul > li > a:hover, .header-navigation ul > li > a:focus, .header-navigation ul > li.open > a, .header-navigation ul > li.open > a:hover, .header-navigation ul > li.open > a:focus{
+    color: #000;
+
+}
+.header-navigation .dropdown-menu > li > a:hover, .header-navigation .dropdown-menu > li.active > a, .header-navigation .header-navigation-content .header-navigation-col li > a:hover, .header-navigation .header-navigation-content .header-navigation-col li.active > a{
+    background-color: #bc9315;
+    color: #000;
+}
+.header-navigation > ul > li:hover a {
+    background-color: #bc9315;
+    color: #000;
+}
+.header-navigation > ul > li > .dropdown-menu{
+    margin-top: 0px;
+}
+.header-navigation{
+    width: 100%;
+}
+.header-navigation>ul{
+    display: flex;
+    width: 100%;
+}
+.header-navigation>ul>li{
+    width: 25%;
+}
+.color-while{
+    color: #fff;
+}
+.header-navigation>ul>li> a{
+    white-space: nowrap;
+    text-align: center;
+
+}
+.page-slider{
+    margin-top: 0px;
+
+}
+.carousel-slider .item{
+    min-height: 400px;
+}
+.list-news-right  {
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.list-news-right li:last-child{
+    border-bottom: 0px dashed #aaa;
+}
+.list-news-right li a{
+    color: #000;
+    font-size: 1.2em;
+    white-space: nowrap;
+    padding: 6px 0;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.list-news-right li{
+    list-style-type: square;
+    border-bottom: 1px dashed #aaa;
+}
+.header .mobi-toggler{
+    margin: 8px 0 10px 13px;
+}
+.btn-theme{
+    background-color: #bc9315;
+    color: #fff;
+    font-weight: bold;
+}
+a:hover{
+    color: #bc9315;
+}
+.footer .powered > a{
+    color: #aaa;
+}
+.pre-header{
+    background-color: #bc9315;
+}
+.pre-footer{
+    color: #000;
+    background-color: #aaa;
+}
+.pre-footer h2, .ecommerce .pre-footer h2{
+    color: #000;
+}
+.pre-footer-subscribe-box .input-group{
+    padding: 0px;
+}
+.pre-footer a{
+    color: #fff;
+}
+.gold{
+    color: #bc9315;
+    border: 1px solid #bc9315;
+}
+.pre-footer-subscribe-box input{
+    background-color: #fff;
+}
+.footer{
+    background-color: #999;
+}
+.pre-footer-subscribe-box .input-group{
+    border: solid 1px #999;
+}
+.pre-footer address{
+    font-size: 1.3em;
+}
+.Main-Content img{
+    max-width: 100% !important;
+    height: auto !important; 
+}
+
+@media (max-width: 575.98px) {
+    .header-navigation>ul{
+        display: block;
+        width: 100%;
+    }
+    .header-navigation>ul>li{
+        width: 100%;
+
+
+    }
+    .pre-header .list-inline li {
+        display: block;
+        border: none;
+        margin-bottom: 5px;
+        padding: 0;
+    }
+    .header-navigation>ul>li> a{
+        text-align: left;
+    }
+}
+
+@media (max-width: 767.98px) {  }
+
+@media (max-width: 991.98px) { }
+
+@media (max-width: 1199.98px) {  }

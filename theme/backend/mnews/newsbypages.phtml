@@ -1,0 +1,76 @@
+<div class="row " ng-controller="newsbypagesController" ng-init="newsbypagesInit(<?php echo $_Param[0] ?>)" >
+    <section class="col-md-12" >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <a href="/mpage/" class="btn btn-sm btn-primary pull-left" style="margin-right: 10px;" >
+                    <i class="fa fa-arrow-left" ></i>
+                </a>
+                <h3 class="box-title">Bài Viết</h3>
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <!-- button with a dropdown -->
+                    <div class="btn-group bakco-categorymenu">
+                    </div>
+                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                </div><!-- /. tools -->
+            </div><!-- /.box-header -->
+            <div class="box-body no-padding ">
+                <div >
+                    <div class="  table-responsive" style="height: 500px;"  >
+                        <table class="table table-bordered table-hover"  >
+                            <thead>
+                                <tr ng-show="_pagesID != ''" >
+                                    <td colspan="6" >
+                                        <a class="btn btn-primary" href="/mnews/addnews/{{_pagesID}}"  >Thêm Bài Viết</a> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 50px;" >STT</th>
+                                    <th style="width: 200px" >Mã bài viết</th>
+                                    <th>Tiêu Đề</th>
+                                    <th>Số Thứ Tự</th>
+                                    <th>Ẩn Hiển</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="itemnews in newsByPage" >
+                                    <th>{{$index + 1}}</th>
+                                    <th>
+                                        #<a href="/mnews/editnews/{{itemnews.ID}}">{{itemnews.ID}}</a>
+                                    </th>
+                                    <th>
+                                        <a href="/mnews/editnews/{{itemnews.ID}}"  >{{itemnews.Name}}</a>
+                                    </th>
+                                    <th style="width: 100px;"  >{{itemnews.Stt}}</th>
+                                    <th style="width: 100px;"  >{{itemnews.AnHien}}</th>
+                                    <th style="width: 100px;" >
+                                        <div class="btn-group" >
+                                            <a href="/mnews/editnews/{{itemnews.ID}}" class="btn-sm btn btn-success"  >Sửa</a>
+                                            <div style="display: inline-table;" class=" bakco-modaldelete" ng-init="modaldeleteInit('Xóa', 'Thông Báo', 'Bạn có muốn xóa trang này', '/mnews/deletenews/' + itemnews.ID, itemnews.ID)" ></div>
+                                        </div>
+                                    </th>
+                                </tr>
+
+                            </tbody>
+
+                            <tfoot>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tiêu Đề</th>
+                                    <th>Mã bài viết</th>
+                                    <th>Số Thứ Tự</th>
+                                    <th>Ẩn Hiển</th>
+                                    <th></th>
+                                </tr>
+
+                            </tfoot>
+
+                        </table>    
+                    </div>    
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

@@ -1,0 +1,107 @@
+<div class="row " ng-controller="categorydetailController" ng-init="categorydetailInit(<?php echo $_Param[0] ?>)" >
+    <section class="col-md-12 " >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-book"></i>
+                <h3 class="box-title">Copy</h3>
+                <!-- tools box -->
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <div >
+                    <div class="col-md-4 connectedSortable" >
+                        <div class="box box-solid " style="margin-top: 20px;" >
+                            <div class="box-header bg-green-gradient">
+                                <h3 class="box-title">Copy Danh Mục </h3>
+                            </div> 
+                            <div class="box-body table-responsive" >
+                                <?php
+                                $a = new \Model\Error();
+                                $error = $a->getError();
+                                if ($error["Content"] != "") {
+                                    ?> 
+                                    <div class="alert alert-<?php echo $error["Type"] ?> alert-dismissible">
+                                        <a href="#" class=" close" style="color: #fff;" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <?php echo $error["Content"] ?>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <div class="" ng-controller="formcategoryController" ng-init="formcategoryInit(<?php echo $_Param[0] ?>, false)" >
+                                    <div ng-show="_CategoryDetail" >
+                                        <form ng-show="_CategoryDetail.catID != null"   action="{{'/mcategory/copy/' + _CategoryDetail.catID}}" method="POST" enctype="multipart/form-data"  >
+                                            <div class="form-group">
+                                                <label >Tên Danh Mục</label>
+                                                <input type="hidden" name="catID" value="{{_CategoryDetail.catID}}" >
+                                                <input type="text" required="required" class="form-control" ng-model="_CategoryDetail.catName" name="catName"  placeholder="Tên Danh Mục">
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Tên Không Đấu</label>
+                                                <input type="text"  class="form-control" ng-model="_CategoryDetail.Path" readonly="readonly"  placeholder="Tên Không Dấu">
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Đường Dẫn</label>
+                                                <input type="text" class="form-control" ng-model="_CategoryDetail.Link" readonly="readonly" placeholder="Đường Dẫn">
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Danh Mục Cấp Trên</label>
+                                                <select ng-model="_CategoryDetail.parentCatID" name="parentCatID" class="form-control select2" >
+                                                    <option value="0" >Là Cấp Cha</option>
+                                                    <option ng-repeat="item in ListCategory" value="{{item.catID}}" >{{item.catName}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Số Thứ Tự Tăng Dần</label>
+                                                <input type="text" class="form-control" ng-model="_CategoryDetail.Serial" name="Serial"  placeholder="Số Thứ Tự Tăng Dần">
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Ghi Chú</label>
+                                                <textarea name="Note" class="form-control" ng-model="_CategoryDetail.Note"   placeholder="Tên Danh Mục" ></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >
+                                                    Ẩn Hiện
+                                                    <input type="checkbox" name="Public" ng-checked="_CategoryDetail.Public == 1" ng-model="_CategoryDetail.Public"    >
+                                                </label>
+                                            </div>
+                                            <div  >
+                                                <button class="btn btn-success" type="submit" name="SuaDanhMuc" > Copy</button>
+                                            </div>
+                                        </form>
+                                        
+                                        
+                                    </div>
+                                    <!--form xóa-->
+                                    <form action="/mcategory/delete/" enctype="multipart/form-data" method="POST" >
+                                        <div class="modal fade" id="modal-id">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header bg-danger">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                        <h4 class="modal-title">Xóa</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <center>Nhập Mật Khẩu Để Xóa Danh Mục : {{_CategoryDetail.catName}}</center> 
+                                                        <input class="form-control" type="hidden" name="catID" value="{{_CategoryDetail.catID}}" >
+                                                        <input class="form-control" required="required" type="password" name="Password" placeholder="Mật khẩu của bạn" >
+                                                        <p class="bg-danger" >Dang mục phải không có <b>danh mục con </b> và <b>danh mục không có sản phẩm</b>.</p>
+                                                        <p class="bg-danger" >Nếu Muốn Xóa Nhiều Hãy Liên Hệ Quả Trị Viên Cao Nhất.</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                                                        <button type="submit" class="btn btn-success" name="xoadanhmuc" >Đồng Ý</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>        
+
+                            </div><!-- /.box-body -->
+                        </div>
+                    </div>
+                    
+                </div>
+            </div><!-- /.box-body -->
+        </div>
+    </section>
+</div>

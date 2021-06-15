@@ -1,0 +1,79 @@
+<?php
+$Model_Duser = new Module\duser\Model\Duser();
+$DSOption = $Model_Duser->Admins(FALSE);
+$validationConfig = get_class_vars("Model\\Admin");
+//$a = new \lib\database2class();
+//$a->MapingClass();
+//$f = new lib\form();
+//$f->MapingForm();
+?>
+<form action="" method="POST" enctype="multipart/form-data" > 
+    <div class="panel " ng-controller="adminController" >
+        <div class="panel-heading">
+            <div class="btn-group-sm pull-right" >
+                <!--<a href="__AddLink___" class="btn btn-primary" >__lblSave___ <i class="fa fa-check" ></i></a>--> 
+                <button name="btnSave" class="btn btn-primary" >__lblSaveClose___ <i class="fa fa-check" ></i></button>
+                <button name="btnSaveClose" class="btn btn-primary" >__lblSave___ <i class="fa fa-check" ></i></button>
+            </div>
+            <h3 class="panel-title">Thông Tin Tài Khoản</h3>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-6" >
+                <div class="form-group">
+                    <label for="">__lblUsername___</label>
+                    <input type="text" value="{{Admin.Username}}" class="form-control" required="required" name="Username" >
+                </div>
+
+                <div class="form-group">
+                    <label for="">__lblPassword___</label>
+                    <input type="password" value="{{Admin.Password}}" class="form-control" required="required" name="Password" >
+                </div>
+                <div class="form-group">
+                    <label for="">__lblRePassword___</label>
+                    <input type="password" value="{{Admin.Password}}" class="form-control" required="required" name="RePassword" >
+                </div>
+                <div class="form-group">
+                    <label for="">__lblGroups___</label>
+                    <input type="text" value="{{Admin.Groups}}" class="form-control" required="required" name="Groups" >
+                </div>
+            </div>
+
+            <div class="col-md-6" >
+                <div class="form-group hidden">
+                    <label for="">__lblRandom___</label>
+                    <input type="text" value="{{Admin.Random}}" class="form-control" required="required" name="Random" >
+                </div>
+
+                <div class="form-group">
+                    <label for="">__lblName___</label>
+                    <input type="text" value="{{Admin.Name}}" class="form-control" required="required" name="Name" >
+                </div>
+
+                <div class="form-group">
+                    <label for="">__lblEmail___</label>
+                    <input type="text" value="{{Admin.Email}}" class="form-control" required="required" name="Email" >
+                </div>
+
+                <div class="form-group">
+                    <label for="">__lblPhone___</label>
+                    <input type="text" value="{{Admin.Phone}}" class="form-control" required="required" name="Phone" >
+                </div>
+
+                <div class="form-group">
+                    <label for="">__lblAddress___</label>
+                    <input type="text" value="{{Admin.Address}}" class="form-control" required="required" name="Address" >
+                </div>
+
+                <div class="form-group">
+                    <label for="">__lblNote___</label>
+                    <input type="text" value="{{Admin.Note}}" class="form-control" required="required" name="Note" >
+                </div>
+                <div class="form-group">
+                    <label for="">__lblUrlimages___</label>
+                    <input type="text" value="{{Admin.Urlimages}}" class="form-control" required="required" name="Urlimages" >
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

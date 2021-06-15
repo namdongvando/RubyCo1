@@ -1,0 +1,10 @@
+Bước 1: 
+Link đăng nhap: https://demo.noithathoaphatgiagoc.vn/backend
+username: admin
+password: 123456
+
+Bước 2:
+vào link:  https://demo.noithathoaphatgiagoc.vn/mproduct/productnoprice/
+
+bước 3: 
+cập nhật giá -> nhấn Lưu

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi" ng-cloak="TRUE" ng-app="rootApp"   ng-controller="homeController"  >
+    <head>
+        <?php
+        \theme\bdsltp\functionLayout::head();
+        ?>
+    </head>
+    <body class="corporate">
+        <?php
+        \theme\bdsltp\functionLayout::header();
+        include $Content;
+        echo \theme\bdsltp\functionLayout::footer();
+        \theme\bdsltp\functionLayout::js();
+        ?>
+
+    </body>
+</html>
+<?php
+\theme\bdsltp\functionLayout::DecodeHTML();
+?>
