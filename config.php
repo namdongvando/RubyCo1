@@ -12,13 +12,12 @@ define("QuanTri", "QuanTri_PGV");
 define("table_prefix", "bakcodt_");
 $_SESSION['TenHienThi'] = 0;
 global $INI;
-
-$INI['host'] = "localhost";
-$INI['username'] = "xpokqxidhosting_rubyads";
-$INI['password'] = "zaq@123Abc456";
-$INI['DBname'] = "xpokqxidhosting_rubyads";
-
- 
+define("ENV", "product");
+$config = parse_ini_file("ENV.ini", true);
+$INI['host'] = $config[ENV]["database"]["host"];
+$INI['username'] = $config[ENV]["database"]["username"];
+$INI['password'] = $config[ENV]["database"]["password"];
+$INI['DBname'] = $config[ENV]["database"]["DBname"];
 
 spl_autoload_register(function($class) {
     $class = str_replace("\\", "_", $class);
