@@ -18,8 +18,8 @@ RewriteRule fonts -  [L]
 RewriteRule public -  [L]
 RewriteRule confix -  [L]
 RewriteRule robots.txt -  [L]
-#RewriteCond %{HTTPS} off
-#RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
 
 RewriteRule page-(.*)\/(.*).html index.php?path=$1 [L]
 RewriteRule (.*)\/(.*).html index.php?ctrl=index&action=chitietsanpham&param=$1&alias=$2 [L]
