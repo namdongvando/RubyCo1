@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f80f51b94bec892cd11afcca206f72e",
+    "content-hash": "4b7c6064eb6fa75407c8013d399c0895",
     "packages": [
         {
-            "name": "pfbc/pfbc",
-            "version": "3.1",
+            "name": "namdongvando/rpfbc",
+            "version": "3.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/lkorth/php-form-builder-class.git",
-                "reference": "e1f9c25b71ee82c60a62a61de63a5926f9d8fc17"
+                "url": "https://github.com/namdongvando/RPFBC.git",
+                "reference": "65d76f3f0c755c2ac01ae7ca8de298d1fe190f96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lkorth/php-form-builder-class/zipball/e1f9c25b71ee82c60a62a61de63a5926f9d8fc17",
-                "reference": "e1f9c25b71ee82c60a62a61de63a5926f9d8fc17",
+                "url": "https://api.github.com/repos/namdongvando/RPFBC/zipball/65d76f3f0c755c2ac01ae7ca8de298d1fe190f96",
+                "reference": "65d76f3f0c755c2ac01ae7ca8de298d1fe190f96",
                 "shasum": ""
             },
             "require": {
@@ -31,31 +31,30 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "GNU GPL v3"
+                "MIT"
             ],
             "authors": [
                 {
-                    "email": "ajporterfield@gmail.com",
+                    "email": "namdong92@gmail.com",
                     "role": "Owner"
                 },
                 {
-                    "email": "moncojhr@gmail.com",
+                    "email": "namdong92@gmail.com",
                     "role": "Committer"
                 }
             ],
-            "description": "Rapid form bulding in PHP",
-            "homepage": "http://code.google.com/p/php-form-builder-class/",
+            "description": "Create Form",
+            "homepage": "https://nguyenvando.net/rpfbc",
             "keywords": [
                 "form",
                 "html",
                 "php"
             ],
             "support": {
-                "issues": "https://github.com/lkorth/php-form-builder-class/issues",
-                "source": "https://github.com/lkorth/php-form-builder-class/tree/master"
+                "issues": "https://github.com/namdongvando/RPFBC/issues",
+                "source": "https://github.com/namdongvando/RPFBC/tree/3.2"
             },
-            "abandoned": true,
-            "time": "2014-03-14T04:14:24+00:00"
+            "time": "2021-06-14T09:16:07+00:00"
         },
         {
             "name": "zendframework/zend-db",
@@ -188,5 +187,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

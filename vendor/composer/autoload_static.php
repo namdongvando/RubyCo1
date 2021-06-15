@@ -30,7 +30,7 @@ class ComposerStaticInit2fd9fe408e5f265b529d5540934eb803
         array (
             'PFBC' => 
             array (
-                0 => __DIR__ . '/..' . '/pfbc/pfbc',
+                0 => __DIR__ . '/..' . '/namdongvando/rpfbc',
             ),
         ),
     );

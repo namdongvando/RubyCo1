@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PFBC' => array($vendorDir . '/pfbc/pfbc'),
+    'PFBC' => array($vendorDir . '/namdongvando/rpfbc'),
 );
