@@ -2,12 +2,12 @@
 
 define("DEFAULT_CONTROLLER", "index");
 define("DEFAULT_ACTION", "index");
-define("BASE_URL", "https://rubyads.com.vn/");
-define("DOMAIN", ".rubyads.com.vn/");
+define("BASE_URL", "https://abc.com/");
+define("DOMAIN", ".abc.com/");
 define("BASE_DIR", "/");
 define("ROOT_DIR", __DIR__);
 define("NgonNgu", "NgonNgu");
-define("Password", "@NguyenVanDo1");
+define("Password", "");
 define("QuanTri", "QuanTri_PGV");
 define("table_prefix", "bakcodt_");
 $_SESSION['TenHienThi'] = 0;
