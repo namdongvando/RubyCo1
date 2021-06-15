@@ -30,4 +30,5 @@ RewriteRule thu-vien.html  index.php?ctrl=index&action=thuvien&param=1 [L]
 RewriteRule category/(.*)/p-(.*)/ index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
 RewriteRule category/(.*)/p-(.*) index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
 RewriteRule san-pham\.html  index.php?ctrl=index&action=sanpham&param=1 [L]
-RewriteRule (.*)  index.php [L]
+
+RewriteRule (.*)  index.php?path=$1 [L]
