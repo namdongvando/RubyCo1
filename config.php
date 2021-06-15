@@ -1,19 +1,19 @@
 <?php
 
-define("DEFAULT_CONTROLLER", "index");
-define("DEFAULT_ACTION", "index");
-define("BASE_URL", "https://abc.com/");
-define("DOMAIN", ".abc.com/");
-define("BASE_DIR", "/");
-define("ROOT_DIR", __DIR__);
-define("NgonNgu", "NgonNgu");
-define("Password", "");
-define("QuanTri", "QuanTri_PGV");
-define("table_prefix", "bakcodt_");
-$_SESSION['TenHienThi'] = 0;
-global $INI;
 define("ENV", "product");
 $config = parse_ini_file("ENV.ini", true);
+
+define("DEFAULT_CONTROLLER", $config["DEFAULT_CONTROLLER"]);
+define("DEFAULT_ACTION", $config["DEFAULT_ACTION"]);
+define("BASE_URL", $config["BASE_URL"]);
+define("DOMAIN", $config["DOMAIN"]);
+define("BASE_DIR", $config["BASE_DIR"]);
+define("ROOT_DIR", __DIR__);
+define("NgonNgu", $config["NgonNgu"]);
+define("QuanTri", $config["QuanTri"]);
+define("table_prefix", $config["table_prefix"]);
+$_SESSION['TenHienThi'] = 0;
+global $INI;
 $INI['host'] = $config[ENV]["database"]["host"];
 $INI['username'] = $config[ENV]["database"]["username"];
 $INI['password'] = $config[ENV]["database"]["password"];
