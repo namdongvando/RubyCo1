@@ -220,42 +220,47 @@ class functionLayout {
         }
         ob_start();
         ?>
-
-        <!-- BEGIN SIDEBAR & CONTENT -->
-        <div class="margin-bottom-40">
-            <!-- BEGIN CONTENT -->
-            <div class="col-md-12 col-sm-12">
-                <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
-                <div class="content-page">
-                    <div class="filter-v1">
-                        <div class="thongtincanbiet row mix-grid thumbnails">
-                            <?php
-                            if ($news) {
-                                foreach ($news as $k => $value) {
-                                    $_v = new \Model\news($value);
-                                    ?>
-                                    <div class="col-md-3 col-sm-4 mix category_1 mix_all" style="display: block; opacity: 1; ">
-                                        <div class="mix-inner ">
-                                            <img alt="<?php echo $_v->Name ?>" data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" class="lazy hinhcol4  img-responsive">
-                                            <div class="mix-details">
-                                                <h4><?php echo $_v->Name ?></h4>
-                                                <a class="mix-link"><i class="fa fa-link"></i></a>
-                                                <a data-rel="fancybox-button" title="<?php echo $_v->Name; ?>" href="<?php echo $_v->UrlHinh(); ?>" class="mix-preview fancybox-button"><i class="fa fa-search"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-
+        <div class="container">
+            <div class="row">
+                <!-- BEGIN SIDEBAR & CONTENT -->
+                <div class="margin-bottom-40">
+                    <!-- BEGIN CONTENT -->
+                    <div class=" col-md-12 col-sm-12">
+                        <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
+                        <div class="content-page">
+                            <div class="filter-v1">
+                                <div class="thongtincanbiet row mix-grid thumbnails">
                                     <?php
-                                }
-                            }
-                            ?>
+                                    if ($news) {
+                                        foreach ($news as $k => $value) {
+                                            $_v = new \Model\news($value);
+                                            ?>
+                                            <div class="col-md-3 col-xs-6 col-sm-4 mix category_1 mix_all" style="opacity: 1; ">
+                                                <div class="mix-inner ">
+                                                    <a href="<?php echo $_v->linkNewsCurent(); ?>"  >
+                                                        <img style="width: 100%;" alt="<?php echo $_v->Name ?>" data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" class="lazy hinhVuong img-responsive">
+                                                    </a>
+                                                    <div class="mix-details">
+                                                        <h4><?php echo $_v->Name ?></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- END CONTENT -->
                 </div>
+                <!-- BEGIN SIDEBAR & CONTENT -->
             </div>
-            <!-- END CONTENT -->
+
         </div>
-        <!-- BEGIN SIDEBAR & CONTENT -->
+
         <?php
         $str = ob_get_clean();
         return $str;
@@ -402,7 +407,9 @@ class functionLayout {
         <link href="/public/bdsltp/public/theme/assets/corporate/css/style-responsive.css" rel="stylesheet">
         <link href="/public/bdsltp/public/theme/assets/corporate/css/themes/blue.css" rel="stylesheet" id="style-color">
         <link href="/public/bdsltp/dainam/custom.css?v=<?php echo filemtime('public/bdsltp/dainam/custom.css'); ?>" rel="stylesheet" type="text/css"/>
+        <link href="/public/Phonering/phonering.css?v=<?php echo filemtime('public/Phonering/phonering.css'); ?>" rel="stylesheet" type="text/css"/>
         <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
+
         <style type="text/css" >
             .float-contact {
                 position: fixed;
@@ -747,7 +754,7 @@ class functionLayout {
         ob_start();
         ?>
         <!-- BEGIN PRE-FOOTER -->
-        <div class="pre-footer">
+        <div class="pre-footer" style="background-color: #0F2C42;" >
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 pre-footer-col">
@@ -757,32 +764,45 @@ class functionLayout {
                         <p class="text-justify" >
                             __GioiThieuFooter___
                         </p>
+
                     </div>
                     <div class="col-md-4 col-sm-6 pre-footer-col">
-                        <h2>Liên Hệ</h2>
+                        <h2 class="title" style="background-color: #0F2C42"  >Liên Hệ</h2>
 
                         <address class="margin-bottom-40">
                             <p><i class="fa fa-map-marker" ></i> Địa Chỉ:  __DiaChi___</p>
                             <p><i class="fa fa-phone" ></i> Phone: __SDT___</p>
-                            <p><i class="fa fa-fax" ></i>Fax: __Fax___</p>
-                            <p><i class="fa fa-envelope" ></i>Email: <a href="mailto:__Email___">__Email___</a></p>
-                            <p><i class="fa fa-skype" ></i>Skype: <a href="skype:__Skyper___">__Skyper___</a></p>
+                            <p><i class="fa fa-fax" ></i> Fax: __Fax___</p>
+                            <p><i class="fa fa-envelope" ></i> Email: <a href="mailto:__Email___">__Email___</a></p>
+                            <p><i class="fa fa-skype" ></i> Skype: <a href="skype:__Skyper___">__Skyper___</a></p>
                         </address>
 
                     </div>
                     <div class="col-md-4 col-sm-6 pre-footer-col">
-                        <h2>Nhận Tin</h2>
+                        <h2 class="title" style="background-color: #0F2C42" >Nhận Tin</h2>
                         <p>Đăng ký nhận bản tin của chúng tôi và cập nhật những tin tức và ưu đãi mới nhất!</p>
                         <div class="pre-footer-subscribe-box pre-footer-subscribe-box-vertical">
                             <form action="#">
-                                <div class="input-group">
+                                <div class="input-group" style="border: 1px solid red; " >
                                     <input type="text" placeholder="youremail@mail.com" class="form-control">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="submit">Gửi</button>
+                                        <button class="btn btn-danger" style="background-color: red;" type="submit">Gửi</button>
                                     </span>
                                 </div>
                             </form>
                         </div>
+                        <ul class="social-footer list-unstyled list-inline">
+                            <li class="btn-group" >
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-facebook"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-google-plus"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-linkedin"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-twitter"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-skype"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-github"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-youtube"></i></a>
+                                <a class="btn-social" href="javascript:;"><i class="fa fa-dropbox"></i></a>
+                            </li>
+                        </ul>
                     </div>
                     <!-- END TWITTER BLOCK -->
                 </div>
@@ -798,17 +818,7 @@ class functionLayout {
                     <!-- END COPYRIGHT -->
                     <!-- BEGIN PAYMENTS -->
                     <div class="col-md-4 col-sm-4">
-                        <ul class="social-footer list-unstyled list-inline pull-right">
-                            <li><a href="javascript:;"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-skype"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-github"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="javascript:;"><i class="fa fa-dropbox"></i></a></li>
-                        </ul>
+
                     </div>
                     <!-- END PAYMENTS -->
                     <!-- BEGIN POWERED -->
@@ -818,6 +828,23 @@ class functionLayout {
                     <!-- END POWERED -->
                 </div>
             </div>
+        </div>
+        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
+            <div class="phonering-alo-ph-circle"></div>
+            <div class="phonering-alo-ph-circle-fill"></div>
+            <a href="tel:__ContactPhone___" class="pps-btn-img" title="Liên hệ">
+                <div class="phonering-alo-ph-img-circle">
+                    <i class="fa fa-phone fa-3x" ></i>
+                </div>
+            </a>
+        </div>
+        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class="phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
+            <div class="phonering-alo-ph-circle"></div>
+            <div class="phonering-alo-ph-circle-fill"></div>
+            <a href="https://zalo.me/__ContactZalo___" class="pps-btn-img" title="Zalo">
+                <div class="icon-zalo phonering-alo-ph-img-circle">
+                </div>
+            </a>
         </div>
         <?php
         $str = ob_get_clean();
@@ -848,6 +875,7 @@ class functionLayout {
         <script src="/public/lazyloadimg/lazyloading.js" type="text/javascript"></script>
         <script type="text/javascript">
                             jQuery(document).ready(function() {
+                            try {
                             Layout.init();
                             Layout.initOWL();
                             Layout.initTwitter();
@@ -855,7 +883,12 @@ class functionLayout {
                             Layout.initNavScrolling();
                             Portfolio.init();
                             ContactUs.init();
+                            } catch (e) {
+                            console.log(e);
+                            }
+
                             });</script>
+        <script src="/public/bdsltp/dainam/Costomer.js?v=<?php echo filemtime('public/bdsltp/dainam/Costomer.js'); ?>" type="text/javascript"></script>
         <?php
     }
 
@@ -935,211 +968,6 @@ class functionLayout {
         $Model_Pages = new \Model\pages();
         $Note = $Model_Pages->_decode($Pages["Note"]);
         $this->$function($Pages);
-    }
-
-    function functionName($param) {
-        ?>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown">
-                <a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Fashion</a>
-                <ul class="dropdown-menu mega_dropdown" role="menu" style="width: 830px;">
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="img_container">
-                                <a href="#">
-                                    <img class="img-responsive" src="/public/home/assets/data/men.png" alt="sport">
-                                </a>
-                            </li>
-                            <li class="link_container group_header">
-                                <a href="#">MEN'S</a>
-                            </li>
-                            <li class="link_container"><a href="#">Skirts</a></li>
-                            <li class="link_container"><a href="#">Jackets</a></li>
-                            <li class="link_container"><a href="#">Tops</a></li>
-                            <li class="link_container"><a href="#">Scarves</a></li>
-                            <li class="link_container"><a href="#">Pants</a></li>
-                        </ul>
-                    </li>
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="img_container">
-                                <a href="#">
-                                    <img class="img-responsive" src="/public/home/assets/data/women.png" alt="sport">
-                                </a>
-                            </li>
-                            <li class="link_container group_header">
-                                <a href="#">WOMEN'S</a>
-                            </li>
-                            <li class="link_container"><a href="#">Skirts</a></li>
-                            <li class="link_container"><a href="#">Jackets</a></li>
-                            <li class="link_container"><a href="#">Tops</a></li>
-                            <li class="link_container"><a href="#">Scarves</a></li>
-                            <li class="link_container"><a href="#">Pants</a></li>
-                        </ul>
-                    </li>
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="img_container">
-                                <a href="#">
-                                    <img class="img-responsive" src="/public/home/assets/data/kid.png" alt="sport">
-                                </a>
-                            </li>
-                            <li class="link_container group_head                                                                                                                                                                                                        er">
-                                <a href                                                                                                                                                                                                        ="#">Kids</a>
-                            </li>
-                            <li class="link_container"><a href="#">Shoes</a></li>
-                            <li class="link_container"><a href="#">Clothing</a></li>
-                            <li class="link_container"><a href="#">Tops</a></li>
-                            <li class="link_container"><a href="#">Scarves</a></li>
-                            <li class="link_container"><a href="#">Accessories</a></li>
-                        </ul>
-                    </li>
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="img_container">
-                                <a href="#">
-                                    <img class="img-responsive" src="/public/home/assets/data/trending.png" alt="sport">
-                                </a>
-                            </li>
-                            <li class="li                                                                                                                                                                                                        nk_container group_header"                                                                                                                                                                                                        >
-                                <a href="#">TRENDING</a>
-                            </li>
-                            <li class="link_container"><a href                                                                                                                                                                                                        ="#">Men's Clothing</a></li>
-                            <li class="lin                                                                                                                                                                                                        k_container"><a href="#">Kid's Clothing</a></li>
-                            <li class="link_contain                                                                                                                                                                                                        er"><a href="#">Women's Clothing</                                                                                                                                                                                                        a></li>
-                            <li class="link_container"><a href="#">Accessories</a><                                                                                                                                                                                                        /li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="category.html" class="dr                                                                                                                                                                                                        opdown-toggle" data-toggle="dropdo                                                                                                                                                                                                        wn">Sports</a></li>
-            <li class="dropdown">
-                <a href="category.ht                                                                                                                                                                                                        ml" class="dropdown-toggle" data-toggle="dropdown">Foods                                                                                                                                                                                                        </a>
-                <ul class="mega_dropdown                                                                                                                                                                                                         dropdown-menu" style="width: 8                                                                                                                                                                                                        30px;">
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="link_contai                                                                                                                                                                                                        ner group_header">
-                                <a href="#">Asian</a>
-                            </li>
-                            <li class="link_container">
-                                <a href                                                                                                                                                                                                        ="#">Vietnamese Pho</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Noodles</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Seafood</a>
-                            </li>
-                            <li class="link_container group_header">
-                                <a href="#">Sausages</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Meat Dishes</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Desserts</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Tops</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Tops</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="link_container group_header">
-                                <a href="#">European</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Greek Potatoes</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Famous Spaghetti</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Famous Spaghetti</a>
-                            </li>
-                            <li class="link_container group_header">
-                                <a href="#">Chicken</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Italian Pizza</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">French Cakes</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Tops</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Tops</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="link_container group_header">
-                                <a href="#">FAST</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Hamberger</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Pizza</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Noodles</a>
-                            </li>
-                            <li class="link_container group_header">
-                                <a href="#">Sandwich</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Salad</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Paste</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Tops</a>
-                            </li>
-                            <li class="link_container">
-                                <a href="#">Tops</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="block-container col-sm-3">
-                        <ul class="block">
-                            <li class="img_container">
-                                <img src="/public/home/assets/data/banner-topmenu.jpg" alt="Banner">
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="dropdown">
-
-                <a href="category.html" class="dropdown-toggle" data-toggle="dropdown">Digital<span class="notify notify-right">new</span></a>
-                <ul class="dropdown-menu container-fluid">
-                    <li class="block-container">
-                        <ul class="block">
-                            <li class="link_container"><a href="#">Mobile</a></li>
-                            <li class="link_container"><a href="#">Tablets</a></li>
-                            <li class="link_container"><a href="#">Laptop</a></li>
-                            <li class="link_container"><a href="#">Memory Cards</a></li>
-                            <li class="link_container"><a href="#">Accessories</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="category.html">Furniture</a></li>
-            <li><a href="category.html">Jewelry</a></li>
-            <li><a href="category.html">Blog</a></li>
-        </ul>
-        <?php
     }
 
     function TinTucFooter() {
@@ -1572,10 +1400,7 @@ class functionLayout {
             <p class="text-center" >NHANH LÊN! HÃY GỌI NGAY CHÚNG TÔI</p>
             <h3 class="text-center" >ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ</h3>
             <div class="btn-tuvan text-center" >
-                <a href="" class="btn-lg btn-bds btn btn-primary btn-radius" >Đăng Ký Tư Vấn Miễn Phí</a>
                 <a href="tel:__Hotline___" class="btn-lg btn-bds btn btn-primary btn-radius" >Hotline: __Hotline___</a>
-                <a href="" class="btn-lg btn-bds btn btn-primary btn-radius" >Đặt Lịch Hẹn Với Kiến Trúc Sư</a>
-
             </div>
         </div>
         <?php
@@ -1619,10 +1444,10 @@ class functionLayout {
                     }
                     ?>
                 </div>
-                <a class="left carousel-control carousel-control-shop carousel-control-frontend" href="#carousel-example-generic" role="button" data-slide="prev">
+                <a target="_self" class="left carousel-control carousel-control-shop carousel-control-frontend" href="#carousel-example-generic" role="button" data-slide="prev">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </a>
-                <a class="right carousel-control carousel-control-shop carousel-control-frontend" href="#carousel-example-generic" role="button" data-slide="next">
+                <a target="_self" class="right carousel-control carousel-control-shop carousel-control-frontend" href="#carousel-example-generic" role="button" data-slide="next">
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </a>
             </div>
@@ -1735,34 +1560,35 @@ class functionLayout {
         ob_start();
         ?>
         <!-- BEGIN RECENT WORKS -->
-        <div class="recent-work margin-bottom-40">
-            <div class="col-md-12">
-                <hr>
-                <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
-                <div class="owl-carousel owl-carousel5">
-                    <?php
-                    foreach ($news as $k => $new) {
-                        $_v = new \Model\news($new);
-                        ?>
-                        <div class="recent-work-item">
-                            <div class="item-content" >
-                                <em>
-                                    <img data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" alt="<?php echo $_v->Name; ?>" class="lazy img-responsive">
-                                    <a href="<?php echo $_v->linkNewsCurent(); ?>"><i class="fa fa-link"></i></a>
-                                    <a href="<?php echo $_v->UrlHinh() ?>" class="fancybox-button" title="<?php echo $_v->Name ?>" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
-                                </em>
-                                <a class="recent-work-description" href="javascript:;">
-                                    <h3><?php echo $_v->Name ?></h3>
-                                </a>
-                            </div>
-                        </div>
+        <div class=" margin-bottom-40 ">
+            <div class="container">
+                <div class="row">
+                    <h2 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h2>
+                    <div class="owl-carousel owl-carousel5">
                         <?php
-                    }
-                    ?>
+                        foreach ($news as $k => $new) {
+                            $_v = new \Model\news($new);
+                            ?>
+                            <div class="recent-work-item">
+                                <div class="item-content" >
+                                    <em>
+                                        <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
+                                            <img data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" alt="<?php echo $_v->Name; ?>" class="lazy hinhVuong img-responsive">
+                                        </a>
+                                    </em>
+                                    <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
+                                        <h3><?php echo $_v->Name ?></h3>
+                                    </a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
 
-
+                    </div>
                 </div>
             </div>
+
         </div>
         <!-- END RECENT WORKS -->
         <?php
@@ -1839,6 +1665,14 @@ class functionLayout {
         <?php
         $str = ob_get_clean();
         return $str;
+    }
+
+    public static function functionsName() {
+        return [
+            "owlcarousel6" => "owlcarousel6",
+            "owlcarousel5" => "owlcarousel5",
+            "owlcarousel1" => "owlcarousel1",
+        ];
     }
 
 }

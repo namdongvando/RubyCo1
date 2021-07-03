@@ -61,6 +61,7 @@ $User = new \Module\DB\Model\Duser($User);
                 <div class="form-group">
                     <label for=""></label>
                     <input type="submit" class="btn btn-success" name="SaveAdmin"  value="Lưu Thông Tin" >
+                    <a href="/duser/index/delete/<?php echo $User->Username; ?>/" class="pull-right btn btn-danger" onclick="return confirm('Xóa tài khoản này?')" >Xóa</a>
                 </div>
             </div>
         </div>

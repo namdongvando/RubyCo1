@@ -58,6 +58,12 @@ class Duser extends \Model\Admin {
         return $this->SaveInsert();
     }
 
+    function DeleteOnsubmit($id) {
+        $where = sprintf("`Username` = '%s'", $id);
+        $this->Query($sql);
+        return $this->delete(self::$TableName, $where);
+    }
+
     public function MapArray($POST) {
 
     }
@@ -102,6 +108,10 @@ class Duser extends \Model\Admin {
             return $users[0];
         }
         return NULL;
+    }
+
+    public function AdminsPT($name, $index, $number, $tong) {
+
     }
 
 }

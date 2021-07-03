@@ -220,7 +220,6 @@ class functionLayout {
         }
         ob_start();
         ?>
-
         <!-- BEGIN SIDEBAR & CONTENT -->
         <div class="margin-bottom-40">
             <!-- BEGIN CONTENT -->
@@ -236,7 +235,7 @@ class functionLayout {
                                     ?>
                                     <div class="col-md-3 col-sm-4 mix category_1 mix_all" style="display: block; opacity: 1; ">
                                         <div class="mix-inner ">
-                                            <img alt="<?php echo $_v->Name ?>" data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" class="lazy hinhcol4  img-responsive">
+                                            <img alt="<?php echo $_v->Name ?>" data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" class="lazy hinhVuong hinhcol4  img-responsive">
                                             <div class="mix-details">
                                                 <h4><?php echo $_v->Name ?></h4>
                                                 <a class="mix-link"><i class="fa fa-link"></i></a>
@@ -782,9 +781,9 @@ class functionLayout {
                         <div class="pre-footer-subscribe-box pre-footer-subscribe-box-vertical">
                             <form action="#">
                                 <div class="input-group">
-                                    <input type="text" placeholder="youremail@mail.com" class="form-control">
+                                    <input type="text" placeholder="email@mail.com" class="form-control">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="submit">Gửi</button>
+                                        <button class="btn btn-danger" type="submit">Gửi</button>
                                     </span>
                                 </div>
                             </form>
@@ -1575,13 +1574,10 @@ class functionLayout {
         ?>
         <div class="clearfix" ></div>
         <div class="tuvan-container margin-10" >
-            <p class="text-center" >NHANH LÊN! HÃY GỌI NGAY CHÚNG TÔI</p>
+            <p class="text-center" >HÃY GỌI NGAY CHÚNG TÔI</p>
             <h3 class="text-center" >ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ</h3>
             <div class="btn-tuvan text-center" >
-                <a href="" class="btn-lg btn-bds btn btn-primary btn-radius" >Đăng Ký Tư Vấn Miễn Phí</a>
                 <a href="tel:__Hotline___" class="btn-lg btn-bds btn btn-primary btn-radius" >Hotline: __Hotline___</a>
-                <a href="" class="btn-lg btn-bds btn btn-primary btn-radius" >Đặt Lịch Hẹn Với Kiến Trúc Sư</a>
-
             </div>
         </div>
         <?php
@@ -1699,29 +1695,31 @@ class functionLayout {
         <!-- BEGIN RECENT WORKS -->
         <div class="recent-work margin-bottom-40">
             <div class="col-md-12">
-                <hr>
-                <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
-                <div class="owl-carousel owl-carousel6-brands">
-                    <?php
-                    foreach ($news as $k => $new) {
-                        $_v = new \Model\news($new);
-                        ?>
-                        <div class="recent-work-item">
-                            <div class="item-content" >
-                                <em>
-                                    <img src="<?php echo $_v->UrlHinh() ?>" alt="<?php echo $_v->Name; ?>" class="img-responsive">
-                                    <a href="<?php echo $_v->linkNewsCurent(); ?>"><i class="fa fa-link"></i></a>
-                                    <a href="<?php echo $_v->UrlHinh() ?>" class="fancybox-button" title="<?php echo $_v->Name ?>" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
-                                </em>
-                                <a class="recent-work-description" href="javascript:;">
-                                    <h3><?php echo $_v->Name ?></h3>
-                                </a>
-                            </div>
-                        </div>
+                <div class="row">
+                    <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
+                    <div class="owl-carousel owl-carousel6-brands">
                         <?php
-                    }
-                    ?>
+                        foreach ($news as $k => $new) {
+                            $_v = new \Model\news($new);
+                            ?>
+                            <div class="recent-work-item">
+                                <div class="item-content" >
+                                    <em>
+                                        <img src="<?php echo $_v->UrlHinh() ?>" alt="<?php echo $_v->Name; ?>" class="img-responsive">
+                                        <a href="<?php echo $_v->linkNewsCurent(); ?>"><i class="fa fa-link"></i></a>
+                                        <a href="<?php echo $_v->UrlHinh() ?>" class="fancybox-button" title="<?php echo $_v->Name ?>" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                                    </em>
+                                    <a class="recent-work-description" href="javascript:;">
+                                        <h3><?php echo $_v->Name ?></h3>
+                                    </a>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
 
+
+                    </div>
 
                 </div>
             </div>
@@ -1741,7 +1739,7 @@ class functionLayout {
         ob_start();
         ?>
         <!-- BEGIN RECENT WORKS -->
-        <div class="recent-work margin-bottom-40">
+        <div class="recent-work margin-bottom-40 container">
             <div class="col-md-12">
                 <hr>
                 <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
@@ -1753,7 +1751,7 @@ class functionLayout {
                         <div class="recent-work-item">
                             <div class="item-content" >
                                 <em>
-                                    <img data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" alt="<?php echo $_v->Name; ?>" class="lazy img-responsive">
+                                    <img data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" alt="<?php echo $_v->Name; ?>" class="lazy hinhVuong img-responsive">
                                     <a href="<?php echo $_v->linkNewsCurent(); ?>"><i class="fa fa-link"></i></a>
                                     <a href="<?php echo $_v->UrlHinh() ?>" class="fancybox-button" title="<?php echo $_v->Name ?>" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                                 </em>

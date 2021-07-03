@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 define("ENV", "product");
 $config = parse_ini_file("ENV.ini", true);
 define("DEFAULT_CONTROLLER", $config["DEFAULT_CONTROLLER"]);

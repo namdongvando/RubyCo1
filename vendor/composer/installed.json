@@ -2,28 +2,28 @@
     "packages": [
         {
             "name": "namdongvando/rpfbc",
-            "version": "3.2",
-            "version_normalized": "3.2.0.0",
+            "version": "3.22",
+            "version_normalized": "3.22.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/namdongvando/RPFBC.git",
-                "reference": "65d76f3f0c755c2ac01ae7ca8de298d1fe190f96"
+                "reference": "f5a4326e7974f0dc87018921525fa7065ab857b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/namdongvando/RPFBC/zipball/65d76f3f0c755c2ac01ae7ca8de298d1fe190f96",
-                "reference": "65d76f3f0c755c2ac01ae7ca8de298d1fe190f96",
+                "url": "https://api.github.com/repos/namdongvando/RPFBC/zipball/f5a4326e7974f0dc87018921525fa7065ab857b9",
+                "reference": "f5a4326e7974f0dc87018921525fa7065ab857b9",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
-            "time": "2021-06-14T09:16:07+00:00",
+            "time": "2021-06-15T07:55:13+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
-                "psr-0": {
-                    "PFBC": "."
+                "psr-4": {
+                    "PFBC\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -49,7 +49,7 @@
             ],
             "support": {
                 "issues": "https://github.com/namdongvando/RPFBC/issues",
-                "source": "https://github.com/namdongvando/RPFBC/tree/3.2"
+                "source": "https://github.com/namdongvando/RPFBC/tree/3.22"
             },
             "install-path": "../namdongvando/rpfbc"
         },

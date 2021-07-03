@@ -8,4 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Zend\\Stdlib\\' => array($vendorDir . '/zendframework/zend-stdlib/src'),
     'Zend\\Db\\' => array($vendorDir . '/zendframework/zend-db/src'),
+    'PFBC\\' => array($vendorDir . '/namdongvando/rpfbc/src'),
 );

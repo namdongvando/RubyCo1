@@ -5,18 +5,18 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '58724e20596d2bf68fb3d24b620de2e1d2f4d5e2',
+        'reference' => '2fb98faa9947118f87ee12bcb0336a23ee678092',
         'name' => 'namdongvando/rubyco',
         'dev' => true,
     ),
     'versions' => array(
         'namdongvando/rpfbc' => array(
-            'pretty_version' => '3.2',
-            'version' => '3.2.0.0',
+            'pretty_version' => '3.22',
+            'version' => '3.22.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../namdongvando/rpfbc',
             'aliases' => array(),
-            'reference' => '65d76f3f0c755c2ac01ae7ca8de298d1fe190f96',
+            'reference' => 'f5a4326e7974f0dc87018921525fa7065ab857b9',
             'dev_requirement' => false,
         ),
         'namdongvando/rubyco' => array(
@@ -25,7 +25,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '58724e20596d2bf68fb3d24b620de2e1d2f4d5e2',
+            'reference' => '2fb98faa9947118f87ee12bcb0336a23ee678092',
             'dev_requirement' => false,
         ),
         'zendframework/zend-db' => array(

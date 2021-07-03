@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b7c6064eb6fa75407c8013d399c0895",
+    "content-hash": "49e8b7aa51724f4b6ef1a39f2bea2398",
     "packages": [
         {
             "name": "namdongvando/rpfbc",
-            "version": "3.2",
+            "version": "3.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/namdongvando/RPFBC.git",
-                "reference": "65d76f3f0c755c2ac01ae7ca8de298d1fe190f96"
+                "reference": "f5a4326e7974f0dc87018921525fa7065ab857b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/namdongvando/RPFBC/zipball/65d76f3f0c755c2ac01ae7ca8de298d1fe190f96",
-                "reference": "65d76f3f0c755c2ac01ae7ca8de298d1fe190f96",
+                "url": "https://api.github.com/repos/namdongvando/RPFBC/zipball/f5a4326e7974f0dc87018921525fa7065ab857b9",
+                "reference": "f5a4326e7974f0dc87018921525fa7065ab857b9",
                 "shasum": ""
             },
             "require": {
@@ -25,8 +25,8 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "PFBC": "."
+                "psr-4": {
+                    "PFBC\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -52,9 +52,9 @@
             ],
             "support": {
                 "issues": "https://github.com/namdongvando/RPFBC/issues",
-                "source": "https://github.com/namdongvando/RPFBC/tree/3.2"
+                "source": "https://github.com/namdongvando/RPFBC/tree/3.22"
             },
-            "time": "2021-06-14T09:16:07+00:00"
+            "time": "2021-06-15T07:55:13+00:00"
         },
         {
             "name": "zendframework/zend-db",

@@ -9,7 +9,12 @@
 .phonering-alo-phone.phonering-alo-static {
     opacity:.6
 }
-
+.icon-zalo{
+    background-image: url('zalo.svg'); 
+    background-size: 34px 34px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 .phonering-alo-phone.phonering-alo-hover,.phonering-alo-phone:hover {
     opacity:1
 }
@@ -131,6 +136,9 @@
     height:60px;
     top:70px;
     left:70px;
+    text-align: center;
+    color: #fff;
+    line-height: 80px;
     position:absolute;
     border-radius:100% !important;
     border:2px solid transparent;

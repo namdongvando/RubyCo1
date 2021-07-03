@@ -10,8 +10,10 @@ namespace lib;
 
 class Common {
 
-    static function ToUrl($url) {
-        header("Location: " . $_SERVER["HTTP_REFERER"]);
+    static function ToUrl($url = null) {
+        if ($url == null)
+            $url = $_SERVER["HTTP_REFERER"];
+        header("Location: " . $url);
     }
 
     static function MapArray($array, &$array1) {

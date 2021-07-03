@@ -1,14 +1,14 @@
 <?php
 
 // api này không cần dang nhap
-class Controller_api extends Application {
+class Controller_api extends Controller_index {
 
     public $param;
     public $Menu;
     static private $version = "111";
 
     function __construct() {
-
+        parent::__construct();
         $this->Menu = new \Model\Menu();
         $this->param = $this->getParam();
     }
@@ -419,6 +419,14 @@ class Controller_api extends Application {
             $b[$k]["Name"] = $value->catName;
             $b[$k]["Image"] = $value->banner;
         }
+        $api = new lib\APIs();
+        $api->ArrayToApi($b);
+    }
+
+    function GetFunctions() {
+        $themeName = Model_ViewTheme::get_viewthene();
+        $funsName = "theme\\{$themeName}\\functionLayout";
+        $b = $funsName::functionsName();
         $api = new lib\APIs();
         $api->ArrayToApi($b);
     }

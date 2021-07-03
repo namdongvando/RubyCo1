@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/index.php</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/bdsltp/layout.phtml</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/layout.phtml</file>
             <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/functionLayout.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/Phonering/phonering.css</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/index.php</file>
             <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/bdsltp/dainam/custom.css</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/bdsltp/functionLayout.php</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/bdsltp/public/theme/assets/corporate/css/custom.css</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Module/duser/View/index/index.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/layout.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Module/duser/Controller/index.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/Phonering/phonering.html</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Module/duser/Model/Duser.php</file>
         </group>
     </open-files>
 </project-private>

@@ -7,7 +7,19 @@ function mhomeController($scope, $rootScope, $http, $routeParams) {
     $http.get("/mpage/getPages/").then(function(res) {
         $scope.ListPages = res.data;
     });
+    $http.get("/api/GetFunctions/").then((res) => {
+        $scope._functions = res.data;
+        console.log($scope._functions);
+    });
+    $scope.mhomeInit = () => {
+    }
 
+    $scope.AddItemGroups = function(item, groups) {
+        groups.push(item);
+    }
+    $scope.RemoveItemGroups = function(index, groups) {
+        groups.splice(index, 1);
+    }
 
     $http.get("/mcategory/getCategorys/").then(function(res) {
         $scope._Categorys = res.data;

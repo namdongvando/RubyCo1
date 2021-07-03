@@ -8,7 +8,6 @@ class Model_Adapter {
 
     public function __construct() { // Kết nối csdl đầu tiên
         global $INI;
-
         self::$_conn = mysqli_connect($INI['host'], $INI['username'], $INI['password'], $INI['DBname']) or mysqli_errno("Can't connect database");
         mysqli_query(self::$_conn, "SET NAMES utf8"); // Chuyển dữ liệu trả về sang kiểu utf8
     }

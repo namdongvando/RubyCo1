@@ -58,12 +58,12 @@ class index extends \Controller_backend {
     }
 
     public function delete() {
-        $this->Bread[] = [
-            "title" => "Thêm Tài Khoản",
-            "link" => "#"
-        ];
-        $this->Breadcrumb->setBreadcrumb($this->Bread);
-        $this->ViewThemeModule();
+        $username = $this->getParam()[0];
+        $Duser = new \Module\duser\Model\Duser();
+        if ($username != 'admin') {
+            $Duser->DeleteOnsubmit($username);
+        }
+        \lib\Common::ToUrl("/duser/index/index/");
     }
 
     public function detail() {
