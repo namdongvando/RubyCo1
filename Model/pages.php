@@ -30,16 +30,16 @@ class pages extends \Model\Database {
             }
             $this->idPa = $menu["idPa"];
             $this->idGroup = !empty($menu["idGroup"]) ? $menu["idGroup"] : 0;
-            $this->Name = !empty($menu["Name"]) ? $menu["Name"] : 0;
-            $this->Alias = !empty($menu["Alias"]) ? $menu["Alias"] : 0;
-            $this->Title = !empty($menu["Title"]) ? $menu["Title"] : 0;
-            $this->Des = !empty($menu["Des"]) ? $menu["Des"] : 0;
-            $this->Keyword = !empty($menu["Keyword"]) ? $menu["Keyword"] : 0;
-            $this->Content = !empty($menu["Content"]) ? $menu["Content"] : 0;
-            $this->Urlimages = !empty($menu["Urlimages"]) ? $menu["Urlimages"] : 0;
+            $this->Name = !empty($menu["Name"]) ? $menu["Name"] : null;
+            $this->Alias = !empty($menu["Alias"]) ? $menu["Alias"] : null;
+            $this->Title = !empty($menu["Title"]) ? $menu["Title"] : null;
+            $this->Des = !empty($menu["Des"]) ? $menu["Des"] : null;
+            $this->Keyword = !empty($menu["Keyword"]) ? $menu["Keyword"] : "";
+            $this->Content = !empty($menu["Content"]) ? $menu["Content"] : "";
+            $this->Urlimages = !empty($menu["Urlimages"]) ? $menu["Urlimages"] : "";
             $this->isShow = !empty($menu["isShow"]) ? $menu["isShow"] : 0;
             $this->Type = !empty($menu["Type"]) ? $menu["Type"] : 0;
-            $this->Note = !empty($menu["Note"]) ? $menu["Note"] : 0;
+            $this->Note = !empty($menu["Note"]) ? $menu["Note"] : "";
             $this->OrderBy = !empty($menu["OrderBy"]) ? $menu["OrderBy"] : 0;
         }
 
@@ -83,7 +83,7 @@ class pages extends \Model\Database {
     }
 
     function editPages($Page) {
-        $Page["Alias"] = $this->bodautv($Page["Name"]);
+        $Page["Alias"] = $this->bodautv($Page["Name"]) . '-' . $Page["idPa"];
         return parent::editPages($Page);
     }
 
@@ -169,6 +169,22 @@ class pages extends \Model\Database {
     public function getNewsMoiTop($number) {
         $Modelnew = new news();
         return $Modelnew->NewsByPagesTop($this->idPa, $number);
+    }
+
+    function ToFormOption() {
+        $sql = "SELECT * FROM `" . table_prefix . "pages` WHERE 1";
+        $this->Query($sql);
+        return $this->fetch2Option(["idPa", "Name"]);
+    }
+
+    public function isShow() {
+        echo $this->isShow == 1 ? 'Hiện' : 'Ẩn';
+    }
+
+    public function GetPagesByidGroup() {
+        $PagesService = new Pages\PagesService();
+        $where = "`idGroup` = '{$this->idPa}'";
+        return $PagesService->Select($where);
     }
 
 }

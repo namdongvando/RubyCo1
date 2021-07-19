@@ -71,4 +71,52 @@ class Common {
         return "H:i:s d-m-Y";
     }
 
+    static function PhanTrangIndex($index, $number, $indexPages) {
+        $indexPages = $indexPages - 1;
+        $indexPages = max($indexPages, 0);
+        return $number * ($indexPages) + $index + 1;
+    }
+
+    /**
+     * Phân Trang Datatable
+     * @param {type} parameter
+     */
+    static function PhanTrang($TongTrang, $TrangHienTai, $DuongDan = '[i]') {
+        $PhanTrang = ' <ul class="pagination">';
+        $PhanTrang .= " <li ><a>{$TrangHienTai}/{$TongTrang}</a></li>";
+
+        $tu = $TrangHienTai - 4;
+        $den = $TrangHienTai + 4;
+        $tu = $tu <= 0 ? 1 : $tu;
+        if ($tu > 1) {
+            $DuongDan1 = str_replace("[i]", 1, $DuongDan);
+            $PhanTrang .= '<li><a href="' . $DuongDan1 . '"><<</a></li>';
+        }
+        if ($tu > 1) {
+            $DuongDan1 = str_replace("[i]", $TrangHienTai - 1, $DuongDan);
+            $PhanTrang .= '<li><a href="' . $DuongDan1 . '"><</a></li>';
+        }
+
+        $den = $den >= $TongTrang ? $TongTrang : $den;
+        for ($i = $tu; $i <= $den; $i++) {
+            $DuongDan1 = str_replace("[i]", $i, $DuongDan);
+            if ($i == $TrangHienTai)
+                $PhanTrang .= '<li class="active" ><a href="' . $DuongDan1 . '">' . $i . '</a></li>';
+            else
+                $PhanTrang .= '<li><a href="' . $DuongDan1 . '">' . $i . '</a></li>';
+        }
+
+        if ($den < $TongTrang) {
+            $DuongDan1 = str_replace("[i]", $TrangHienTai + 1, $DuongDan);
+            $PhanTrang .= '<li><a href="' . $DuongDan1 . '">></a></li>';
+        }
+        if ($den < $TongTrang) {
+            $DuongDan1 = str_replace("[i]", $TongTrang, $DuongDan);
+            $PhanTrang .= '<li><a href="' . $DuongDan1 . '">>></a></li>';
+        }
+
+        $PhanTrang .= '</ul>';
+        return $PhanTrang;
+    }
+
 }

@@ -13,23 +13,15 @@ class Controller_mnews extends Controller_mpage {
     }
 
     function index() {
-        if ($this->getParam()[0]) {
-            $this->news->DanhSachTinMoiNhat();
-        }
-        $news = new \Model\news();
-        $Tong = 0;
-        $indexPages = isset($this->getParam()[0]) ? $this->getParam()[0] : 1;
-        $indexPage = max($indexPages, 1);
-        $Number = 10;
-        $Name = '';
-        $newsdata = $news->DanhSachTinPT($indexPage, $Number, $Name, $Tong);
-        $this->ViewTheme(["NewsData" => $newsdata], Model_ViewTheme::get_viewthene(), "news");
+
+        $this->ViewTheme([], Model_ViewTheme::get_viewthene(), "news");
     }
 
     function addnews() {
         if (isset($_POST["AddNews"])) {
             $a = new Model\news();
             $Page = get_class_vars(get_class($a));
+            unset($Page["_conn"]);
             $img = "";
             foreach ($Page as $k => $v) {
                 $Page[$k] = $this->news->Bokytusql($_POST[$k]);
@@ -54,9 +46,8 @@ class Controller_mnews extends Controller_mpage {
             $this->news->_header("/mnews/editnews/" . $Page["ID"]);
         }
         $Bread = new \Model\Breadcrumb();
-
-        $_page = $this->page->PagesById($this->param[0]);
-
+        if (isset($this->param[0]))
+            $_page = $this->page->PagesById($this->param[0]);
 
         $this->Bread[] = [
             "title" => "Thêm Bài Viết",
@@ -82,7 +73,7 @@ class Controller_mnews extends Controller_mpage {
 
     function deletenews() {
         $this->news->DeleteNews($this->param[0]);
-        $this->news->_header("/mnews/index");
+        $this->news->_header($_SERVER["HTTP_REFERER"]);
     }
 
     function editnews() {

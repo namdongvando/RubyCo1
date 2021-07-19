@@ -21,8 +21,9 @@ class backend extends \Model\Database {
         <link rel="stylesheet" href="/public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
         <link href="/public/admin/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/>
         <link href="/public/admin/dist/css/Style.css?v=<?php echo filemtime('public/admin/dist/css/Style.css'); ?>" rel="stylesheet" type="text/css"/>
+        <link href="/public/admin/Customer.css?v=<?php echo filemtime("public/admin/Customer.css"); ?>" rel="stylesheet" type="text/css"/>
         <script src="/public/ckfinder/ckfinder.js" type="text/javascript"></script>
-
+        <script src="/public/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
         <?php
     }
 
@@ -102,37 +103,12 @@ class backend extends \Model\Database {
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu ">
                     <li class="header text-center text-uppercase " style="color: #ddd;" ><b>Chức Năng Chính</b></li>
-                    <!--                    <li class="treeview">
-                                            <a href="/cart/vieworder">
-                                                <i class="fa fa-list-alt"></i> <span>Quản Lý Đơn Hàng</span>
-                                                <i class="fa fa-angle-right pull-right"></i>
-                                            </a>
-                                        </li>-->
 
-                    <li class="treeview ">
-                        <a href="/mcategory/index">
-                            <i class="fa fa-list-alt"></i> <span>Danh Mục Sản Phẩm</span>
-                            <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                    </li>
                     <li class="treeview ">
                         <a href="/mthuvien/index">
                             <i class="fa fa-image"></i> <span>Thư Viện Hình Ảnh</span>
                         </a>
                     </li>
-                    <li class="treeview ">
-                        <a href="/mproduct/index">
-                            <i class="fa fa-list-alt"></i> <span>Quản Lý Sản Phẩm</span>
-                            <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                    </li>
-                    <!--                    <li class="treeview">
-                                            <a href="/mproduct/productnoprice/">
-                                                <i class="fa fa-list-alt"></i> <span>Sản Phẩm Chưa Có Giá</span>
-                                                <i class="fa fa-angle-right pull-right"></i>
-                                            </a>
-                                        </li>-->
-
 
 
                     <li class="treeview <?php echo \Model\Breadcrumb::CheckMenuAcrive("Controller_mpage") ? 'active' : '' ?> ">
@@ -191,7 +167,7 @@ class backend extends \Model\Database {
                     </li>
                     <?php
                     $Duser = \Module\duser\Model\Duser::CurentUsernameAdmin(true);
-                    if ($Duser->Groups == \Module\duser\Model\Duser::$CodeAdmin || true) {
+                    if ($Duser->Groups == \Module\duser\Model\Duser::$CodeAdmin) {
                         ?>
                         <li class="  treeview  ">
                             <a href="/duser/index/index">
@@ -202,29 +178,6 @@ class backend extends \Model\Database {
                         <?php
                     }
                     ?>
-                    <li class="hidden treeview">
-                        <a href="#">
-                            <i class="fa fa-share"></i> <span>Multilevel</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                            <li>
-                                <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                                        <ul class="treeview-menu">
-                                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                        </ul>
-                    </li>
 
                 </ul>
                 <div class="clearfix" ></div>
@@ -238,7 +191,7 @@ class backend extends \Model\Database {
 
     function js() {
         ?>
-        <script src="/public/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script>
@@ -276,11 +229,13 @@ class backend extends \Model\Database {
         <script src="/public/admin/dist/js/app.min.js"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="/public/admin/dist/js/demo.js"></script>
-
+        <script src="/public/admin/Javascript.js" type="text/javascript"></script>
         <script>
 
                             $(function() {
+                                $(".xoa").click(function() {
 
+                                });
                                 $(".dataTable").each(function() {
                                     var id = "#" + $(this).attr("id");
                                     $(id).dataTable();

@@ -111,13 +111,17 @@ class PagesForm implements IPagesForm {
         return new FormRender(new Element\Textbox($label, $name, $options));
     }
 
-    public static function idGroup($value = null) {
+    public static function idGroup($value = null, $name = null) {
         $properties = self::$Option;
+        $pages = new pages();
         $properties["value"] = $value;
-        $name = "pages[" . __FUNCTION__ . "]";
-        $options["1"] = "Hiện";
-        $options["0"] = "Ẩn";
-        $label = "Nhóm";
+        if ($name == null) {
+            $name = "pages[" . __FUNCTION__ . "]";
+        }
+        $id = __FUNCTION__;
+        $options = [0 => "Cấp Cha"];
+        Pages\PagesService::ToSelectDequy(0, $options);
+        $label = "Cấp Cha";
         return new FormRender(new Element\Select($label, $name, $options, $properties));
     }
 

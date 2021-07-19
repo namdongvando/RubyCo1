@@ -81,15 +81,26 @@ class news extends \Model\Database {
     }
 
     function DanhSachTinPT($indexPage, $Number, $Name, &$Tong) {
+        $DanhMuc = 0;
+        if (!is_array($Name)) {
+            $Name = $Name;
+        } else {
+            $DanhMuc = !empty($Name["DanhMuc"]) ? intval($Name["DanhMuc"]) : "";
+            $Name = $Name["Name"];
+        }
+        $sqlDanhmuc = "";
+        if ($DanhMuc > 0) {
+            $sqlDanhmuc = " and `PageID` = '{$DanhMuc}'";
+        }
         $Tong = 0;
         $indexPage = $indexPage - 1;
         $indexPage = max($indexPage, 0);
         $indexPage = $indexPage * $Number;
-        $TongTin = $this->select($this->TableName, [], " `AnHien` = 1");
-
+        $TongTin = $this->select($this->TableName, [], " `Name` like '%$Name%' and `AnHien` = 1 $sqlDanhmuc");
         if ($TongTin)
             $Tong = count($TongTin);
-        return $this->select($this->TableName, [], " `AnHien` = 1 order by `NgayDang` desc limit {$indexPage},{$Number}");
+        $where = "`Name` like '%$Name%' and `AnHien` = 1 $sqlDanhmuc order by `NgayDang` desc limit {$indexPage},{$Number}";
+        return $this->select($this->TableName, [], $where);
     }
 
     function Thumnail() {

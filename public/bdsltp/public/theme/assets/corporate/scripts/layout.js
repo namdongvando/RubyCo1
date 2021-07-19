@@ -396,7 +396,7 @@ var Layout = function() {
                 $(".owl-carousel5").owlCarousel({
                     pagination: false,
                     navigation: true,
-                    loop: false,
+                    loop: true,
                     items: 5,
                     dots: false,
                     addClassActive: true,
@@ -421,6 +421,7 @@ var Layout = function() {
                     pagination: false,
                     navigation: true,
                     items: 4,
+                    dots: false,
                     addClassActive: true,
                     loop: true,
                     responsive: {

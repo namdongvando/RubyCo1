@@ -6,7 +6,7 @@ interface IPagesForm {
 
     public static function idPa($value = null);
 
-    public static function idGroup($value = null);
+    public static function idGroup($value = null, $name = null);
 
     public static function Name($value = null);
 

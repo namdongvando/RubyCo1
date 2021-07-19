@@ -5,7 +5,7 @@ namespace Module\duser\Model;
 class Duser extends \Model\Admin {
 
     public static $TableName = table_prefix . "admin";
-    public static $CodeAdmin = 1;
+    public static $CodeAdmin = 0;
     public $Username;
     public $Password;
     public $Random;

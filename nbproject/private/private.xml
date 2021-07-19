@@ -3,15 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/functionLayout.php</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/Phonering/phonering.css</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/index/index.phtml</file>
             <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/index.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/Adapter.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/functionLayout.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/layout_pages.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/backend/mpage/editpage.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/backend/mpage/index.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/Seo.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/layout_news.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/pages.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/admin/plugins/ckeditor/config.js</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/thuonghieu.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/.htaccess</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/mpage.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/backend/mnews/editnews.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/mnews.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/bdsltp/public/theme/assets/corporate/scripts/layout.js</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/index/news.phtml</file>
             <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/bdsltp/dainam/custom.css</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Module/duser/View/index/index.phtml</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/layout.phtml</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Module/duser/Controller/index.php</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/Phonering/phonering.html</file>
-            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Module/duser/Model/Duser.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/dainamhomes/layout_danhmuc.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/backend/mnews/addnews.phtml</file>
         </group>
     </open-files>
 </project-private>

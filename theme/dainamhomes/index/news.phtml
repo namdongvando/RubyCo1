@@ -9,6 +9,13 @@ $_Pages = new Model\pages($data["pages"]);
         <li><a href="<?php echo $_Pages->linkPagesCurent() ?>"><?php echo $_Pages->Name ?></a></li>
         <li class="active"><?php echo $_News->Name ?></li>
     </ul>
+    <?php
+    if (isset($_SESSION[QuanTri])) {
+        ?>
+        <a href="/mnews/editnews/<?php echo $_News->ID; ?>" class="btn btn-primary pull-right" >Sửa</a>
+        <?php
+    }
+    ?>
 </div>
 <div class="Main-Content" >
     <div class="container" >

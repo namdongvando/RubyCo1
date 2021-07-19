@@ -8,17 +8,10 @@ $_new = new \Model\news($news);
     <section class="col-md-12" >
         <div class="box box-solid ">
             <div class="box-header bg-green-gradient">
-                <a href="<?php echo Model\news::LinkDetail($_new->ID); ?>" class="btn btn-primary" >
-                    <i class="fa fa-arrow-left"></i>
-                </a>
-                <h3 class="box-title">Bài Viết</h3>
-                <!-- tools box -->
+                <h3 class="box-title">Sửa Bài Viết</h3>
                 <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group bakco-categorymenu">
-                    </div>
-                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <!--<button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>-->
+                    <a href="/mnews/addnews/<?php echo $_new->PageID; ?>" class="btn btn-primary" >Thêm Mới</a>
+                    <a target="_blank" href="<?php echo $_new->linkNewsCurent(); ?>" class="btn btn-primary" >Xem bài Viết</a>
                 </div><!-- /. tools -->
             </div><!-- /.box-header -->
             <div class="box-body no-padding ">
@@ -55,6 +48,8 @@ $_new = new \Model\news($news);
                                 <label for="">__ID___</label>
                                 <input type="text" value="<?php echo $_new->ID ?>" class="form-control" name="ID" >
                             </div>
+                            <?php
+                            ?>
                             <div class="form-group">
                                 <label for="">__PageID___</label>
                                 <select name="PageID" class="form-control" >

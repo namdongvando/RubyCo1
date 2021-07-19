@@ -1,59 +1,105 @@
-
-<div class="row"  ng-controller="mpageController">
+<?php
+$pase = new Model\Pages\PagesService();
+$total = 0;
+$pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
+?>
+<div class="row"  >
     <section class="col-md-12" >
         <div class="box box-solid ">
             <div class="box-header">
                 <a href="/mpage/addpage/" class="btn pull-right btn-success"  >Thêm</a>
                 <h3 class="box-title">Quản Lý Bài Viết</h3>
-
-            </div><!-- /.box-header -->
+            </div>
             <div class="box-body no-padding ">
                 <div class="table-responsive" >
+                    <form action="" enctype="multipart/form-data" method="POST" >
+                        <table class="table table-bordered table-hover " id="dataTable" >
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th style="width: 50px">#</th>
+                                    <th >Tên Trang</th>
+                                    <th style="width: 150px">Danh mục cha</th>
+                                    <th style="width: 100px">Hiển Thị</th>
+                                    <th style="width: 150px">Loại Trang</th>
+                                </tr>
+                            </thead>
+                            <?php
+                            if ($pages) {
+                                foreach ($pages as $value) {
+                                    $_page = new Model\pages($value);
+                                    $pages1 = $pase->GetAllPTByPrent($_page->idPa, $total, 1, 100);
+                                    ?>
+                                    <tbody >
+                                        <tr  >
+                                            <td style="width: 150px;" >
+                                                <a class="btn btn-sm btn-primary" href="/mpage/editpage/<?php echo $_page->idPa ?>" >Sửa</a>
+                                                <?php
+                                                if ($pages1 == false) {
+                                                    ?>
+                                                    <a title="Xóa Danh Mục Này" class="btn xoa btn-sm btn-danger" href="/mpage/deletepage/<?php echo $_page->idPa ?>" >Xóa</a>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </td>
+                                            <td><?php echo $_page->idPa; ?></td>
+                                            <td><?php echo $_page->Name; ?></td>
+                                            <td>
+                                                <?php
+                                                \Model\PagesForm::idGroup($_page->idGroup, "GroupId[{$_page->idPa}]")->render();
+                                                ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $_page->isShow(); ?>
+                                            </td>
+                                            <td><?php echo $_page->Type(); ?></td>
+                                        </tr>
+                                        <?php
+                                        if ($pages1) {
+                                            foreach ($pages1 as $value1) {
+                                                $_page1 = new Model\pages($value1);
+                                                ?>
+                                                <tr  >
+                                                    <td style="width: 150px;" >
+                                                        <a class="btn btn-sm btn-primary" href="/mpage/editpage/<?php echo $_page1->idPa ?>" >Sửa</a>
+                                                        <a title="Xóa Danh Mục Này" class="btn  xoa btn-sm btn-danger" href="/mpage/deletepage/<?php echo $_page1->idPa ?>" >Xóa</a>
+                                                    </td>
+                                                    <td><?php echo $_page1->idPa; ?></td>
+                                                    <td><?php echo "--|" . $_page1->Name; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        \Model\PagesForm::idGroup($_page1->idGroup, "GroupId[{$_page1->idPa}]")->render();
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $_page1->isShow(); ?>
+                                                    </td>
+                                                    <td><?php echo $_page1->Type(); ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
 
-                    <table class="table table-bordered  " id="dataTable" >
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th style="width: 50px">#</th>
-                                <th >Tên Trang</th>
-                                <th style="width: 150px">Danh mục cha</th>
-                                <th style="width: 100px">Hiển Thị</th>
-                                <th style="width: 100px">Loại Trang</th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                            <tr ng-repeat="itemPage in  _Pages"  >
-                                <td style="width: 150px;" >
-                                    <a class="btn btn-sm btn-primary" href="/mpage/editpage/{{itemPage.idPa}}" >Sửa</a>
-                                    <span class="bakco-modaldelete" ng-init="modaldeleteInit('Xóa', 'Thông Báo', 'Bạn có muốn xóa trang này', '/mpage/deletepage/' + itemPage.idPa, itemPage.idPa)" ></span>
-                                </td>
-                                <td>{{itemPage.idPa}}</td>
-                                <td>
-                                    <a ng-show="itemPage.Type == 1" href="/mnews/newsbypages/{{itemPage.idPa}}" >{{itemPage.Name}}</a>
-                                    <a ng-show="itemPage.Type != 1" href="/mpage/editpage/{{itemPage.idPa}}" >{{itemPage.Name}}</a>
-                                </td>
-                                <td>
-                                    <span ng-show="itemPage.idGroup == 0">{{itemPage.idGroupName}}</span>
-                                    <a ng-show="itemPage.idGroup > 0" href="/mpage/editpage/{{itemPage.idGroup}}" >{{itemPage.idGroupName}}</a>
-                                </td>
-                                <td>
-                                    {{itemPage.isShow==0?"Ẩn":"Hiện"}}
-                                </td>
-                                <td>{{itemPage.TypeName}}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th> </th>
-                                <th>#</th>
-                                <th>Tên Trang</th>
-                                <th>Nhóm</th>
-                                <th>Hiển Thị</th>
-                                <th>Loại Trang</th>
-                            </tr>
-                        </tfoot>
+                                    </tbody>
+                                    <?php
+                                }
+                            }
+                            ?>
 
-                    </table>
+                            <tfoot>
+                                <tr>
+                                    <th> </th>
+                                    <th colspan="5">
+                                        <button type="submit" name="Save" >Cập Nhật</button>
+                                    </th>
+
+                                </tr>
+                            </tfoot>
+
+                        </table>
+                    </form>
+
 
                 </div>
             </div><!-- /.box-body -->

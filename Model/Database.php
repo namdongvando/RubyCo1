@@ -743,7 +743,7 @@ class Database extends \Model\iDatabase {
 
     function NewsByAlias($alias, $paId, $isobj = true) {
 //        reutur array
-        $a = $this->select(table_prefix . "news", [], "`Alias` = '{$alias}' and `PageID` = '{$paId}' ");
+        $a = $this->select(table_prefix . "news", [], "`Alias` = '{$alias}' and `PageID` = '{$paId}'");
         return $a[0];
     }
 
@@ -794,9 +794,9 @@ class Database extends \Model\iDatabase {
 
     public function PagesByType($type, $isobj = true) {
         if ($isobj) {
-            return $this->select(table_prefix . "pages", [], " `Type` = '{$type}' ");
+            return $this->select(table_prefix . "pages", [], " `Type` = '{$type}' and `isShow` > 0 ", "\Model\pages");
         }
-        return $this->select(table_prefix . "pages", [], " `Type` = '{$type}' ", "\Model\pages");
+        return $this->select(table_prefix . "pages", [], " `Type` = '{$type}' and `isShow` > 0 ");
     }
 
     public function MenuByTheme($theme, $isobj = true) {

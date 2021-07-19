@@ -21,7 +21,6 @@ class Controller_index extends Application {
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__Keyword___";
-        Model_Seo::$Images = "__ImggesTitle___";
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
@@ -111,10 +110,10 @@ class Controller_index extends Application {
         $aliasNews = $url[2][0];
         $Page = $this->Pages->PagesByAlias($aliasPages, FALSE);
         $_Page = new \Model\pages($Page);
-
         $news = $this->News->NewsByAlias($aliasNews, $_Page->idPa);
         $_News = new \Model\news($news);
         $_Breadcrumb = new \Model\Breadcrumb();
+
         $a = [
             [
                 "title" => $_Page->Name,
@@ -131,7 +130,6 @@ class Controller_index extends Application {
         Model_Seo::$Title = $_News->Name;
         Model_Seo::$des = $_News->description;
         Model_Seo::$key = $_News->keyword;
-        Model_Seo::$Images = $_News->UrlHinh();
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
@@ -143,7 +141,6 @@ class Controller_index extends Application {
         Model_Seo::$Title = $Pages->Title;
         Model_Seo::$des = $Pages->Des;
         Model_Seo::$key = $Pages->Keyword;
-        Model_Seo::$Images = $Pages->Urlimages;
         $data["pages"] = $_Pages;
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "pages");
     }

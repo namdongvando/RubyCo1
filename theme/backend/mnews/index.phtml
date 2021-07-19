@@ -1,49 +1,108 @@
 <?php
-$dataNews = $NewsData;
+$news = new \Model\news();
+$Pages = new Model\pages();
+$Tong = 0;
+$indexPage = isset($_GET["indexPage"]) ? intval($_GET["indexPage"]) : 1;
+$indexPage = max($indexPage, 1);
+$Number = isset($_GET["Number"]) ? intval($_GET["Number"]) : 10;
+$Name = isset($_GET["Name"]) ? $_GET["Name"] : "";
+$opTimKiem["Name"] = $Name;
+$DanhMuc = !empty($_GET["DanhMuc"]) ? $_GET["DanhMuc"] : "0";
+$opTimKiem["DanhMuc"] = $DanhMuc;
+$dataNews = $news->DanhSachTinPT($indexPage, $Number, $opTimKiem, $Tong);
 ?>
-<div class="row " ng-controller="mnewsController" >
+<div class="row "  >
     <section class="col-md-12" >
         <div class="box box-solid ">
             <div class="box-header">
                 <h3 class="box-title">Danh Sách Bài Viết</h3>
-            </div><!-- /.box-header -->
+            </div>
             <div class="box-body no-padding ">
+                <div class="row">
+                    <div class="col-md-3">
+                        <?php
+                        \Model\PhanTrangForm::IndexPage($indexPage, ["id" => "indexPages", "onchange" => "FuncTimKiem()"])->render();
+                        \Model\PhanTrangForm::TuKhoa($Name, ["id" => "TimKiemTuKhoa", "placeholder" => "Từ Khoá", "onchange" => "FuncTimKiem()"])->render();
+                        ?>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <?php
+                            \Model\PhanTrangForm::HienThi($Number, ["id" => "Number", "onchange" => "FuncTimKiem()"])->render();
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="row">
+                            <?php
+                            Model\Pages\PagesService::ToSelectDequy(0, $dataPages);
+                            $dataPages = ["0" => "Tất Cả"] + $dataPages;
+                            \Model\PhanTrangForm::Select($DanhMuc, $dataPages, ["id" => "DanhMuc", "onchange" => "FuncTimKiem()"])->render();
+                            ?>
+                        </div>
+                    </div>
+                </div>
                 <div class=" " >
                     <table class="table table-hover table-bordered" id="dataTable" >
                         <thead>
                             <tr>
-                                <th style="width: 50px">#</th>
+                                <th class="text-center" style="width: 50px">#</th>
                                 <th >Tiêu Đề</th>
                                 <th style="width: 250px">Danh Mục</th>
+                                <th style="width: 250px" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody  >
                             <?php
-                            foreach ($dataNews as $key => $value) {
-                                $_news = new Model\news($value);
-                                ?>
-                                <tr>
-                                    <td><?php echo $key + 1 ?></td>
-                                    <td><a href="<?php echo Model\news::LinkDetail($_news->ID); ?>"  ><?php echo $_news->Name; ?></a></td>
-                                    <td><?php echo $_news->PageID()->Name; ?></td>
-                                </tr>
-
-                                <?php
+                            if ($dataNews) {
+                                foreach ($dataNews as $key => $value) {
+                                    $_news = new Model\news($value);
+                                    ?>
+                                    <tr>
+                                        <td class="text-center" ><?php echo lib\Common::PhanTrangIndex($key, $Number, $indexPage); ?></td>
+                                        <td><a href="<?php echo Model\news::LinkDetail($_news->ID); ?>"  ><?php echo $_news->Name; ?></a></td>
+                                        <td><?php echo $_news->PageID()->Name; ?></td>
+                                        <td class="d-flex">
+                                            <a title="Bạn có Muốn Xóa Bài Viết Này?" class="xoa btn-xoa" href="<?php echo Model\news::LinkDelete($_news->ID) ?>"  >Xóa</a> <span>|</span>
+                                            <a href=""  >Sửa</a>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
                             }
                             ?>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th style="width: 50px">#</th>
+                                <th class="text-center" style="width: 50px">#</th>
                                 <th >Tiêu Đề</th>
                                 <th style="width: 250px">Danh Mục</th>
+                                <th style="width: 250px" class="text-center">Action</th>
                             </tr>
                         </tfoot>
-
                     </table>
-
+                    <?php
+                    $TongTrang = ceil($Tong / $Number);
+                    $DuongDan = "/mnews/index/?indexPage=[i]&Name={$Name}&Number={$Number}&DanhMuc={$DanhMuc}";
+                    echo lib\Common::PhanTrang($TongTrang, $indexPage, $DuongDan);
+                    ?>
                 </div>
             </div><!-- /.box-body -->
         </div>
     </section>
 </div>
+<script type="text/javascript" >
+    var FuncTimKiem = function() {
+        var DuongDan = "/mnews/index/?indexPage={i}&Name={$Name}&Number={$Number}&DanhMuc={$DanhMuc}";
+        var TuKhoa = $("#TimKiemTuKhoa").val();
+        var Number = $("#Number").val();
+        var DanhMuc = $("#DanhMuc").val();
+        DuongDan = DuongDan.replace("{i}", 1);
+        DuongDan = DuongDan.replace("{$Name}", TuKhoa);
+        DuongDan = DuongDan.replace("{$Number}", Number);
+        DuongDan = DuongDan.replace("{$DanhMuc}", DanhMuc);
+        window.location.href = DuongDan;
+    }
+    $(function() {
+    });
+</script>

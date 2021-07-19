@@ -1,0 +1,23 @@
+{
+    "short_name": "RUBYCO",
+    "name": "Công Ty TNHH TM DV Giải Trí RUBY",
+    "description": "Công Ty TNHH TM DV Giải Trí RUBY",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/public/Logo_Vuong.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/public/Logo_Vuong.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#fff",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#EB2B43"
+}

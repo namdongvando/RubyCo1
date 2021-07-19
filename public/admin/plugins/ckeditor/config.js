@@ -4,6 +4,8 @@
  */
 
 CKEDITOR.editorConfig = function(config) {
+
+    config.skin = 'office2013';
     config.filebrowserBrowseUrl = '/public/ckfinder/ckfinder.html';
     config.filebrowserImageBrowseUrl = '/public/ckfinder/ckfinder.html?type=Images';
     config.filebrowserFlashBrowseUrl = '/public/ckfinder/ckfinder.html?type=Flash';

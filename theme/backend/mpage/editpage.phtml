@@ -1,6 +1,5 @@
 <?php
 $a = new Model_Adapter();
-
 ob_start();
 $_Pages = new \Model\pages($data["p"]);
 ?>
@@ -27,7 +26,7 @@ $_Pages = new \Model\pages($data["p"]);
                         ?>
                         <div class="form-group">
                             <img src="<?php echo $_Pages->Urlimages ?>" style="max-height: 100px;" class="img img-responsive" >
-                            <button type="button" onclick="BrowseServer('Images:/', 'txtUrlimages')" >Chọn Hình</button>
+                            <button type="button" onclick="BrowseServer('Images:/pages/', 'txtUrlimages')" >Chọn Hình</button>
                             <?php
                             Model\PagesForm::Urlimages($_Pages->Urlimages)->renderHTML();
                             ?>

@@ -2,7 +2,7 @@
 
 class Model_Adapter {
 
-    static protected $_conn = "";
+    static public $_conn = "";
     static protected $_result = "";
     static protected $_Query = "";
 
@@ -137,9 +137,6 @@ class Model_Adapter {
             } else {
                 $d[$value[$columns[0]]] = $value[$columns[1]];
             }
-        }
-        foreach ($data as $k => $value) {
-
         }
     }
 

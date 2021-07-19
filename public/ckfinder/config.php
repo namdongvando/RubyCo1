@@ -12,8 +12,8 @@ function CheckAuthentication() {
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
 // fully functional, in demo mode.
-$config['LicenseName'] = 'bdsltp';
-$config['LicenseKey'] = 'F45J2APWV22RMJNEEMDQETGKTQJA4678';
+$config['LicenseName'] = 'rubyads.com.vn';
+$config['LicenseKey'] = 'AR3PUQWHYERX6FJS7S4KJ2LD183VAQET';
 
 $baseUrl = '/public/img/'; //duong dan
 

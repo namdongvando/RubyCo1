@@ -220,10 +220,10 @@ class functionLayout {
         }
         ob_start();
         ?>
-        <div class="container">
-            <div class="row">
-                <!-- BEGIN SIDEBAR & CONTENT -->
-                <div class="margin-bottom-40">
+        <div class="margin-bottom-40">
+            <div class="container">
+                <div class="row">
+                    <!-- BEGIN SIDEBAR & CONTENT -->
                     <!-- BEGIN CONTENT -->
                     <div class=" col-md-12 col-sm-12">
                         <h1 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h1>
@@ -238,10 +238,12 @@ class functionLayout {
                                             <div class="col-md-3 col-xs-6 col-sm-4 mix category_1 mix_all" style="opacity: 1; ">
                                                 <div class="mix-inner ">
                                                     <a href="<?php echo $_v->linkNewsCurent(); ?>"  >
-                                                        <img style="width: 100%;" alt="<?php echo $_v->Name ?>" data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" class="lazy hinhVuong img-responsive">
+                                                        <img style="width: 100%;" alt="<?php echo $_v->Name ?>" data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" class="lazy HinhChuNhat img-responsive">
                                                     </a>
                                                     <div class="mix-details">
-                                                        <h4><?php echo $_v->Name ?></h4>
+                                                        <a href="<?php echo $_v->linkNewsCurent(); ?>"  >
+                                                            <h4><?php echo $_v->Name ?></h4>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -364,7 +366,7 @@ class functionLayout {
         <link rel="canonical" href="<?php echo $actual_link; ?>">
         <link rel="alternate" hreflang="vi" href="<?php echo $actual_link; ?>">
         <meta name="Resource-type" content="Document" />
-        <meta name="theme-color" content="#007a8c" />
+        <meta name="theme-color" content="#EB2B43" />
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
         <link rel="dns-prefetch" href="//ajax.googleapis.com" />
         <link rel="dns-prefetch" href="//www.facebook.com" />
@@ -374,7 +376,7 @@ class functionLayout {
         <meta name="description" content="<?php echo strip_tags(\Model_Seo::$des); ?>">
         <meta name="author" content="https://nguyenvando.net">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta property="og:image" content="__icon___">
+        <meta property="og:image" content="<?php echo \Model_Seo::$Images; ?>">
         <meta property="og:locale" content="vi_VN" />
         <meta property="og:url" content="<?php echo $actual_link; ?>">
         <meta property="og:type" content="website">
@@ -386,6 +388,7 @@ class functionLayout {
         <link rel="apple-touch-icon" href="__icon___">
         <link rel="apple-touch-icon" sizes="72x72" href="__icon___">
         <link rel="apple-touch-icon" sizes="114x114" href="__icon___">
+        <link rel="manifest" href="/public/manifest.json?v=<?php echo filemtime('public/manifest.json'); ?>">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
 
         <?php
@@ -409,7 +412,7 @@ class functionLayout {
         <link href="/public/bdsltp/dainam/custom.css?v=<?php echo filemtime('public/bdsltp/dainam/custom.css'); ?>" rel="stylesheet" type="text/css"/>
         <link href="/public/Phonering/phonering.css?v=<?php echo filemtime('public/Phonering/phonering.css'); ?>" rel="stylesheet" type="text/css"/>
         <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
-
+        <link href="/public/bdsltp/dainam/style.css?v=<?php echo filemtime("public/bdsltp/dainam/style.css"); ?>" rel="stylesheet" type="text/css"/>
         <style type="text/css" >
             .float-contact {
                 position: fixed;
@@ -758,7 +761,7 @@ class functionLayout {
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 pre-footer-col">
-                        <div class="text-center">
+                        <div class="hidden-xs text-center">
                             <img class="img img-responsive" style="max-height: 150px;margin: auto;margin-bottom: 10px;" src="__Logo___" alt="__webName___">
                         </div>
                         <p class="text-justify" >
@@ -783,8 +786,8 @@ class functionLayout {
                         <p>Đăng ký nhận bản tin của chúng tôi và cập nhật những tin tức và ưu đãi mới nhất!</p>
                         <div class="pre-footer-subscribe-box pre-footer-subscribe-box-vertical">
                             <form action="#">
-                                <div class="input-group" style="border: 1px solid red; " >
-                                    <input type="text" placeholder="youremail@mail.com" class="form-control">
+                                <div class="input-group" style="border: 1px solid #0F2C42; " >
+                                    <input type="text" placeholder="youmail@mail.com" class="form-control">
                                     <span class="input-group-btn">
                                         <button class="btn btn-danger" style="background-color: red;" type="submit">Gửi</button>
                                     </span>
@@ -792,15 +795,13 @@ class functionLayout {
                             </form>
                         </div>
                         <ul class="social-footer list-unstyled list-inline">
-                            <li class="btn-group" >
+                            <li class="btn-group btn-group-social d-flex" >
                                 <a class="btn-social" href="javascript:;"><i class="fa fa-facebook"></i></a>
                                 <a class="btn-social" href="javascript:;"><i class="fa fa-google-plus"></i></a>
                                 <a class="btn-social" href="javascript:;"><i class="fa fa-linkedin"></i></a>
                                 <a class="btn-social" href="javascript:;"><i class="fa fa-twitter"></i></a>
                                 <a class="btn-social" href="javascript:;"><i class="fa fa-skype"></i></a>
-                                <a class="btn-social" href="javascript:;"><i class="fa fa-github"></i></a>
                                 <a class="btn-social" href="javascript:;"><i class="fa fa-youtube"></i></a>
-                                <a class="btn-social" href="javascript:;"><i class="fa fa-dropbox"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -829,7 +830,8 @@ class functionLayout {
                 </div>
             </div>
         </div>
-        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
+
+        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="hidden-xs phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
             <a href="tel:__ContactPhone___" class="pps-btn-img" title="Liên hệ">
@@ -838,7 +840,7 @@ class functionLayout {
                 </div>
             </a>
         </div>
-        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class="phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
+        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class="hidden-xs phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
             <a href="https://zalo.me/__ContactZalo___" class="pps-btn-img" title="Zalo">
@@ -1414,8 +1416,6 @@ class functionLayout {
         ?>
         <div class="page-slider margin-bottom-40">
             <div id="carousel-example-generic" class="carousel slide carousel-slider">
-                <!-- Indicators -->
-
                 <ol class="carousel-indicators carousel-indicators-frontend">
                     <?php
                     for ($i = 0; $i < count($advs); $i++) {
@@ -1425,8 +1425,6 @@ class functionLayout {
                     }
                     ?>
                 </ol>
-
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <!-- First slide -->
                     <?php
@@ -1559,38 +1557,38 @@ class functionLayout {
         }
         ob_start();
         ?>
-        <!-- BEGIN RECENT WORKS -->
         <div class=" margin-bottom-40 ">
             <div class="container">
                 <div class="row">
-                    <h2 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h2>
-                    <div class="owl-carousel owl-carousel5">
-                        <?php
-                        foreach ($news as $k => $new) {
-                            $_v = new \Model\news($new);
-                            ?>
-                            <div class="recent-work-item">
-                                <div class="item-content" >
-                                    <em>
-                                        <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
-                                            <img data-src="<?php echo $_v->UrlHinh() ?>" src="/public/loading.svg" alt="<?php echo $_v->Name; ?>" class="lazy hinhVuong img-responsive">
-                                        </a>
-                                    </em>
-                                    <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
-                                        <h3><?php echo $_v->Name ?></h3>
-                                    </a>
-                                </div>
-                            </div>
+                    <div class="col-md-12">
+                        <h2 class="text-center title-pannel" ><span><?php echo $DanhMuc->Name; ?></span></h2>
+                        <div class="owl-carousel owl-carousel5">
                             <?php
-                        }
-                        ?>
+                            foreach ($news as $k => $new) {
+                                $_v = new \Model\news($new);
+                                ?>
+                                <div class="recent-work-item">
+                                    <div class="item-content" >
+                                        <em>
+                                            <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
+                                                <img  src="<?php echo $_v->UrlHinh() ?>" alt="<?php echo $_v->Name; ?>" class="HinhChuNhat img-responsive">
+                                            </a>
+                                        </em>
+                                        <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
+                                            <h3><?php echo $_v->Name ?></h3>
+                                        </a>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
 
                     </div>
                 </div>
             </div>
 
         </div>
-        <!-- END RECENT WORKS -->
         <?php
         $str = ob_get_clean();
         return $str;
@@ -1673,6 +1671,56 @@ class functionLayout {
             "owlcarousel5" => "owlcarousel5",
             "owlcarousel1" => "owlcarousel1",
         ];
+    }
+
+    public static function DanhSachDangMuc($DSDanhMuc) {
+        if ($DSDanhMuc == null)
+            return;
+        ob_start();
+        if ($DSDanhMuc) {
+            foreach ($DSDanhMuc as $id) {
+                $_Pages = new \Model\pages($id);
+                $DSDanhMucCon = $_Pages->getNewsMoiTop(12);
+                ?>
+                <div class=" margin-bottom-40 ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2 class="text-center title-pannel" ><span><?php echo $_Pages->Name; ?></span></h2>
+                                <div class="owl-carousel owl-carousel4">
+                                    <?php
+                                    if (!empty($DSDanhMucCon)) {
+                                        foreach ($DSDanhMucCon as $k => $new) {
+                                            $_v = new \Model\news($new);
+                                            ?>
+                                            <div class="recent-work-item">
+                                                <div class="item-content" >
+                                                    <em>
+                                                        <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
+                                                            <img src="<?php echo $_v->UrlHinh(); ?>" alt="<?php echo $_v->Name; ?>" class="HinhChuNhat img-responsive">
+                                                        </a>
+                                                    </em>
+                                                    <a class="" href="<?php echo $_v->linkNewsCurent(); ?>">
+                                                        <h3><?php echo $_v->Name ?></h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+
+        $str = ob_get_clean();
+        return $str;
     }
 
 }

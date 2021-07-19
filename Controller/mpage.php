@@ -18,7 +18,14 @@ class Controller_mpage extends Controller_backend {
     }
 
     function index() {
-
+        if (isset($_POST["Save"])) {
+            $pages = new Model\pages();
+            foreach ($_POST["GroupId"] as $id => $value) {
+                $_p = $pages->PagesById($id, FALSE);
+                $_p["idGroup"] = $value;
+                $pages->editPages($_p);
+            }
+        }
         $Bread = new \Model\Breadcrumb();
         $Bread->setBreadcrumb($this->Bread);
         $news = new \Model\news();
@@ -32,8 +39,13 @@ class Controller_mpage extends Controller_backend {
     }
 
     function deletepage() {
-        $this->page->DeletePages($this->param[0]);
-        $this->page->_header("/mpage/");
+        $id = $this->param[0];
+        $pageService = new Model\Pages\PagesService();
+        $p = $pageService->GetById($id);
+        $p["isShow"] = -1;
+        $pageService->Put($p);
+//        $this->page->DeletePages($id);
+        $this->page->_header("/mpage/index/");
     }
 
     function editpage() {
@@ -76,6 +88,11 @@ class Controller_mpage extends Controller_backend {
             }
             $edit["Urlimages"] = $img;
             $edit["Alias"] = $this->page->bodautv($edit["Name"]);
+            $index = 1;
+            while ($this->page->PagesByAlias($edit["Alias"], FALSE)) {
+                $edit["Alias"] = $edit["Alias"] . '-' . $index;
+                $index ++;
+            }
             $edit["Note"] = $_POST["Note"] == "" ? "{}" : $_POST["Note"];
             $edit["OrderBy"] = intval($edit["OrderBy"]);
             $edit["isShow"] = intval($edit["isShow"]);
