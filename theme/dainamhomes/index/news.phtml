@@ -1,8 +1,9 @@
 <?php
 $_News = new Model\news($data["news"]);
+$data["news"]["SoLanXem"] = $data["news"]["SoLanXem"] + 1;
+$_News->editNews($data["news"]);
 $_Pages = new Model\pages($data["pages"]);
-?>
-<!-- Product -->
+?> 
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="/">Trang Chủ</a></li>

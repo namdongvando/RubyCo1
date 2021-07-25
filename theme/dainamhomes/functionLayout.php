@@ -361,6 +361,7 @@ class functionLayout {
         $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $hotlint_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]" . "/";
         ?>
+
         <title><?php echo \Model_Seo::$Title; ?></title>
         <meta charset="utf-8">
         <link rel="canonical" href="<?php echo $actual_link; ?>">
@@ -383,6 +384,8 @@ class functionLayout {
         <meta property="og:title" content="<?php echo strip_tags(\Model_Seo::$key); ?>">
         <meta property="og:description" content="<?php echo strip_tags(\Model_Seo::$des); ?>">
         <meta charset="utf-8">
+        <meta name="google-site-verification" content="agE2_gUWWzEd2vxHZsVrGQDvEDMbspGj1F7Mr3Ay5Ko">
+
         <title><?php echo \Model_Seo::$Title; ?></title>
         <link rel="shortcut icon" href="__icon___">
         <link rel="apple-touch-icon" href="__icon___">
@@ -485,9 +488,9 @@ class functionLayout {
                             <span class="sep"></span>
                             <i class="fa fa-search search-btn"></i>
                             <div class="search-box">
-                                <form action="#">
+                                <form action="/timkiem/index/">
                                     <div class="input-group">
-                                        <input type="text" placeholder="Search" class="form-control">
+                                        <input name="keyword" type="text" placeholder="Search" class="form-control">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="submit">Tìm Kiếm</button>
                                         </span>
@@ -757,7 +760,7 @@ class functionLayout {
         ob_start();
         ?>
         <!-- BEGIN PRE-FOOTER -->
-        <div class="pre-footer" style="background-color: #0F2C42;" >
+        <div class="pre-footer" style="background-color: #62060a;" >
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 pre-footer-col">
@@ -770,7 +773,7 @@ class functionLayout {
 
                     </div>
                     <div class="col-md-4 col-sm-6 pre-footer-col">
-                        <h2 class="title" style="background-color: #0F2C42"  >Liên Hệ</h2>
+                        <h2 class="title" style="background-color: #62060a"  >Liên Hệ</h2>
 
                         <address class="margin-bottom-40">
                             <p><i class="fa fa-map-marker" ></i> Địa Chỉ:  __DiaChi___</p>
@@ -782,14 +785,14 @@ class functionLayout {
 
                     </div>
                     <div class="col-md-4 col-sm-6 pre-footer-col">
-                        <h2 class="title" style="background-color: #0F2C42" >Nhận Tin</h2>
+                        <h2 class="title" style="background-color: #62060a" >Nhận Tin</h2>
                         <p>Đăng ký nhận bản tin của chúng tôi và cập nhật những tin tức và ưu đãi mới nhất!</p>
                         <div class="pre-footer-subscribe-box pre-footer-subscribe-box-vertical">
-                            <form action="#">
-                                <div class="input-group" style="border: 1px solid #0F2C42; " >
-                                    <input type="text" placeholder="youmail@mail.com" class="form-control">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-danger" style="background-color: red;" type="submit">Gửi</button>
+                            <form action="/index/savemail/" method="POST" >
+                                <div class="input-group" style="border: 1px solid #62060a; " >
+                                    <input type="text" name="Email" placeholder="youmail@mail.com" class="form-control">
+                                    <span class="input-group-btn" style="border-color: #fff;" >
+                                        <button class="btn btn-danger" style="background-color: #62060a;border-color: #fff;" type="submit">Gửi</button>
                                     </span>
                                 </div>
                             </form>
@@ -891,6 +894,7 @@ class functionLayout {
 
                             });</script>
         <script src="/public/bdsltp/dainam/Costomer.js?v=<?php echo filemtime('public/bdsltp/dainam/Costomer.js'); ?>" type="text/javascript"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LdxarcbAAAAAGyiHFhosVhbdNa5uK-ufiERSCF3"></script>
         <?php
     }
 
@@ -1719,6 +1723,91 @@ class functionLayout {
             }
         }
 
+        $str = ob_get_clean();
+        return $str;
+    }
+
+    public static function DoiTac() {
+        $adv = new \Model\adv();
+        $DoiTacs = $adv->AdvsByGroup("DoiTac", FALSE);
+        ob_start();
+        ?>
+        <div class="recent-work margin-top-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center title-pannel" ><span>Đối Tác</span></h2>
+                        <div class="owl-carousel owl-carousel6-brands">
+                            <?php
+                            foreach ($DoiTacs as $k => $doitac) {
+                                $_v = new \Model\adv($doitac);
+                                ?>
+                                <div class="recent-work-item">
+                                    <div class="item-content" >
+                                        <img style="height: 100px;" src="<?php echo $_v->Urlimages ?>" alt="<?php echo $_v->Name; ?>" class="img-responsive">
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <?php
+        $str = ob_get_clean();
+        return $str;
+    }
+
+    public static function TinTuc() {
+        $news = new \Model\news();
+        $DSnews = $news->DanhSachTinMoiNhat(5);
+        $TinChinh = new \Model\news($DSnews[0]);
+        unset($DSnews[0]);
+        ob_start();
+        ?>
+        <div class="recent-work  mt-40">
+            <div  style="background-color: #FFDE76;" >
+                <div class="container"  >
+                    <div class="row pb-4">
+                        <div class="col-md-12">
+                            <h2  class="title-tintuc pt-2">Tin Tức</h2>
+                        </div>
+                        <div class="col-md-6">
+                            <article class="baiviet-chinh pt-4">
+                                <a href="<?php echo $TinChinh->linkNewsCurent(); ?>" >
+                                    <img src="<?php echo $TinChinh->UrlHinh(); ?>" class="HinhChuNhat img img img-responsive" alt="<?php echo $TinChinh->Name ?>" title="<?php echo $TinChinh->Name ?>" >
+                                    <h2><?php echo $TinChinh->Name ?></h2>
+                                    <p><?php echo $TinChinh->Summary(); ?></p>
+                                </a>
+                            </article>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row pt-4">
+                                <?php
+                                foreach ($DSnews as $news) {
+                                    $TinChinh = new \Model\news($news);
+                                    ?>
+                                    <div class="col-md-6">
+                                        <article class="">
+                                            <a href="<?php echo $TinChinh->linkNewsCurent(); ?>" >
+                                                <img src="<?php echo $TinChinh->UrlHinh(); ?>" class="HinhChuNhat img img img-responsive" alt="<?php echo $TinChinh->Name ?>" title="<?php echo $TinChinh->Name ?>" >
+                                                <h2><?php echo $TinChinh->Name ?></h2>
+                                            </a>
+                                        </article>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
         $str = ob_get_clean();
         return $str;
     }

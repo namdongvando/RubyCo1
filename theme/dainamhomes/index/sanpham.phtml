@@ -1,9 +1,8 @@
 <?php
 $view_theme = $functionLayout;
-
 $Products = new Model\Products();
-$tong= 0;
-$DSProduct = $Products->ProductsAllPT(1,21,$tong);
+$tong = 0;
+$DSProduct = $Products->ProductsAllPT(1, 21, $tong);
 ?>
 <div id="view-product-list" class="view-product-list">
     <h2 class="page-heading">
@@ -22,7 +21,7 @@ $DSProduct = $Products->ProductsAllPT(1,21,$tong);
         <?php
         if ($DSProduct)
             foreach ($DSProduct as $_Poroduct) {
-                ?> 
+                ?>
                 <li class="col-sx-12 col-sm-4">
                     <?php
                     $view_theme->product($_Poroduct);
@@ -33,5 +32,5 @@ $DSProduct = $Products->ProductsAllPT(1,21,$tong);
         ?>
 
     </ul>
-     
+
 </div>
