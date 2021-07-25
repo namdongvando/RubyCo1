@@ -64,7 +64,7 @@ $dataNews = $news->DanhSachTinPT($indexPage, $Number, $opTimKiem, $Tong);
                                         <td><?php echo $_news->PageID()->Name; ?></td>
                                         <td class="d-flex">
                                             <a title="Bạn có Muốn Xóa Bài Viết Này?" class="xoa btn-xoa" href="<?php echo Model\news::LinkDelete($_news->ID) ?>"  >Xóa</a> <span>|</span>
-                                            <a href=""  >Sửa</a>
+                                            <a href="<?php echo Model\news::LinkEdit($_news->ID); ?>"  >Sửa</a>
                                         </td>
                                     </tr>
                                     <?php

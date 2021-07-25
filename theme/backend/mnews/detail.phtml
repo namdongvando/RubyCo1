@@ -28,7 +28,6 @@ $_new = new \Model\news($news);
             <div class="box-body no-padding ">
                 <div >
                     <div class="col-md-9 " >
-
                         <div class="form-group">
                             <label for="">link</label>
                             <?php echo $_new->linkNewsCurent(); ?>
@@ -56,7 +55,6 @@ $_new = new \Model\news($news);
                     </div>
                     <div class="col-md-3 " >
 
-
                         <div class="form-group">
                             <label for="">__PageID___:</label>
                             <?php echo $_new->PageID()->Name ?>
@@ -68,6 +66,10 @@ $_new = new \Model\news($news);
                         <div class="form-group">
                             <label for="">__keyword___:</label>
                             <?php echo $_new->keyword ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Link</label>
+                            <?php echo $_new->linkNewsCurent(); ?>
                         </div>
                         <div class="form-group">
                             <label for="">__description___:</label>

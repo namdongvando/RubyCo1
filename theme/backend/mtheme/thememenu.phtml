@@ -1,108 +1,5 @@
 <div class="clearfix" ></div>
 <div class="row " ng-controller="thememenuController" ng-init="thememenuInit('<?php echo $_Param[0] ?>', '<?php echo $_Param[1] ?>')" >
-    <section class="col-md-3 connectedSortable" >
-        <div class="box box-solid hidden " >
-            <div class="box-header bg-green-gradient">
-                <i class="fa fa-list"></i>
-                <h3 class="box-title">Quản Lý Menu</h3>
-            </div>
-            <div class="box-body">
-                <ul class="todo-list" >
-                    <li style="cursor: pointer" ng-repeat="item11 in _MenusByThemeId"   >
-                        <a href="/mtheme/thememenu/home/{{item11.Groups}}" >
-                            {{item11.Groups}}
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <a class="btn-block btn btn-primary" target="_self" data-toggle="modal" href='#modal-Pages'>Trang</a>
-        <div class="modal fade" id="modal-Pages">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Tất cả các trang</h4>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-bordered" >
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Tên Trang</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="linkPages in _LinkPages" >
-                                    <th>{{$index}}</th>
-                                    <th>{{linkPages.Name}}</th>
-                                    <th>
-                                        <div class="form-inline" >
-                                            <input style="min-width: 80%;" id="copyLink" type="text" class="form-control" value="{{linkPages.link}}" placeholder="...">
-                                        </div>
-                                    </th>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Tên Trang</th>
-                                    <th>Link</th>
-                                </tr>
-                            </tfoot>
-
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <a class="btn-block btn btn-primary" target="_self" data-toggle="modal" href='#modalDanhMuc'>Danh Mục</a>
-        <div class="modal fade" id="modalDanhMuc">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Tất cả danh mục</h4>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-bordered" >
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Danh Mục</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="linkPages in _LinkDanhMuc" >
-                                    <th>{{$index}}</th>
-                                    <th>{{linkPages.Name}}</th>
-                                    <th>
-                                        <div class="form-inline" >
-                                            <input style="min-width: 80%;" id="copyLink" type="text" class="form-control" value="{{linkPages.link}}" placeholder="...">
-                                        </div>
-                                    </th>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Danh Mục</th>
-                                    <th>Link</th>
-                                </tr>
-                            </tfoot>
-
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <section class="col-md-12  " >
         <div class="col-md-3" >
@@ -111,6 +8,92 @@
                     <option value="" >__Chọn Menu__</option>
                     <option ng-selected="{{item11.Groups == '<?php echo $_Param[1]; ?>'}}" value="{{item11.Groups}}" ng-repeat="item11 in _MenusByThemeId">{{item11.Groups}}</option>
                 </select>
+            </div>
+        </div>
+        <div class="col-md-9  " >
+            <a class=" btn btn-primary" target="_self" data-toggle="modal" href='#modal-Pages'>Trang</a>
+            <div class="modal fade" id="modal-Pages">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Tất cả các trang</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered" >
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Tên Trang</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="linkPages in _LinkPages" >
+                                        <th>{{$index}}</th>
+                                        <th>{{linkPages.Name}}</th>
+                                        <th>
+                                            <div class="form-inline" >
+                                                <input style="min-width: 80%;" id="copyLink" type="text" class="form-control" value="{{linkPages.link}}" placeholder="...">
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Tên Trang</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <a class="  btn btn-primary" target="_self" data-toggle="modal" href='#modalDanhMuc'>Danh Mục</a>
+            <div class="modal fade" id="modalDanhMuc">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Tất cả danh mục</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-bordered" >
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Danh Mục</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="linkPages in _LinkDanhMuc" >
+                                        <th>{{$index}}</th>
+                                        <th>{{linkPages.Name}}</th>
+                                        <th>
+                                            <div class="form-inline" >
+                                                <input style="min-width: 80%;" id="copyLink" type="text" class="form-control" value="{{linkPages.link}}" placeholder="...">
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Danh Mục</th>
+                                        <th>Link</th>
+                                    </tr>
+                                </tfoot>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
         <div class="clearfix" ></div>

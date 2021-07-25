@@ -1,4 +1,4 @@
-<div class="row " ng-controller="addnewsController" ng-init="addnewsInit(<?php echo $_Param[0] ?>)" >
+<div class="row " ng-controller="addnewsController" ng-init="addnewsInit(<?php echo!empty($_Param[0]) ? $_Param[0] : "" ?>)" >
     <section class="col-md-12" >
         <div class="box box-solid ">
             <div class="box-header bg-green-gradient">
