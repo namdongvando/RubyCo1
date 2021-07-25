@@ -1,5 +1,7 @@
 <?php
 
+use Module\duser\Model\Duser;
+
 class Controller_mpage extends Controller_backend {
 
     public $page;
@@ -39,12 +41,20 @@ class Controller_mpage extends Controller_backend {
     }
 
     function deletepage() {
-        $id = $this->param[0];
-        $pageService = new Model\Pages\PagesService();
-        $p = $pageService->GetById($id);
-        $p["isShow"] = -1;
-        $pageService->Put($p);
+        try {
+            if (Duser::CheckQuyen([Duser::CodeSuperAdmin, Duser::$CodeAdmin]) == FALSE) {
+                throw new Exception("Bạn không có quyển xóa");
+            }
+            $id = $this->param[0];
+            $pageService = new Model\Pages\PagesService();
+            $p = $pageService->GetById($id);
+            $p["isShow"] = -1;
+            $pageService->Put($p);
 //        $this->page->DeletePages($id);
+            $this->page->_header("/mpage/index/");
+        } catch (Exception $exc) {
+            new Model\Error(["danger", $exc->getMessage()]);
+        }
         $this->page->_header("/mpage/index/");
     }
 

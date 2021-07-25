@@ -35,6 +35,10 @@ class Admin extends \Model\Database {
         return parent::CheckLogin($Username, $Password, $isobj);
     }
 
+    static public function UsernameLogin() {
+        return new Admin($_SESSION[QuanTri]);
+    }
+
 }
 
 ?>

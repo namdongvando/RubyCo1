@@ -72,6 +72,13 @@ class news extends \Model\Database {
         return $p1->linkPagesCurent() . $this->Alias . ".html";
     }
 
+    function linkFullNewsCurent() {
+        $p = new pages();
+        $_p = $p->PagesById($this->PageID, FALSE);
+        $p1 = new pages($_p);
+        return $p1->linkFullPagesCurent() . $this->Alias . ".html";
+    }
+
     function NewsHot() {
         return $this->select($this->TableName, [], " `TinNoiBat` = '1' and `AnHien` = 1 ");
     }
@@ -139,7 +146,16 @@ class news extends \Model\Database {
     }
 
     public function Summary() {
-        return strip_tags($this->Summary);
+        $sumary = strip_tags($this->Summary);
+        if (!empty($sumary))
+            return strip_tags($this->Summary);
+        $Content = strip_tags($this->Content);
+        $Content = explode(" ", $Content);
+        $a = [];
+        for ($i = 0; $i < 50; $i++) {
+            $a[] = $Content[$i];
+        }
+        return implode(" ", $a);
     }
 
     public function DanhSachTinNoiBat($param0) {

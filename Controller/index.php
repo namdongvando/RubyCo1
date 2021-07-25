@@ -11,12 +11,19 @@ class Controller_index extends Application {
         $this->param = $this->getParam();
         $this->Pages = new \Model\pages();
         $this->News = new \Model\news();
-//        Model_ViewTheme::set_viewthene("luatkimsa");
-//        if (isset($_SESSION["Theme"]))
         Model_ViewTheme::set_viewthene("dainamhomes");
     }
 
     function index() {
+
+        Model_Seo::$Title = "__Title___";
+        Model_Seo::$des = "__Des___";
+        Model_Seo::$key = "__Keyword___";
+        Model_Seo::$Images = "__ImggesTitle___";
+        $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
+    }
+
+    function index1() {
 
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
@@ -87,11 +94,12 @@ class Controller_index extends Application {
 //        var_dump($url);
 
         $linkDanhMuc = $url[1][0];
-        $curentpages = isset($url[2][0]) ? $url[2][0] : 1;
+        $curentpages = isset($url[2][0]) ? intval($url[2][0]) : 1;
+        $linkDanhMuc = \Model\CheckInput::ChekInput($linkDanhMuc);
         $pathCat = $Category->getCategoryFromLink($linkDanhMuc);
-//        var_dump($pathCat);
-//        $pathCat = $Category->getCategoryFromPath($linkDanhMuc);
-//        $catCurent = $Category->Category4Path($pathCat);
+        if ($pathCat == null) {
+            die("Lỗi 404");
+        }
         $catCurent = new \Model\Category($pathCat);
         $bre = new Model\Breadcrumb();
         $abre = $Category->Breadcrumb($catCurent->catID);
@@ -107,12 +115,20 @@ class Controller_index extends Application {
     }
 
     function news($url) {
-        $aliasPages = $url[1][0];
-        $aliasNews = $url[2][0];
+        $aliasPages = \Model\CheckInput::ChekInput($url[1][0]);
+        $aliasNews = \Model\CheckInput::ChekInput($url[2][0]);
         $Page = $this->Pages->PagesByAlias($aliasPages, FALSE);
+        if ($Page == null) {
+            header("HTTP/1.0 404 Not Found");
+//            throw new Exception();
+        }
         $_Page = new \Model\pages($Page);
-
         $news = $this->News->NewsByAlias($aliasNews, $_Page->idPa);
+        if ($news == null) {
+            header('HTTP/1.1 404 Not Found');
+//            throw new Exception();
+        }
+
         $_News = new \Model\news($news);
         $_Breadcrumb = new \Model\Breadcrumb();
         $a = [
@@ -138,7 +154,12 @@ class Controller_index extends Application {
     function pages($url) {
 
         $pages = new \Model\pages();
+        $url[1][0] = \Model\CheckInput::ChekInput($url[1][0]);
         $_Pages = $pages->PagesByAlias($url[1][0], FALSE);
+
+        if ($_Pages == null) {
+            die("Lỗi 404");
+        }
         $Pages = new \Model\pages($_Pages);
         Model_Seo::$Title = $Pages->Title;
         Model_Seo::$des = $Pages->Des;
@@ -152,7 +173,6 @@ class Controller_index extends Application {
 
         $mp = new Model\Products();
         $p = $mp->ProductsByAlias($url[2][0], FALSE);
-
         $data["p"] = $p;
 //        var_dump($p);
         $p["Views"] = $p["Views"] + 1;
@@ -169,11 +189,9 @@ class Controller_index extends Application {
     }
 
     function chitietsanpham() {
-
         $mp = new Model\Products();
         $p = $mp->ProductsByAlias($_GET["alias"], FALSE);
 //        var_dump($p);
-
         $data["p"] = $p;
 //        var_dump($p);
         $p["Views"] = $p["Views"] + 1;
@@ -251,6 +269,61 @@ class Controller_index extends Application {
  [ThongTinCanBiet]
  [HomeSlide]
  [GioiThieuNgan]";
+    }
+
+    function getRemoteIP() {
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
+        return $ip;
+    }
+
+    /* If your visitor comes from proxy server you have use another function
+      to get a real IP address: */
+
+    function getIP() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            //check ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            //to check ip is pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
+
+    function savemail() {
+        if (isset($_POST["Email"])) {
+            try {
+                $email = $_POST["Email"];
+                $email = trim($email);
+                $email = addslashes($email);
+                $email = htmlspecialchars($email);
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    throw new Exception("Invalid email format");
+                }
+                $content = [];
+                $filename = "data/contacEmail.txt";
+                if (file_exists($filename)) {
+                    $content = file_get_contents($filename);
+                }
+                $io = new \lib\io();
+                if (!empty($content)) {
+                    $content = json_decode($content);
+                } else {
+                    $content = [];
+                }
+                $content[md5($email)] = $email;
+                $io->writeFile($filename, json_encode($content));
+            } catch (Exception $exc) {
+                echo $exc->getTraceAsString();
+            }
+        }
+        lib\Common::ToUrl("/");
+    }
+
+    function loi404() {
+        echo "404";
     }
 
 }

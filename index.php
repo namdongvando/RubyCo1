@@ -3,6 +3,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+header("X-XSS-Protection: 1; mode=block");
 
 function minify_output($buffer) {
     $search = array(
@@ -37,10 +38,7 @@ $host = $_SERVER["HTTP_HOST"];
 $user = explode(DOMAIN, $host);
 Model_Subdomail::setSubdoamin($user[0]);
 Model_Tableprefix::setTableprefix(Model_Subdomail::getSubdoamin() . "_");
-
 $Application = new Application($url);
-//var_dump($_GET["ctrl"]);
-//var_dump($_GET["action"]);
 if (isset($_GET["ctrl"])) {
     $Module = null;
     $cnameV = $_GET["ctrl"];
@@ -88,6 +86,9 @@ if ($Module) {
 //    controler mặc định lấy
     }
 }
-
+if (isset($_GET["debug"])) {
+    echo $Application->getController();
+    echo $Application->getAction();
+}
 //echo $etime - $stime;
 ?>

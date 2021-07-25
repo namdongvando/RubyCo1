@@ -2,6 +2,7 @@
 $Model_Duser = new Module\duser\Model\Duser();
 $DSOption = $Model_Duser->Admins(FALSE);
 $User = new \Module\DB\Model\Duser($User);
+$AdminLogin = Model\Admin::UsernameLogin();
 ?>
 
 <div class="col-md-6" >
@@ -44,7 +45,7 @@ $User = new \Module\DB\Model\Duser($User);
                 </div>
                 <div class="form-group  ">
                     <label for="">Nhóm</label>
-                    <select   class="form-control" name="user[Groups]"  >
+                    <select  class="form-control" name="user[Groups]"  >
                         <option <?php echo $User->Groups == 0 ? 'selected="selected"' : ''; ?>  value="0" >Admin</option>
                         <option <?php echo $User->Groups == 1 ? 'selected="selected"' : ''; ?>  value="1" >Chỉnh Sửa Nội Dung</option>
                     </select>
@@ -61,36 +62,41 @@ $User = new \Module\DB\Model\Duser($User);
                 <div class="form-group">
                     <label for=""></label>
                     <input type="submit" class="btn btn-success" name="SaveAdmin"  value="Lưu Thông Tin" >
-                    <a href="/duser/index/delete/<?php echo $User->Username; ?>/" class="pull-right btn btn-danger" onclick="return confirm('Xóa tài khoản này?')" >Xóa</a>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-<div class="col-md-6" >
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Tạo Lại Mật Khẩu</h3>
-        </div>
-        <div class="panel-body">
-            <form action="" method="POST" class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputName" class="col-sm-4 control-label">Nhập Mật Khẩu</label>
-                    <div class="col-sm-6">
-                        <input type="hidden" readonly="readonly" value="<?php echo $User->Username; ?>"  name="Username"   >
-                        <input type="password" name="Password" id="password" class="form-control"  placeholder="Mật khẩu">
-                        <button type="button" data-target="#password" class="XemMatKhau btn btn-success"><i class="fa fa-eye" ></i></button>
-                        <button type="button" id="TaoMatKhau" data-target="#password" class="btn btn-success"><i class="fa fa-refresh" ></i></button>
+<?php
+if ($AdminLogin->Groups == Module\duser\Model\Duser::CodeSuperAdmin) {
+    ?>
+    <div class="col-md-6" >
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tạo Lại Mật Khẩu</h3>
+            </div>
+            <div class="panel-body">
+                <form action="" method="POST" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="inputName" class="col-sm-4 control-label">Nhập Mật Khẩu</label>
+                        <div class="col-sm-6">
+                            <input type="hidden" readonly="readonly" value="<?php echo $User->Username; ?>"  name="Username"   >
+                            <input type="password" name="Password" id="password" class="form-control"  placeholder="Mật khẩu">
+                            <button type="button" data-target="#password" class="XemMatKhau btn btn-success"><i class="fa fa-eye" ></i></button>
+                            <button type="button" id="TaoMatKhau" data-target="#password" class="btn btn-success"><i class="fa fa-refresh" ></i></button>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-offset-4 col-sm-6">
-                    <button type="submit" name="ResetPassword" class="btn btn-success">Cập Nhật</button>
-                </div>
-            </form>
-        </div>
+                    <div class="col-sm-offset-4 col-sm-6">
+                        <button type="submit" name="ResetPassword" class="btn btn-success">Cập Nhật</button>
+                    </div>
+                </form>
+            </div>
 
+        </div>
     </div>
-</div>
+    <?php
+}
+?>
+
 
 </div>

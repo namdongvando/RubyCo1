@@ -3,14 +3,21 @@
     font-family: verdana;
     src: url("fonts/verdana.ttf");
 }
+
 :root {
     --bg: #BC9311;
     --gold: #BC9311;
     --black: #000;
     --gray : gray;
 }
+
 boby {
     font-family: verdana;
+    font: 400 15px 'Open Sans', Arial, sans-serif !important;
+
+}
+.pb-4{
+    padding-bottom: 40px;
 }
 .border-radius-0{
     border-radius: 0px !important;
@@ -321,6 +328,7 @@ address {
         display: none;
 
     }
+
 }
 
 

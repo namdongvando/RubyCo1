@@ -94,11 +94,10 @@ class Controller_mnews extends Controller_mpage {
                     $img = "/public/img/" . $img[1];
                 }
             }
-
             foreach ($Page as $k => $v) {
                 $Page[$k] = $this->news->Bokytusql($_POST[$k]);
             }
-            $Page["Alias"] = $this->news->bodautv($_POST["Name"]);
+            $Page["Alias"] = $Page["Alias"];
             $Page["UrlHinh"] = $img;
             $this->news->editNews($Page);
             $this->news->_header("/mnews/editnews/" . $Page["ID"]);
@@ -133,7 +132,6 @@ class Controller_mnews extends Controller_mpage {
 
     function copy() {
 
-
         $data["news"] = $this->news->NewsById($this->param[0], FALSE);
         $_New = new Model\news($data["news"]);
         $Bread = new \Model\Breadcrumb();
@@ -165,6 +163,11 @@ class Controller_mnews extends Controller_mpage {
         $a["Summary"] = "";
         $a["Content"] = "";
         echo $this->news->_encode($a);
+    }
+
+    function createAlias() {
+        $a = $this->news->NewsById($this->param[0], FALSE);
+        echo $this->news->bodautv($a["Name"]);
     }
 
     function getNewsByPages() {

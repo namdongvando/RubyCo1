@@ -4,6 +4,8 @@ namespace Module\duser\Model;
 
 class Duser extends \Model\Admin {
 
+    const CodeSuperAdmin = -1;
+
     public static $TableName = table_prefix . "admin";
     public static $CodeAdmin = 0;
     public $Username;
@@ -26,7 +28,7 @@ class Duser extends \Model\Admin {
             $this->Phone = isset($NhanVien['Phone']) ? $NhanVien['Phone'] : "";
             $this->Address = isset($NhanVien['Address']) ? $NhanVien['Address'] : "";
             $this->Note = isset($NhanVien['Note']) ? $NhanVien['Note'] : "";
-            $this->Groups = isset($NhanVien['Groups']) ? $NhanVien['Groups'] : "";
+            $this->Groups = isset($NhanVien['Groups']) ? $NhanVien['Groups'] : 1;
         }
         parent::__construct();
     }
@@ -43,6 +45,10 @@ class Duser extends \Model\Admin {
         return parent::Admins($isobj);
     }
 
+    public function Groups() {
+        return new Groups($this->Groups);
+    }
+
     static function CurentUsernameAdmin($isobj = true) {
         if ($isobj)
             return new \Module\duser\Model\Duser($_SESSION[QuanTri]);
@@ -56,12 +62,6 @@ class Duser extends \Model\Admin {
         );
         $this->Query($sql);
         return $this->SaveInsert();
-    }
-
-    function DeleteOnsubmit($id) {
-        $where = sprintf("`Username` = '%s'", $id);
-        $this->Query($sql);
-        return $this->delete(self::$TableName, $where);
     }
 
     public function MapArray($POST) {
@@ -110,8 +110,14 @@ class Duser extends \Model\Admin {
         return NULL;
     }
 
-    public function AdminsPT($name, $index, $number, $tong) {
-
+    public static function CheckQuyen($lisAllow, $listDelow = []) {
+        if ($listDelow) {
+            if (in_array(self::CurentUsernameAdmin(true)->Groups, $listDelow))
+                return FALSE;
+        }
+        if (in_array(self::CurentUsernameAdmin(true)->Groups, $lisAllow))
+            return true;
+        return FALSE;
     }
 
 }

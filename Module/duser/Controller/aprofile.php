@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-class aprofile extends \Controller_backend implements \Controller_IBackenController {
+class aprofile extends \Controller_backend {
 
     function __construct() {
         parent::__construct();
@@ -36,7 +36,7 @@ class aprofile extends \Controller_backend implements \Controller_IBackenControl
             if (isset($_POST["SaveInfor"])) {
                 $DUser = new \Module\duser\Model\Duser();
                 $CurentUser = \Module\duser\Model\Duser::CurentUsernameAdmin(true);
-                $username = $CurentUser->UserInfor($CurentUser->Username, FALSE);
+                $username = $CurentUser->GetByUsername($CurentUser->Username);
                 if (!$username) {
                     throw new \Exception("Không Có username này");
                 }
@@ -45,7 +45,6 @@ class aprofile extends \Controller_backend implements \Controller_IBackenControl
                 $username["Phone"] = $_POST["Phone"];
                 $username["Address"] = isset($_POST["Address"]) ? $_POST["Address"] : "";
                 $username["Note"] = isset($_POST["Note"]) ? $_POST["Note"] : "";
-                $username["Groups"] = isset($_POST["Groups"]) ? $_POST["Groups"] : 0;
                 $username["Urlimages"] = isset($_POST["Urlimages"]) ? $_POST["Urlimages"] : "";
                 $DUser->UpdateInfor($username);
                 \Module\duser\Model\Duser::SetUsernameAdmin($username);

@@ -14,6 +14,11 @@ class PagesService extends \Model\DB implements \Model\IModel {
         return $this->UpdateDB($where);
     }
 
+    public function GetAll() {
+        $where = "1";
+        return $this->Select($where);
+    }
+
     public function GetAllPT($name, &$total, $indexPage = 1, $pageNumber = 10) {
         $where = "`Name` like '%{$name}%'";
         return $this->SelectPT($where, $indexPage, $pageNumber, $total);

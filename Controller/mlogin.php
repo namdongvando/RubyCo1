@@ -32,6 +32,8 @@ class Controller_mlogin extends Application {
                 } else {
                     // nếu còn số lần đăng nhập thì thì kiển tra tiếp
                     $Admin = new \Model\Admin();
+                    $_POST["Username"] = Model\CheckInput::ChekInput($_POST["Username"]);
+                    $_POST["Password"] = Model\CheckInput::ChekInput($_POST["Password"]);
                     $_SESSION[QuanTri] = $Admin->CheckLogin($_POST["Username"], $_POST["Password"], FALSE);
 // danh nhap không thanh công
                     if (!$_SESSION[QuanTri]) {

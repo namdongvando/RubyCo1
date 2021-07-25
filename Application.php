@@ -202,6 +202,8 @@ class Application {
     static function BokyTuDacBietPaRam($str) {
 
         if (!empty($str)) {
+            $str = addslashes($str);
+            $str = htmlspecialchars($str);
             $kytu = array(";", "select", "delete", "insert", "update");
             foreach ($kytu as $k => $v) {
                 $str = str_replace($v, "", $str);
@@ -370,7 +372,9 @@ class Application {
             }
         }
         $Content = __DIR__ . "/theme/" . $theme . "/" . $_Controller . "/" . $_Action . ".phtml";
-
+        if (http_response_code() >= 300) {
+            $Content = __DIR__ . "/theme/" . $theme . "/index/loi404.phtml";
+        }
         if ($themelayout == "") {
             $layout = "theme/" . $theme . "/" . "layout.phtml";
         } else {

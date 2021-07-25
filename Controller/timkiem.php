@@ -15,13 +15,10 @@ class Controller_timkiem extends Controller_index {
     }
 
     function index() {
-
-        $_strParam = str_replace("?", "", $this->getParam()[0]);
-        parse_str($_strParam, $params);
-
-        $_GET["keyword"] = $params["keyword"];
-        $_GET["pages"] = isset($params["pages"]) ? $params["pages"] : 1;
-
+        $params = $_GET;
+        $_GET["keyword"] = !empty($_GET["keyword"]) ? $_GET["keyword"] : "";
+        $_GET["keyword"] = Model\CheckInput::ChekInput($params["keyword"]);
+        $_GET["pages"] = isset($params["pages"]) ? intval($params["pages"]) : 1;
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__SEO_Keyword___";

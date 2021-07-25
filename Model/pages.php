@@ -94,6 +94,13 @@ class pages extends \Model\Database {
         return "/page-" . $this->Alias . ".html";
     }
 
+    function linkFullPagesCurent() {
+        if ($this->Type == 1) {
+            return BASE_URL . "page-" . $this->Alias . "/";
+        }
+        return BASE_URL . "page-" . $this->Alias . ".html";
+    }
+
     function AddPages($data) {
         $data["Alias"] = $this->bodautv($data["Name"]);
         return parent::AddPages($data);

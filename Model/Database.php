@@ -744,7 +744,9 @@ class Database extends \Model\iDatabase {
     function NewsByAlias($alias, $paId, $isobj = true) {
 //        reutur array
         $a = $this->select(table_prefix . "news", [], "`Alias` = '{$alias}' and `PageID` = '{$paId}'");
-        return $a[0];
+        if ($a)
+            return $a[0];
+        return null;
     }
 
     public function NewsByPages($pages, $isobj = true) {
@@ -856,7 +858,9 @@ class Database extends \Model\iDatabase {
         if ($isobj) {
             return new \Model\pages($a[0]);
         }
-        return $a[0];
+        if ($a)
+            return $a[0];
+        return null;
     }
 
     function PagesMin() {

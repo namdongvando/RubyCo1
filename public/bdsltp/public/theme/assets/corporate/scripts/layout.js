@@ -380,22 +380,33 @@ var Layout = function() {
                     pagination: false,
                     navigation: true,
                     items: 6,
+                    dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: false,
+                    loop: true,
                     addClassActive: true,
-                    itemsCustom: [
-                        [0, 1],
-                        [320, 1],
-                        [480, 2],
-                        [700, 2],
-                        [975, 5],
-                        [1200, 6],
-                        [1400, 6],
-                        [1600, 6]
-                    ],
+                    responsive: {
+                        0: {
+                            items: 2,
+                            stagePadding: 50,
+                        },
+                        600: {
+                            items: 3
+                        },
+                        1000: {
+                            items: 4
+                        }
+                        , 1200: {
+                            items: 6
+                        }
+                    },
                 });
 
                 $(".owl-carousel5").owlCarousel({
                     pagination: false,
                     navigation: true,
+                    navigationText: ["<img src='myprevimage.png'>", "<img src='mynextimage.png'>"],
                     loop: true,
                     items: 5,
                     dots: false,
@@ -419,9 +430,12 @@ var Layout = function() {
 
                 $(".owl-carousel4").owlCarousel({
                     pagination: false,
-                    navigation: true,
+                    navigation: false,
                     items: 4,
                     dots: false,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: false,
                     addClassActive: true,
                     loop: true,
                     responsive: {

@@ -38,19 +38,35 @@ $config['RoleSessionVar'] = 'CKFinder_UserRole';
 //session_start();
 
 
+if ($_SESSION["QuanTri_PGV"]["Groups"] >= 1) {
+    $config['AccessControl'][] = Array(
+        'role' => '*',
+        'resourceType' => '*',
+        'folder' => '/',
+        'folderView' => true,
+        'folderCreate' => true,
+        'folderRename' => true,
+        'folderDelete' => false,
+        'fileView' => true,
+        'fileUpload' => true,
+        'fileRename' => true,
+        'fileDelete' => false);
+} else {
+    $config['AccessControl'][] = Array(
+        'role' => '*',
+        'resourceType' => '*',
+        'folder' => '/',
+        'folderView' => true,
+        'folderCreate' => true,
+        'folderRename' => true,
+        'folderDelete' => true,
+        'fileView' => true,
+        'fileUpload' => true,
+        'fileRename' => true,
+        'fileDelete' => true);
+}
 
-$config['AccessControl'][] = Array(
-    'role' => '*',
-    'resourceType' => '*',
-    'folder' => '/',
-    'folderView' => true,
-    'folderCreate' => true,
-    'folderRename' => true,
-    'folderDelete' => true,
-    'fileView' => true,
-    'fileUpload' => true,
-    'fileRename' => true,
-    'fileDelete' => true);
+
 
 /*
   For example, if you want to restrict the upload, rename or delete of files in

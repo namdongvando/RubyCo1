@@ -9,6 +9,7 @@ class index extends \Controller_backend {
 
     function __construct() {
         parent::__construct();
+        new auth();
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
@@ -58,12 +59,12 @@ class index extends \Controller_backend {
     }
 
     public function delete() {
-        $username = $this->getParam()[0];
-        $Duser = new \Module\duser\Model\Duser();
-        if ($username != 'admin') {
-            $Duser->DeleteOnsubmit($username);
-        }
-        \lib\Common::ToUrl("/duser/index/index/");
+        $this->Bread[] = [
+            "title" => "Thêm Tài Khoản",
+            "link" => "#"
+        ];
+        $this->Breadcrumb->setBreadcrumb($this->Bread);
+        $this->ViewThemeModule();
     }
 
     public function detail() {
@@ -85,6 +86,9 @@ class index extends \Controller_backend {
             $_user["Phone"] = $userInfor["Phone"];
             $_user["Email"] = $userInfor["Email"];
             $_user["Groups"] = $userInfor["Groups"];
+            if ($userInfor["Username"] == "admin") {
+                $_user["Groups"] = \Module\duser\Model\Duser::CodeSuperAdmin;
+            }
             $_user["Address"] = $userInfor["Address"];
             $_user["Note"] = $userInfor["Note"];
             $Duser->UpdateInfor($_user);
@@ -109,7 +113,7 @@ class index extends \Controller_backend {
                     throw new \Exception("Không có mật khẩu.");
                 }
                 $curentUser = new \Module\duser\Model\Duser(\Module\duser\Model\Duser::CurentUsernameAdmin(FALSE));
-                if ($curentUser->Groups == 0) {
+                if ($curentUser->Groups == \Module\duser\Model\Duser::CodeSuperAdmin) {
                     $username = $_POST["Username"];
                     $Duser = new \Module\duser\Model\Duser();
                     $_user = $Duser->GetByUsername($username);
