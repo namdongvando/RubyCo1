@@ -367,7 +367,7 @@ class functionLayout {
         <link rel="canonical" href="<?php echo $actual_link; ?>">
         <link rel="alternate" hreflang="vi" href="<?php echo $actual_link; ?>">
         <meta name="Resource-type" content="Document" />
-        <meta name="theme-color" content="#EB2B43" />
+        <meta name="theme-color" content="#62060a" />
         <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
         <link rel="dns-prefetch" href="//ajax.googleapis.com" />
         <link rel="dns-prefetch" href="//www.facebook.com" />

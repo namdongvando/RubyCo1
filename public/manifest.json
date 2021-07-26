@@ -5,19 +5,19 @@
     "orientation": "portrait",
     "icons": [
         {
-            "src": "/public/Logo_Vuong.png",
+            "src": "/public/Logo_Vuong.png?v=1",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/public/Logo_Vuong.png",
+            "src": "/public/Logo_Vuong.png?v=1",
             "type": "image/png",
             "sizes": "512x512"
         }
     ],
     "start_url": "/",
-    "background_color": "#fff",
+    "background_color": "#62060A",
     "display": "standalone",
     "scope": "/",
-    "theme_color": "#EB2B43"
+    "theme_color": "#62060A"
 }
