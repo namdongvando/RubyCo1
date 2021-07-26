@@ -15,7 +15,6 @@ class Controller_index extends Application {
     }
 
     function index() {
-
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__Keyword___";
@@ -117,7 +116,7 @@ class Controller_index extends Application {
     function news($url) {
         $aliasPages = \Model\CheckInput::ChekInput($url[1][0]);
         $aliasNews = \Model\CheckInput::ChekInput($url[2][0]);
-        $Page = $this->Pages->PagesByAlias($aliasPages, FALSE);
+        $Page = $this->Pages->PagesByAliasIsShow($aliasPages, FALSE);
         if ($Page == null) {
             header("HTTP/1.0 404 Not Found");
 //            throw new Exception();
@@ -155,10 +154,9 @@ class Controller_index extends Application {
 
         $pages = new \Model\pages();
         $url[1][0] = \Model\CheckInput::ChekInput($url[1][0]);
-        $_Pages = $pages->PagesByAlias($url[1][0], FALSE);
-
+        $_Pages = $pages->PagesByAliasIsShow($url[1][0], FALSE);
         if ($_Pages == null) {
-            die("Lỗi 404");
+            header('HTTP/1.1 404 Not Found');
         }
         $Pages = new \Model\pages($_Pages);
         Model_Seo::$Title = $Pages->Title;
@@ -212,7 +210,10 @@ class Controller_index extends Application {
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         $pages = new \Model\pages();
-        $_Pages = $pages->PagesByAlias($url[1][0], FALSE);
+        $_Pages = $pages->PagesByAliasIsShow($url[1][0], FALSE);
+        if ($_Pages == null) {
+            header("HTTP/1.0 404 Not Found");
+        }
         $Pages = new \Model\pages($_Pages);
         Model_Seo::$Title = $Pages->Title;
         Model_Seo::$des = $Pages->Des;

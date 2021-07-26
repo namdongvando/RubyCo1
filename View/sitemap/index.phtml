@@ -13,7 +13,7 @@ header("Content-type: text/xml");
     </url>
     <?php
     $pageModel = new Model\Pages\PagesService();
-    $DSDanhMuc = $pageModel->GetAll();
+    $DSDanhMuc = $pageModel->GetAllIsShow();
     if ($DSDanhMuc)
         foreach ($DSDanhMuc as $DanhMuc) {
             $_DanhMuc = new Model\pages($DanhMuc);
@@ -28,7 +28,7 @@ header("Content-type: text/xml");
     ?>
     <?php
     $newModel = new \Model\news();
-    $DSNews = $newModel->News(FALSE);
+    $DSNews = $newModel->NewsIsShow(FALSE);
     if ($DSNews)
         foreach ($DSNews as $news) {
             $_news = new Model\news($news);

@@ -4,7 +4,6 @@
     } else if (typeof define === 'function' && define.amd) {
         define('GMaps', [], factory);
     }
-
     root.GMaps = factory();
 
 }(this, function() {

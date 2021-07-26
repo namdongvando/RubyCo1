@@ -130,6 +130,10 @@ class pages extends \Model\Database {
         return parent::PagesByAlias($alias, $isobj);
     }
 
+    function PagesByAliasIsShow($alias, $isobj = true) {
+        return parent::PagesByAliasIsShow($alias, $isobj);
+    }
+
     function Breadcrumb($id) {
         $listCat = [];
         $a = [];

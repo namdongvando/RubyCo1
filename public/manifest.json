@@ -5,12 +5,12 @@
     "orientation": "portrait",
     "icons": [
         {
-            "src": "/public/Logo_Vuong.png?v=1",
+            "src": "/public/Logo_Vuong.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/public/Logo_Vuong.png?v=1",
+            "src": "/public/Logo_Vuong.png",
             "type": "image/png",
             "sizes": "512x512"
         }

@@ -741,9 +741,21 @@ class Database extends \Model\iDatabase {
         return $this->select(table_prefix . "news", [], ' 1 ORDER BY `Stt` DESC');
     }
 
+    public function NewsIsShow($isobj = true) {
+        return $this->select(table_prefix . "news", [], ' `AnHien` > 0 ORDER BY `Stt` DESC');
+    }
+
     function NewsByAlias($alias, $paId, $isobj = true) {
 //        reutur array
         $a = $this->select(table_prefix . "news", [], "`Alias` = '{$alias}' and `PageID` = '{$paId}'");
+        if ($a)
+            return $a[0];
+        return null;
+    }
+
+    function NewsByAliasHien($alias, $paId, $isobj = true) {
+//        reutur array
+        $a = $this->select(table_prefix . "news", [], "`Alias` = '{$alias}' and `PageID` = '{$paId}' and `AnHien` >= 1");
         if ($a)
             return $a[0];
         return null;
@@ -855,6 +867,16 @@ class Database extends \Model\iDatabase {
 
     public function PagesByAlias($Alias, $isobj = true) {
         $a = $this->select(table_prefix . "pages", [], "`Alias` = '{$Alias}'");
+        if ($isobj) {
+            return new \Model\pages($a[0]);
+        }
+        if ($a)
+            return $a[0];
+        return null;
+    }
+
+    public function PagesByAliasIsShow($Alias, $isobj = true) {
+        $a = $this->select(table_prefix . "pages", [], " `IsShow` > 0 and  `Alias` = '{$Alias}'");
         if ($isobj) {
             return new \Model\pages($a[0]);
         }
