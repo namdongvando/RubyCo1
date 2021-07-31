@@ -1,4 +1,7 @@
 $(function() {
+    $('body').bind('contextmenu cut copy paste', function(event) {
+        event.preventDefault();
+    });
     $(".btn-toggle").click(function() {
         var dataHtml = $(this).data();
         $(dataHtml.target).toggle(200);

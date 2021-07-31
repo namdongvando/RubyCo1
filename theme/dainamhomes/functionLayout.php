@@ -879,22 +879,22 @@ class functionLayout {
         <script src="/public/bdsltp/public/theme/assets/corporate/scripts/layout.js?v=<?php echo time(); ?>" type="text/javascript"></script>
         <script src="/public/lazyloadimg/lazyloading.js" type="text/javascript"></script>
         <script type="text/javascript">
-                            jQuery(document).ready(function() {
-                            try {
-                            Layout.init();
-                            Layout.initOWL();
-                            Layout.initTwitter();
-                            Layout.initFixHeaderWithPreHeader();
-                            Layout.initNavScrolling();
-                            Portfolio.init();
-                            ContactUs.init();
-                            } catch (e) {
-                            console.log(e);
-                            }
+                        jQuery(document).ready(function() {
+                        try {
+                        Layout.init();
+                        Layout.initOWL();
+                        Layout.initTwitter();
+                        Layout.initFixHeaderWithPreHeader();
+                        Layout.initNavScrolling();
+                        Portfolio.init();
+                        ContactUs.init();
+                        } catch (e) {
+                        console.log(e);
+                        }
 
-                            });</script>
+                        });</script>
         <script src="/public/bdsltp/dainam/Costomer.js?v=<?php echo filemtime('public/bdsltp/dainam/Costomer.js'); ?>" type="text/javascript"></script>
-        <script src="https://www.google.com/recaptcha/api.js?render=6LdxarcbAAAAAGyiHFhosVhbdNa5uK-ufiERSCF3"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=<?php echo reCAPTCHA; ?>"></script>
         <?php
     }
 
@@ -1148,7 +1148,7 @@ class functionLayout {
             <p class="title_block">Danh Mục Sản Phẩm</p>
             <div class="block_content">
                 <ul class="tree-menu">
-                    <li  ng-repeat="mainmenu in _allMenus.LeftMenu| orderBy:Serial"  >
+                    <li  ng-repeat="mainmenu in _allMenus.LeftMenu | orderBy:Serial"  >
                         <span ng-show="mainmenu.DSDanhMucCon" class="pull-right" >
                             <i class="fa fa-arrow-circle-right" ></i>
                         </span>
@@ -1219,7 +1219,7 @@ class functionLayout {
             <p class="title_block">Danh Mục Sản Phẩm</p>
             <div class="block_content">
                 <ul class="tree-menu">
-                    <li  ng-repeat="mainmenu in _allMenus.LeftMenu| orderBy:Serial" >
+                    <li  ng-repeat="mainmenu in _allMenus.LeftMenu | orderBy:Serial" >
                         <span ng-show="mainmenu.DSDanhMucCon" class="pull-right" >
                             <i class="fa fa-arrow-circle-right" ></i>
                         </span>

@@ -14,7 +14,10 @@
 boby {
     font-family: verdana;
     font: 400 15px 'Open Sans', Arial, sans-serif !important;
-
+    -webkit-user-select: none !important;
+    -moz-user-select: -moz-none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
 }
 .pb-4{
     padding-bottom: 40px;

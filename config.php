@@ -8,6 +8,7 @@ $config = parse_ini_file("ENV.ini", true);
 define("DEFAULT_CONTROLLER", $config["DEFAULT_CONTROLLER"]);
 define("DEFAULT_ACTION", $config["DEFAULT_ACTION"]);
 define("BASE_URL", $config["BASE_URL"]);
+define("reCAPTCHA", $config["reCAPTCHA"]);
 define("DOMAIN", $config["DOMAIN"]);
 define("BASE_DIR", $config["BASE_DIR"]);
 define("ROOT_DIR", __DIR__);
