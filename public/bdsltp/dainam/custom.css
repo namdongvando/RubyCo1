@@ -481,8 +481,10 @@ address p{
     article img{
         max-width: 100px;
         width: 100px;
-        float: left;
         margin-right: 10px;
+    }
+    .baiviet-chinh-phu a img{
+
     }
     .backdrop{
         z-index: 9999998;

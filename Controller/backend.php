@@ -7,8 +7,6 @@ class Controller_backend extends Application {
 
     function __construct() {
         set_time_limit(0);
-
-
         $this->param = $this->getParam();
         $a = new Model_Adapter();
         if (!isset($_SESSION[QuanTri])) {

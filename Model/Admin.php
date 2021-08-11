@@ -39,6 +39,10 @@ class Admin extends \Model\Database {
         return new Admin($_SESSION[QuanTri]);
     }
 
+    static public function isLogin() {
+        return empty($_SESSION[QuanTri]) ? FALSE : TRUE;
+    }
+
 }
 
 ?>

@@ -71,6 +71,19 @@ class Common {
         return "H:i:s d-m-Y";
     }
 
+    static function getGUID() {
+        mt_srand((double) microtime() * 10000); //optional for php 4.2.0 and up.
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45); // "-"
+        $uuid = substr($charid, 0, 8) . $hyphen
+                . substr($charid, 8, 4) . $hyphen
+                . substr($charid, 12, 4) . $hyphen
+                . substr($charid, 16, 4) . $hyphen
+                . substr($charid, 20, 12);
+
+        return $uuid;
+    }
+
     static function PhanTrangIndex($index, $number, $indexPages) {
         $indexPages = $indexPages - 1;
         $indexPages = max($indexPages, 0);

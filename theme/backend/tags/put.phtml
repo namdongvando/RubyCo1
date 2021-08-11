@@ -1,0 +1,22 @@
+<?php
+$tags = new Model\tags\tags($tags);
+?> 
+<div class="container">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Sửa Tabs</h3>
+        </div>
+        <div class="box-body">
+            <form action=""  enctype="multipart/form-data" method="POST" >
+                <?php
+                \Model\tags\tagsForm::Id($tags->Id)->render();
+                \Model\tags\tagsForm::Name($tags->Name)->renderHTML();
+                \Model\tags\tagsForm::Alias($tags->Alias)->renderHTML();
+                \Model\tags\tagsForm::Content($tags->Content)->renderHTML();
+                \Model\tags\tagsForm::btnSave()->render();
+                \Model\tags\tagsForm::btnDelete()->render();
+                ?>
+            </form>
+        </div>
+    </div>
+</div>

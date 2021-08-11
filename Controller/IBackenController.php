@@ -1,6 +1,8 @@
 <?php
 
-interface Controller_IBackenController {
+namespace Controller;
+
+interface IBackenController {
 
     public function create();
 

@@ -17,6 +17,7 @@ class Controller_mpage extends Controller_backend {
             "title" => "Danh Mục Bài Viết",
             "link" => "/mpage/"
         ];
+        \Model\Breadcrumb::setMenuAcrive("QuanLyBaiViet");
     }
 
     function index() {

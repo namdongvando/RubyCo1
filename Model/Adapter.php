@@ -401,7 +401,7 @@ class Model_Adapter {
         if (!is_dir($folder)) {
             mkdir($folder, 0777);
         }
-        if (!$isNameFile) {
+        if ($isNameFile == FALSE) {
             $tienTo = $tt . time() . rand(1, 2000);
         } else {
             $tienTo = $tt;

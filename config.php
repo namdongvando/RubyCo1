@@ -24,6 +24,7 @@ $INI['DBname'] = $config[ENV]["database"]["DBname"];
 spl_autoload_register(function($class) {
     $class = str_replace("\\", "_", $class);
     $class = str_replace("_", "/", $class) . ".php";
+    $class = __DIR__ . "/" . $class;
     if (file_exists($class)) {
         include_once $class;
     }

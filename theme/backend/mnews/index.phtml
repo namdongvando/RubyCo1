@@ -16,6 +16,9 @@ $dataNews = $news->DanhSachTinPT($indexPage, $Number, $opTimKiem, $Tong);
         <div class="box box-solid ">
             <div class="box-header">
                 <h3 class="box-title">Danh Sách Bài Viết</h3>
+                <div class="box-tools" >
+                    <a href="/mnews/addnews" class="btn btn-primary" >Thêm mới</a>
+                </div>
             </div>
             <div class="box-body no-padding ">
                 <div class="row">
@@ -49,6 +52,7 @@ $dataNews = $news->DanhSachTinPT($indexPage, $Number, $opTimKiem, $Tong);
                                 <th class="text-center" style="width: 50px">#</th>
                                 <th >Tiêu Đề</th>
                                 <th style="width: 250px">Danh Mục</th>
+                                <th style="width: 100px">Tình Trạng</th>
                                 <th style="width: 250px" class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -60,8 +64,12 @@ $dataNews = $news->DanhSachTinPT($indexPage, $Number, $opTimKiem, $Tong);
                                     ?>
                                     <tr>
                                         <td class="text-center" ><?php echo lib\Common::PhanTrangIndex($key, $Number, $indexPage); ?></td>
-                                        <td><a href="<?php echo Model\news::LinkDetail($_news->ID); ?>"  ><?php echo $_news->Name; ?></a></td>
+                                        <td><a href="<?php echo Model\news::LinkEdit($_news->ID); ?>"  >
+                                                <?php echo $_news->Name == "" ? "N/A" : $_news->Name; ?>
+                                            </a>
+                                        </td>
                                         <td><?php echo $_news->PageID()->Name; ?></td>
+                                        <td><?php echo $_news->AnHien(); ?></td>
                                         <td class="d-flex">
                                             <a title="Bạn có Muốn Xóa Bài Viết Này?" class="xoa btn-xoa" href="<?php echo Model\news::LinkDelete($_news->ID) ?>"  >Xóa</a> <span>|</span>
                                             <a href="<?php echo Model\news::LinkEdit($_news->ID); ?>"  >Sửa</a>
@@ -77,6 +85,7 @@ $dataNews = $news->DanhSachTinPT($indexPage, $Number, $opTimKiem, $Tong);
                                 <th class="text-center" style="width: 50px">#</th>
                                 <th >Tiêu Đề</th>
                                 <th style="width: 250px">Danh Mục</th>
+                                <th style="width: 100px">Tình Trạng</th>
                                 <th style="width: 250px" class="text-center">Action</th>
                             </tr>
                         </tfoot>

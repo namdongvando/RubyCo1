@@ -113,6 +113,36 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
+    function newsdetail() {
+        $alias = Model\CheckInput::ChekInput($this->getParam()[0]);
+        $news = $this->News->GetNewsByAlias($alias);
+        if ($news == null) {
+            header('HTTP/1.1 404 Not Found');
+        }
+
+        $_News = new \Model\news($news);
+        if ($_News->AnHien == 0) {
+            header('HTTP/1.1 404 Not Found');
+        }
+        $_Breadcrumb = new \Model\Breadcrumb();
+        $a = [
+            [
+                "title" => $_News->PageID()->Name,
+                "link" => $_News->PageID()->linkPagesCurent()
+            ],
+            [
+                "title" => $_News->Name,
+                "link" => $_News->linkNewsCurent()
+            ]
+        ];
+        $data["news"] = $news;
+        Model_Seo::$Title = $_News->Name;
+        Model_Seo::$des = $_News->description;
+        Model_Seo::$key = $_News->keyword;
+        Model_Seo::$Images = $_News->UrlHinh();
+        $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
+    }
+
     function news($url) {
         $aliasPages = \Model\CheckInput::ChekInput($url[1][0]);
         $aliasNews = \Model\CheckInput::ChekInput($url[2][0]);
@@ -125,10 +155,9 @@ class Controller_index extends Application {
         $news = $this->News->NewsByAlias($aliasNews, $_Page->idPa);
         if ($news == null) {
             header('HTTP/1.1 404 Not Found');
-//            throw new Exception();
         }
-
         $_News = new \Model\news($news);
+        \lib\Common::ToUrl($_News->linkNewsCurent());
         $_Breadcrumb = new \Model\Breadcrumb();
         $a = [
             [
@@ -205,12 +234,17 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "product");
     }
 
-    function pagesdetail($url) {
+    function pagesdetail($url = null) {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         $pages = new \Model\pages();
-        $_Pages = $pages->PagesByAliasIsShow($url[1][0], FALSE);
+        if ($url != null) {
+            $_Pages = $pages->PagesByAliasIsShow($url[1][0], FALSE);
+        } else {
+            $alias = $this->getParam()[0];
+            $_Pages = $pages->PagesByAliasIsShow($alias, FALSE);
+        }
         if ($_Pages == null) {
             header("HTTP/1.0 404 Not Found");
         }
@@ -325,6 +359,61 @@ class Controller_index extends Application {
 
     function loi404() {
         echo "404";
+    }
+
+    function newsPreview() {
+        $id = $this->getParam()[0];
+        if (Model\Admin::isLogin() == FALSE) {
+            header('HTTP/1.1 404 Not Found');
+        }
+        $news = $this->News->NewsById($id, FALSE);
+        $_News = new \Model\news($news);
+        $_Breadcrumb = new \Model\Breadcrumb();
+        $a = [
+            [
+                "title" => $_News->PageID()->Name,
+                "link" => $_News->PageID()->linkPagesCurent()
+            ],
+            [
+                "title" => $_News->Name,
+                "link" => $_News->linkNewsCurent()
+            ]
+        ];
+        $data["news"] = $news;
+        Model_Seo::$Title = $_News->Name;
+        Model_Seo::$des = $_News->description;
+        Model_Seo::$key = $_News->keyword;
+        Model_Seo::$Images = $_News->UrlHinh();
+        $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
+    }
+
+    function tags($param = null) {
+        Model_Seo::$Title = "__Title___";
+        Model_Seo::$des = "__Des___";
+        Model_Seo::$key = "__Keyword___";
+        Model_Seo::$Images = "__ImggesTitle___";
+        $alias = Model\CheckInput::ChekInput($param[1][0]);
+        $tagsDetail = new Model\tags\tags();
+        $total = 0;
+//        Model\DB::$Debug = true;
+        $TagsDetail = $tagsDetail->GetByAlias($alias);
+        $data["TagsDetail"] = $TagsDetail;
+        $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
+    }
+
+    function gettags() {
+        $modelTags = new Model\tags\tags();
+        $total = 0;
+        $tags = $modelTags->GetAllPT("", $total, 1, 100);
+        $strTag = "";
+        foreach ($tags as $value) {
+            $_value = new Model\tags\tags($value);
+            $strTag .= <<<TAGS
+
+                    <a href="{$_value->LinkTags()}" class="btn btn-default" >{$_value->Name}</a>
+TAGS;
+        }
+        echo $strTag;
     }
 
 }

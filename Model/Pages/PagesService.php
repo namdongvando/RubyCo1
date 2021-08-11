@@ -20,7 +20,7 @@ class PagesService extends \Model\DB implements \Model\IModel {
     }
 
     public function GetAllIsShow() {
-        $where = " `isShow` > 0 ";
+        $where = " `isShow` > 0  ";
         return $this->Select($where);
     }
 

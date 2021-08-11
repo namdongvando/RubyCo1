@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/tabs.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/backend.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/Adapter.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/theme/backend/mnews/editnews.phtml</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/mthuvien.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/IModelDB.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/public/ckfinder/config.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/mnews.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/tags/tagsForm.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Controller/IBackenController.php</file>
+            <file>file:/D:/001ThietKeWeb/CongKaka/ProjectTinTuc/RubyCo/Model/tags/tags.php</file>
+        </group>
     </open-files>
 </project-private>

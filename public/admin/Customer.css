@@ -2,6 +2,10 @@
     display: flex;
     justify-content: space-evenly;
 }
+.d-flex .item{
+    width: 50%;
+    padding: 10px;
+}
 .btn-xoa{
     color: red;
 }

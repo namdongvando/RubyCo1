@@ -89,7 +89,6 @@ class Controller_mtheme extends Controller_backend {
     }
 
     function createMenu4ThemeGroups() {
-        $a = get_class_vars("Model\Menu");
         $a["IDMenu"] = time();
         $a["Theme"] = $this->param[0];
         $a["Groups"] = $this->param[1];

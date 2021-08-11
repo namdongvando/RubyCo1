@@ -10,7 +10,7 @@ $_new = new \Model\news($news);
                 <h3 class="box-title">Sửa Bài Viết</h3>
                 <div class="pull-right box-tools">
                     <a href="/mnews/addnews/<?php echo $_new->PageID; ?>" class="btn btn-primary" >Thêm Mới</a>
-                    <a target="_blank" href="<?php echo $_new->linkNewsCurent(); ?>" class="btn btn-primary" >Xem bài Viết</a>
+                    <a target="_blank" href="<?php echo $_new->linkPreview(); ?>" class="btn btn-primary" >Xem bài Viết</a>
                 </div><!-- /. tools -->
             </div><!-- /.box-header -->
             <div class="box-body no-padding ">
@@ -45,67 +45,198 @@ $_new = new \Model\news($news);
                                 <label for=""></label>
                                 <button type="submit" class="btn btn-success btn-block" name="EditNews" >Lưu</button>
                             </div>
-                            <div class="form-group hidden">
-                                <label for="">__ID___</label>
-                                <input type="text" value="<?php echo $_new->ID ?>" class="form-control" name="ID" >
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#HienThi">Hiển Thị</a>
+                                            <a class="pull-right" data-toggle="collapse" href="#HienThi" >
+                                                <i class="fa fa-bars" ></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="HienThi" class="no-border-radius panel-collapse collapse in">
+                                        <div class="col-md-12">
+                                            <div class="form-group hidden">
+                                                <label for="">__ID___</label>
+                                                <input type="text" value="<?php echo $_new->ID ?>" class="form-control" name="ID" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">__PageID___</label>
+                                                <select name="PageID" class="form-control" >
+                                                    <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}" >{{optionPage.Name}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">__AnHien___</label>
+                                                <select required="required" class="form-control" ng-model="_New.AnHien"  name="AnHien" >
+                                                    <option value="1" >Hiện</option>
+                                                    <option value="0" >Ẩn</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">__TinNoiBat___</label>
+                                                <select required="required" class="form-control" ng-model="_New.TinNoiBat"  name="TinNoiBat" >
+                                                    <option value="1" >Nổi Bật</option>
+                                                    <option value="0" >Không Nổi Bật</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group hidden">
+                                                <label for="">__SoLanXem___</label>
+                                                <input type="text" value="{{_New.SoLanXem}}" class="form-control" name="SoLanXem" >
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">__Stt___</label>
+                                                <input type="text" value="{{_New.Stt}}" class="form-control" name="Stt" >
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="">Ngày Đăng (<?php echo $_new->NgayDang(); ?>)</label>
+                                                <label class="pull-right" data-toggle="tooltip" title="Có Thể Hẹn Ngày Public Bài Viết" >
+                                                    <i class="fa fa-info-circle" ></i>
+                                                </label>
+                                                <input type="datetime-local" value="<?php echo $_new->NgayDangEdit(); ?>" class="form-control" name="NgayDang" >
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
 
-
-                            <div class="form-group">
-                                <label for="">__PageID___</label>
-                                <select name="PageID" class="form-control" >
-                                    <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}" >{{optionPage.Name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="">__title___</label>
-                                <textarea class="form-control" name="title"  ><?php echo $_new->title ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="">__keyword___</label>
-                                <textarea class="form-control" name="keyword"  ><?php echo $_new->keyword ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="">__description___</label>
-                                <textarea class="form-control" name="description"  ><?php echo $_new->description ?></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">__AnHien___</label>
-                                <select required="required" class="form-control" ng-model="_New.AnHien"  name="AnHien" >
-                                    <option value="1" >Hiện</option>
-                                    <option value="0" >Ẩn</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group hidden">
-                                <label for="">__NgayDang___</label>
-                                <input type="text" value="{{_New.NgayDang}}" class="form-control" name="NgayDang" >
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#seoTag">SEO Content</a>
+                                            <a class="pull-right" data-toggle="collapse" href="#seoTag" >
+                                                <i class="fa fa-bars" ></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="seoTag" class="no-border-radius panel-collapse collapse in">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">__title___</label>
+                                                <textarea class="form-control" name="title"  ><?php echo $_new->title ?></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">__keyword___</label>
+                                                <textarea class="form-control" name="keyword"  ><?php echo $_new->keyword ?></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="">__description___</label>
+                                                <textarea class="form-control" name="description"  ><?php echo $_new->description ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <img  style="height: 50px;" src="<?php echo $_new->UrlHinh; ?>" >
-                                <label for="">__UrlHinh___</label>
-                                <input type="file" class="form-control" name="Fileimages" >
-                                <input type="hidden" value="{{_New.UrlHinh}}" class="form-control" name="UrlHinh" >
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse11">Hình Đại Diện</a>
+                                            <a class="pull-right"  data-toggle="collapse" href="#collapse11" >
+                                                <i class="fa fa-bars" ></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse11" class="no-border-radius panel-collapse collapse in">
+                                        <label style="display: block;margin: 10px auto ;width: 96%;background-color: #aaa;height: 80px;padding: 5px;" class="text-center" >
+                                            <img style="height: 70px;" src="<?php echo $_new->UrlHinh; ?>" id="imgShow" >
+                                            <input type="hidden" readonly value="<?php echo $_new->UrlHinh; ?>" class="form-control" id="UrlHinh" name="UrlHinh" >
+                                            <button type="button" style="display: none;" onclick="BrowseServerShowImg('Images:/', 'UrlHinh', 'imgShow')">Chọn File</button>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-group">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapseTag">Tags</a>
+                                            <a class="pull-right" data-toggle="collapse" href="#collapseTag" >
+                                                <i class="fa fa-bars" ></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTag" class="no-border-radius panel-collapse collapse in">
+                                        <div role="tabpanel">
+                                            <ul class="nav nav-tabs d-flex" role="tablist">
+                                                <li role="presentation" class="item active">
+                                                    <a href="#tags" aria-controls="tags" role="tab" data-toggle="tab">Tags</a>
+                                                </li>
+                                                <li role="presentation" class="item" >
+                                                    <a href="#searchtags" aria-controls="searchtags" role="tab" data-toggle="tab">Chọn Tags</a>
+                                                </li>
+                                                <li role="presentation" class="item" >
+                                                    <a href="#addtags" aria-controls="addtags" role="tab" data-toggle="tab">Thêm Tags</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div role="tabpanel" class="tab-pane active" id="tags">
+                                                    <div id="DanhSachTagsByNews" style="padding: 10px;" >
+                                                        <?php
+                                                        $tagsDetail = new Model\tags\tagsDetail();
+                                                        $tagsDetailBynews = $tagsDetail->GetByNewsId($_new->ID);
+                                                        foreach ($tagsDetailBynews as $tagsBynews) {
+                                                            $_tagDetai = new Model\tags\tagsDetail($tagsBynews);
+                                                            ?>
+                                                            <label class="btn btn-default" >
+                                                                <?php echo $_tagDetai->Name; ?>
+                                                                <button title="Xóa Tags Này?" data-idnews="<?php echo $_new->ID; ?>" data-id="<?php echo $_tagDetai->Id; ?>"
+                                                                        class="no-border btn-xoaTags " type="button" >
+                                                                    <i class="fa fa-times" ></i>
+                                                                </button>
+                                                            </label>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="searchtags">
+                                                    <table class="table table-bordered" >
+                                                        <thead id="danhsachtags" >
+                                                            <?php
+                                                            $modelTags = new Model\tags\tags();
+                                                            $total = 0;
+                                                            $dsTags = $modelTags->GetAllPT("", $total, 1, 100);
+                                                            foreach ($dsTags as $value) {
+                                                                ?>
+                                                                <tr>
+                                                                    <td><?php echo $value["Name"]; ?></td>
+                                                                    <td  style="width: 40px"><button  data-newsid="<?php echo $_new->ID ?>" data-id="<?php echo $value["Id"] ?>"  class="btn-chontags btn btn-primary" type="button" >Chọn</button></td>
+                                                                </tr>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane" id="addtags">
+                                                    <table class="table table-bordered" >
+                                                        <thead>
+                                                            <tr>
+                                                                <th><input class="form-control" name="tagsName" id="tagsName" ></th>
+                                                                <th style="width: 40px">
+                                                                    <button data-newsid="<?php echo $_new->ID ?>" class="btn btn-themTags btn-success" type="button" >Thêm</button>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="">__TinNoiBat___</label>
-                                <select required="required" class="form-control" ng-model="_New.TinNoiBat"  name="TinNoiBat" >
-                                    <option value="1" >Nổi Bật</option>
-                                    <option value="0" >Không Nổi Bật</option>
-                                </select>
-                            </div>
-                            <div class="form-group hidden">
-                                <label for="">__SoLanXem___</label>
-                                <input type="text" value="{{_New.SoLanXem}}" class="form-control" name="SoLanXem" >
-                            </div>
-                            <div class="form-group">
-                                <label for="">__Stt___</label>
-                                <input type="text" value="{{_New.Stt}}" class="form-control" name="Stt" >
-                            </div>
+
                         </div>
                     </form>
 
@@ -114,3 +245,70 @@ $_new = new \Model\news($news);
         </div>
     </section>
 </div>
+<script type="text/javascript"  >
+    $(function() {
+        function DanhSacTabByBewsId(newId) {
+            $.ajax({
+                method: "POST",
+                url: "/mnews/gettagsbynews/",
+                data: {
+                    id: newId
+                }
+            }).done(function(res) {
+                $("#DanhSachTagsByNews").html(res);
+                btn_xoaTags();
+            });
+        }
+        function btn_chontags() {
+            $(".btn-chontags").click(function() {
+                var htmlData = $(this).data();
+                $.ajax({
+                    method: "POST",
+                    url: "/mnews/addtags/",
+                    data: {
+                        idtags: htmlData.id,
+                        idnews: htmlData.newsid
+                    }
+                }).done(function(res) {
+                    DanhSacTabByBewsId(htmlData.newsid);
+                });
+            });
+        }
+        $(".btn-themTags").click(function() {
+            var htmlData = $(this).data();
+            var name = $("#tagsName").val();
+            $.ajax({
+                method: "POST",
+                url: "/mnews/addnewtags/",
+                data: {
+                    tagsName: name,
+                    idnews: htmlData.newsid
+                }
+            }).done(function(res) {
+                DanhSacTabByBewsId(htmlData.newsid);
+            });
+        });
+        function btn_xoaTags() {
+            $(".btn-xoaTags").click(function() {
+                var title = $(this).prop('title');
+                if (window.confirm(title) == false) {
+                    return;
+                }
+                var htmlData = $(this).data();
+                $.ajax({
+                    method: "POST",
+                    url: "/mnews/delatetags/",
+                    data: {
+                        id: htmlData.id
+                    }
+                }).done(function(res) {
+                    DanhSacTabByBewsId(htmlData.idnews);
+                });
+            });
+        }
+        btn_xoaTags();
+        btn_chontags();
+
+    });
+
+</script>

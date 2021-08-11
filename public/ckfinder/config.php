@@ -1,5 +1,14 @@
 ﻿<?php
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$fileName = __DIR__ . '/../../config.php';
+if (file_exists(__DIR__ . '/../../config.php')) {
+    include_once ($fileName);
+} else {
+    echo "khong có file";
+}
 
 function CheckAuthentication() {
 
@@ -10,13 +19,17 @@ function CheckAuthentication() {
     }
 }
 
+CheckAuthentication();
+
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
 // fully functional, in demo mode.
 $config['LicenseName'] = 'rubyads.com.vn';
 $config['LicenseKey'] = 'AR3PUQWHYERX6FJS7S4KJ2LD183VAQET';
 
 $baseUrl = '/public/img/'; //duong dan
-
+if (Model\pathCkFinder::get() != null) {
+    $baseUrl = Model\pathCkFinder::get();
+}
 $baseDir = resolveUrl($baseUrl);
 $config['Thumbnails'] = Array(
     'url' => $baseUrl . '_thumbs',

@@ -21,7 +21,7 @@ header("Content-type: text/xml");
             <url>
                 <loc><?php echo $_DanhMuc->linkFullPagesCurent() ?></loc>
                 <lastmod><?php echo date("Y-m-d", time() - 3600) ?></lastmod>
-                <priority>0.80</priority>
+                <priority>0.90</priority>
             </url>
             <?php
         }
@@ -36,7 +36,7 @@ header("Content-type: text/xml");
             <url>
                 <loc><?php echo $_news->linkFullNewsCurent(); ?></loc>
                 <lastmod><?php echo date("Y-m-d", strtotime($_news->NgayDang)); ?></lastmod>
-                <priority>0.60</priority>
+                <priority>0.80</priority>
             </url>
             <?php
         }

@@ -1,0 +1,113 @@
+<?php
+$_TagsDetail = new Model\tags\tagsDetail($TagsDetail);
+//Model\DB::$Debug = true;
+$total = 0;
+$DSnews = $_TagsDetail->GetNews($total);
+$_Pages = new \Model\pages();
+$DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
+$Model_News = new \Model\news();
+$DanhSachTinMoiNhat = $Model_News->DanhSachTinMoiNhat(6);
+?>
+<div class="container" >
+    <div class="" >
+        <ul class="breadcrumb">
+            <li><a href="/">Trang Chủ</a></li>
+            <li class="active"><?php echo $_TagsDetail->Name ?></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-8" >
+            <h2 class="text-left title-pannel"><span><?php echo $_TagsDetail->Name ?></span></h2>
+            <?php
+            if ($DSnews) {
+                foreach ($DSnews as $news) {
+                    $_new = new \Model\news($news["IdNews"]);
+                    ?>
+                    <div class="row" >
+                        <div class="col-md-4" >
+                            <a href="<?php echo $_new->linkNewsCurent(); ?>"  >
+                                <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>"/>
+                            </a>
+                        </div>
+                        <div class="col-md-8" >
+                            <a href="<?php echo $_new->linkNewsCurent(); ?>" class="" >
+                                <h3 class="newstitle text-justify" ><?php echo $_new->Name ?></h3>
+                            </a>
+                            <p><span><?php echo $_new->NgayDang() ?></span>  </p>
+                            <p><?php echo $_new->Summary(); ?></p>
+                        </div>
+                        <div class="clearfix" ></div>
+                        <hr>
+                    </div>
+
+                    <?php
+                }
+            }
+            ?>
+        </div>
+        <div class="col-md-4" >
+            <div class="">
+                <h2 class="text-left title-pannel"><span>Danh Mục Bài Viết</span></h2>
+                <div class="d-flex danhmucbaiviet">
+                    <a href="" data-target=".backdrop,.MenuMobie" class="btn-toggle hidden-lg hidden-md hidden-sm btn btn-default" >
+                        <i class="fa fa-bars" ></i>
+                    </a>
+                </div>
+                <div class="backdrop btn-toggle" data-target=".backdrop,.MenuMobie">
+                </div>
+                <div class="MenuMobie ">
+                    <ul class="list-group margin-bottom-25 sidebar-menu">
+                        <?php
+                        if ($DanhMucBaiViet) {
+                            foreach ($DanhMucBaiViet as $page) {
+                                $_page = new Model\pages($page);
+                                ?>
+                                <li class="list-group-item clearfix"><a href="<?php echo $_page->linkPagesCurent() ?>"><i class="fa fa-angle-right"></i> <?php echo $_page->Name ?></a></li>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </ul>
+                </div>
+
+                <h2 class="text-left title-pannel"><span>Tin Mới Nhất</span></h2>
+                <?php
+                if ($DanhSachTinMoiNhat) {
+                    foreach ($DanhSachTinMoiNhat as $news) {
+                        $_new = new \Model\news($news);
+                        ?>
+                        <div class=" " >
+                            <div class="col-xs-4" >
+                                <div class="row">
+                                    <a href="<?php echo $_new->linkNewsCurent(); ?>"  >
+                                        <img style="min-width: 100%;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img HinhChuNhat img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-8" >
+                                <a href="<?php echo $_new->linkNewsCurent(); ?>" class="" >
+                                    <h3 style="font-size: 14px;" class="text-bold text-justify" ><?php echo $_new->Name ?></h3>
+                                </a>
+                                <p><span><?php echo $_new->NgayDang() ?></span></p>
+                            </div>
+                            <div class="clearfix" ></div>
+                            <hr style="margin: 10px" >
+                        </div>
+
+                        <?php
+                    }
+                }
+                ?>
+                <h2 class="text-left title-pannel"><span>Tags</span></h2>
+                <div class="DanhSachTags ajaxHtml" data-target="#DanhSachTags" id="DanhSachTags" data-url="/index/gettags/">
+
+                </div>
+                <div class="clearfix" style="margin-bottom: 10px;" >
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

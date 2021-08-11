@@ -20,16 +20,15 @@ RewriteRule confix -  [L]
 RewriteRule robots.txt -  [L]
 RewriteCond %{HTTPS} off
 RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
-
-
-RewriteRule page-(.*)\/(.*).html index.php?path=$1 [L]
-RewriteRule (.*)\/(.*).html index.php?ctrl=index&action=chitietsanpham&param=$1&alias=$2 [L]
+ 
 RewriteRule ^tim-kiem index.php?ctrl=timkiem&action=index&param=$1 [L]
-
-RewriteRule category/(.*)/p-(.*)/ index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
-RewriteRule category/(.*)/p-(.*) index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
-RewriteRule san-pham\.html  index.php?ctrl=index&action=sanpham&param=1 [L]
-RewriteRule ^thuong-hieu\.html  index.php?ctrl=index&action=thuonghieu&param=1 [L]
+RewriteRule ^category/(.*)/p-(.*)/ index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
+RewriteRule ^category/(.*)/p-(.*) index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
+#RewriteRule ^san-pham\.html  index.php?ctrl=index&action=sanpham&param=1 [L]
+RewriteRule ^thuong-hieu\.html  index.php?ctrl=index&action=thuonghieu&param=$1 [L]
+RewriteRule ^page-(.*)/(.*).html index.php [L]
+RewriteRule ^page-(.*).html index.php?ctrl=index&action=pagesdetail&param=$1 [L]
+RewriteRule (.*)\.html  index.php?ctrl=index&action=newsdetail&param=$1 [L]
 
 RewriteRule (.*)  index.php  [L]
 

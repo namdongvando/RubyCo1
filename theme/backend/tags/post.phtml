@@ -1,0 +1,18 @@
+ 
+<div class="container-fluid">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Thêm Tabs</h3>
+        </div>
+        <div class="box-body">
+            <form action=""  enctype="multipart/form-data" method="POST" >
+                <?php
+                \Model\tags\tagsForm::Name()->renderHTML();
+                \Model\tags\tagsForm::Alias()->renderHTML();
+                \Model\tags\tagsForm::Content()->renderHTML();
+                \Model\tags\tagsForm::btnSave()->renderHTML();
+                ?>
+            </form>
+        </div>
+    </div>
+</div>

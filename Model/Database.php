@@ -742,7 +742,15 @@ class Database extends \Model\iDatabase {
     }
 
     public function NewsIsShow($isobj = true) {
-        return $this->select(table_prefix . "news", [], ' `AnHien` > 0 ORDER BY `Stt` DESC');
+        return $this->select(table_prefix . "news", [], ' `AnHien` > 0 and `NgayDang` < NOW() ORDER BY `Stt` DESC');
+    }
+
+    function GetNewsByAlias($alias) {
+//        reutur array
+        $a = $this->select(table_prefix . "news", [], "`Alias` = '{$alias}' and `NgayDang` < NOW()");
+        if ($a)
+            return $a[0];
+        return null;
     }
 
     function NewsByAlias($alias, $paId, $isobj = true) {
@@ -768,7 +776,7 @@ class Database extends \Model\iDatabase {
     }
 
     public function NewsByPagesTop($pages, $number) {
-        $where = "`PageID` = '{$pages}' and `AnHien` >= 1  ORDER BY `STT` DESC limit 0,$number";
+        $where = "`PageID` = '{$pages}' and `AnHien` >= 1 and `NgayDang` < NOW() ORDER BY `STT` DESC limit 0,$number";
         return $this->select(table_prefix . "news", [], $where);
     }
 

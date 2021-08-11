@@ -372,6 +372,7 @@ class Application {
             }
         }
         $Content = __DIR__ . "/theme/" . $theme . "/" . $_Controller . "/" . $_Action . ".phtml";
+
         if (http_response_code() >= 300) {
             $Content = __DIR__ . "/theme/" . $theme . "/index/loi404.phtml";
         }
@@ -500,12 +501,9 @@ class Application {
                 "/\/(.*)\/(.*)(\.html)(.*)$/i",
                 "/\/(.*)\/(.*)(\.html)$/i",
             ]
-            ,
-            "category" => array(
-                "/(.*)\/pages-(.*)/i",
-                "/(.*)\/pages-(.*)\//i",
-                "/(.*)/i",
-                "/(.*)\//i",
+            , "tags" => array(
+                "/\/(.*)/i",
+                "/\/(.*)\//i",
             )
         ];
 

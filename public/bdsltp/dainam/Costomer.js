@@ -2,6 +2,15 @@ $(function() {
     $('body').bind('contextmenu cut copy paste', function(event) {
         event.preventDefault();
     });
+    $(".ajaxHtml").each(function() {
+        var datahtml = $(this).data();
+        $.ajax({
+            url: datahtml.url,
+        }).done(function(res) {
+            $(datahtml.target).html(res);
+        });
+    });
+
     $(".btn-toggle").click(function() {
         var dataHtml = $(this).data();
         $(dataHtml.target).toggle(200);

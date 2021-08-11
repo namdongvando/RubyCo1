@@ -39,6 +39,7 @@ $user = explode(DOMAIN, $host);
 Model_Subdomail::setSubdoamin($user[0]);
 Model_Tableprefix::setTableprefix(Model_Subdomail::getSubdoamin() . "_");
 $Application = new Application($url);
+
 if (isset($_GET["ctrl"])) {
     $Module = null;
     $cnameV = $_GET["ctrl"];
@@ -82,6 +83,7 @@ if ($Module) {
         $Application->setAction($Ctrl);
         $action = $Ctrl;
         $c = new Controller_index();
+//        echo $TieuDeKD
         $c->$action($TieuDeKD);
 //    controler mặc định lấy
     }

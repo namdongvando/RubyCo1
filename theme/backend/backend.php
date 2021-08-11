@@ -106,7 +106,7 @@ class backend extends \Model\Database {
                             <i class="fa fa-image"></i> <span>Thư Viện Hình Ảnh</span>
                         </a>
                     </li>
-                    <li class="treeview <?php echo \Model\Breadcrumb::CheckMenuAcrive("Controller_mpage") ? 'active' : '' ?> ">
+                    <li class="treeview <?php echo \Model\Breadcrumb::CheckMenuAcrive("QuanLyBaiViet") ? 'active' : '' ?> ">
                         <a href="/mpage/index">
                             <i class="fa fa-list-alt"></i> <span>Quản Lý Bài Viết</span>
                             <i class="fa fa-angle-right pull-right"></i>
@@ -115,6 +115,7 @@ class backend extends \Model\Database {
                             <li><a href="/mpage/index"><i class="fa fa-circle-o"></i> Danh mục bài biết</a></li>
                             <li><a href="/mnews/index"><i class="fa fa-circle-o"></i> Bài viết</a></li>
                             <li><a href="/mnews/addnews"><i class="fa fa-circle-o"></i> Thêm Bài viết</a></li>
+                            <li><a href="/tags/"><i class="fa fa-circle-o"></i> Tags</a></li>
                         </ul>
                     </li>
                     <li class="treeview hidden ">
@@ -281,6 +282,23 @@ class backend extends \Model\Database {
 
                             });
 
+                            function BrowseServerShowImg(startupPath, functionData, idimg) {
+                                var finder = new CKFinder();
+                                finder.BasePath = '<?php echo BASE_URL ?>public/';
+                                finder.startupPath = startupPath;
+                                finder.selectActionFunction = function(fileUrl, data) {
+                                    document.getElementById(data["selectActionData"]).value = fileUrl;
+                                    var ID = data["selectActionData"];
+                                    console.log(fileUrl);
+                                    $('#' + idimg).attr('src', fileUrl);
+                                };
+                                finder.selectActionData = functionData;
+                                finder.selectThumbnailActionFunction = function(fileUrl, data) {
+                                    console.log(fileUrl);
+                                    $('#' + idimg).attr('src', fileUrl);
+                                };
+                                finder.popup();
+                            }
                             function BrowseServer(startupPath, functionData) {
                                 var finder = new CKFinder();
                                 finder.BasePath = '<?php echo BASE_URL ?>public/';
@@ -320,7 +338,7 @@ class backend extends \Model\Database {
 
 
         </script>
-        <script src="https://www.google.com/recaptcha/api.js?render=6LdxarcbAAAAAGyiHFhosVhbdNa5uK-ufiERSCF3"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=<?php echo reCAPTCHA; ?>"></script>
         <?php
     }
 

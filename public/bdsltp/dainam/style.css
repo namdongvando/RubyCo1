@@ -283,9 +283,24 @@ address {
     bottom: 0px;
     width: 100%;
 }
+.dsbaivietlienquan li::marker{
+    text-indent: -10px;
+}
 
+.dsbaivietlienquan {
+
+}
+.dsbaivietlienquan li a{
+    padding: 10px 5px;
+    display: block;
+    font-size: 15px;
+    text-transform: capitalize;
+}
 .ChungToiLaAi .card .card-body{
     min-height: 350px;
+}
+.recent-work h2, .ecommerce .recent-work h2{
+    height: 50px;
 }
 .taisaochonchungtoi-phone{
     line-height: 10px;

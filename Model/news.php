@@ -24,24 +24,33 @@ class news extends \Model\Database {
 
     function __construct($menu = null) {
         if ($menu) {
-            $this->ID = $menu['ID'];
-            $this->PageID = $menu['PageID'];
-            $this->Name = $menu['Name'];
-            $this->Alias = $menu['Alias'];
-            $this->Summary = $menu['Summary'];
-            $this->Content = $menu['Content'];
-            $this->title = $menu['title'];
-            $this->keyword = $menu['keyword'];
-            $this->description = $menu['description'];
-            $this->AnHien = $menu['AnHien'];
-            $this->NgayDang = $menu['NgayDang'];
-            $this->UrlHinh = $menu['UrlHinh'];
-            $this->TinNoiBat = $menu['TinNoiBat'];
-            $this->SoLanXem = $menu['SoLanXem'];
-            $this->Stt = $menu['Stt'];
+            if (!is_array($menu)) {
+                $menu = $this->NewsById($menu, FALSE);
+            }
+            if ($menu) {
+                $this->ID = $menu['ID'];
+                $this->PageID = $menu['PageID'];
+                $this->Name = $menu['Name'];
+                $this->Alias = $menu['Alias'];
+                $this->Summary = $menu['Summary'];
+                $this->Content = $menu['Content'];
+                $this->title = $menu['title'];
+                $this->keyword = $menu['keyword'];
+                $this->description = $menu['description'];
+                $this->AnHien = $menu['AnHien'];
+                $this->NgayDang = $menu['NgayDang'];
+                $this->UrlHinh = $menu['UrlHinh'];
+                $this->TinNoiBat = $menu['TinNoiBat'];
+                $this->SoLanXem = $menu['SoLanXem'];
+                $this->Stt = $menu['Stt'];
+            }
         }
         parent::__construct();
         $this->TableName = table_prefix . "news";
+    }
+
+    function NewsByAliasOnly($alias) {
+        return $this->GetNewsByAlias($alias);
     }
 
     function ToArrayJson() {
@@ -65,7 +74,16 @@ class news extends \Model\Database {
         return md5(time() . $this->RandomString(8));
     }
 
+    function linkPreview() {
+        return "/index/newsPreview/" . $this->ID;
+        $p = new pages();
+        $_p = $p->PagesById($this->PageID, FALSE);
+        $p1 = new pages($_p);
+        return $p1->linkPagesCurent() . $this->Alias . ".html";
+    }
+
     function linkNewsCurent() {
+        return "/" . $this->Alias . ".html";
         $p = new pages();
         $_p = $p->PagesById($this->PageID, FALSE);
         $p1 = new pages($_p);
@@ -73,6 +91,7 @@ class news extends \Model\Database {
     }
 
     function linkFullNewsCurent() {
+        return BASE_URL . $this->Alias . ".html";
         $p = new pages();
         $_p = $p->PagesById($this->PageID, FALSE);
         $p1 = new pages($_p);
@@ -84,7 +103,7 @@ class news extends \Model\Database {
     }
 
     function DanhSachTinMoiNhat($number = 10) {
-        return $this->select($this->TableName, [], " `AnHien` = 1 order by `NgayDang` desc limit 0,{$number}");
+        return $this->select($this->TableName, [], " `AnHien` = 1 and `NgayDang` < NOW() order by `NgayDang` desc limit 0,{$number}");
     }
 
     function DanhSachTinPT($indexPage, $Number, $Name, &$Tong) {
@@ -106,7 +125,7 @@ class news extends \Model\Database {
         $TongTin = $this->select($this->TableName, [], " `Name` like '%$Name%' and `AnHien` = 1 $sqlDanhmuc");
         if ($TongTin)
             $Tong = count($TongTin);
-        $where = "`Name` like '%$Name%' and `AnHien` = 1 $sqlDanhmuc order by `NgayDang` desc limit {$indexPage},{$Number}";
+        $where = "`Name` like '%$Name%' $sqlDanhmuc order by `NgayDang` desc limit {$indexPage},{$Number}";
         return $this->select($this->TableName, [], $where);
     }
 
@@ -183,6 +202,14 @@ class news extends \Model\Database {
         if (file_exists($url))
             return $this->UrlHinh;
         return "/public/lawkimsa/Images/h1.jpg";
+    }
+
+    public function AnHien() {
+        return $this->AnHien == 0 ? 'Ẩn' : "Hiện";
+    }
+
+    public function NgayDangEdit() {
+        return date("yy-m-d\TH:i", strtotime($this->NgayDang));
     }
 
 }

@@ -83,7 +83,7 @@ class pages extends \Model\Database {
     }
 
     function editPages($Page) {
-        $Page["Alias"] = $this->bodautv($Page["Name"]) . '-' . $Page["idPa"];
+        $Page["Alias"] = $this->bodautv($Page["Name"]);
         return parent::editPages($Page);
     }
 

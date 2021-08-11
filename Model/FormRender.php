@@ -8,6 +8,11 @@ class FormRender extends Element {
 
     public $element;
 
+    const readonly = "readonly";
+    const required = "required";
+    const autofocus = "autofocus";
+    const checked = "checked";
+
     function __construct($element) {
         $this->element = $element;
     }

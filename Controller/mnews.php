@@ -1,6 +1,6 @@
 <?php
 
-class Controller_mnews extends Controller_mpage {
+class Controller_mnews extends Controller_backend {
 
     public $news;
     public $page;
@@ -10,6 +10,11 @@ class Controller_mnews extends Controller_mpage {
         $this->page = new \Model\pages();
         parent::__construct();
         ob_start();
+        \Model\Breadcrumb::setMenuAcrive("QuanLyBaiViet");
+        $this->Bread[] = [
+            "title" => "Danh Sách Bài Viết",
+            "link" => "/mnews/index/"
+        ];
     }
 
     function index() {
@@ -89,7 +94,7 @@ class Controller_mnews extends Controller_mpage {
                     if (is_file($imgHinh)) {
                         unlink($imgHinh);
                     }
-                    $img = $this->news->upload_image1($_FILES["Fileimages"], $urlimg, "news-" . $_POST["ID"], true);
+                    $img = $this->news->upload_image1($_FILES["Fileimages"], $urlimg, "", true);
                     $img = explode("public/img/", BASE_URL . $img);
                     $img = "/public/img/" . $img[1];
                 }
@@ -98,12 +103,13 @@ class Controller_mnews extends Controller_mpage {
                 $Page[$k] = $this->news->Bokytusql($_POST[$k]);
             }
             $Page["Alias"] = $Page["Alias"];
-            $Page["UrlHinh"] = $img;
+            $Page["UrlHinh"] = $Page["UrlHinh"];
             $this->news->editNews($Page);
             $this->news->_header("/mnews/editnews/" . $Page["ID"]);
         }
-
         $data["news"] = $this->news->NewsById($this->param[0], FALSE);
+        $path = "/public/img/news/" . $this->param[0] . "/";
+        Model\pathCkFinder::set($path);
         $_New = new Model\news($data["news"]);
         $Bread = new \Model\Breadcrumb();
         $_Pages = $this->page->PagesById($_New->PageID);
@@ -176,6 +182,67 @@ class Controller_mnews extends Controller_mpage {
             echo $this->news->_encode($a);
         else
             echo "[]";
+    }
+
+    function addtags() {
+        try {
+            $Model["IdNews"] = Model\CheckInput::ChekInput($_POST["idnews"]);
+            $Model["IdTags"] = Model\CheckInput::ChekInput($_POST["idtags"]);
+            $modelTag = new Model\tags\tags($Model["IdTags"]);
+            $Model["Id"] = \lib\Common::getGUID();
+            if ($modelTag->Id == null) {
+                throw new Exception("Không có tags");
+            }
+            $Model["Name"] = $modelTag->Name;
+            $tagsDetail = new Model\tags\tagsDetail();
+            $tagsDetail->Post($Model);
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+        }
+    }
+
+    function gettagsbynews() {
+        try {
+            $Id = Model\CheckInput::ChekInput($_POST["id"]);
+            $tagsDetail = new Model\tags\tagsDetail();
+            $tags = $tagsDetail->GetByNewsId($Id);
+            $str = "";
+            foreach ($tags as $value) {
+                $_tagDetai = new Model\tags\tagsDetail($value);
+                $str .= <<<TABLETR
+                        <label class="btn btn-default" >
+                           {$_tagDetai->Name}
+                            <button title="Xóa Tags Này?" data-idnews="{$_tagDetai->IdNews}" data-id="{$_tagDetai->Id}"
+                                    class="no-border btn-xoaTags " type="button" >
+                                <i class="fa fa-times" ></i>
+                            </button>
+                        </label>
+
+TABLETR;
+            }
+            echo $str;
+        } catch (Exception $exc) {
+
+        }
+    }
+
+    function delatetags() {
+        try {
+            $Id = Model\CheckInput::ChekInput($_POST["id"]);
+            $tagsDetail = new Model\tags\tagsDetail();
+            $tagsDetail->Delete($Id);
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+        }
+    }
+
+    function addnewtags() {
+        $tagsName = Model\CheckInput::ChekInput($_POST["tagsName"]);
+        $idnews = Model\CheckInput::ChekInput($_POST["idnews"]);
+        $tagsModel = new Model\tags\tags();
+        $model["Id"] = \lib\Common::getGUID();
+        $model["Name"] = $tagsName;
+        $tagsModel->Post($model);
     }
 
     function __destruct() {
