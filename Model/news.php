@@ -209,7 +209,7 @@ class news extends \Model\Database {
     }
 
     public function NgayDangEdit() {
-        return date("yy-m-d\TH:i", strtotime($this->NgayDang));
+        return date("Y-m-d\TH:i", strtotime($this->NgayDang));
     }
 
 }

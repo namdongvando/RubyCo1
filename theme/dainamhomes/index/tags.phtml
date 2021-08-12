@@ -22,23 +22,28 @@ $DanhSachTinMoiNhat = $Model_News->DanhSachTinMoiNhat(6);
             if ($DSnews) {
                 foreach ($DSnews as $news) {
                     $_new = new \Model\news($news["IdNews"]);
+                    if ($_new->AnHien > 0) {
+                        ?>
+                        <div class="row" >
+                            <div class="col-md-4" >
+                                <a href="<?php echo $_new->linkNewsCurent(); ?>"  >
+                                    <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>"/>
+                                </a>
+                            </div>
+                            <div class="col-md-8" >
+                                <a href="<?php echo $_new->linkNewsCurent(); ?>" class="" >
+                                    <h3 class="newstitle text-justify" ><?php echo $_new->Name ?></h3>
+                                </a>
+                                <p><span><?php echo $_new->NgayDang() ?></span>  </p>
+                                <p><?php echo $_new->Summary(); ?></p>
+                            </div>
+                            <div class="clearfix" ></div>
+                            <hr>
+                        </div>
+                        <?php
+                    }
                     ?>
-                    <div class="row" >
-                        <div class="col-md-4" >
-                            <a href="<?php echo $_new->linkNewsCurent(); ?>"  >
-                                <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>"/>
-                            </a>
-                        </div>
-                        <div class="col-md-8" >
-                            <a href="<?php echo $_new->linkNewsCurent(); ?>" class="" >
-                                <h3 class="newstitle text-justify" ><?php echo $_new->Name ?></h3>
-                            </a>
-                            <p><span><?php echo $_new->NgayDang() ?></span>  </p>
-                            <p><?php echo $_new->Summary(); ?></p>
-                        </div>
-                        <div class="clearfix" ></div>
-                        <hr>
-                    </div>
+
 
                     <?php
                 }

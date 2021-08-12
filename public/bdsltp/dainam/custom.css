@@ -35,6 +35,9 @@ article.baiviet-chinh h2{
 .text-bold{
     font-weight: bold;
 }
+.d-flex .item{
+    width: 100%; 
+}
 .d-flex{
     display: flex;
 }

@@ -86,7 +86,6 @@ class Controller_mnews extends Controller_backend {
             $a = new Model\news();
             $Page = $this->news->NewsById($_POST["ID"], FALSE);
             $img = $Page["UrlHinh"];
-//             xóa hình tin túc
             if (isset($_FILES["Fileimages"])) {
                 if ($_FILES["Fileimages"]["error"] == 0) {
                     $urlimg = "public/img/images/news/" . date("Y") . "/" . date("m") . "/";
@@ -104,6 +103,8 @@ class Controller_mnews extends Controller_backend {
             }
             $Page["Alias"] = $Page["Alias"];
             $Page["UrlHinh"] = $Page["UrlHinh"];
+            if (isset($_POST["TuDongCapNhat"]))
+                $Page["NgayDang"] = date("Y-m-d H:i:s", time());
             $this->news->editNews($Page);
             $this->news->_header("/mnews/editnews/" . $Page["ID"]);
         }
@@ -240,9 +241,28 @@ TABLETR;
         $tagsName = Model\CheckInput::ChekInput($_POST["tagsName"]);
         $idnews = Model\CheckInput::ChekInput($_POST["idnews"]);
         $tagsModel = new Model\tags\tags();
-        $model["Id"] = \lib\Common::getGUID();
-        $model["Name"] = $tagsName;
-        $tagsModel->Post($model);
+        $tagsDetail = $tagsModel->GetByNameDetail($tagsName);
+//        var_dump($tagsDetail);
+//chưa có tags
+        if ($tagsDetail == null) {
+            $model["Id"] = \lib\Common::getGUID();
+            $model["Name"] = $tagsName;
+            $model["Alias"] = \lib\Common::bodautv($tagsName);
+            $tagsModel->Post($model);
+            $tagsDetail = new Model\tags\tagsDetail();
+            $modelTag["Id"] = \lib\Common::getGUID();
+            $modelTag["IdTags"] = $model["Id"];
+            $modelTag["IdNews"] = $idnews;
+            $modelTag["Name"] = $tagsName;
+            $tagsDetail->Post($modelTag);
+        } else {
+// đã có tags
+            $modelTag["Id"] = \lib\Common::getGUID();
+            $modelTag["IdTags"] = $tagsDetail["Id"];
+            $modelTag["IdNews"] = $idnews;
+            $modelTag["Name"] = $tagsName;
+            $tagsDetail->Post($modelTag);
+        }
     }
 
     function __destruct() {

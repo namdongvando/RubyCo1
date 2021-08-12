@@ -15,7 +15,7 @@ $_new = new \Model\news($news);
             </div><!-- /.box-header -->
             <div class="box-body no-padding ">
                 <div >
-                    <form action="/mnews/editnews" method="POST" enctype="multipart/form-data" >
+                    <form onsubmit="return window.confirm('Bạn có muốn Lưu Không?')" action="/mnews/editnews" method="POST" enctype="multipart/form-data" >
                         <div class="col-md-9 " >
                             <div class="form-group">
                                 <label for="">__Name___</label>
@@ -89,12 +89,17 @@ $_new = new \Model\news($news);
                                                 <label for="">__Stt___</label>
                                                 <input type="text" value="{{_New.Stt}}" class="form-control" name="Stt" >
                                             </div>
+
                                             <div class="form-group ">
-                                                <label for="">Ngày Đăng (<?php echo $_new->NgayDang(); ?>)</label>
+                                                <label for="">Ngày Đăng </label>
                                                 <label class="pull-right" data-toggle="tooltip" title="Có Thể Hẹn Ngày Public Bài Viết" >
                                                     <i class="fa fa-info-circle" ></i>
                                                 </label>
                                                 <input type="datetime-local" value="<?php echo $_new->NgayDangEdit(); ?>" class="form-control" name="NgayDang" >
+                                                <label>
+                                                    <input name="TuDongCapNhat" type="checkbox" >
+                                                    Ngày Tự Cập Nhật Khi Sửa
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="clearfix">
@@ -165,72 +170,35 @@ $_new = new \Model\news($news);
                                         </h4>
                                     </div>
                                     <div id="collapseTag" class="no-border-radius panel-collapse collapse in">
-                                        <div role="tabpanel">
-                                            <ul class="nav nav-tabs d-flex" role="tablist">
-                                                <li role="presentation" class="item active">
-                                                    <a href="#tags" aria-controls="tags" role="tab" data-toggle="tab">Tags</a>
-                                                </li>
-                                                <li role="presentation" class="item" >
-                                                    <a href="#searchtags" aria-controls="searchtags" role="tab" data-toggle="tab">Chọn Tags</a>
-                                                </li>
-                                                <li role="presentation" class="item" >
-                                                    <a href="#addtags" aria-controls="addtags" role="tab" data-toggle="tab">Thêm Tags</a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content">
-                                                <div role="tabpanel" class="tab-pane active" id="tags">
-                                                    <div id="DanhSachTagsByNews" style="padding: 10px;" >
-                                                        <?php
-                                                        $tagsDetail = new Model\tags\tagsDetail();
-                                                        $tagsDetailBynews = $tagsDetail->GetByNewsId($_new->ID);
-                                                        foreach ($tagsDetailBynews as $tagsBynews) {
-                                                            $_tagDetai = new Model\tags\tagsDetail($tagsBynews);
-                                                            ?>
-                                                            <label class="btn btn-default" >
-                                                                <?php echo $_tagDetai->Name; ?>
-                                                                <button title="Xóa Tags Này?" data-idnews="<?php echo $_new->ID; ?>" data-id="<?php echo $_tagDetai->Id; ?>"
-                                                                        class="no-border btn-xoaTags " type="button" >
-                                                                    <i class="fa fa-times" ></i>
-                                                                </button>
-                                                            </label>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </div>
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="searchtags">
-                                                    <table class="table table-bordered" >
-                                                        <thead id="danhsachtags" >
-                                                            <?php
-                                                            $modelTags = new Model\tags\tags();
-                                                            $total = 0;
-                                                            $dsTags = $modelTags->GetAllPT("", $total, 1, 100);
-                                                            foreach ($dsTags as $value) {
-                                                                ?>
-                                                                <tr>
-                                                                    <td><?php echo $value["Name"]; ?></td>
-                                                                    <td  style="width: 40px"><button  data-newsid="<?php echo $_new->ID ?>" data-id="<?php echo $value["Id"] ?>"  class="btn-chontags btn btn-primary" type="button" >Chọn</button></td>
-                                                                </tr>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </thead>
-                                                    </table>
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane" id="addtags">
-                                                    <table class="table table-bordered" >
-                                                        <thead>
-                                                            <tr>
-                                                                <th><input class="form-control" name="tagsName" id="tagsName" ></th>
-                                                                <th style="width: 40px">
-                                                                    <button data-newsid="<?php echo $_new->ID ?>" class="btn btn-themTags btn-success" type="button" >Thêm</button>
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                        <table class="table table-bordered" >
+                                            <thead>
+                                                <tr>
+                                                    <th><input class="form-control" name="tagsName" id="tagsName" ></th>
+                                                    <th style="width: 40px">
+                                                        <button data-newsid="<?php echo $_new->ID ?>" class="btn btn-themTags btn-success" type="button" >Thêm</button>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                        <div id="DanhSachTagsByNews" style="padding: 10px;" >
+                                            <?php
+                                            $tagsDetail = new Model\tags\tagsDetail();
+                                            $tagsDetailBynews = $tagsDetail->GetByNewsId($_new->ID);
+                                            foreach ($tagsDetailBynews as $tagsBynews) {
+                                                $_tagDetai = new Model\tags\tagsDetail($tagsBynews);
+                                                ?>
+                                                <label class="btn btn-default" >
+                                                    <?php echo $_tagDetai->Name; ?>
+                                                    <button title="Xóa Tags Này?" data-idnews="<?php echo $_new->ID; ?>" data-id="<?php echo $_tagDetai->Id; ?>"
+                                                            class="no-border btn-xoaTags " type="button" >
+                                                        <i class="fa fa-times" ></i>
+                                                    </button>
+                                                </label>
+                                                <?php
+                                            }
+                                            ?>
                                         </div>
+
 
                                     </div>
                                 </div>

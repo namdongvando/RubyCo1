@@ -115,7 +115,9 @@ class Controller_index extends Application {
 
     function newsdetail() {
         $alias = Model\CheckInput::ChekInput($this->getParam()[0]);
+
         $news = $this->News->GetNewsByAlias($alias);
+
         if ($news == null) {
             header('HTTP/1.1 404 Not Found');
         }

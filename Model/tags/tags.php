@@ -63,4 +63,9 @@ class tags extends \Model\DB implements \Model\IModelDB {
         return $this->SelectRow($where);
     }
 
+    public function GetByNameDetail($name) {
+        $where = "`Name` = '{$name}'";
+        return $this->SelectRow($where);
+    }
+
 }
