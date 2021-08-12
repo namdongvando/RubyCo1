@@ -193,7 +193,7 @@ class news extends \Model\Database {
         $number = 10;
         $id = $this->ID;
         $PageID = $this->PageID;
-        $pk = "`PageID` = '{$PageID}' and `ID` not in('{$id}') and `AnHien` >= 1 order by `NgayDang` desc limit {$start},{$number}";
+        $pk = "`PageID` = '{$PageID}' and `ID` not in('{$id}') and `AnHien` >= 1 and `NgayDang` < NOW() order by `NgayDang` desc limit {$start},{$number}";
         return $this->select($this->TableName, [], $pk);
     }
 
