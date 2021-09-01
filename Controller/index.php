@@ -189,12 +189,15 @@ class Controller_index extends Application {
         if ($_Pages == null) {
             header('HTTP/1.1 404 Not Found');
         }
+        $indexPage = $url[2][0];
+
         $Pages = new \Model\pages($_Pages);
         Model_Seo::$Title = $Pages->Title;
         Model_Seo::$des = $Pages->Des;
         Model_Seo::$key = $Pages->Keyword;
         Model_Seo::$Images = $Pages->Urlimages;
         $data["pages"] = $_Pages;
+        $data["indexPage"] = $indexPage;
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "pages");
     }
 

@@ -238,30 +238,39 @@ TABLETR;
     }
 
     function addnewtags() {
-        $tagsName = Model\CheckInput::ChekInput($_POST["tagsName"]);
-        $idnews = Model\CheckInput::ChekInput($_POST["idnews"]);
-        $tagsModel = new Model\tags\tags();
-        $tagsDetail = $tagsModel->GetByNameDetail($tagsName);
-//        var_dump($tagsDetail);
-//chưa có tags
-        if ($tagsDetail == null) {
-            $model["Id"] = \lib\Common::getGUID();
-            $model["Name"] = $tagsName;
-            $model["Alias"] = \lib\Common::bodautv($tagsName);
-            $tagsModel->Post($model);
-            $tagsDetail = new Model\tags\tagsDetail();
-            $modelTag["Id"] = \lib\Common::getGUID();
-            $modelTag["IdTags"] = $model["Id"];
-            $modelTag["IdNews"] = $idnews;
-            $modelTag["Name"] = $tagsName;
-            $tagsDetail->Post($modelTag);
-        } else {
-// đã có tags
-            $modelTag["Id"] = \lib\Common::getGUID();
-            $modelTag["IdTags"] = $tagsDetail["Id"];
-            $modelTag["IdNews"] = $idnews;
-            $modelTag["Name"] = $tagsName;
-            $tagsDetail->Post($modelTag);
+        try {
+            $tagsName = Model\CheckInput::ChekInput($_POST["tagsName"]);
+            $idnews = Model\CheckInput::ChekInput($_POST["idnews"]);
+            if ($tagsName == "") {
+                throw new Exception("Không có tên");
+            }
+            $tagsModel = new Model\tags\tags();
+            $tagsDetail = $tagsModel->GetByNameDetail($tagsName);
+            if ($tagsDetail == null) {
+                $model["Id"] = \lib\Common::getGUID();
+                $model["Name"] = $tagsName;
+                $model["Alias"] = \lib\Common::bodautv($tagsName);
+                $tagsModel->Post($model);
+                $modelTag["Id"] = \lib\Common::getGUID();
+                $modelTag["IdTags"] = $model["Id"];
+                $modelTag["IdNews"] = $idnews;
+                $modelTag["Name"] = $tagsName;
+                $modelTag["Alias"] = $model["Alias"];
+                $ModeltagsDetail = new Model\tags\tagsDetail();
+                $ModeltagsDetail->Post($modelTag);
+            } else {
+                // đã có tags
+                $modelTag["Id"] = \lib\Common::getGUID();
+                $modelTag["IdTags"] = $tagsDetail["Id"];
+                $modelTag["IdNews"] = $idnews;
+                $modelTag["Name"] = $tagsName;
+                $modelTag["Alias"] = \lib\Common::bodautv($tagsName);
+                $ModeltagsDetail = new Model\tags\tagsDetail();
+                $ModeltagsDetail->Post($modelTag);
+            }
+        } catch (Exception $exc) {
+            echo $exc->getMessage();
+            header('HTTP/1.1 404 Not Found');
         }
     }
 

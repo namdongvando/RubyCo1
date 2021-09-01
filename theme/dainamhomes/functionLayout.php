@@ -880,17 +880,17 @@ class functionLayout {
         <script src="/public/lazyloadimg/lazyloading.js" type="text/javascript"></script>
         <script type="text/javascript">
                             jQuery(document).ready(function() {
-                            try {
-                            Layout.init();
-                            Layout.initOWL();
-                            Layout.initTwitter();
-                            Layout.initFixHeaderWithPreHeader();
-                            Layout.initNavScrolling();
-                            Portfolio.init();
-                            ContactUs.init();
-                            } catch (e) {
-                            console.log(e);
-                            }
+                                try {
+                                    Layout.init();
+                                    Layout.initOWL();
+                                    Layout.initTwitter();
+                                    Layout.initFixHeaderWithPreHeader();
+                                    Layout.initNavScrolling();
+                                    Portfolio.init();
+                                    ContactUs.init();
+                                } catch (e) {
+                                    console.log(e);
+                                }
 
                             });</script>
         <script src="/public/bdsltp/dainam/Costomer.js?v=<?php echo filemtime('public/bdsltp/dainam/Costomer.js'); ?>" type="text/javascript"></script>
@@ -901,6 +901,7 @@ class functionLayout {
             <?php
         }
         ?>
+        <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=611f2ae4f4d23f00121c6e0b&product=sop' async='async'></script>
         <?php
     }
 

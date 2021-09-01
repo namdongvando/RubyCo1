@@ -1,9 +1,12 @@
 <?php
 $_Pages = new \Model\pages($data["pages"]);
+$indexPage = !empty($data["indexPage"]) ? intval($data["indexPage"]) : 1;
+$number = 12;
 $DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
 $Model_News = new \Model\news();
 $DanhSachTinMoiNhat = $Model_News->DanhSachTinMoiNhat(6);
-$newsByPage = $Model_News->NewsByPagesLimitNumber($_Pages->idPa, 9, FALSE);
+$tong = 0;
+$newsByPage = $Model_News->NewsByPagesLimitNumberPt($_Pages->idPa, $indexPage, $number, $tong);
 ?>
 <div class="container" >
     <div class="" >
@@ -12,10 +15,9 @@ $newsByPage = $Model_News->NewsByPagesLimitNumber($_Pages->idPa, 9, FALSE);
             <li class="active"><?php echo $_Pages->Name ?></li>
         </ul>
     </div>
-
     <div class="row">
         <div class="col-md-8" >
-            <h2 class="text-left title-pannel"><span><?php echo $_Pages->Name ?></span></h2>
+            <h1 class="text-left title-pannel"><span><?php echo $_Pages->Name ?></span></h1>
             <?php
             if ($newsByPage) {
                 foreach ($newsByPage as $news) {
@@ -41,7 +43,10 @@ $newsByPage = $Model_News->NewsByPagesLimitNumber($_Pages->idPa, 9, FALSE);
                     <?php
                 }
             }
+            $tongTrang = ceil($tong / $number);
+            echo \lib\Common::PhanTrang($tongTrang, $indexPage, "[i]");
             ?>
+
         </div>
         <div class="col-md-4" >
             <div class="">

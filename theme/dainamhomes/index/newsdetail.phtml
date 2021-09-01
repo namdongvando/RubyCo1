@@ -19,18 +19,36 @@ $_News->editNews($data["news"]);
 </div>
 <div class="Main-Content" >
     <div class="container" >
-        <h2 class="text-left text-uppercase text-bold"  ><?php echo $_News->Name ?></h2>
+        <h1 class="text-left text-uppercase text-bold" style="font-size: 24px;" ><?php echo $_News->Name ?></h1>
         <p>
             <i class="fa fa-calendar" ></i> <?php echo $_News->NgayDang() ?>
             <i class="fa fa-eye" ></i> <?php echo $_News->SoLanXem ?>
         </p>
         <hr>
         <?php echo $_News->Content; ?>
+        <hr>
+        Tags
+        <?php
+        $tagsDetail = new Model\tags\tagsDetail();
+        $tagsDetailBynews = $tagsDetail->GetByNewsId($_News->ID);
+        foreach ($tagsDetailBynews as $tagsBynews) {
+            $_tagDetai = new Model\tags\tagsDetail($tagsBynews);
+            ?>
+            <a href="<?php echo $_tagDetai->Tags()->LinkTags(); ?>" >
+                <label class="btn btn-default" >
+                    <?php echo $_tagDetai->Name; ?>
+                </label>
+            </a>
+            <?php
+        }
+        ?>
+        <hr>
+        Chia Sẻ: <div class="sharethis-inline-share-buttons"></div>
     </div>
 </div>
 <hr>
 <div class="container">
-    <h2 class="text-left title-pannel " ><span>Bài Viết Liên Quan</span></h2>
+    <h2 class="text-left title-pannel " ><span>Bài Viết Liên Quan </span></h2>
     <ul class="dsbaivietlienquan" >
         <?php
         $newsLienQuan = $_News->BaiVietLienQuan();

@@ -212,4 +212,12 @@ class news extends \Model\Database {
         return date("Y-m-d\TH:i", strtotime($this->NgayDang));
     }
 
+    function functionName($param) {
+        $sql = " SELECT
+a.* ,b.*
+   ,MAX(case when (b.ColumName='Maps') then b.ValuesText else NULL end) as 'Maps'
+        ,MAX(case when (b.ColumName='DienTich') then b.ValuesText else NULL end) as 'DienTich'
+FROM `bakcodt_duan` as a,`bakcodt_duan_options` as b where a.Id = b.IdDuan GROUP BY a.Id";
+    }
+
 }

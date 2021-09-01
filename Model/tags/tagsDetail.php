@@ -66,4 +66,13 @@ class tagsDetail extends \Model\DB implements \Model\IModelDB {
         return $this->SelectPT($where, $indexPage, $pageNumber, $total);
     }
 
+    public function GetByAlias($alias, &$total, $indexPage = 1, $pageNumber = 10) {
+        $where = "`Alias` = '{$alias}'";
+        return $this->SelectPT($where, $indexPage, $pageNumber, $total);
+    }
+
+    public function Tags() {
+        return new tags($this->IdTags);
+    }
+
 }

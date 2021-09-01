@@ -798,8 +798,18 @@ class Database extends \Model\iDatabase {
 
     public function NewsByPagesLimitNumber($pages, $number, $isobj = true) {
         if (!$isobj)
-            return $this->select(table_prefix . "news", [], "`PageID` = '{$pages}' limit 0,{$number}");
-        return $this->select(table_prefix . "news", [], "`PageID` = '{$pages}' limit 0,{$number}", "\Model\news");
+            return $this->select(table_prefix . "news", [], "`PageID` = '{$pages}' and `AnHien` > 0 limit 0,{$number}");
+        return $this->select(table_prefix . "news", [], "`PageID` = '{$pages}' and `AnHien` > 0 limit 0,{$number}", "\Model\news");
+    }
+
+    public function NewsByPagesLimitNumberPt($pages, $pageIndex, $number, &$tong) {
+        $pageIndex = ($pageIndex - 1) * $number;
+        $pageIndex = max(0, $pageIndex);
+        $where = "`PageID` = '{$pages}' and `AnHien` > 0";
+        $resCout = $this->select(table_prefix . "news", [], $where);
+        $tong = count($resCout);
+        $where = "`PageID` = '{$pages}' and `AnHien` > 0 limit {$pageIndex},{$number}";
+        return $this->select(table_prefix . "news", [], $where);
     }
 
     public function NewsById($id, $isobj = true) {

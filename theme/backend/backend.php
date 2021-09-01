@@ -278,8 +278,7 @@ class backend extends \Model\Database {
                                         $(target).attr("type", "text");
                                     }
 
-                                });
-
+                                }); 
                             });
 
                             function BrowseServerShowImg(startupPath, functionData, idimg) {

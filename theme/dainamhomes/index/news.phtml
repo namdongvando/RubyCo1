@@ -20,18 +20,19 @@ $_Pages = new Model\pages($data["pages"]);
 </div>
 <div class="Main-Content" >
     <div class="container" >
-        <h2 class="text-left text-uppercase text-bold"  ><?php echo $_News->Name ?></h2>
+        <h1 class="text-left text-uppercase text-bold"  ><?php echo $_News->Name ?></h1>
         <p>
             <i class="fa fa-calendar" ></i> <?php echo $_News->NgayDang() ?>
             <i class="fa fa-eye" ></i> <?php echo $_News->SoLanXem ?>
         </p>
         <hr>
         <?php echo $_News->Content; ?>
+
     </div>
 </div>
 <hr>
 <div class="container">
-    <h2 class="text-left title-pannel " ><span>Bài Viết Liên Quan</span></h2>
+    <h2 class="text-left title-pannel " ><span>Bài Viết Liên Quan  </span></h2>
     <ul>
         <?php
         $newsLienQuan = $_News->BaiVietLienQuan();
