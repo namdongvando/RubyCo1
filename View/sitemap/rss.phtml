@@ -1,0 +1,51 @@
+<?php
+header("Content-type: text/xml");
+echo "<?xml version='1.0' encoding='UTF-8'";
+?>
+<rss version='2.0'>
+    <channel>
+        <title>Công Ty TNHH TM DV Giải Trí RUBY</title>
+        <copyright>Copyright 2021 – Công Ty TNHH TM DV Giải Trí RUBY</copyright>
+        <link>https://rubyads.com.vn</link>
+        <lastBuildDate><?php echo date("D, d M Y  h:i:s +0700"); ?></lastBuildDate>
+        <pubDate><?php echo date("D, d M Y  h:i:s +0700"); ?></pubDate>
+        <description>__Des___</description>
+        <language>vi-vn</language>
+        <image>
+        <url><?php echo substr(BASE_URL, 0, -1); ?>__Logo___</url>
+        <title>__Title___</title>
+        <link><?php echo BASE_URL; ?></link>
+        </image>
+        <?php
+        $TinTuc = new \Model\newsService();
+        $a = $TinTuc->GetAllToRss();
+        foreach ($a as $news) {
+            $_new = new \Model\news($news);
+            ?>
+            <item>
+                <title><?php echo $_new->Name; ?></title>
+                <link><?php echo $_new->linkNewsCurent(); ?></link>
+                <image><?php echo $_new->UrlHinh(); ?></image>
+                <description><![CDATA[ <?php echo $_new->description; ?> ]]></description>
+                <category>
+                    <![CDATA[ <?php echo $_new->PageID()->Name; ?> ]]>
+                </category>
+            </item>
+            <?php
+        }
+        ?>
+
+    </channel>
+</rss>
+
+<?php
+$str = ob_get_clean();
+$Content = new \Model\Content();
+$DSOption = $Content->Contents();
+if ($DSOption)
+    foreach ($DSOption as $k => $value) {
+        $str = str_replace("__" . $k . "___", $value, $str);
+    }
+$str = \Model_SaveCache::minify_output($str);
+echo $str;
+?>

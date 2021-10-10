@@ -143,11 +143,12 @@ $config['ForceAscii'] = false;
 
 $config['XSendfile'] = false;
 
+$config['plugin_imageresize']['smallThumb'] = '180x180';
+$config['plugin_imageresize']['mediumThumb'] = '250x250';
+$config['plugin_imageresize']['largeThumb'] = '350x350';
 
 include_once "plugins/imageresize/plugin.php";
 include_once "plugins/fileeditor/plugin.php";
 include_once "plugins/zip/plugin.php";
+include_once "plugins/fileeditor/plugin.php";
 
-$config['plugin_imageresize']['smallThumb'] = '90x90';
-$config['plugin_imageresize']['mediumThumb'] = '120x120';
-$config['plugin_imageresize']['largeThumb'] = '180x180';

@@ -1,5 +1,5 @@
 $(function() {
-    $('body').bind('contextmenu cut copy paste', function(event) {
+    $('body').bind('contextmenu cut copy', function(event) {
         event.preventDefault();
     });
     $(".ajaxHtml").each(function() {
@@ -36,5 +36,9 @@ $(function() {
             $(this).height(width * 0.725);
             $(this).css("max-height", width + "px");
         });
+    });
+    $(window).scroll(function() {
+        var scrollTop = $(window).scrollTop();
+        $(".DSNhanVienHoTro").css("top", scrollTop + "px");
     });
 });

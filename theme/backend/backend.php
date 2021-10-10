@@ -118,6 +118,13 @@ class backend extends \Model\Database {
                             <li><a href="/tags/"><i class="fa fa-circle-o"></i> Tags</a></li>
                         </ul>
                     </li>
+
+                    <li class="treeview ">
+                        <a href="/mtheme/chamsockhachhang/">
+                            <i class="fa fa-list-alt"></i> <span>Danh Sách Nhân Viên</span>
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </a>
+                    </li>
                     <li class="treeview hidden ">
                         <a href="/mpage/index">
                             <i class="fa fa-list-alt"></i> <span>Quản Lý Bài Viết</span>
@@ -278,7 +285,7 @@ class backend extends \Model\Database {
                                         $(target).attr("type", "text");
                                     }
 
-                                }); 
+                                });
                             });
 
                             function BrowseServerShowImg(startupPath, functionData, idimg) {

@@ -83,7 +83,7 @@ class news extends \Model\Database {
     }
 
     function linkNewsCurent() {
-        return "/" . $this->Alias . ".html";
+        return BASE_URL . $this->Alias . ".html";
         $p = new pages();
         $_p = $p->PagesById($this->PageID, FALSE);
         $p1 = new pages($_p);
@@ -200,7 +200,7 @@ class news extends \Model\Database {
     public function UrlHinh() {
         $url = substr($this->UrlHinh, 1);
         if (file_exists($url))
-            return $this->UrlHinh;
+            return substr(BASE_URL, 0, -1) . $this->UrlHinh;
         return "/public/lawkimsa/Images/h1.jpg";
     }
 

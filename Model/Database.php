@@ -807,7 +807,9 @@ class Database extends \Model\iDatabase {
         $pageIndex = max(0, $pageIndex);
         $where = "`PageID` = '{$pages}' and `AnHien` > 0";
         $resCout = $this->select(table_prefix . "news", [], $where);
-        $tong = count($resCout);
+        $tong = 0;
+        if ($resCout != null)
+            $tong = count($resCout);
         $where = "`PageID` = '{$pages}' and `AnHien` > 0 limit {$pageIndex},{$number}";
         return $this->select(table_prefix . "news", [], $where);
     }

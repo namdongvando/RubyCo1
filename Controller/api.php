@@ -13,6 +13,12 @@ class Controller_api extends Controller_index {
         $this->param = $this->getParam();
     }
 
+    function getNhanVien() {
+        header('Content-Type: application/json');
+        $NhaVien = new Model\ChamSocKhachHang\NhanVien();
+        echo $NhaVien->GetToString();
+    }
+
     function version() {
         $a = ["Version" => session_id()];
         $a = ["Version" => time()];

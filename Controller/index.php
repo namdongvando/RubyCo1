@@ -119,7 +119,9 @@ class Controller_index extends Application {
         $news = $this->News->GetNewsByAlias($alias);
 
         if ($news == null) {
-            header('HTTP/1.1 404 Not Found');
+            \lib\Common::ToUrl("/");
+            die();
+//            header('HTTP/1.1 404 Not Found');
         }
 
         $_News = new \Model\news($news);
@@ -398,11 +400,15 @@ class Controller_index extends Application {
         Model_Seo::$key = "__Keyword___";
         Model_Seo::$Images = "__ImggesTitle___";
         $alias = Model\CheckInput::ChekInput($param[1][0]);
+        $pagesIndex = isset($param[2][0]) ? intval($param[2][0]) : 1;
+        $pagesIndex = max($pagesIndex, 1);
         $tagsDetail = new Model\tags\tags();
         $total = 0;
 //        Model\DB::$Debug = true;
         $TagsDetail = $tagsDetail->GetByAlias($alias);
         $data["TagsDetail"] = $TagsDetail;
+        $data["Alias"] = $alias;
+        $data["pagesIndex"] = $pagesIndex;
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 

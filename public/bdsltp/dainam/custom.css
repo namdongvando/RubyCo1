@@ -36,7 +36,7 @@ article.baiviet-chinh h2{
     font-weight: bold;
 }
 .d-flex .item{
-    width: 100%; 
+    width: 100%;
 }
 .d-flex{
     display: flex;
@@ -159,7 +159,7 @@ article.baiviet-chinh h2{
     text-transform: uppercase;
     padding: 11px 30px;
     color: #fff;
-
+    white-space: nowrap;
 }
 .title-pannel span:before{
     content: '';
@@ -417,6 +417,56 @@ address p{
 }
 .recent-work .recent-work-item:hover a.recent-work-description{
     background: #E6400C;
+}
+.NhanVienHoTro .phone .fa{
+    border: 1px solid #fff;
+    padding: 0px;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 25px;
+}
+.NhanVienHoTro .phone{
+    font-size: 16px;
+    margin: 0px;
+}
+.NhanVienHoTro .btn-social .fa{
+    height: 33px !important;
+    width: 33px !important;
+    line-height: 33px !important;
+}
+.NhanVienHoTro .btn-social{
+    height: 35px !important;
+    width: 35px !important;
+    line-height: 33px !important;
+}
+.NhanVienHoTro .btn-social .fa{
+    font-size: 20px;
+}
+.NhanVienHoTro .name{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+.DSNhanVienHoTro{
+    background-color: #62060a;
+    padding: 10px;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+}
+.NhanVienHoTro {
+    border: 2px dashed #fff;
+    padding: 10px;
+    padding-bottom: 0px;
+    border-radius: 1em !important;
+}
+.NhanVienHoTro .btn-social{
+    color: #fff;
 }
 @media (min-width: 1025px) and (max-width: 1205px){
     .header .header-navigation > ul > li {

@@ -1,0 +1,104 @@
+<script type="text/javascript" >
+    app.controller("chamsockhachhangController", chamsockhachhangController);
+    function chamsockhachhangController($scope, $rootScope, $http, $routeParams) {
+        $scope.CSKHInit = async  function() {
+            $http.get("/mtheme/chamsockhachhangApi").then((res) => {
+                $scope.Home = res.data;
+            });
+        }
+        $scope.AddItemGroups = function(item, Data) {
+            Data.push(item);
+        }
+        $scope.RemoveItemGroups = function(index, Data) {
+            Data.splice(index, 1);
+        }
+    }
+</script>
+<div class="clearfix" ></div>
+<div class="row " ng-controller="chamsockhachhangController" ng-init="CSKHInit()" >
+    <section class="col-md-12 " >
+        <div class="box box-solid ">
+            <div class="box-header bg-green-gradient">
+                <i class="fa fa-list"></i>
+                <h3 class="box-title">Cấu Hình Thành Phần Trang Web</h3>
+            </div>
+            <div class="box-body ">
+                <form action="" method="POST" enctype="multipart/form-data" >
+                    <textarea readonly  class="form-control" name="ConfigHome" >{{Home}}</textarea>
+                    <div style="margin-top: 20px;" class="box box-primary">
+                        <div class="box-header" >
+                            <h3 class="box-title" >Danh Sách Nhân Viên</h3>
+                            <div class="box-tools" >
+                                <button ng-click='AddItemGroups({"id": "1", "Name": "", "name": "", "phone": "", "email": "", "sky": "", "facebook": ""}, Home.NhanVien)' class="btn btn-success" type="button" >
+                                    <i class="fa fa-plus" ></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="col-md-6" ng-repeat="itemhome  in Home.NhanVien| orderBy : 'id'" >
+                                <div class="box box-primary"  >
+                                    <div class="box-header">
+                                        <h3 class="box-title">{{itemhome.name}}</h3>
+                                        <div class="box-tools">
+                                            <button ng-show="$index >= 1" ng-click="RemoveItemGroups($index, Home.NhanVien)" class="btn btn-danger" type="button" ><i class="fa fa-minus" ></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row "   >
+                                            <div class="col-md-3"  >
+                                                <label>Mã</label>
+                                                <input type="text" ng-model="itemhome.id" class="form-control" >
+                                            </div>
+                                            <div class="col-md-3"  >
+                                                <label>Họ & Tên</label>
+                                                <input type="text" ng-model="itemhome.name" class="form-control" >
+                                            </div>
+                                            <div class="col-md-3"  >
+                                                <label>
+                                                    <i class="fa fa-phone" ></i>
+                                                    SĐT
+                                                </label>
+                                                <input type="" ng-model="itemhome.phone" class="form-control" >
+                                            </div>
+                                            <div class="col-md-3"  >
+                                                <label>
+                                                    <i class="fa fa-envelope" ></i>
+                                                    Email
+                                                </label>
+                                                <input type="email" ng-model="itemhome.email" class="form-control" >
+                                            </div>
+                                            <div class="col-md-6"  >
+                                                <label>
+                                                    <i class="fa fa-skype" ></i>
+                                                    Sky
+                                                </label>
+                                                <input type="text" ng-model="itemhome.sky" class="form-control" >
+                                            </div>
+                                            <div class="col-md-6"  >
+                                                <label>
+                                                    <i class="fa fa-facebook" ></i>
+                                                    Facebook
+                                                </label>
+                                                <input type="text" ng-model="itemhome.facebook" class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="submit" name="SaveConfigHome" class="btn btn-success"  >Lưu</button>
+                    <button ng-click='AddItemGroups({"id": "1", "Name": "", "name": "", "phone": "", "email": "", "sky": "", "facebook": ""}, Home.NhanVien)' class="pull-right btn btn-success" type="button" >
+                        Thêm Nhân Viên
+                    </button>
+                </form>
+
+
+
+            </div>
+        </div>
+    </section>
+
+</div>
+

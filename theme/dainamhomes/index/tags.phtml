@@ -2,7 +2,9 @@
 $_TagsDetail = new Model\tags\tagsDetail($TagsDetail);
 //Model\DB::$Debug = true;
 $total = 0;
-$DSnews = $_TagsDetail->GetNews($total);
+$indexPage = $data["pagesIndex"];
+$pageNumber = 10;
+$DSnews = $_TagsDetail->GetNews($total, $indexPage, $pageNumber);
 $_Pages = new \Model\pages();
 $DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
 $Model_News = new \Model\news();
@@ -42,12 +44,15 @@ $DanhSachTinMoiNhat = $Model_News->DanhSachTinMoiNhat(6);
                         </div>
                         <?php
                     }
-                    ?>
-
-
-                    <?php
                 }
             }
+            ?>
+
+            <?php
+            $TongTrang = ceil($total / 10);
+            $TrangHienTai = $indexPage;
+            $DuongDan = "/" . $Alias . "/[i]";
+            echo \lib\Common::PhanTrang($TongTrang, $TrangHienTai, $DuongDan);
             ?>
         </div>
         <div class="col-md-4" >

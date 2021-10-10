@@ -22,6 +22,22 @@ class Controller_mtheme extends Controller_backend {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "theme");
     }
 
+    function chamsockhachhang() {
+        if (isset($_POST["ConfigHome"])) {
+            $data = $_POST["ConfigHome"];
+            $NhanVien = new Model\ChamSocKhachHang\NhanVien();
+            $NhanVien->Save($data);
+        }
+
+        $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "theme");
+    }
+
+    function chamsockhachhangApi() {
+        header('Content-Type: application/json');
+        $NhanVien = new Model\ChamSocKhachHang\NhanVien();
+        echo $NhanVien->GetToString();
+    }
+
     function deletemenu() {
         $this->menu->DeleteMenu($this->param[0]);
         lib\Common::ToUrl($_SERVER["HTTP_REFERER"]);
