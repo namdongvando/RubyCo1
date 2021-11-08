@@ -2,7 +2,7 @@
 
 namespace Model\News;
 
-class NewsService extends \Model\DB implements \Model\IModel {
+class NewsService extends \Model\DB {
 
     //put your code here
     public function __construct() {

@@ -9,6 +9,7 @@ $_new = new \Model\news($news);
             <div class="box-header bg-green-gradient">
                 <h3 class="box-title">Sửa Bài Viết</h3>
                 <div class="pull-right box-tools">
+                    <a href="/mnews/hoidap/<?php echo $_new->ID; ?>" class="btn btn-primary" >Tạo Câu Hỏi</a>
                     <a href="/mnews/addnews/<?php echo $_new->PageID; ?>" class="btn btn-primary" >Thêm Mới</a>
                     <a target="_blank" href="<?php echo $_new->linkPreview(); ?>" class="btn btn-primary" >Xem bài Viết</a>
                 </div><!-- /. tools -->

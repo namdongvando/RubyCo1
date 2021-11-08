@@ -220,4 +220,9 @@ a.* ,b.*
 FROM `bakcodt_duan` as a,`bakcodt_duan_options` as b where a.Id = b.IdDuan GROUP BY a.Id";
     }
 
+    function HoiDaps() {
+        $HoiDap = new News\HoiDap();
+        return $HoiDap->GetByNews($this->ID);
+    }
+
 }

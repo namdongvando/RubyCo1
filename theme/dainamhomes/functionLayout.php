@@ -381,7 +381,7 @@ class functionLayout {
         <meta property="og:locale" content="vi_VN" />
         <meta property="og:url" content="<?php echo $actual_link; ?>">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="<?php echo strip_tags(\Model_Seo::$key); ?>">
+        <meta property="og:title" content="<?php echo strip_tags(\Model_Seo::$Title); ?>">
         <meta property="og:description" content="<?php echo strip_tags(\Model_Seo::$des); ?>">
         <meta charset="utf-8">
         <meta name="google-site-verification" content="agE2_gUWWzEd2vxHZsVrGQDvEDMbspGj1F7Mr3Ay5Ko">
@@ -416,40 +416,7 @@ class functionLayout {
         <link href="/public/Phonering/phonering.css?v=<?php echo filemtime('public/Phonering/phonering.css'); ?>" rel="stylesheet" type="text/css"/>
         <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
         <link href="/public/bdsltp/dainam/style.css?v=<?php echo filemtime("public/bdsltp/dainam/style.css"); ?>" rel="stylesheet" type="text/css"/>
-        <style type="text/css" >
-            .float-contact {
-                position: fixed;
-                bottom: 20px;
-                left: 20px;
-                z-index: 99999;
-            }
-            .chat-zalo {
-                background: #0084c7;
-                border-radius: 20px;
-                padding: 8px 15px;
-                color: white;
-                font-weight: bold;
-                margin-bottom: 12px;
-            }
-            .chat-face {
-                background: #125c9e;
-                border-radius: 20px;
-                padding: 8px 15px;
-                color: white;
-                display: block;
-                margin-bottom: 6px;
-            }
-            .float-contact .hotline {
-                background: #103852 !important;
-                font-weight: bold;
-                border-radius: 20px !important;
-                padding: 8px 15px;
-                color: white;
-                display: block;
-                margin-bottom: 6px;
-            }
 
-        </style>
         <?php
     }
 
@@ -860,7 +827,6 @@ class functionLayout {
         ?>
 
         <div class="float-contact">
-            <!--            <a class="chat-zalo btn" href="http://zalo.me/__Hotline___">Chat Zalo</a>-->
             <a style="border-radius: 100px;" class="hotline btn" href="tel:__SDT___">Gọi Ngay : __Hotline___</a>
         </div>
         <script src="/public/bdsltp/public/theme/assets/plugins/jquery.min.js" type="text/javascript"></script>
@@ -892,7 +858,8 @@ class functionLayout {
                                     console.log(e);
                                 }
 
-                            });</script>
+                            });
+        </script>
         <script src="/public/bdsltp/dainam/Costomer.js?v=<?php echo filemtime('public/bdsltp/dainam/Costomer.js'); ?>" type="text/javascript"></script>
         <?php
         if (FALSE) {

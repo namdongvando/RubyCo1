@@ -1,6 +1,9 @@
 <?php
 $_News = new Model\news($data["news"]);
 ?>
+
+
+
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="/">Trang Chủ</a></li>
@@ -23,6 +26,9 @@ $_News = new Model\news($data["news"]);
             <i class="fa fa-eye" ></i> <?php echo $_News->SoLanXem ?>
         </p>
         <hr>
+        <?php
+        echo Model\MucLuc::add_table_of_content($_News->Content);
+        ?>
         <?php echo $_News->Content; ?>
     </div>
 </div>

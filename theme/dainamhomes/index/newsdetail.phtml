@@ -3,6 +3,21 @@ $_News = new Model\news($data["news"]);
 $data["news"]["SoLanXem"] = $data["news"]["SoLanXem"] + 1;
 $_News->editNews($data["news"]);
 ?>
+<script type="application/ld+json">
+    {
+    "@context": "https://schema.org/",
+    "@type": "CreativeWorkSeries",
+    "name": "<?php echo Model_Seo::$Title ?>",
+    "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "bestRating": "5",
+    "ratingCount": "100"
+    }
+    }
+
+</script>
+
 <div class="container">
     <ul class="breadcrumb">
         <li><a href="/">Trang Chủ</a></li>

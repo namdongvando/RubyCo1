@@ -1,7 +1,9 @@
 
 app.controller("homeController", homeController);
 
-function homeController($scope, $rootScope, $http, $routeParams) {
+function homeController($scope, $http, $location, $anchorScroll) {
+    $location.hash('');
+    $location.replace();
     $scope.productCatHome = [];
     var Version = window.localStorage.getItem("Version");
     $http.get("/api/version/").then(function(res) {

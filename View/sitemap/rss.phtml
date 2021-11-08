@@ -1,6 +1,6 @@
 <?php
 header("Content-type: text/xml");
-echo "<?xml version='1.0' encoding='UTF-8'";
+echo "<?xml version='1.0' encoding='UTF-8' ?>";
 ?>
 <rss version='2.0'>
     <channel>
@@ -26,7 +26,7 @@ echo "<?xml version='1.0' encoding='UTF-8'";
                 <title><?php echo $_new->Name; ?></title>
                 <link><?php echo $_new->linkNewsCurent(); ?></link>
                 <image><?php echo $_new->UrlHinh(); ?></image>
-                <description><![CDATA[ <?php echo $_new->description; ?> ]]></description>
+                <description><![CDATA[ <?php echo strip_tags($_new->description); ?> ]]></description>
                 <category>
                     <![CDATA[ <?php echo $_new->PageID()->Name; ?> ]]>
                 </category>
@@ -34,7 +34,6 @@ echo "<?xml version='1.0' encoding='UTF-8'";
             <?php
         }
         ?>
-
     </channel>
 </rss>
 

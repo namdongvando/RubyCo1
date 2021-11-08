@@ -349,5 +349,55 @@ address {
 
 }
 
-
-
+.float-contact {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 99999;
+}
+.chat-zalo {
+    background: #0084c7;
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+.chat-face {
+    background: #125c9e;
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: white;
+    display: block;
+    margin-bottom: 6px;
+}
+.float-contact .hotline {
+    background: #103852 !important;
+    font-weight: bold;
+    border-radius: 20px !important;
+    padding: 8px 15px;
+    color: white;
+    display: block;
+    margin-bottom: 6px;
+}
+.PhuLuc >ul,
+.PhuLuc >ol{
+    padding-left: 0px;
+    list-style: none;
+}
+.PhuLuc ul li h3 a,
+.PhuLuc ol li h3 a{
+    font-size: 20px;
+    font-weight: bold;
+}
+.PhuLuc > h3{
+    font-size: 18px;
+}
+.PhuLuc{
+    padding: 20px;
+    background-color: #eee;
+    border: 1px dashed #aaa;
+    display: table;
+    min-width: 350px;
+    margin-bottom: 30px;
+}

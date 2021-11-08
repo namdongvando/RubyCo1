@@ -227,6 +227,40 @@ TABLETR;
         }
     }
 
+    function xoacauhoi() {
+
+        $HoiDapService = new \Model\News\HoiDapService();
+        $id = $this->getParam()[0];
+        $HoiDapService->Delete($id);
+        \lib\Common::ToUrl($_SERVER["HTTP_REFERER"]);
+    }
+
+    function hoidap() {
+        $HoiDapService = new \Model\News\HoiDapService();
+
+        if (isset($_POST["Save"])) {
+            if ($_POST["Id"] == null) {
+                $hoiDap["NewsId"] = $_POST["IdBaiViet"];
+                $hoiDap["CauHoi"] = strip_tags($_POST["CauHoi"]);
+                $hoiDap["TraLoi"] = strip_tags($_POST["TraLoi"]);
+                $hoiDap["NgayTao"] = date("Y-m-d H:i:s");
+                $hoiDap["IsActive"] = 1;
+                $HoiDapService->Post($hoiDap);
+            } else {
+                $hoiDap = $HoiDapService->GetById($_POST["Id"]);
+                $hoiDap["NewsId"] = $_POST["IdBaiViet"];
+                $hoiDap["CauHoi"] = strip_tags($_POST["CauHoi"]);
+                $hoiDap["TraLoi"] = strip_tags($_POST["TraLoi"]);
+                $hoiDap["IsActive"] = 1;
+                $HoiDapService->Put($hoiDap);
+            }
+            unset($_POST);
+        }
+
+        $data["news"] = $this->news->NewsById($this->param[0], FALSE);
+        $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "news");
+    }
+
     function delatetags() {
         try {
             $Id = Model\CheckInput::ChekInput($_POST["id"]);

@@ -12,4 +12,5 @@ CKEDITOR.editorConfig = function(config) {
     config.filebrowserUploadUrl = '/public/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
     config.filebrowserImageUploadUrl = '/public/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
     config.filebrowserFlashUploadUrl = '/public/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+    config.extraAllowedContent = 'h2[id];h3[id];h4[id];h1[id];';
 };
