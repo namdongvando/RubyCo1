@@ -198,4 +198,11 @@ class pages extends \Model\Database {
         return $PagesService->Select($where);
     }
 
+    public function PagesTheoIds($DanhSachDichVu) {
+        $DanhSachDichVu = implode("','", $DanhSachDichVu);
+        $PagesService = new Pages\PagesService();
+        $where = "`idPa` in ('{$DanhSachDichVu}')";
+        return $PagesService->Select($where);
+    }
+
 }

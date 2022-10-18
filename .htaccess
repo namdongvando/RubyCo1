@@ -18,9 +18,9 @@ RewriteRule fonts -  [L]
 RewriteRule public -  [L]
 RewriteRule confix -  [L]
 RewriteRule robots.txt -  [L]
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
- 
+#RewriteCond %{HTTPS} off
+#RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
+
 RewriteRule ^tim-kiem index.php?ctrl=timkiem&action=index&param=$1 [L]
 RewriteRule ^category/(.*)/p-(.*)/ index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]
 RewriteRule ^category/(.*)/p-(.*) index.php?ctrl=index&action=danhmucsanpham&param=$1&pages=$2 [L]

@@ -1,7 +1,7 @@
 $(function() {
-    $('body').bind('contextmenu cut copy', function(event) {
-        event.preventDefault();
-    });
+//    $('body').bind('contextmenu cut copy', function(event) {
+//        event.preventDefault();
+//    });
     $(".ajaxHtml").each(function() {
         var datahtml = $(this).data();
         $.ajax({

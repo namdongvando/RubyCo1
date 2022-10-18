@@ -6,6 +6,7 @@ class ThemeConfig {
 
     const pathFile = ROOT_DIR . "/theme/config/homeconfig.json";
     const HomeCategory = "HomeCategory";
+    const DichVu = "DichVu";
     const GioiThieu = "GioiThieu";
     const ChungToiLaAi = "ChungToiLaAi";
     const tabhome1 = "tabhome1";

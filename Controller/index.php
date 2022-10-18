@@ -115,9 +115,7 @@ class Controller_index extends Application {
 
     function newsdetail() {
         $alias = Model\CheckInput::ChekInput($this->getParam()[0]);
-
-        $news = $this->News->GetNewsByAlias($alias);
-
+        $news = $this->News->GetNewsByAlias($alias, 1);
         if ($news == null) {
             \lib\Common::ToUrl("/");
             die();
@@ -186,8 +184,9 @@ class Controller_index extends Application {
     function pages($url) {
 
         $pages = new \Model\pages();
-        $url[1][0] = \Model\CheckInput::ChekInput($url[1][0]);
-        $_Pages = $pages->PagesByAliasIsShow($url[1][0], FALSE);
+        $alias = \Model\CheckInput::ChekInput($url[1][0]);
+        $_Pages = $pages->PagesByAliasIsShow($alias, FALSE);
+
         if ($_Pages == null) {
             header('HTTP/1.1 404 Not Found');
         }
@@ -246,6 +245,7 @@ class Controller_index extends Application {
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
         $pages = new \Model\pages();
+
         if ($url != null) {
             $_Pages = $pages->PagesByAliasIsShow($url[1][0], FALSE);
         } else {
@@ -428,5 +428,3 @@ TAGS;
     }
 
 }
-?>
-

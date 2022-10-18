@@ -83,7 +83,7 @@ class news extends \Model\Database {
     }
 
     function linkNewsCurent() {
-        return BASE_URL . $this->Alias . ".html";
+        return "/" . $this->Alias . ".html";
         $p = new pages();
         $_p = $p->PagesById($this->PageID, FALSE);
         $p1 = new pages($_p);
@@ -172,7 +172,8 @@ class news extends \Model\Database {
         $Content = explode(" ", $Content);
         $a = [];
         for ($i = 0; $i < 50; $i++) {
-            $a[] = $Content[$i];
+            if (isset($Content[$i]))
+                $a[] = $Content[$i];
         }
         return implode(" ", $a);
     }

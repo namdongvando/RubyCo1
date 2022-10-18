@@ -3,11 +3,21 @@ $adv = new \Model\adv();
 $_homeslide = $adv->AdvsByGroup("homeslide", FALSE);
 $_homeslideClass = ["carousel-item-eight", "carousel-item-nine", "carousel-item-ten"];
 $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::HomeCategory);
+
+$DichVu = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
+//var_dump($DichVu);
+$DichVus = array_map(function($item) {
+    return $item["idPa"];
+}, $DichVu);
+
+//var_dump($DichVus);
+//exit();
 ?>
 <div class="main">
     <?php
     echo theme\dainamhomes\functionLayout::HomeSlide();
-    echo theme\dainamhomes\functionLayout::DanhSachDangMuc([41, 55, 64, 66]);
+    echo theme\dainamhomes\functionLayout::DichVuCuaChungToi($DichVus);
+    echo theme\dainamhomes\functionLayout::DanhSachDangMuc([41, 55, 64, 66, 66]);
     echo theme\dainamhomes\functionLayout::MauBietThuDep();
     echo theme\dainamhomes\functionLayout::TuVanHotLine();
     echo theme\dainamhomes\functionLayout::DoiTac();

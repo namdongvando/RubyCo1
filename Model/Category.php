@@ -205,4 +205,11 @@ class Category extends \Model\Database {
         return $p->fetch2Option(["catID", "catName"]);
     }
 
+    public function DanhMucTheoDanhMucIds($DanhSachDichVu) {
+        $DanhSachDichVu = implode("','", $DanhSachDichVu);
+        echo $sql = "SELECT * FROM `" . table_prefix . "categories` where `CatID` in ('{$DanhSachDichVu}')";
+        $this->Query($sql);
+        return $this->fetchArray();
+    }
+
 }

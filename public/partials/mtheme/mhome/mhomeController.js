@@ -25,8 +25,15 @@ function mhomeController($scope, $rootScope, $http, $routeParams) {
         $scope._Categorys = res.data;
     });
 
-    $scope.addHomeCategory = function(item, type) {
+    $scope.removeItemFromList = function(index, List) {
+        List.splice(index, 1);
+    }
+    $scope.addItemToList = function(item, List) {
+        List.push(item);
+    }
 
+
+    $scope.addHomeCategory = function(item, type) {
         if (type == $scope.TypeCatId) {
             var itemdata = {
                 "Id": item.catID,

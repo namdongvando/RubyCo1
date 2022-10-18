@@ -1,4 +1,4 @@
-var Layout = function() {
+var Layout = function () {
 
     // IE mode
     var isRTL = false;
@@ -11,7 +11,7 @@ var Layout = function() {
 
     var responsiveHandlers = [];
 
-    var handleInit = function() {
+    var handleInit = function () {
 
         if ($('body').css('direction') === 'rtl') {
             isRTL = true;
@@ -31,7 +31,7 @@ var Layout = function() {
     }
 
     // runs callback functions set by App.addResponsiveHandler().
-    var runResponsiveHandlers = function() {
+    var runResponsiveHandlers = function () {
         // reinitialize other subscribed elements
         for (var i in responsiveHandlers) {
             var each = responsiveHandlers[i];
@@ -40,39 +40,39 @@ var Layout = function() {
     }
 
     // handle the layout reinitialization on window resize
-    var handleResponsiveOnResize = function() {
+    var handleResponsiveOnResize = function () {
         var resize;
         if (isIE8) {
             var currheight;
-            $(window).resize(function() {
+            $(window).resize(function () {
                 if (currheight == document.documentElement.clientHeight) {
                     return; //quite event since only body resized not window.
                 }
                 if (resize) {
                     clearTimeout(resize);
                 }
-                resize = setTimeout(function() {
+                resize = setTimeout(function () {
                     runResponsiveHandlers();
                 }, 50); // wait 50ms until window resize finishes.
                 currheight = document.documentElement.clientHeight; // store last body client height
             });
         } else {
-            $(window).resize(function() {
+            $(window).resize(function () {
                 if (resize) {
                     clearTimeout(resize);
                 }
-                resize = setTimeout(function() {
+                resize = setTimeout(function () {
                     runResponsiveHandlers();
                 }, 50); // wait 50ms until window resize finishes.
             });
         }
     }
 
-    var handleIEFixes = function() {
+    var handleIEFixes = function () {
         //fix html5 placeholder attribute for ie7 & ie8
         if (isIE8 || isIE9) { // ie8 & ie9
             // this is html5 placeholder fix for inputs, inputs with placeholder-no-fix class will be skipped(e.g: we need this for password fields)
-            jQuery('input[placeholder]:not(.placeholder-no-fix), textarea[placeholder]:not(.placeholder-no-fix)').each(function() {
+            jQuery('input[placeholder]:not(.placeholder-no-fix), textarea[placeholder]:not(.placeholder-no-fix)').each(function () {
 
                 var input = jQuery(this);
 
@@ -80,13 +80,13 @@ var Layout = function() {
                     input.addClass("placeholder").val(input.attr('placeholder'));
                 }
 
-                input.focus(function() {
+                input.focus(function () {
                     if (input.val() == input.attr('placeholder')) {
                         input.val('');
                     }
                 });
 
-                input.blur(function() {
+                input.blur(function () {
                     if (input.val() == '' || input.val() == input.attr('placeholder')) {
                         input.val(input.attr('placeholder'));
                     }
@@ -96,8 +96,8 @@ var Layout = function() {
     }
 
     // Handles scrollable contents using jQuery SlimScroll plugin.
-    var handleScrollers = function() {
-        $('.scroller').each(function() {
+    var handleScrollers = function () {
+        $('.scroller').each(function () {
             var height;
             if ($(this).attr("data-height")) {
                 height = $(this).attr("data-height");
@@ -118,8 +118,8 @@ var Layout = function() {
         });
     }
 
-    var handleSearch = function() {
-        $('.search-btn').click(function() {
+    var handleSearch = function () {
+        $('.search-btn').click(function () {
             if ($('.search-btn').hasClass('show-search-icon')) {
                 if ($(window).width() > 767) {
                     $('.search-box').fadeOut(300);
@@ -139,11 +139,11 @@ var Layout = function() {
 
         // close search box on body click
         if ($('.search-btn').size() != 0) {
-            $('.search-box, .search-btn').on('click', function(e) {
+            $('.search-box, .search-btn').on('click', function (e) {
                 e.stopPropagation();
             });
 
-            $('body').on('click', function() {
+            $('body').on('click', function () {
                 if ($('.search-btn').hasClass('show-search-icon')) {
                     $('.search-btn').removeClass("show-search-icon");
                     $('.search-box').fadeOut(300);
@@ -152,19 +152,19 @@ var Layout = function() {
         }
     }
 
-    var handleMenu = function() {
-        $(".header .navbar-toggle").click(function() {
+    var handleMenu = function () {
+        $(".header .navbar-toggle").click(function () {
             if ($(".header .navbar-collapse").hasClass("open")) {
                 $(".header .navbar-collapse").slideDown(300)
-                        .removeClass("open");
+                    .removeClass("open");
             } else {
                 $(".header .navbar-collapse").slideDown(300)
-                        .addClass("open");
+                    .addClass("open");
             }
         });
     }
-    var handleSubMenuExt = function() {
-        $(".header-navigation .dropdown").on("hover", function() {
+    var handleSubMenuExt = function () {
+        $(".header-navigation .dropdown").on("hover", function () {
             if ($(this).children(".header-navigation-content-ext").show()) {
                 if ($(".header-navigation-content-ext").height() >= $(".header-navigation-description").height()) {
                     $(".header-navigation-description").css("height", $(".header-navigation-content-ext").height() + 22);
@@ -173,8 +173,8 @@ var Layout = function() {
         });
     }
 
-    var handleSidebarMenu = function() {
-        $(".sidebar .dropdown > a").click(function(event) {
+    var handleSidebarMenu = function () {
+        $(".sidebar .dropdown > a").click(function (event) {
             if ($(this).next().hasClass('dropdown-menu')) {
                 event.preventDefault();
                 if ($(this).hasClass("collapsed") == false) {
@@ -199,7 +199,7 @@ var Layout = function() {
         }
         var test = $("input[type=checkbox]:not(.toggle), input[type=radio]:not(.toggle, .star)");
         if (test.size() > 0) {
-            test.each(function() {
+            test.each(function () {
                 if ($(this).parents(".checker").size() == 0) {
                     $(this).show();
                     $(this).uniform();
@@ -208,7 +208,7 @@ var Layout = function() {
         }
     }
 
-    var handleFancybox = function() {
+    var handleFancybox = function () {
         if (!jQuery.fancybox) {
             return;
         }
@@ -235,18 +235,18 @@ var Layout = function() {
     }
 
     // Handles Bootstrap Accordions.
-    var handleAccordions = function() {
+    var handleAccordions = function () {
 
-        jQuery('body').on('shown.bs.collapse', '.accordion.scrollable', function(e) {
+        jQuery('body').on('shown.bs.collapse', '.accordion.scrollable', function (e) {
             Layout.scrollTo($(e.target), -100);
         });
 
     }
 
     // Handles Bootstrap Tabs.
-    var handleTabs = function() {
+    var handleTabs = function () {
         // fix content height on tab click
-        $('body').on('shown.bs.tab', '.nav.nav-tabs', function() {
+        $('body').on('shown.bs.tab', '.nav.nav-tabs', function () {
             handleSidebarAndContentHeight();
         });
 
@@ -257,8 +257,8 @@ var Layout = function() {
         }
     }
 
-    var handleMobiToggler = function() {
-        $(".mobi-toggler").on("click", function(event) {
+    var handleMobiToggler = function () {
+        $(".mobi-toggler").on("click", function (event) {
             event.preventDefault();//the default action of the event will not be triggered
 
             $(".header").toggleClass("menuOpened");
@@ -266,28 +266,28 @@ var Layout = function() {
         });
     }
 
-    var handleTheme = function() {
+    var handleTheme = function () {
 
         var panel = $('.color-panel');
 
         // handle theme colors
-        var setColor = function(color) {
+        var setColor = function (color) {
             $('#style-color').attr("href", "assets/corporate/css/themes/" + color + ".css");
             $('.corporate .site-logo img').attr("src", "assets/corporate/img/logos/logo-corp-" + color + ".png");
             $('.ecommerce .site-logo img').attr("src", "assets/corporate/img/logos/logo-shop-" + color + ".png");
         }
 
-        $('.icon-color', panel).click(function() {
+        $('.icon-color', panel).click(function () {
             $('.color-mode').show();
             $('.icon-color-close').show();
         });
 
-        $('.icon-color-close', panel).click(function() {
+        $('.icon-color-close', panel).click(function () {
             $('.color-mode').hide();
             $('.icon-color-close').hide();
         });
 
-        $('li', panel).click(function() {
+        $('li', panel).click(function () {
             var color = $(this).attr("data-style");
             setColor(color);
             $('.inline li', panel).removeClass("current");
@@ -296,7 +296,7 @@ var Layout = function() {
     }
 
     return {
-        init: function() {
+        init: function () {
             // init core variables
             handleTheme();
             handleInit();
@@ -313,9 +313,9 @@ var Layout = function() {
             handleMobiToggler();
         },
 
-        initUniform: function(els) {
+        initUniform: function (els) {
             if (els) {
-                jQuery(els).each(function() {
+                jQuery(els).each(function () {
                     if ($(this).parents(".checker").size() == 0) {
                         $(this).show();
                         $(this).uniform();
@@ -326,8 +326,8 @@ var Layout = function() {
             }
         },
 
-        initTwitter: function() {
-            !function(d, s, id) {
+        initTwitter: function () {
+            !function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
                 if (!d.getElementById(id)) {
                     js = d.createElement(s);
@@ -338,7 +338,7 @@ var Layout = function() {
             }(document, "script", "twitter-wjs");
         },
 
-        initTouchspin: function() {
+        initTouchspin: function () {
             $(".product-quantity .form-control").TouchSpin({
                 buttondown_class: "btn quantity-down",
                 buttonup_class: "btn quantity-up"
@@ -347,8 +347,8 @@ var Layout = function() {
             $(".quantity-up").html("<i class='fa fa-angle-up'></i>");
         },
 
-        initFixHeaderWithPreHeader: function() {
-            jQuery(window).scroll(function() {
+        initFixHeaderWithPreHeader: function () {
+            jQuery(window).scroll(function () {
                 if (jQuery(window).scrollTop() > 37) {
                     jQuery("body").addClass("page-header-fixed");
                 } else {
@@ -357,7 +357,7 @@ var Layout = function() {
             });
         },
 
-        initNavScrolling: function() {
+        initNavScrolling: function () {
             function NavScrolling() {
                 if (jQuery(window).scrollTop() > 60) {
                     jQuery(".header").addClass("reduce-header");
@@ -368,12 +368,12 @@ var Layout = function() {
 
             NavScrolling();
 
-            jQuery(window).scroll(function() {
+            jQuery(window).scroll(function () {
                 NavScrolling();
             });
         },
 
-        initOWL: function() {
+        initOWL: function () {
             $(".owl-carousel6-brands").owlCarousel({
                 pagination: false,
                 navigation: true,
@@ -427,7 +427,7 @@ var Layout = function() {
 
             $(".owl-carousel3").owlCarousel({
                 pagination: false,
-                navigation: true,
+                navigation: false,
                 items: 3, loop: true,
                 autoplay: true, autoplayTimeout: 1000,
                 addClassActive: true,
@@ -463,26 +463,26 @@ var Layout = function() {
             });
         },
 
-        initImageZoom: function() {
-            $('.product-main-image').zoom({url: $('.product-main-image img').attr('data-BigImgSrc')});
+        initImageZoom: function () {
+            $('.product-main-image').zoom({ url: $('.product-main-image img').attr('data-BigImgSrc') });
         },
 
-        initSliderRange: function() {
+        initSliderRange: function () {
             $("#slider-range").slider({
                 range: true,
                 min: 0,
                 max: 500,
                 values: [50, 250],
-                slide: function(event, ui) {
-                    $("#amount").val("$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ]);
+                slide: function (event, ui) {
+                    $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
                 }
             });
             $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-                    " - $" + $("#slider-range").slider("values", 1));
+                " - $" + $("#slider-range").slider("values", 1));
         },
 
         // wrapper function to scroll(focus) to an element
-        scrollTo: function(el, offeset) {
+        scrollTo: function (el, offeset) {
             var pos = (el && el.size() > 0) ? el.offset().top : 0;
             if (el) {
                 if ($('body').hasClass('page-header-fixed')) {
@@ -497,16 +497,16 @@ var Layout = function() {
         },
 
         //public function to add callback a function which will be called on window resize
-        addResponsiveHandler: function(func) {
+        addResponsiveHandler: function (func) {
             responsiveHandlers.push(func);
         },
 
-        scrollTop: function() {
+        scrollTop: function () {
             App.scrollTo();
         },
 
-        gridOption1: function() {
-            $(function() {
+        gridOption1: function () {
+            $(function () {
                 $('.grid-v1').mixitup();
             });
         }

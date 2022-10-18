@@ -143,6 +143,43 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                         </div>
 
                     </div>
+                    <div class="box box-solid ">
+                        <div class="box-header ">
+                            <i class="fa fa-list"></i>
+                            <h3 class="box-title">Danh sách dịch vụ</h3>
+                        </div>
+                        <div class="box-body connectedSortable">
+                            <div class="col-md-6" >
+                                <div class="col-md-12" ng-repeat="item in Home.DichVu track by $index" >
+                                    <button type="button" class="btn btn-xs" ng-click="removeItemFromList($index, Home.DichVu)"  >
+                                        <i class="fa fa-minus" ></i>
+                                    </button>
+                                    <label>
+                                        {{$index + 1}} |
+                                        {{item.Name}}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <div class="form-group hidden">
+                                    <label for="">Danh Mục Sản Phẩm</label>
+                                    <input ng-model="seach"  type="text" class="form-control"  >
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addItemToList(item, Home.DichVu)"  ng-repeat="item in _Categorys| filter :seach"  >
+                                        {{item.catName}}
+                                    </button>
+                                </div>
+                                <div class="form-group  ">
+                                    <label for="">Danh Mục Bài Viết </label>
+                                    <input ng-model="seachdm"  type="text" class="form-control"  >
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addItemToList(item, Home.DichVu)"  ng-repeat="item in ListPages| filter :seachdm"  >
+                                        {{item.Name}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <button type="submit" name="SaveConfigHome" class="btn btn-success"  >Lưu</button>
                 </form>
 

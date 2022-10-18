@@ -745,7 +745,16 @@ class Database extends \Model\iDatabase {
         return $this->select(table_prefix . "news", [], ' `AnHien` > 0 and `NgayDang` < NOW() ORDER BY `Stt` DESC');
     }
 
-    function GetNewsByAlias($alias) {
+    function GetNewsByAlias($alias, $ishow = 0) {
+//        reutur array
+        $where = "`Alias` = '{$alias}' and `NgayDang` < NOW() and `AnHien` = '{$ishow}' ";
+        $a = $this->select(table_prefix . "news", [], $where);
+        if ($a)
+            return $a[0];
+        return null;
+    }
+
+    function GetNewsByAliasIsShow($alias) {
 //        reutur array
         $where = "`Alias` = '{$alias}' and `NgayDang` < NOW() ";
         $a = $this->select(table_prefix . "news", [], $where);

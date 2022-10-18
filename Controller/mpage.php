@@ -18,6 +18,8 @@ class Controller_mpage extends Controller_backend {
             "link" => "/mpage/"
         ];
         \Model\Breadcrumb::setMenuAcrive("QuanLyBaiViet");
+        $path = "/public/img/";
+        Model\pathCkFinder::set($path);
     }
 
     function index() {

@@ -2,15 +2,46 @@
 $adv = new \Model\adv();
 $_homeslide = $adv->AdvsByGroup("homeslide", FALSE);
 $_homeslideClass = ["carousel-item-eight", "carousel-item-nine", "carousel-item-ten"];
-$HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::HomeCategory);
+$HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
 ?>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "CreativeWorkSeries",
+        "name": "<?php echo Model_Seo::$Title ?>",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "ratingCount": "1000"
+        }
+    }
+</script>
 <div class="main">
     <?php
     echo theme\dainamhomes\functionLayout::HomeSlide();
-    echo theme\dainamhomes\functionLayout::DanhSachDangMuc([41, 55, 64, 66]);
-    echo theme\dainamhomes\functionLayout::MauBietThuDep();
-    echo theme\dainamhomes\functionLayout::TuVanHotLine();
-    echo theme\dainamhomes\functionLayout::DoiTac();
-    echo theme\dainamhomes\functionLayout::TinTuc();
     ?>
+    <div class=" margin-bottom-40 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <?php
+                    $HomeCategoryID = array_map(function ($item) {
+                        return $item["idPa"];
+                    }, $HomeCategory);
+                    echo theme\dainamhomes\functionLayout::DanhSachDangMuc1($HomeCategoryID);
+                    // echo theme\dainamhomes\functionLayout::MauBietThuDep();
+                    // echo theme\dainamhomes\functionLayout::TuVanHotLine();
+                    // echo theme\dainamhomes\functionLayout::DoiTac();
+                    // echo theme\dainamhomes\functionLayout::TinTuc();
+                    ?>
+                </div>
+                <div class="col-md-4">
+                    <?php
+                    include "right.phtml";
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
