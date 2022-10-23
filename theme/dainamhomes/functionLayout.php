@@ -430,7 +430,7 @@ class functionLayout
         <link href="/public/Phonering/phonering.css?v=<?php echo filemtime('public/Phonering/phonering.css'); ?>" rel="stylesheet" type="text/css" />
         <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
         <link href="/public/bdsltp/dainam/style.css?v=<?php echo filemtime("public/bdsltp/dainam/style.css"); ?>" rel="stylesheet" type="text/css" />
-
+        <link href="/public/wowjs/animate.min.css<?php echo filemtime("public/wowjs/animate.min.css"); ?>" rel="stylesheet" type="text/css" />
 
     <?php
     }
@@ -814,27 +814,21 @@ class functionLayout
         </div>
         <div class="footer">
             <div class="container">
-                <div class="row">
-                    <!-- BEGIN COPYRIGHT -->
+                <div class="row"> 
                     <div class="col-md-4 col-sm-4 padding-top-10">
                         2015 © . ALL Rights Reserved.
-                    </div>
-                    <!-- END COPYRIGHT -->
-                    <!-- BEGIN PAYMENTS -->
+                    </div> 
                     <div class="col-md-4 col-sm-4">
 
-                    </div>
-                    <!-- END PAYMENTS -->
-                    <!-- BEGIN POWERED -->
+                    </div> 
                     <div class="col-md-4 col-sm-4 text-right">
                         <p class="powered">nguyenvando.net</p>
-                    </div>
-                    <!-- END POWERED -->
+                    </div> 
                 </div>
             </div>
         </div>
 
-        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="hidden-xs  phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
+        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="hidden hidden-xs  phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
             <a href="https://m.me/__messengerID___" class="pps-btn-img" title="Liên hệ">
@@ -843,7 +837,7 @@ class functionLayout
                 </div>
             </a>
         </div>
-        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class="hidden-xs phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
+        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class="hidden hidden-xs phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
             <a href="https://zalo.me/__ContactZalo___" class="pps-btn-img" title="Zalo">
@@ -910,8 +904,10 @@ class functionLayout
         <script src="/public/lazyloadimg/lazyloading.js" type="text/javascript"></script>
 
         <script src="/public/mucluc.js" type="text/javascript"></script>
+        <script src="/public/wowjs/wow.js" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(document).ready(function() {
+                
                 try {
                     Layout.init();
                     Layout.initOWL();
@@ -920,6 +916,7 @@ class functionLayout
                     Layout.initNavScrolling();
                     Portfolio.init();
                     ContactUs.init();
+                    new WOW().init();
                 } catch (e) {
                     console.log(e);
                 }
@@ -1510,9 +1507,9 @@ class functionLayout
     }
     public static function HomeSlide1()
     {
-        ?>
+    ?>
 
-        <?php
+    <?php
     }
     public static function GioiThieuNgan()
     {

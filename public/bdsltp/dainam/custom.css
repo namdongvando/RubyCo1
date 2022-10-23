@@ -583,6 +583,11 @@ address p {
     box-shadow: 0 0 2px #ccc;
 }
 
+.title-baiviet:hover {
+    text-decoration: none;
+    color: #ccc !important;
+}
+
 .title-baiviet {
     height: 65px;
     display: block;
@@ -840,7 +845,7 @@ address p {
 
 .slider_home_item .title-baiviet h3 {
     font-size: 25px;
-    font-weight: bold;
+    font-weight: normal;
     color: #000;
 }
 
@@ -861,4 +866,32 @@ address p {
 
 .slider_home_item {
     position: relative;
+}
+
+.octagon {
+    width: 100px;
+    height: 110px;
+    position: relative;
+    background: #0062af;
+}
+
+.octagon::before {
+    width: 100px;
+    height: 0;
+    position: absolute;
+    content: "";
+    border-bottom: 30px solid #0062af;
+    border-left: 50px solid #fff;
+    border-right: 50px solid #fff;
+}
+
+.octagon::after {
+    width: 100px;
+    height: 0;
+    margin: 80px 0 0 0;
+    position: absolute;
+    content: "";
+    border-top: 30px solid #0062af;
+    border-left: 50px solid #fff;
+    border-right: 50px solid #fff;
 }
