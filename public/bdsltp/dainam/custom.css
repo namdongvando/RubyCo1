@@ -485,9 +485,25 @@ address p {
     font-weight: bold;
 }
 
+.fullscreem {
+    width: 100%;
+    min-height: 80ch;
+}
+
+.pt-25 {
+    padding-top: 10%;
+}
+
+.slider_home {
+    background-image: url('/public/banner/header-bg.jpg');
+    background-color: #eab60b;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .header {
-    box-shadow: 0 0px 10px #13313c;
-    margin-bottom: 15px;
+    /* box-shadow: 0 0px 10px #13313c; */
+    margin-bottom: 0px;
 }
 
 .pre-footer a {
@@ -592,7 +608,7 @@ address p {
     border: 2px dashed #fff;
     padding: 10px;
     padding-bottom: 0px;
-    border-radius: 1em !important;
+    border-radius: 0.5em !important;
 }
 
 .NhanVienHoTro .btn-social {
@@ -821,3 +837,28 @@ address p {
 }
 
 .danhsachdichvu {}
+
+.slider_home_item .title-baiviet h3 {
+    font-size: 25px;
+    font-weight: bold;
+    color: #000;
+}
+
+.slider_home_item .item-content img {
+    margin: auto;
+}
+
+.slider_home_item .title-baiviet {
+    position: absolute;
+    top: 35px;
+    left: 10px;
+    text-indent: 20px;
+}
+
+.item-content {
+    box-shadow: 0 0 0 #fff;
+}
+
+.slider_home_item {
+    position: relative;
+}

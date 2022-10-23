@@ -1508,7 +1508,12 @@ class functionLayout
         $str = ob_get_clean();
         return $str;
     }
+    public static function HomeSlide1()
+    {
+        ?>
 
+        <?php
+    }
     public static function GioiThieuNgan()
     {
         $Pages = new \Model\pages(self::getThemeConfig(self::GioiThieuNgan));
