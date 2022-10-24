@@ -39,7 +39,7 @@ $(function () {
     });
     $(window).scroll(function () {
         var scrollTop = $(window).scrollTop();
-        console.log(scrollTop);
+        // console.log(scrollTop);
         if (scrollTop > 300) {
             var top = scrollTop - 350;
             $(".DSNhanVienHoTro").css("top", top + "px");

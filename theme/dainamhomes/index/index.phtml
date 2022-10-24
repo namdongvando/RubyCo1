@@ -22,15 +22,14 @@ $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichV
         <div class="container">
             <div class="row pt-25">
                 <div class="col-md-4">
-                    <div class="slider_home_item"> 
+                    <div class="slider_home_item">
                         <div class="item-content">
                             <em>
-                               
-                                <a class="" href="">
+                                <a class="/page-thi-cong/" href="">
                                     <img src="/public/banner/banner1.png" data-wow-duration="1s" alt="Thi Công" class="wow slideInRight img-responsive">
                                 </a>
                             </em>
-                            <a class="title-baiviet" href="#">
+                            <a class="title-baiviet" href="/page-thi-cong/">
                                 <h3 class="wow slideInLeft" data-wow-duration="2s">Thi Công</h3>
                             </a>
                         </div>
@@ -40,26 +39,25 @@ $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichV
                     <div class="slider_home_item">
                         <div class="item-content">
                             <em>
-                                <a class="" href="">
+                                <a class="" href="/page-in-an/">
                                     <img src="/public/banner/banner2.png" data-wow-duration="1s" alt="In Ấn" class="wow slideInRight img-responsive">
                                 </a>
                             </em>
-                            <a class="title-baiviet" href="#">
+                            <a class="title-baiviet" href="/page-in-an/">
                                 <h3 class="wow slideInLeft" data-wow-duration="2s">In Ấn</h3>
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <!-- <div class="octagon"></div> -->
                     <div class="slider_home_item">
                         <div class="item-content text-center">
                             <em>
-                                <a class="" href="">
+                                <a class="" href="/page-to-chuc-su-kien/">
                                     <img src="/public/banner/banner3.png" data-wow-duration="1s" alt="Tổ chức sự kiện" class="wow slideInRight img-responsive">
                                 </a>
                             </em>
-                            <a class="title-baiviet" href="#">
+                            <a class="title-baiviet" href="/page-to-chuc-su-kien/">
                                 <h3 class="wow slideInLeft" data-wow-duration="2s">Tổ Chức <br> Sự Kiện</h3>
                             </a>
                         </div>
@@ -91,4 +89,7 @@ $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichV
             </div>
         </div>
     </div>
+    <?php
+    echo theme\dainamhomes\functionLayout::TinTuc();
+    ?>
 </div>
