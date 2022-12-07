@@ -1,10 +1,12 @@
 <?php
 
-class Controller_mcategory extends Controller_backend {
+class Controller_mcategory extends Controller_backend
+{
 
     public $Category;
 
-    function __construct() {
+    function __construct()
+    {
         $this->Category = new Model\Category();
         parent::__construct();
         ini_set('display_errors', 1);
@@ -13,7 +15,8 @@ class Controller_mcategory extends Controller_backend {
         Model\Breadcrumb::setMenuAcrive(__CLASS__);
     }
 
-    function index() {
+    function index()
+    {
         $this->Bread[] = [
             "title" => "Danh Mục Sản Phẩn",
             "link" => "/mpage/"
@@ -23,12 +26,14 @@ class Controller_mcategory extends Controller_backend {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function detail() {
+    function detail()
+    {
 
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function editorderby() {
+    function editorderby()
+    {
 
         if (isset($_POST["saveOrderBy"])) {
             foreach ($_POST["orderBy"] as $id => $value) {
@@ -40,7 +45,8 @@ class Controller_mcategory extends Controller_backend {
         $this->Category->_header("/mcategory/index");
     }
 
-    function edit() {
+    function edit()
+    {
         if (isset($_POST["SuaDanhMuc"])) {
             $Cat = $this->Category->Category4Id($_POST["catID"], FALSE);
             $_cat = new \Model\Category($Cat);
@@ -55,10 +61,10 @@ class Controller_mcategory extends Controller_backend {
             if ($kt > 0) {
                 $Cat["Link"] = $_cat->linkCurentCategory();
                 $this->Category->EditCategory($Cat);
-//                $this->Category->_header("/mcategory/detail/" . $_POST["catID"]);
+                //                $this->Category->_header("/mcategory/detail/" . $_POST["catID"]);
                 lib\Common::ToUrl($_SERVER["HTTP_REFERER"]);
             } else {
-                $M_error = new \Model\Error();
+                $M_error = new \Model\Error([]);
                 $M_error->setError($this->Category->getError($kt), 'danger');
             }
         }
@@ -66,7 +72,8 @@ class Controller_mcategory extends Controller_backend {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function copy() {
+    function copy()
+    {
 
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
@@ -87,14 +94,15 @@ class Controller_mcategory extends Controller_backend {
                 $Cat["Link"] = $_cat->linkCurentCategory();
                 $this->Category->EditCategory($Cat);
             } else {
-                $M_error = new \Model\Error();
+                $M_error = new \Model\Error([]);
                 $M_error->setError($this->Category->getError($kt), 'danger');
             }
         }
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function add() {
+    function add()
+    {
 
         if (isset($_POST["ThemDanhMuc"])) {
             $Cat["catName"] = $this->Category->Bokytusql($_POST["catName"]);
@@ -120,43 +128,47 @@ class Controller_mcategory extends Controller_backend {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function delete() {
+    function delete()
+    {
         if (isset($_POST["xoadanhmuc"])) {
             $this->Category->DeleteCategory($_POST["catID"]);
             $this->Category->_header("/mcategory/index");
         }
     }
 
-    function deleteid() {
+    function deleteid()
+    {
         $id = $this->getParam()[0];
         $this->Category->DeleteCategory($id);
         $this->Category->_header("/mcategory/index");
     }
 
-    function categorys() {
+    function categorys()
+    {
 
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function getCategoryByID() {
+    function getCategoryByID()
+    {
         $a = $this->Category->Category4Id($this->param[0], FALSE);
         echo $this->Category->_encode($a);
     }
 
-    function getCategorys() {
+    function getCategorys()
+    {
         $a = $this->Category->getCategorys();
         echo $this->Category->_encode($a);
     }
 
-    function import() {
+    function import()
+    {
 
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function catchil() {
+    function catchil()
+    {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
-
 }
-
-?>

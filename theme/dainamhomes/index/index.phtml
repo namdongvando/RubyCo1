@@ -3,6 +3,10 @@ $adv = new \Model\adv();
 $_homeslide = $adv->AdvsByGroup("homeslide", FALSE);
 $_homeslideClass = ["carousel-item-eight", "carousel-item-nine", "carousel-item-ten"];
 $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
+$DichVus = array_map(function ($item) {
+    return $item["idPa"];
+}, $HomeCategory);
+
 ?>
 <script type="application/ld+json">
     {
@@ -18,7 +22,8 @@ $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichV
     }
 </script>
 <div class="main">
-    <div class=" margin-bottom-40 fullscreem slider_home " style="">
+
+    <div class="  fullscreem slider_home ">
         <div class="container">
             <div class="row pt-25">
                 <div class="col-md-4">
@@ -66,30 +71,11 @@ $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichV
             </div>
         </div>
     </div>
-    <div class=" margin-bottom-40 ">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <?php
-                    $HomeCategoryID = array_map(function ($item) {
-                        return $item["idPa"];
-                    }, $HomeCategory);
-                    echo theme\dainamhomes\functionLayout::DanhSachDangMuc1($HomeCategoryID);
-                    // echo theme\dainamhomes\functionLayout::MauBietThuDep();
-                    // echo theme\dainamhomes\functionLayout::TuVanHotLine();
-                    // echo theme\dainamhomes\functionLayout::DoiTac();
-                    // echo theme\dainamhomes\functionLayout::TinTuc();
-                    ?>
-                </div>
-                <div class="col-md-4">
-                    <?php
-                    include "right.phtml";
-                    ?>
-                </div>
-            </div>
-        </div>
+    <div class="pt-25">
+        <?php
+        echo theme\dainamhomes\functionLayout::DanhSachDangMuc($DichVus);
+        echo theme\dainamhomes\functionLayout::TinTuc();
+        ?>
     </div>
-    <?php
-    echo theme\dainamhomes\functionLayout::TinTuc();
-    ?>
+
 </div>

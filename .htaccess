@@ -30,6 +30,5 @@ RewriteRule ^page-(.*)/(.*).html index.php [L]
 RewriteRule ^page-(.*).html index.php?ctrl=index&action=pagesdetail&param=$1 [L]
 RewriteRule (.*)\.html  index.php?ctrl=index&action=newsdetail&param=$1 [L]
 
-RewriteRule (.*)  index.php  [L]
-
+RewriteRule (.*)  index.php  [L] 
 ErrorDocument 404 loi404.php

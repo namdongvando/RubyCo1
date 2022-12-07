@@ -40,12 +40,12 @@ $(function () {
     $(window).scroll(function () {
         var scrollTop = $(window).scrollTop();
         // console.log(scrollTop);
-        if (scrollTop > 300) {
-            var top = scrollTop - 350;
-            $(".DSNhanVienHoTro").css("top", top + "px");
+        // if (scrollTop > 300) {
+        //     var top = scrollTop - 350;
+        //     $(".DSNhanVienHoTro").css("top", top + "px");
 
-        } else {
-            $(".DSNhanVienHoTro").css("top", "0px");
-        }
+        // } else {
+        //     $(".DSNhanVienHoTro").css("top", "0px");
+        // }
     });
 });

@@ -38,7 +38,10 @@ article.baiviet-chinh h2 {
 }
 
 .newstitle {
+    font-size: 14px;
     font-weight: bold;
+    margin-top: 10px;
+    height: 40px;
 }
 
 .text-bold {
@@ -599,10 +602,45 @@ address p {
     padding: 4px;
 }
 
+.DSNhanVienHoTro .panel-title {
+    font-weight: bold;
+}
+
+
+.DSNhanVienHoTro .btn-actions .btn {
+    background-color: #62060a; 
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+.btn-lienhe:hover,
+.btn-lienhe {
+    background-color: #fff;
+    position: fixed;
+    color: #000;
+    font-weight: bold;
+    z-index: 9999;
+    bottom: 0px;
+    right: 80px;
+    padding: 8px 40px;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+    border-top: 2px solid #fff !important;
+    border-left: 2px solid #fff !important;
+    border-right: 2px solid #fff !important;
+}
+
+.DSNhanVienHoTro .btn-actions {
+    margin-top: -43px;
+
+}
+
 .DSNhanVienHoTro {
-    background-color: #62060a;
+    border: 2px solid #62060a;
+    border-radius: 10px !important;
+    background-color: #fff;
     padding: 10px;
-    color: #fff;
+    color: #62060a;
     position: absolute;
     width: 100%;
     top: 0px;
@@ -610,14 +648,20 @@ address p {
 }
 
 .NhanVienHoTro {
-    border: 2px dashed #fff;
+    border: 2px dashed #62060a;
     padding: 10px;
     padding-bottom: 0px;
     border-radius: 0.5em !important;
 }
 
+.NhanVienHoTro .phone {
+    font-weight: bold;
+}
+
 .NhanVienHoTro .btn-social {
-    color: #fff;
+    color: #62060a;
+    border: 1px solid #62060a;
+    border-radius: 4px !important;
 }
 
 @media (min-width: 1025px) and (max-width: 1205px) {

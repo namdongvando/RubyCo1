@@ -3,56 +3,73 @@ $a = new Model_Adapter();
 $news = $data["news"];
 $_new = new \Model\news($news);
 ?>
-<div class="row " ng-controller="editnewsController" ng-init="editnewsInit('<?php echo $_new->ID ?>')" >
-    <section class="col-md-12" >
+<div class="row " ng-controller="editnewsController" ng-init="editnewsInit('<?php echo $_new->ID ?>')">
+    <section class="col-md-12">
         <div class="box box-solid ">
             <div class="box-header bg-green-gradient">
                 <h3 class="box-title">Sửa Bài Viết</h3>
                 <div class="pull-right box-tools">
-                    <a href="/mnews/hoidap/<?php echo $_new->ID; ?>" class="btn btn-primary" >Tạo Câu Hỏi</a>
-                    <a href="/mnews/addnews/<?php echo $_new->PageID; ?>" class="btn btn-primary" >Thêm Mới</a>
-                    <a target="_blank" href="<?php echo $_new->linkPreview(); ?>" class="btn btn-primary" >Xem bài Viết</a>
+                    <a href="/mnews/hoidap/<?php echo $_new->ID; ?>" class="btn btn-primary">Tạo Câu Hỏi</a>
+                    <a href="/mnews/addnews/<?php echo $_new->PageID; ?>" class="btn btn-primary">Thêm Mới</a>
+                    <a target="_blank" href="<?php echo $_new->linkPreview(); ?>" class="btn btn-primary">Xem bài Viết</a>
                 </div><!-- /. tools -->
             </div><!-- /.box-header -->
             <div class="box-body no-padding ">
-                <div >
-                    <form onsubmit="return window.confirm('Bạn có muốn Lưu Không?')" action="/mnews/editnews" method="POST" enctype="multipart/form-data" >
-                        <div class="col-md-9 " >
+                <div>
+                    <form onsubmit="return window.confirm('Bạn có muốn Lưu Không?')" action="/mnews/editnews" method="POST" enctype="multipart/form-data">
+                        <div class="col-md-9 ">
                             <div class="form-group">
                                 <label for="">__Name___</label>
-                                <input type="text" value="<?php echo $_new->Name ?>" class="form-control" name="Name" >
+                                <input type="text" value="<?php echo $_new->Name ?>" class="form-control" name="Name">
+                            </div>
+                            <div clsass="form-group ">
+                                <label for="">link </label> <a href="<?php echo $_new->linkNewsCurent(); ?>">đến liên kết</a>
+                                <div class="d-flex">
+                                    <input disabled type="text" value="<?php echo $_new->linkNewsCurent(); ?>" class="form-control" name="Alias">
+                                </div>
                             </div>
                             <div clsass="form-group ">
                                 <label for="">Permalink</label>
                                 <div class="d-flex">
-                                    <input type="text" id="Alias" value="<?php echo $_new->Alias ?>" class="form-control"  name="Alias" >
-                                    <button data-target="#Alias" data-target-type="val" type="button" data-url="/mnews/createAlias/<?php echo $_new->ID; ?>" class="btn AjaxBtnResetContent btn-primary"  > Tạo Tự Động</button>
+                                    <input id="Alias" type="text" value="<?php echo $_new->Alias ?>" class="form-control" name="Alias">
+                                    <button data-target="#Alias" data-target-type="val" type="button" data-url="/mnews/createAlias/<?php echo $_new->ID; ?>" class="btn AjaxBtnResetContent btn-primary"> Tạo Tự Động</button>
                                 </div>
+                            </div>
+                            <div clsass="form-group ">
+                                <label for="">Redirect Link</label>
+                                <span style="color: #aaa;">có thể để fullLink hoặc </span>
+                                <span style="color: #aaa;">link trên trang bắt đầu là "/"</span>
+                                <span style="color: red;">không chuyển hướng thì bỏ trống</span>
+                                <div class="d-flex">
+                                    <input type="text" value="<?php echo $_new->RedirectLink ?>" class="form-control" name="RedirectLink">
+
+                                </div>
+
                             </div>
 
                             <div class="form-group">
                                 <label for="">__Summary___</label>
-                                <textarea  class="editorMini" id="Summary" name="Summary" ><?php echo $_new->Summary ?></textarea>
+                                <textarea class="editorMini" id="Summary" name="Summary"><?php echo $_new->Summary ?></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="">__Content___</label>
-                                <textarea  class="editor" id="Content" name="Content" ><?php echo $_new->Content ?></textarea>
+                                <textarea class="editor" id="Content" name="Content"><?php echo $_new->Content ?></textarea>
 
                             </div>
                         </div>
-                        <div class="col-md-3 " >
+                        <div class="col-md-3 ">
                             <div class="form-group ">
                                 <label for=""></label>
-                                <button type="submit" class="btn btn-success btn-block" name="EditNews" >Lưu</button>
+                                <button type="submit" class="btn btn-success btn-block" name="EditNews">Lưu</button>
                             </div>
                             <div class="panel-group">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#HienThi">Hiển Thị</a>
-                                            <a class="pull-right" data-toggle="collapse" href="#HienThi" >
-                                                <i class="fa fa-bars" ></i>
+                                            <a class="pull-right" data-toggle="collapse" href="#HienThi">
+                                                <i class="fa fa-bars"></i>
                                             </a>
                                         </h4>
                                     </div>
@@ -60,45 +77,45 @@ $_new = new \Model\news($news);
                                         <div class="col-md-12">
                                             <div class="form-group hidden">
                                                 <label for="">__ID___</label>
-                                                <input type="text" value="<?php echo $_new->ID ?>" class="form-control" name="ID" >
+                                                <input type="text" value="<?php echo $_new->ID ?>" class="form-control" name="ID">
                                             </div>
                                             <div class="form-group">
                                                 <label for="">__PageID___</label>
-                                                <select name="PageID" class="form-control" >
-                                                    <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}" >{{optionPage.Name}}</option>
+                                                <select name="PageID" class="form-control">
+                                                    <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}">{{optionPage.Name}}</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">__AnHien___</label>
-                                                <select required="required" class="form-control" ng-model="_New.AnHien"  name="AnHien" >
-                                                    <option value="1" >Hiện</option>
-                                                    <option value="0" >Ẩn</option>
+                                                <select required="required" class="form-control" ng-model="_New.AnHien" name="AnHien">
+                                                    <option value="1">Hiện</option>
+                                                    <option value="0">Ẩn</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">__TinNoiBat___</label>
-                                                <select required="required" class="form-control" ng-model="_New.TinNoiBat"  name="TinNoiBat" >
-                                                    <option value="1" >Nổi Bật</option>
-                                                    <option value="0" >Không Nổi Bật</option>
+                                                <select required="required" class="form-control" ng-model="_New.TinNoiBat" name="TinNoiBat">
+                                                    <option value="1">Nổi Bật</option>
+                                                    <option value="0">Không Nổi Bật</option>
                                                 </select>
                                             </div>
                                             <div class="form-group hidden">
                                                 <label for="">__SoLanXem___</label>
-                                                <input type="text" value="{{_New.SoLanXem}}" class="form-control" name="SoLanXem" >
+                                                <input type="text" value="{{_New.SoLanXem}}" class="form-control" name="SoLanXem">
                                             </div>
                                             <div class="form-group">
                                                 <label for="">__Stt___</label>
-                                                <input type="text" value="{{_New.Stt}}" class="form-control" name="Stt" >
+                                                <input type="text" value="{{_New.Stt}}" class="form-control" name="Stt">
                                             </div>
 
                                             <div class="form-group ">
                                                 <label for="">Ngày Đăng </label>
-                                                <label class="pull-right" data-toggle="tooltip" title="Có Thể Hẹn Ngày Public Bài Viết" >
-                                                    <i class="fa fa-info-circle" ></i>
+                                                <label class="pull-right" data-toggle="tooltip" title="Có Thể Hẹn Ngày Public Bài Viết">
+                                                    <i class="fa fa-info-circle"></i>
                                                 </label>
-                                                <input type="datetime-local" value="<?php echo $_new->NgayDangEdit(); ?>" class="form-control" name="NgayDang" >
+                                                <input type="datetime-local" value="<?php echo $_new->NgayDangEdit(); ?>" class="form-control" name="NgayDang">
                                                 <label>
-                                                    <input name="TuDongCapNhat" type="checkbox" >
+                                                    <input name="TuDongCapNhat" type="checkbox">
                                                     Ngày Tự Cập Nhật Khi Sửa
                                                 </label>
                                             </div>
@@ -116,8 +133,8 @@ $_new = new \Model\news($news);
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#seoTag">SEO Content</a>
-                                            <a class="pull-right" data-toggle="collapse" href="#seoTag" >
-                                                <i class="fa fa-bars" ></i>
+                                            <a class="pull-right" data-toggle="collapse" href="#seoTag">
+                                                <i class="fa fa-bars"></i>
                                             </a>
                                         </h4>
                                     </div>
@@ -125,15 +142,15 @@ $_new = new \Model\news($news);
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">__title___</label>
-                                                <textarea class="form-control" name="title"  ><?php echo $_new->title ?></textarea>
+                                                <textarea class="form-control" name="title"><?php echo $_new->title ?></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">__keyword___</label>
-                                                <textarea class="form-control" name="keyword"  ><?php echo $_new->keyword ?></textarea>
+                                                <textarea class="form-control" name="keyword"><?php echo $_new->keyword ?></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="">__description___</label>
-                                                <textarea class="form-control" name="description"  ><?php echo $_new->description ?></textarea>
+                                                <textarea class="form-control" name="description"><?php echo $_new->description ?></textarea>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
@@ -146,15 +163,15 @@ $_new = new \Model\news($news);
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#collapse11">Hình Đại Diện</a>
-                                            <a class="pull-right"  data-toggle="collapse" href="#collapse11" >
-                                                <i class="fa fa-bars" ></i>
+                                            <a class="pull-right" data-toggle="collapse" href="#collapse11">
+                                                <i class="fa fa-bars"></i>
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="collapse11" class="no-border-radius panel-collapse collapse in">
-                                        <label style="display: block;margin: 10px auto ;width: 96%;background-color: #aaa;height: 80px;padding: 5px;" class="text-center" >
-                                            <img style="height: 70px;" src="<?php echo $_new->UrlHinh; ?>" id="imgShow" >
-                                            <input type="hidden" readonly value="<?php echo $_new->UrlHinh; ?>" class="form-control" id="UrlHinh" name="UrlHinh" >
+                                        <label style="display: block;margin: 10px auto ;width: 96%;background-color: #aaa;height: 80px;padding: 5px;" class="text-center">
+                                            <img style="height: 70px;" src="<?php echo $_new->UrlHinh; ?>" id="imgShow">
+                                            <input type="hidden" readonly value="<?php echo $_new->UrlHinh; ?>" class="form-control" id="UrlHinh" name="UrlHinh">
                                             <button type="button" style="display: none;" onclick="BrowseServerShowImg('Images:/', 'UrlHinh', 'imgShow')">Chọn File</button>
                                         </label>
                                     </div>
@@ -165,37 +182,36 @@ $_new = new \Model\news($news);
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" href="#collapseTag">Tags</a>
-                                            <a class="pull-right" data-toggle="collapse" href="#collapseTag" >
-                                                <i class="fa fa-bars" ></i>
+                                            <a class="pull-right" data-toggle="collapse" href="#collapseTag">
+                                                <i class="fa fa-bars"></i>
                                             </a>
                                         </h4>
                                     </div>
                                     <div id="collapseTag" class="no-border-radius panel-collapse collapse in">
-                                        <table class="table table-bordered" >
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th><input class="form-control" name="tagsName" id="tagsName" ></th>
+                                                    <th><input class="form-control" name="tagsName" id="tagsName"></th>
                                                     <th style="width: 40px">
-                                                        <button data-newsid="<?php echo $_new->ID ?>" class="btn btn-themTags btn-success" type="button" >Thêm</button>
+                                                        <button data-newsid="<?php echo $_new->ID ?>" class="btn btn-themTags btn-success" type="button">Thêm</button>
                                                     </th>
                                                 </tr>
                                             </thead>
                                         </table>
-                                        <div id="DanhSachTagsByNews" style="padding: 10px;" >
+                                        <div id="DanhSachTagsByNews" style="padding: 10px;">
                                             <?php
                                             $tagsDetail = new Model\tags\tagsDetail();
                                             $tagsDetailBynews = $tagsDetail->GetByNewsId($_new->ID);
                                             foreach ($tagsDetailBynews as $tagsBynews) {
                                                 $_tagDetai = new Model\tags\tagsDetail($tagsBynews);
-                                                ?>
-                                                <label class="btn btn-default" >
+                                            ?>
+                                                <label class="btn btn-default">
                                                     <?php echo $_tagDetai->Name; ?>
-                                                    <button title="Xóa Tags Này?" data-idnews="<?php echo $_new->ID; ?>" data-id="<?php echo $_tagDetai->Id; ?>"
-                                                            class="no-border btn-xoaTags " type="button" >
-                                                        <i class="fa fa-times" ></i>
+                                                    <button title="Xóa Tags Này?" data-idnews="<?php echo $_new->ID; ?>" data-id="<?php echo $_tagDetai->Id; ?>" class="no-border btn-xoaTags " type="button">
+                                                        <i class="fa fa-times"></i>
                                                     </button>
                                                 </label>
-                                                <?php
+                                            <?php
                                             }
                                             ?>
                                         </div>
@@ -214,7 +230,7 @@ $_new = new \Model\news($news);
         </div>
     </section>
 </div>
-<script type="text/javascript"  >
+<script type="text/javascript">
     $(function() {
         function DanhSacTabByBewsId(newId) {
             $.ajax({
@@ -228,6 +244,7 @@ $_new = new \Model\news($news);
                 btn_xoaTags();
             });
         }
+
         function btn_chontags() {
             $(".btn-chontags").click(function() {
                 var htmlData = $(this).data();
@@ -257,6 +274,7 @@ $_new = new \Model\news($news);
                 DanhSacTabByBewsId(htmlData.newsid);
             });
         });
+
         function btn_xoaTags() {
             $(".btn-xoaTags").click(function() {
                 var title = $(this).prop('title');
@@ -279,5 +297,4 @@ $_new = new \Model\news($news);
         btn_chontags();
 
     });
-
 </script>

@@ -1,17 +1,31 @@
 <script type="text/javascript">
-    app.controller("nhanvienController", function($scope, $rootScope, $http, $routeParams) {
-        $scope.CSKHInit = async function() {
-            $http.get("/api/getNhanVien/").then((res) => {
-                $scope.NhanVien = res.data.NhanVien;
-                console.log($scope.NhanVien);
-            });
-        }
-    });
+    app.controller("nhanvienController",
+        function($scope, $rootScope, $http, $routeParams) {
+            $scope.IsShowInFor = true;
+            $scope.onToggle = function() {
+                $scope.IsShowInFor = !$scope.IsShowInFor;
+            };
+            $scope.CSKHInit = function() {
+                $http.get("/api/getNhanVien/").then((res) => {
+                    $scope.NhanVien = res.data.NhanVien;
+                    console.log($scope.NhanVien);
+                });
+            };
+        });
 </script>
 <div class="clearfix"></div>
 <div class="">
-    <div class="" style="position: relative" ng-init="CSKHInit()" ng-controller="nhanvienController">
-        <div class="DSNhanVienHoTro">
+
+    <div ng-init="CSKHInit()" ng-controller="nhanvienController" style="width: 300px;z-index: 9999;position: fixed;right: 0px;top: 30%;">
+        <button ng-click="onToggle()" ng-show="IsShowInFor==false" class="btn-lienhe btn btn-primary">
+            <i class="fa fa-phone"></i> Liên Hệ
+        </button>
+        <div class="DSNhanVienHoTro" ng-show="IsShowInFor==true">
+            <div class="pull-right btn-actions">
+                <button ng-click="onToggle()" ng-show="IsShowInFor==true" class="btn btn-primary">Đóng Lại
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
             <h3 class="panel-title " style="margin-bottom: 10px;">Hỗ trợ khách hàng</h3>
             <hr style="border: 1px dasher;">
             <div style="margin-bottom: 10px;" class="NhanVienHoTro" ng-repeat="item in NhanVien| orderBy:'id' ">

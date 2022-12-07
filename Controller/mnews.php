@@ -1,11 +1,13 @@
 <?php
 
-class Controller_mnews extends Controller_backend {
+class Controller_mnews extends Controller_backend
+{
 
     public $news;
     public $page;
 
-    function __construct() {
+    function __construct()
+    {
         $this->news = new \Model\news();
         $this->page = new \Model\pages();
         parent::__construct();
@@ -17,12 +19,14 @@ class Controller_mnews extends Controller_backend {
         ];
     }
 
-    function index() {
+    function index()
+    {
 
         $this->ViewTheme([], Model_ViewTheme::get_viewthene(), "news");
     }
 
-    function addnews() {
+    function addnews()
+    {
         if (isset($_POST["AddNews"])) {
             $a = new Model\news();
             $Page = get_class_vars(get_class($a));
@@ -46,6 +50,7 @@ class Controller_mnews extends Controller_backend {
             $Page["AnHien"] = isset($_POST["AnHien"]) ? $_POST["AnHien"] : 0;
             $Page["TinNoiBat"] = isset($_POST["TinNoiBat"]) ? $_POST["TinNoiBat"] : 0;
             $Page["Alias"] = $this->news->bodautv($_POST["Name"]);
+            $Page["RedirectLink"] = "";
             $Page["NgayDang"] = date("Y-m-d H:i:s", time());
             $this->news->AddNews($Page);
             $this->news->_header("/mnews/editnews/" . $Page["ID"]);
@@ -63,7 +68,8 @@ class Controller_mnews extends Controller_backend {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "news");
     }
 
-    function detail() {
+    function detail()
+    {
 
         $data["news"] = $this->news->NewsById($this->param[0], FALSE);
         $Bread = new \Model\Breadcrumb();
@@ -76,12 +82,14 @@ class Controller_mnews extends Controller_backend {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "page");
     }
 
-    function deletenews() {
+    function deletenews()
+    {
         $this->news->DeleteNews($this->param[0]);
         $this->news->_header($_SERVER["HTTP_REFERER"]);
     }
 
-    function editnews() {
+    function editnews()
+    {
         if (isset($_POST["EditNews"])) {
             $a = new Model\news();
             $Page = $this->news->NewsById($_POST["ID"], FALSE);
@@ -102,6 +110,7 @@ class Controller_mnews extends Controller_backend {
                 $Page[$k] = $this->news->Bokytusql($_POST[$k]);
             }
             $Page["Alias"] = $Page["Alias"];
+            $Page["RedirectLink"] = $Page["RedirectLink"];
             $Page["UrlHinh"] = $Page["UrlHinh"];
             if (isset($_POST["TuDongCapNhat"]))
                 $Page["NgayDang"] = date("Y-m-d H:i:s", time());
@@ -125,19 +134,20 @@ class Controller_mnews extends Controller_backend {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "news");
     }
 
-    function newsbypages() {
+    function newsbypages()
+    {
         $_Pages = $this->page->PagesById($this->param[0]);
         $Bread = new \Model\Breadcrumb();
         $this->Bread[] = [
             "title" => $_Pages->Name,
             "link" => "/mpage/"
-                ]
-        ;
+        ];
         $Bread->setBreadcrumb($this->Bread);
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "news");
     }
 
-    function copy() {
+    function copy()
+    {
 
         $data["news"] = $this->news->NewsById($this->param[0], FALSE);
         $_New = new Model\news($data["news"]);
@@ -157,27 +167,30 @@ class Controller_mnews extends Controller_backend {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "news");
     }
 
-    function getPages() {
+    function getPages()
+    {
         $a = $this->news->PagesByType(1, FALSE);
         foreach ($a as $k => $value) {
-
         }
         echo $this->news->_encode($a);
     }
 
-    function getnewById() {
+    function getnewById()
+    {
         $a = $this->news->NewsById($this->param[0], FALSE);
         $a["Summary"] = "";
         $a["Content"] = "";
         echo $this->news->_encode($a);
     }
 
-    function createAlias() {
+    function createAlias()
+    {
         $a = $this->news->NewsById($this->param[0], FALSE);
         echo $this->news->bodautv($a["Name"]);
     }
 
-    function getNewsByPages() {
+    function getNewsByPages()
+    {
         $a = $this->news->NewsByPagesAD($this->param[0], FALSE);
         if ($a)
             echo $this->news->_encode($a);
@@ -185,7 +198,8 @@ class Controller_mnews extends Controller_backend {
             echo "[]";
     }
 
-    function addtags() {
+    function addtags()
+    {
         try {
             $Model["IdNews"] = Model\CheckInput::ChekInput($_POST["idnews"]);
             $Model["IdTags"] = Model\CheckInput::ChekInput($_POST["idtags"]);
@@ -202,7 +216,8 @@ class Controller_mnews extends Controller_backend {
         }
     }
 
-    function gettagsbynews() {
+    function gettagsbynews()
+    {
         try {
             $Id = Model\CheckInput::ChekInput($_POST["id"]);
             $tagsDetail = new Model\tags\tagsDetail();
@@ -223,11 +238,11 @@ TABLETR;
             }
             echo $str;
         } catch (Exception $exc) {
-
         }
     }
 
-    function xoacauhoi() {
+    function xoacauhoi()
+    {
 
         $HoiDapService = new \Model\News\HoiDapService();
         $id = $this->getParam()[0];
@@ -235,7 +250,8 @@ TABLETR;
         \lib\Common::ToUrl($_SERVER["HTTP_REFERER"]);
     }
 
-    function hoidap() {
+    function hoidap()
+    {
         $HoiDapService = new \Model\News\HoiDapService();
 
         if (isset($_POST["Save"])) {
@@ -261,7 +277,8 @@ TABLETR;
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "news");
     }
 
-    function delatetags() {
+    function delatetags()
+    {
         try {
             $Id = Model\CheckInput::ChekInput($_POST["id"]);
             $tagsDetail = new Model\tags\tagsDetail();
@@ -271,7 +288,8 @@ TABLETR;
         }
     }
 
-    function addnewtags() {
+    function addnewtags()
+    {
         try {
             $tagsName = Model\CheckInput::ChekInput($_POST["tagsName"]);
             $idnews = Model\CheckInput::ChekInput($_POST["idnews"]);
@@ -308,7 +326,8 @@ TABLETR;
         }
     }
 
-    function __destruct() {
+    function __destruct()
+    {
         $str = ob_get_clean();
         $params = parse_ini_file(__DIR__ . '/../public/language/editnews.ini', true);
         $DSOption = $params;
@@ -318,7 +337,4 @@ TABLETR;
             }
         echo $str;
     }
-
 }
-
-?>

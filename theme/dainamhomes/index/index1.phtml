@@ -6,7 +6,7 @@ $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::HomeC
 
 $DichVu = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
 //var_dump($DichVu);
-$DichVus = array_map(function($item) {
+$DichVus = array_map(function ($item) {
     return $item["idPa"];
 }, $DichVu);
 

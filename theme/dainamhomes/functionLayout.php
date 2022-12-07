@@ -431,7 +431,21 @@ class functionLayout
         <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
         <link href="/public/bdsltp/dainam/style.css?v=<?php echo filemtime("public/bdsltp/dainam/style.css"); ?>" rel="stylesheet" type="text/css" />
         <link href="/public/wowjs/animate.min.css<?php echo filemtime("public/wowjs/animate.min.css"); ?>" rel="stylesheet" type="text/css" />
-
+        <script type="text/javascript">
+            app.controller("nhanvienController",
+                function($scope, $rootScope, $http, $routeParams) {
+                    $scope.IsShowInFor = true;
+                    $scope.onToggle = function() {
+                        $scope.IsShowInFor = !$scope.IsShowInFor;
+                    };
+                    $scope.CSKHInit = function() {
+                        $http.get("/api/getNhanVien/").then((res) => {
+                            $scope.NhanVien = res.data.NhanVien;
+                            console.log($scope.NhanVien);
+                        });
+                    };
+                });
+        </script>
     <?php
     }
 
@@ -814,30 +828,31 @@ class functionLayout
         </div>
         <div class="footer">
             <div class="container">
-                <div class="row"> 
+                <div class="row">
                     <div class="col-md-4 col-sm-4 padding-top-10">
                         2015 © . ALL Rights Reserved.
-                    </div> 
+                    </div>
                     <div class="col-md-4 col-sm-4">
 
-                    </div> 
+                    </div>
                     <div class="col-md-4 col-sm-4 text-right">
                         <p class="powered">nguyenvando.net</p>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="hidden hidden-xs  phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
+        <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="  hidden-xs  phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
             <a href="https://m.me/__messengerID___" class="pps-btn-img" title="Liên hệ">
                 <div class="phonering-alo-ph-img-circle">
-                    <i style="color: #fff;background-color: #fff0;" class="fa fa-facebook fa-3x"></i>
+                    <img style="width: 40px;margin-top: -25px;" src="/public/Icon/messenger.png">
+                    <!-- <i style="color: #fff;background-color: #fff0;" class="fa fa-facebook fa-3x"></i> -->
                 </div>
             </a>
         </div>
-        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class="hidden hidden-xs phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
+        <div style="position: fixed;left: 0px;bottom: 40%;z-index: 99999" class=" hidden-xs phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-zalo-phoneIcon1">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
             <a href="https://zalo.me/__ContactZalo___" class="pps-btn-img" title="Zalo">
@@ -845,35 +860,69 @@ class functionLayout
                 </div>
             </a>
         </div>
-        <div class="hidden-lg hidden-md btn-callfooter">
-            <ul class="listCall">
+        <div class="">
 
-                <li>
-                    <a href="https://m.me/__messengerID___">
-                        <img src="/public/Icon/messenger.svg">
-                        Messenger
-                    </a>
-                </li>
-                <li>
-                    <a href="https://zalo.me/__ContactZalo___">
-                        <img src="/public/Icon/zaloIcon.png">
-                        Zalo
-                    </a>
-                </li>
-                <li>
-                    <a href="tel:__ContactPhone___">
-                        <img src="/public/Icon/smartphone.svg">
-                        Gọi Ngay
-                    </a>
-                </li>
-                <li class="hidden tops" style="width:120px;">
-                    <a>
-                        <img src="/public/bdsltp/public/theme/assets/corporate/img/up.png">
-                        Top
-                    </a>
-                </li>
-            </ul>
+            <div ng-init="CSKHInit()" ng-controller="nhanvienController" style="width: 300px;z-index: 9999;position: fixed;right: 0px;top: 30%;">
+                <button ng-click="onToggle()" ng-show="IsShowInFor==false" class="btn-lienhe btn btn-primary">
+                    <i class="fa fa-phone"></i> Liên Hệ
+                </button>
+                <div class="DSNhanVienHoTro" ng-show="IsShowInFor==true">
+                    <div class="pull-right btn-actions">
+                        <button ng-click="onToggle()" ng-show="IsShowInFor==true" class="btn btn-primary">Đóng Lại
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                    <h3 class="panel-title " style="margin-bottom: 10px;">Hỗ trợ khách hàng</h3>
+                    <hr style="border: 1px dasher;">
+                    <div style="margin-bottom: 10px;" class="NhanVienHoTro" ng-repeat="item in NhanVien| orderBy:'id' ">
+                        <h3 class="name">{{item.name}}</h3>
+                        <p class="phone"><i class="fa fa-phone"></i> {{item.phone}}</p>
+                        <p>
+                        <ul class="social-footer list-unstyled list-inline">
+                            <li class="btn-group btn-group-social d-flex">
+                                <a class="btn-social" href="tell:{{item.phone}}"><i class="fa fa-phone"></i></a>
+                                <!-- <a class="btn-social" href="{{item.facebook}}"><i class="fa fa-facebook"></i></a> -->
+                                <a class="btn-social" href="mailto:{{item.email}}"><i class="fa fa-envelope"></i></a>
+                                <!-- <a class="btn-social" href="skyper:{{item.sky}}"><i class="fa fa-skype"></i></a> -->
+                            </li>
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="hidden-lg hidden-md btn-callfooter">
+                    <ul class="listCall">
+
+                        <li>
+                            <a href="https://m.me/__messengerID___">
+                                <img src="/public/Icon/messenger.png">
+                                Messenger
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://zalo.me/__ContactZalo___">
+                                <img src="/public/Icon/zaloIcon.png">
+                                Zalo
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:__ContactPhone___">
+                                <img src="/public/Icon/smarrtphone.png">
+                                Gọi Ngay
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="onToggle()">
+                                <i class="fa fa-phone fa-2x"></i>
+                                <br>Hỗ trợ
+                            </a>
+                        </li> 
+                    </ul>
+                </div>
+
+            </div>
         </div>
+
 
     <?php
         $str = ob_get_clean();
@@ -907,7 +956,7 @@ class functionLayout
         <script src="/public/wowjs/wow.js" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(document).ready(function() {
-                
+
                 try {
                     Layout.init();
                     Layout.initOWL();
@@ -1870,7 +1919,7 @@ class functionLayout
         unset($DSnews[0]);
         ob_start();
     ?>
-        <div class="recent-work  mt-40">
+        <div class="recent-work ">
             <div style="background-color: #FFDE76;">
                 <div class="container">
                     <div class="row pb-4">
