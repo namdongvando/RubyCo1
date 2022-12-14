@@ -465,14 +465,31 @@ class functionLayout
     static function header()
     {
     ?>
-        <div class="header">
-            <div class="container">
+        <div class="container" ng-init="CSKHInit()" ng-controller="nhanvienController">
+            <div class="col-md-4">
                 <a class="site-logo" href="/">
                     <img src="__Logo___" alt="__WebName___">
                 </a>
+            </div>
+            <div class="col-md-8">
+                <div class="d-flex" style="margin-top: 10px;margin-bottom: 10px;">
+                    <div class="NhanVienHoTro" style="margin-right: 10px" ng-repeat="item in NhanVien| orderBy:'id' ">
+                        <p style="margin: 0px" class="">
+                            <a style="color: #66060C;" href="tel:{{item.phone}}"> {{item.phone}}</a>
+                        </p>
+                        <p style="margin: 0px" class="">{{item.name}}</p>
+                    </div>
+                    <div style="width: 100%;">
+                        <a style="margin-top: 10px;" href="__linkBaoGia___" class="pull-right btn btn-success">Xem Báo Giá</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header">
+
+            <div class="container">
                 <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
-                <!-- BEGIN NAVIGATION -->
-                <div class="header-navigation pull-right font-transform-inherit">
+                <div class="header-navigation font-transform-inherit">
                     <ul>
                         <li ng-repeat="item in _MenuTopMainMenu" ng-class="item.submenu ? 'dropdown' : ''" class="">
                             <a ng-href="{{item.Link}}" data-toggle="{{item.submenu?'dropdown':''}}">{{item.Name}}
@@ -498,7 +515,6 @@ class functionLayout
                                 </form>
                             </div>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -862,7 +878,7 @@ class functionLayout
         </div>
         <div class="">
 
-            <div ng-init="CSKHInit()" ng-controller="nhanvienController" style="width: 300px;z-index: 9999;position: fixed;right: 0px;top: 30%;">
+            <div ng-init="CSKHInit()" ng-controller="nhanvienController" style="display:none;width: 300px;z-index: 9999;position: fixed;right: 0px;top: 30%;">
                 <button ng-click="onToggle()" ng-show="IsShowInFor==false" class="btn-lienhe btn btn-primary">
                     <i class="fa fa-phone"></i> Liên Hệ
                 </button>
@@ -916,7 +932,7 @@ class functionLayout
                                 <i class="fa fa-phone fa-2x"></i>
                                 <br>Hỗ trợ
                             </a>
-                        </li> 
+                        </li>
                     </ul>
                 </div>
 

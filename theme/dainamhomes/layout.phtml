@@ -6,20 +6,23 @@ error_reporting(E_ALL);
 
 use theme\dainamhomes\functionLayout;
 ?>
-<html lang="vi"   >
-    <head>
-        <?php
-        functionLayout::head();
-        ?>
-    </head>
-    <body class="corporate" ng-cloak="TRUE" ng-app="rootApp" ng-controller="homeController" >
-        <?php
-        functionLayout::header();
-        include $Content;
-        echo functionLayout::footer();
-        functionLayout::js();
-        ?>
-    </body>
+<html lang="vi">
+
+<head>
+    <?php
+    functionLayout::head();
+    ?>
+</head>
+
+<body class="corporate" ng-cloak="TRUE" ng-app="rootApp" ng-controller="homeController">
+    <?php
+    functionLayout::header();
+    include $Content;
+    echo functionLayout::footer();
+    functionLayout::js();
+    ?>
+</body>
+
 </html>
 <?php
 functionLayout::DecodeHTML();

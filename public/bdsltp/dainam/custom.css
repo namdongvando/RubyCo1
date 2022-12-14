@@ -7,6 +7,10 @@
     text-shadow: 0px 0px 1px #000;
 }
 
+.header-navigation {
+    font: inherit;
+}
+
 article h2 {
     font-size: 16px;
     font-weight: bold;
@@ -93,7 +97,7 @@ article.baiviet-chinh h2 {
     border-radius: 50% !important;
     width: 45px;
     height: 45px;
-    margin: 20px 10px 0 30px;
+    margin: 5px 10px 5px 30px;
     position: relative;
     background-image: none;
     text-align: center;
@@ -147,7 +151,7 @@ article.baiviet-chinh h2 {
 
 .header-navigation>ul>li>a {
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     text-transform: uppercase;
 }
 
@@ -191,7 +195,7 @@ article.baiviet-chinh h2 {
     padding: 10px 15px;
     font-weight: 600;
     color: #000;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .header-navigation .dropdown-menu {
@@ -608,7 +612,7 @@ address p {
 
 
 .DSNhanVienHoTro .btn-actions .btn {
-    background-color: #62060a; 
+    background-color: #62060a;
     border-top-left-radius: 10px !important;
     border-top-right-radius: 10px !important;
 }
@@ -670,7 +674,7 @@ address p {
     }
 
     .header .header-navigation li.menu-search {
-        top: 26px;
+        top: 10px;
         margin-left: 0px;
     }
 
@@ -686,7 +690,7 @@ address p {
     }
 
     .header .header-navigation>ul>li>a {
-        padding: 30px 10px 30px;
+        padding: 15px 10px 15px;
         display: block;
     }
 

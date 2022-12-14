@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 @font-face {
     font-family: verdana;
     src: url("fonts/verdana.ttf");
@@ -8,39 +9,48 @@
     --bg: #BC9311;
     --gold: #BC9311;
     --black: #000;
-    --gray : gray;
+    --gray: gray;
 }
 
 boby {
-    font-family:  Arial, Helvetica, sans-serif !important;
-    font: 400 15px 'Open Sans',  Arial, Helvetica, sans-serif !important;
+    font-family: Roboto, Arial !important;
+    font: 400 15px Roboto, Arial !important;
     -webkit-user-select: none !important;
     -moz-user-select: -moz-none !important;
     -ms-user-select: none !important;
     user-select: none !important;
 }
-.pb-4{
+
+.pb-4 {
     padding-bottom: 40px;
 }
-.border-radius-0{
+
+.border-radius-0 {
     border-radius: 0px !important;
 }
-.color-while{
+
+.color-while {
     color: white;
 }
-.color-black{
+
+.color-black {
     color: black;
 }
-.bg-menu.affix{
+
+.bg-menu.affix {
     background-color: #fff;
     padding: 5px 10px;
 }
-.menu-top,.bg-menu{
+
+.menu-top,
+.bg-menu {
     background-color: rgb(255 255 255 / 80%);
 }
+
 .mainslide {
     margin-top: 80px;
 }
+
 .mainslide .carousel-item {
     height: 720px;
     background-image: url("../images/Carousel_Placeholder.png");
@@ -48,7 +58,9 @@ boby {
     background-size: cover;
     background-position: center;
 }
-.carousel-control-prev, .carousel-control-next {
+
+.carousel-control-prev,
+.carousel-control-next {
     position: absolute;
     top: auto;
     bottom: 45%;
@@ -67,141 +79,178 @@ boby {
     opacity: 0.5;
     transition: opacity 0.15s ease;
 }
+
 .main-menu li a {
     color: #000;
     font-weight: bold;
 }
+
 .list-news-group li {
     border-bottom: 1px dashed#aaa;
 }
+
 .list-news-group {
     padding: 0px;
     margin: 0px;
     list-style-type: none;
 }
+
 .list-news-group a {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
 .list-news-group li a {
     color: #000;
     text-transform: capitalize !important;
 }
+
 .list-news-group li a {
     display: block;
     padding: 10px;
 }
+
 .btn-theme {
     background: #BC9315;
     color: #fff;
     font-weight: bold;
 }
+
 .footer {
     background: rgba(65, 62, 62, 1.00);
 }
+
 .footer-title {
     color: #fff;
     font-size: 18px;
 }
+
 address {
     color: #aaa;
 }
+
 .title-mail {
     color: #aaa;
 }
+
 .footer-map {
     width: 100%;
 }
+
 .title-theme {
     color: #000;
     font-weight: bold;
     font-size: 14px;
     background: #BC9315;
 }
+
 .hotline {
     position: fixed;
     bottom: 30px;
     left: 20px;
 }
+
 .taisaochonchungtoi .title {
     font-size: 1.3em;
     font-weight: bold;
 }
+
 .theme-color {
     color: rgba(245, 208, 12, 1.00);
 }
+
 .taisaochonchungtoi .item h2 {
     font-size: 1.2em;
 }
+
 .taisaochonchungtoi-title {
     font-size: 1.3px;
 
 }
+
 .taisaochonchungtoi {
     color: #000;
 }
+
 .theme-bg {
     background: linear-gradient(#BC9311, gold, #BC9311, gold);
     color: #000;
     font-size: 14px;
 }
-.fw-bold{
+
+.fw-bold {
     font-weight: bold;
 }
-.bg-gray{
+
+.bg-gray {
     background: #ddd;
 }
-.fs-3{
+
+.fs-3 {
     font-size: 20px;
 }
-.fs-2{
+
+.fs-2 {
     font-size: 18px;
 }
-.fs-1{
+
+.fs-1 {
     font-size: 16px;
 }
-.fs-0{
+
+.fs-0 {
     font-size: 14px;
 }
+
 .bg-theme {
     background: #BC9315;
 }
+
 .main-menu .navbar-nav li a {
     color: #000;
     font-size: 14px;
 }
+
 .nav-item {
     color: #000;
 }
+
 .navbar-expand-md .navbar-nav .nav-link {
     color: #000;
 }
+
 .navbar-expand-sm .navbar-nav .nav-link:hover {
     /*background-color: var(--bg);*/
     border-bottom: 2px solid var(--bg);
 }
-.navbar-brand{
+
+.navbar-brand {
     color: #000;
     font-size: 16px;
     font-weight: bold;
 }
-.color-gray{
+
+.color-gray {
     color: var(--gray);
 }
-.bg-white{
-    background-color: #fff ;
+
+.bg-white {
+    background-color: #fff;
 }
+
 .logo-img {
     max-height: 70px;
 }
 
-.BaiVietNoiBat .BaiVietNoiBat3 img{
+.BaiVietNoiBat .BaiVietNoiBat3 img {
     height: 150px;
 }
-.BaiVietNoiBat .BaiVietNoiBat2 img{
+
+.BaiVietNoiBat .BaiVietNoiBat2 img {
     height: 235px;
 }
+
 .BaiVietNoiBat .BaiVietNoiBat1 .card-title,
 .BaiVietNoiBat .BaiVietNoiBat2 .card-title,
 .BaiVietNoiBat .BaiVietNoiBat3 .card-title,
@@ -213,7 +262,8 @@ address {
     width: 100%;
     background-color: rgb(0 0 0 / 49%);
 }
-.BaiVietNoiBat .BaiVietNoiBat-Main .card-img-top{
+
+.BaiVietNoiBat .BaiVietNoiBat-Main .card-img-top {
     height: 590px;
 }
 
@@ -223,29 +273,34 @@ address {
 .BaiVietNoiBat .BaiVietNoiBat-Main {
     position: relative;
 }
-.DanhSachDoiTac .owl-nav .owl-prev{
+
+.DanhSachDoiTac .owl-nav .owl-prev {
     float: left;
 }
-.DanhSachDoiTac .owl-nav .owl-next{
+
+.DanhSachDoiTac .owl-nav .owl-next {
     float: right;
 }
+
 .DanhSachDoiTac .owl-nav .owl-prev,
-.DanhSachDoiTac .owl-nav .owl-next{
+.DanhSachDoiTac .owl-nav .owl-next {
     padding: 10px !important;
     width: 40px;
     height: 40px;
     line-height: 40px;
     padding: 0px;
-    background: rgba(0,0,0,0.47) !important;
+    background: rgba(0, 0, 0, 0.47) !important;
     color: #fff !important;
 }
-.DanhSachDoiTac .owl-nav{
+
+.DanhSachDoiTac .owl-nav {
     position: absolute;
     top: 40%;
     width: 100%;
     height: 0px;
 }
-.card.TinNoiBat> .card-body > a{
+
+.card.TinNoiBat>.card-body>a {
     line-height: 16px;
     font-size: 14px;
     min-height: 28px;
@@ -256,61 +311,72 @@ address {
     text-overflow: ellipsis;
     color: #000;
 }
-.card.TinNoiBat{
+
+.card.TinNoiBat {
     border: 0;
 }
-.card.TinNoiBat> a{
+
+.card.TinNoiBat>a {
     height: 120px;
     overflow: hidden;
     display: block;
 }
+
 .NhanXetCuaKhacHang .carousel-item {
     min-height: 200px;
 }
-.NhanXetCuaKhacHang .carousel-caption{
+
+.NhanXetCuaKhacHang .carousel-caption {
     bottom: 35%;
 }
 
 .bg-dark60 {
-    background: rgba(0,0,0,0.60);
+    background: rgba(0, 0, 0, 0.60);
 }
 
 .mainslide {
     position: relative;
 }
-.mainslide .danhSachDoiTac{
+
+.mainslide .danhSachDoiTac {
     position: absolute;
     bottom: 0px;
     width: 100%;
 }
-.dsbaivietlienquan li::marker{
+
+.dsbaivietlienquan li::marker {
     text-indent: -10px;
 }
 
-.dsbaivietlienquan {
+.dsbaivietlienquan {}
 
-}
-.dsbaivietlienquan li a{
+.dsbaivietlienquan li a {
     padding: 10px 5px;
     display: block;
     font-size: 15px;
     text-transform: capitalize;
 }
-.ChungToiLaAi .card .card-body{
+
+.ChungToiLaAi .card .card-body {
     min-height: 350px;
 }
-.recent-work h2, .ecommerce .recent-work h2{
+
+.recent-work h2,
+.ecommerce .recent-work h2 {
     height: 50px;
 }
-.taisaochonchungtoi-phone{
+
+.taisaochonchungtoi-phone {
     line-height: 10px;
     font-size: 40px;
 }
+
 @media(max-width:600px) {
-    #carouselExampleIndicators1{
+    #carouselExampleIndicators1 {
         background-color: #ddd;
 
     }
+
     .mainslide .carousel-item {
         min-height: 300px;
         background-image: url("../images/Carousel_Placeholder.png");
@@ -318,23 +384,28 @@ address {
         background-size: contain;
         background-position: center;
     }
+
     .Main-menu {
         background: var(--gold);
         margin-top: 10px;
     }
+
     .logo-img {
         max-height: 70px;
     }
-    .Main-menu .navbar-toggler{
+
+    .Main-menu .navbar-toggler {
         border: 1px solid #000;
     }
-    .fixed-top{
-        position:  relative !important;
+
+    .fixed-top {
+        position: relative !important;
     }
 
     .mainslide {
         margin-top: 0px;
     }
+
     .mainslide .carousel-item {
         height: 370px;
         background-image: url("../images/Carousel_Placeholder.png");
@@ -342,7 +413,8 @@ address {
         background-size: contain;
         background-position: center;
     }
-    .DanhSachDoiTac .owl-nav{
+
+    .DanhSachDoiTac .owl-nav {
         display: none;
 
     }
@@ -355,6 +427,7 @@ address {
     left: 20px;
     z-index: 99999;
 }
+
 .chat-zalo {
     background: #0084c7;
     border-radius: 20px;
@@ -363,6 +436,7 @@ address {
     font-weight: bold;
     margin-bottom: 12px;
 }
+
 .chat-face {
     background: #125c9e;
     border-radius: 20px;
@@ -371,6 +445,7 @@ address {
     display: block;
     margin-bottom: 6px;
 }
+
 .float-contact .hotline {
     background: #103852 !important;
     font-weight: bold;
@@ -380,20 +455,24 @@ address {
     display: block;
     margin-bottom: 6px;
 }
-.PhuLuc >ul,
-.PhuLuc >ol{
+
+.PhuLuc>ul,
+.PhuLuc>ol {
     padding-left: 0px;
     list-style: none;
 }
+
 .PhuLuc ul li h3 a,
-.PhuLuc ol li h3 a{
+.PhuLuc ol li h3 a {
     font-size: 20px;
     font-weight: bold;
 }
-.PhuLuc > h3{
+
+.PhuLuc>h3 {
     font-size: 18px;
 }
-.PhuLuc{
+
+.PhuLuc {
     padding: 20px;
     background-color: #eee;
     border: 1px dashed #aaa;
@@ -401,30 +480,43 @@ address {
     min-width: 350px;
     margin-bottom: 30px;
 }
-.btn-callfooter .listCall li a img{
+
+.btn-callfooter .listCall li a img {
     height: 25px;
     margin: auto;
     display: block;
 }
-.btn-callfooter .listCall li a{
+
+.btn-callfooter .listCall li a {
     padding: 10px;
     display: block;
     color: #fff;
     font-weight: normal;
     font-size: 12px;
 }
-.btn-callfooter .listCall li{
+
+.btn-callfooter .listCall li {
     width: 50%;
     text-align: center;
-
 }
-.btn-callfooter .listCall{
+
+.header-navigation li.menu-search {
+    position: relative;
+    top: 10px;
+}
+
+.header-navigation>ul>li>a {
+    padding: 15px 10px 15px;
+}
+
+.btn-callfooter .listCall {
     list-style: none;
     margin: 0px;
     padding: 0px;
     display: flex;
 }
-.btn-callfooter{
+
+.btn-callfooter {
 
     background-color: #bf2620;
     color: #fff;
@@ -434,3 +526,30 @@ address {
     width: 100%;
     z-index: 999999;
 }
+
+/* .site-logo:after {
+    position: absolute;
+    width: 100em;
+    height: 100%;
+    right: 100%;
+    top: 0px;
+    display: block;
+    content: " ";
+    background-color: #66060C;
+}
+
+.site-logo:before {
+    position: absolute;
+    background-color: #66060C;
+    content: " ";
+    height: 100%;
+    display: block;
+    left: 100%;
+    top: 0px;
+    width: 100px;
+}
+
+.site-logo {
+    position: relative;
+    background-color: #66060C;
+} */
