@@ -876,13 +876,13 @@ class functionLayout
                 </div>
             </a>
         </div>
-        <div class="">
+        <!-- <div class="hidden">
 
             <div ng-init="CSKHInit()" ng-controller="nhanvienController" style="display:none;width: 300px;z-index: 9999;position: fixed;right: 0px;top: 30%;">
-                <button ng-click="onToggle()" ng-show="IsShowInFor==false" class="btn-lienhe btn btn-primary">
+                <button ng-click="onToggle()" ng-show="IsShowInFor==false" class="hidden btn-lienhe btn btn-primary">
                     <i class="fa fa-phone"></i> Liên Hệ
                 </button>
-                <div class="DSNhanVienHoTro" ng-show="IsShowInFor==true">
+                <div class="hidden DSNhanVienHoTro" ng-show="IsShowInFor==true">
                     <div class="pull-right btn-actions">
                         <button ng-click="onToggle()" ng-show="IsShowInFor==true" class="btn btn-primary">Đóng Lại
                             <i class="fa fa-times"></i>
@@ -897,9 +897,7 @@ class functionLayout
                         <ul class="social-footer list-unstyled list-inline">
                             <li class="btn-group btn-group-social d-flex">
                                 <a class="btn-social" href="tell:{{item.phone}}"><i class="fa fa-phone"></i></a>
-                                <!-- <a class="btn-social" href="{{item.facebook}}"><i class="fa fa-facebook"></i></a> -->
                                 <a class="btn-social" href="mailto:{{item.email}}"><i class="fa fa-envelope"></i></a>
-                                <!-- <a class="btn-social" href="skyper:{{item.sky}}"><i class="fa fa-skype"></i></a> -->
                             </li>
                         </ul>
                         </p>
@@ -937,7 +935,7 @@ class functionLayout
                 </div>
 
             </div>
-        </div>
+        </div> -->
 
 
     <?php

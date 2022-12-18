@@ -1006,6 +1006,7 @@ class Database extends \Model\iDatabase
 
     public function PagesByAliasIsShow($Alias, $isobj = true)
     {
+        // echo " `IsShow` > 0 and  `Alias` = '{$Alias}'";
         $a = $this->select(table_prefix . "pages", [], " `IsShow` > 0 and  `Alias` = '{$Alias}'");
         if ($isobj) {
             return new \Model\pages($a[0]);

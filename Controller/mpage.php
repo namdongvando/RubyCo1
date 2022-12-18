@@ -2,11 +2,13 @@
 
 use Module\duser\Model\Duser;
 
-class Controller_mpage extends Controller_backend {
+class Controller_mpage extends Controller_backend
+{
 
     public $page;
 
-    function __construct() {
+    function __construct()
+    {
         $this->page = new \Model\pages();
         $a = new lib\form();
         $a->createFormByClassToFile("\Model\pages", "page");
@@ -22,7 +24,8 @@ class Controller_mpage extends Controller_backend {
         Model\pathCkFinder::set($path);
     }
 
-    function index() {
+    function index()
+    {
         if (isset($_POST["Save"])) {
             $pages = new Model\pages();
             foreach ($_POST["GroupId"] as $id => $value) {
@@ -40,10 +43,12 @@ class Controller_mpage extends Controller_backend {
         $Number = 10;
         $Name = '';
         $newsdata = $news->DanhSachTinPT($indexPage, $Number, $Name, $Tong);
+       
         $this->ViewTheme(["NewsData" => $newsdata], Model_ViewTheme::get_viewthene(), "page");
     }
 
-    function deletepage() {
+    function deletepage()
+    {
         try {
             if (Duser::CheckQuyen([Duser::CodeSuperAdmin, Duser::$CodeAdmin]) == FALSE) {
                 throw new Exception("Bạn không có quyển xóa");
@@ -53,7 +58,7 @@ class Controller_mpage extends Controller_backend {
             $p = $pageService->GetById($id);
             $p["isShow"] = -1;
             $pageService->Put($p);
-//        $this->page->DeletePages($id);
+            //        $this->page->DeletePages($id);
             $this->page->_header("/mpage/index/");
         } catch (Exception $exc) {
             new Model\Error(["danger", $exc->getMessage()]);
@@ -61,7 +66,8 @@ class Controller_mpage extends Controller_backend {
         $this->page->_header("/mpage/index/");
     }
 
-    function editpage() {
+    function editpage()
+    {
         if (isset($_POST["pages"])) {
             $pages = $_POST["pages"];
             $edit = $this->page->PagesById($pages["idPa"], FALSE);
@@ -83,7 +89,8 @@ class Controller_mpage extends Controller_backend {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "page");
     }
 
-    function addpage() {
+    function addpage()
+    {
         if (isset($_POST["AddPage"])) {
             $edit = $this->page->Pages(FALSE);
             $edit = $edit[0];
@@ -104,7 +111,7 @@ class Controller_mpage extends Controller_backend {
             $index = 1;
             while ($this->page->PagesByAlias($edit["Alias"], FALSE)) {
                 $edit["Alias"] = $edit["Alias"] . '-' . $index;
-                $index ++;
+                $index++;
             }
             $edit["Note"] = $_POST["Note"] == "" ? "{}" : $_POST["Note"];
             $edit["OrderBy"] = intval($edit["OrderBy"]);
@@ -112,7 +119,7 @@ class Controller_mpage extends Controller_backend {
             $edit["idGroup"] = intval($edit["idGroup"]);
             $edit["Type"] = intval($edit["Type"]);
 
-//            unset($edit["idPa"]);
+            //            unset($edit["idPa"]);
 
             $this->page->addPages($edit);
             $this->page->_header('/mpage/editpage/' . $edit["idPa"]);
@@ -128,7 +135,8 @@ class Controller_mpage extends Controller_backend {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "page");
     }
 
-    function detail() {
+    function detail()
+    {
 
         $data["p"] = $this->page->PagesById($this->param[0], FALSE);
         $Bread = new \Model\Breadcrumb();
@@ -140,7 +148,8 @@ class Controller_mpage extends Controller_backend {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "page");
     }
 
-    function getPages() {
+    function getPages()
+    {
         $a = $this->page->Pages(FALSE);
         $dataJSon = [];
 
@@ -152,7 +161,8 @@ class Controller_mpage extends Controller_backend {
         echo $this->page->_encode($dataJSon);
     }
 
-    function getPagesOptions() {
+    function getPagesOptions()
+    {
         $parent = $this->getParam()[0];
 
         $parent = intval($parent);
@@ -164,13 +174,7 @@ class Controller_mpage extends Controller_backend {
         }
         $dataJSon = [];
         $dataJSon[] = [
-            "idPa" => "0"
-            , "Name" => "Là Cấp Cha"
-            , "Alias" => ""
-            , "isShow" => "0"
-            , "Type" => "0"
-            , "OrderBy" => ""
-            , "TypeName" => ""
+            "idPa" => "0", "Name" => "Là Cấp Cha", "Alias" => "", "isShow" => "0", "Type" => "0", "OrderBy" => "", "TypeName" => ""
         ];
         foreach ($a as $key => $value) {
             $_Pages = new \Module\pages\Model\pages($value);
@@ -179,11 +183,12 @@ class Controller_mpage extends Controller_backend {
         echo $this->page->_encode($dataJSon);
     }
 
-    function importdata() {
-
+    function importdata()
+    {
     }
 
-    function __destruct() {
+    function __destruct()
+    {
         $str = ob_get_clean();
         $params = parse_ini_file(__DIR__ . '/../public/language/editpages.ini', true);
         $DSOption = $params;
@@ -193,7 +198,4 @@ class Controller_mpage extends Controller_backend {
             }
         echo $str;
     }
-
 }
-
-?>

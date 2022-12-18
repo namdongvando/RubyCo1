@@ -1,11 +1,20 @@
 <?php
+
+use Model\pages;
+
 $adv = new \Model\adv();
 $_homeslide = $adv->AdvsByGroup("homeslide", FALSE);
 $_homeslideClass = ["carousel-item-eight", "carousel-item-nine", "carousel-item-ten"];
 $HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
+$_HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::HomeCategory);
 $DichVus = array_map(function ($item) {
     return $item["idPa"];
 }, $HomeCategory);
+$_HomeCategory = array_map(function ($item) {
+    return $item["Id"];
+}, $_HomeCategory);
+$page = new pages();
+$pages = $page->GetPageByList($_HomeCategory);
 
 ?>
 <script type="application/ld+json">
@@ -25,55 +34,36 @@ $DichVus = array_map(function ($item) {
 
     <div class="  fullscreem slider_home ">
         <div class="container">
-            <div class="row pt-25">
-                <div class="col-md-4">
-                    <div class="slider_home_item">
-                        <div class="item-content">
-                            <em>
-                                <a class="/page-thi-cong/" href="">
-                                    <img src="/public/banner/banner1.png" data-wow-duration="1s" alt="Thi Công" class="wow slideInRight img-responsive">
+            <div class="row pt-25 pb-25">
+                <?php
+                foreach ($pages as $p) {
+                    $_p = new pages($p);
+                ?>
+                    <div class="col-md-4">
+                        <div class="slider_home_item">
+                            <div class="item-content">
+                                <em>
+                                    <a class="" href="<?php echo $_p->linkPagesCurent() ?>">
+                                        <div class="item-content-imgages wow slideInRight " data-wow-duration="1s">
+                                            <img src="/public/banner/hexagon-bg_1.png?v=<?php echo filectime('public/banner/hexagon-bg_1.png'); ?>" alt="Thi Công" class="imgages-cut img-responsive">
+                                            <img onerror="this.src='/public/banner/hexagon-bg.png'" src="<?php echo $_p->Urlimages ?>" alt="Thi Công" class="img-responsive">
+                                        </div>
+                                    </a>
+                                </em>
+                                <a class="title-baiviet" href="<?php echo $_p->linkPagesCurent() ?>">
+                                    <h3 class="wow slideInLeft" data-wow-duration="2s"><?php echo $_p->Name; ?></h3>
                                 </a>
-                            </em>
-                            <a class="title-baiviet" href="/page-thi-cong/">
-                                <h3 class="wow slideInLeft" data-wow-duration="2s">Thi Công</h3>
-                            </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="slider_home_item">
-                        <div class="item-content">
-                            <em>
-                                <a class="" href="/page-in-an/">
-                                    <img src="/public/banner/banner2.png" data-wow-duration="1s" alt="In Ấn" class="wow slideInRight img-responsive">
-                                </a>
-                            </em>
-                            <a class="title-baiviet" href="/page-in-an/">
-                                <h3 class="wow slideInLeft" data-wow-duration="2s">In Ấn</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="slider_home_item">
-                        <div class="item-content text-center">
-                            <em>
-                                <a class="" href="/page-to-chuc-su-kien/">
-                                    <img src="/public/banner/banner3.png" data-wow-duration="1s" alt="Tổ chức sự kiện" class="wow slideInRight img-responsive">
-                                </a>
-                            </em>
-                            <a class="title-baiviet" href="/page-to-chuc-su-kien/">
-                                <h3 class="wow slideInLeft" data-wow-duration="2s">Tổ Chức <br> Sự Kiện</h3>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>
     <div class="">
-        <?php
-        // echo theme\dainamhomes\functionLayout::DanhSachDangMuc($DichVus);
+        <?php 
         echo theme\dainamhomes\functionLayout::TinTuc();
         ?>
     </div>

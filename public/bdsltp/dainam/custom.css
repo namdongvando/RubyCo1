@@ -502,8 +502,7 @@ address p {
 }
 
 .slider_home {
-    background-image: url('/public/banner/header-bg.jpg');
-    background-color: #eab60b;
+    background-color: #FBC26D;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -903,6 +902,7 @@ address p {
 
 .slider_home_item .title-baiviet {
     position: absolute;
+    z-index: 3;
     top: 35px;
     left: 10px;
     text-indent: 20px;
@@ -912,8 +912,25 @@ address p {
     box-shadow: 0 0 0 #fff;
 }
 
-.slider_home_item {
+.item-content-imgages .imgages-cut {
+    z-index: 2;
+}
+
+.item-content-imgages img {
+    z-index: 1;
+    position: absolute;
+    width: 300px;
+    height: 300px;
+}
+
+.item-content-imgages {
     position: relative;
+}
+
+.slider_home_item {
+    height: 300px;
+    position: relative;
+    padding-bottom: 2em;
 }
 
 .octagon {
@@ -942,4 +959,35 @@ address p {
     border-top: 30px solid #0062af;
     border-left: 50px solid #fff;
     border-right: 50px solid #fff;
+}
+
+.octagon {
+    width: 100px;
+    height: 100px;
+    background: red;
+    position: relative;
+}
+
+.octagon:before {
+    content: "";
+    width: 100px;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 29px solid red;
+    border-left: 29px solid #eee;
+    border-right: 29px solid #eee;
+}
+
+.octagon:after {
+    content: "";
+    width: 100px;
+    height: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 29px solid red;
+    border-left: 29px solid #eee;
+    border-right: 29px solid #eee;
 }

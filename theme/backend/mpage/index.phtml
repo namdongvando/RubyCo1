@@ -1,24 +1,29 @@
 <?php
 $pase = new Model\Pages\PagesService();
 $total = 0;
-$pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
+
+if ($_GET["delete"]??false) {
+    $pages = $pase->GetAllPTByPrentIsDelete(0, $total, 1, 100);
+} else {
+    $pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
+}
 ?>
-<div class="row"  >
-    <section class="col-md-12" >
+<div class="row">
+    <section class="col-md-12">
         <div class="box box-solid ">
             <div class="box-header">
-                <a href="/mpage/addpage/" class="btn pull-right btn-success"  >Thêm</a>
+                <a href="/mpage/addpage/" class="btn pull-right btn-success">Thêm</a>
                 <h3 class="box-title">Quản Lý Bài Viết</h3>
             </div>
             <div class="box-body no-padding ">
-                <div class="table-responsive" >
-                    <form action="" enctype="multipart/form-data" method="POST" >
-                        <table class="table table-bordered table-hover " id="dataTable" >
+                <div class="table-responsive">
+                    <form action="" enctype="multipart/form-data" method="POST">
+                        <table class="table table-bordered table-hover " id="dataTable">
                             <thead>
                                 <tr>
                                     <th></th>
                                     <th style="width: 50px">#</th>
-                                    <th >Tên Trang</th>
+                                    <th>Tên Trang</th>
                                     <th style="width: 150px">Danh mục cha</th>
                                     <th style="width: 100px">Hiển Thị</th>
                                     <th style="width: 150px">Loại Trang</th>
@@ -29,16 +34,16 @@ $pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
                                 foreach ($pages as $value) {
                                     $_page = new Model\pages($value);
                                     $pages1 = $pase->GetAllPTByPrent($_page->idPa, $total, 1, 100);
-                                    ?>
-                                    <tbody >
-                                        <tr  >
-                                            <td style="width: 150px;" >
-                                                <a class="btn btn-sm btn-primary" href="/mpage/editpage/<?php echo $_page->idPa ?>" >Sửa</a>
+                            ?>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 150px;">
+                                                <a class="btn btn-sm btn-primary" href="/mpage/editpage/<?php echo $_page->idPa ?>">Sửa</a>
                                                 <?php
                                                 if ($pages1 == false) {
-                                                    ?>
-                                                    <a title="Xóa Danh Mục Này" class="btn xoa btn-sm btn-danger" href="/mpage/deletepage/<?php echo $_page->idPa ?>" >Xóa</a>
-                                                    <?php
+                                                ?>
+                                                    <a title="Xóa Danh Mục Này" class="btn xoa btn-sm btn-danger" href="/mpage/deletepage/<?php echo $_page->idPa ?>">Xóa</a>
+                                                <?php
                                                 }
                                                 ?>
                                             </td>
@@ -58,11 +63,11 @@ $pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
                                         if ($pages1) {
                                             foreach ($pages1 as $value1) {
                                                 $_page1 = new Model\pages($value1);
-                                                ?>
-                                                <tr  >
-                                                    <td style="width: 150px;" >
-                                                        <a class="btn btn-sm btn-primary" href="/mpage/editpage/<?php echo $_page1->idPa ?>" >Sửa</a>
-                                                        <a title="Xóa Danh Mục Này" class="btn  xoa btn-sm btn-danger" href="/mpage/deletepage/<?php echo $_page1->idPa ?>" >Xóa</a>
+                                        ?>
+                                                <tr>
+                                                    <td style="width: 150px;">
+                                                        <a class="btn btn-sm btn-primary" href="/mpage/editpage/<?php echo $_page1->idPa ?>">Sửa</a>
+                                                        <a title="Xóa Danh Mục Này" class="btn  xoa btn-sm btn-danger" href="/mpage/deletepage/<?php echo $_page1->idPa ?>">Xóa</a>
                                                     </td>
                                                     <td><?php echo $_page1->idPa; ?></td>
                                                     <td><?php echo "--|" . $_page1->Name; ?></td>
@@ -76,13 +81,13 @@ $pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
                                                     </td>
                                                     <td><?php echo $_page1->Type(); ?></td>
                                                 </tr>
-                                                <?php
+                                        <?php
                                             }
                                         }
                                         ?>
 
                                     </tbody>
-                                    <?php
+                            <?php
                                 }
                             }
                             ?>
@@ -91,7 +96,7 @@ $pages = $pase->GetAllPTByPrent(0, $total, 1, 100);
                                 <tr>
                                     <th> </th>
                                     <th colspan="5">
-                                        <button type="submit" name="Save" >Cập Nhật</button>
+                                        <button type="submit" name="Save">Cập Nhật</button>
                                     </th>
 
                                 </tr>

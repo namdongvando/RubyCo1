@@ -1,103 +1,98 @@
-<div class="container " ng-controller="addnewsController" ng-init="addnewsInit(<?php echo!empty($_Param[0]) ? $_Param[0] : "" ?>)" >
-    <section class="" >
+<div class="container " ng-controller="addnewsController" ng-init="addnewsInit(<?php echo !empty($_Param[0]) ? $_Param[0] : "" ?>)">
+    <section class="">
         <div class="box box-solid ">
-            <div class="box-header bg-green-gradient"> 
+            <div class="box-header bg-green-gradient">
                 <h3 class="box-title">Thêm Bài Viết</h3>
             </div><!-- /.box-header -->
             <div class="box-body no-padding ">
-                <div  >
-                    <form action="" method="POST" enctype="multipart/form-data" >
-                        <div class="col-md-12 " >
+                <div>
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        <div class="col-md-12 ">
                             <div class="form-group">
                                 <label for="">__Name___</label>
-                                <input type="text" required="" value="{{_New.Name}}" class="form-control" name="Name" >
+                                <input type="text" required="" value="{{_New.Name}}" class="form-control" name="Name">
                             </div>
 
                             <div class="form-group hidden">
                                 <label for="">__Alias___</label>
-                                <input type="text" value="{{_New.Alias}}" class="form-control"  name="Alias" >
+                                <input type="text" value="{{_New.Alias}}" class="form-control" name="Alias">
                             </div>
 
                             <div class="form-group hidden">
                                 <label for="">__Summary___</label>
-                                <textarea  id="Summary" name="Summary" >{{_New.Summary}}</textarea>
+                                <textarea id="Summary" name="Summary">{{_New.Summary}}</textarea>
                             </div>
                             <div class="form-group hidden">
                                 <label for="">__Content___</label>
-                                <textarea  id="Content" name="Content" >{{_New.Content}}</textarea>
+                                <textarea id="Content" name="Content">{{_New.Content}}</textarea>
 
                             </div>
                             <div class="d-flex">
                                 <div class="form-group item">
                                     <label for="">__PageID___</label>
-                                    <select name="PageID" class="form-control" >
-                                        <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}" >{{optionPage.Name}}</option>
+                                    <select name="PageID" class="form-control">
+                                        <option ng-selected="optionPage.idPa == _New.PageID" ng-repeat="optionPage in  PagesByType" value="{{optionPage.idPa}}">{{optionPage.Name}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group item">
                                     <label for="">__AnHien___</label>
-                                    <select  class="form-control" ng-value="0"  name="AnHien" >
-                                        <option value="1" >Hiện</option>
-                                        <option value="0" >Ẩn</option>
+                                    <select class="form-control" ng-value="0" name="AnHien">
+                                        <option value="1">Hiện</option>
+                                        <option value="0">Ẩn</option>
                                     </select>
                                 </div>
                                 <div class="form-group item">
                                     <label for="">__TinNoiBat___</label>
-                                    <select required="required" class="form-control" ng-model="_New.TinNoiBat"  name="TinNoiBat" >
-                                        <option  value="1" >Nổi Bật</option>
-                                        <option selected value="0" >Không Nổi Bật</option>
+                                    <select required="required" class="form-control" ng-model="_New.TinNoiBat" name="TinNoiBat">
+                                        <option value="1">Nổi Bật</option>
+                                        <option selected value="0">Không Nổi Bật</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <div class="form-group item">
                                     <label for="">__title___</label>
-                                    <textarea class="form-control" name="title"  >{{_New.title}}</textarea>
+                                    <textarea class="form-control" name="title">{{_New.title}}</textarea>
                                 </div>
                                 <div class="form-group item">
                                     <label for="">__keyword___</label>
-                                    <textarea class="form-control" name="keyword"  >{{_New.keyword}}</textarea>
+                                    <textarea class="form-control" name="keyword">{{_New.keyword}}</textarea>
                                 </div>
                                 <div class="form-group item">
                                     <label for="">__description___</label>
-                                    <textarea class="form-control" name="description"  >{{_New.description}}</textarea>
+                                    <textarea class="form-control" name="description">{{_New.description}}</textarea>
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-success  " name="AddNews" >Thêm Tin</button>
+                            <button type="submit" class="btn btn-success  " name="AddNews">Thêm Tin</button>
                         </div>
-                        <div class="col-md-3 hidden " >
+                        <div class="col-md-3 hidden ">
                             <div class="form-group ">
                                 <label for=""></label>
-                                <button type="submit" class="btn btn-success btn-block" name="AddNews" >Thêm Tin</button>
+                                <button type="submit" class="btn btn-success btn-block" name="AddNews">Thêm Tin</button>
                             </div>
                             <div class="form-group hidden">
                                 <label for="">__ID___</label>
-                                <input type="text" value="{{_New.ID}}" class="form-control" name="ID" >
-                            </div>
-
-
-
-
-
+                                <input type="text" value="{{_New.ID}}" class="form-control" name="ID">
+                            </div> 
                             <div class="form-group hidden">
                                 <label for="">__NgayDang___</label>
-                                <input type="text" value="{{_New.NgayDang}}" class="form-control" name="NgayDang" >
+                                <input type="text" value="{{_New.NgayDang}}" class="form-control" name="NgayDang">
                             </div>
 
                             <div class="form-group hidden">
                                 <label for="">__UrlHinh___</label>
-                                <input type="file" class="form-control" name="Fileimages" >
-                                <input type="hidden" value="{{_New.UrlHinh}}" class="form-control" name="UrlHinh" >
+                                <input type="file" class="form-control" name="Fileimages">
+                                <input type="hidden" value="{{_New.UrlHinh}}" class="form-control" name="UrlHinh">
                             </div>
                             <div class="form-group">
                                 <label for="">__SoLanXem___</label>
-                                <input type="text" value="0" class="form-control" name="SoLanXem" >
+                                <input type="text" value="0" class="form-control" name="SoLanXem">
                             </div>
 
                             <div class="form-group">
                                 <label for="">__Stt___</label>
-                                <input type="text" value="0" class="form-control" name="Stt" >
+                                <input type="text" value="0" class="form-control" name="Stt">
                             </div>
                         </div>
                     </form>

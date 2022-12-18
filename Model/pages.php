@@ -50,6 +50,12 @@ class pages extends \Model\Database
         //        $this->capnhatAllPages();
     }
 
+    public function GetPageByList($listPage)
+    {
+        $listidPage = implode("','", $listPage);
+        return $this->select($this->TableName, [], "`idPa` in ('{$listidPage}')");
+    }
+
     public function ToArrayJson()
     {
         return [
@@ -63,6 +69,12 @@ class pages extends \Model\Database
         $newsByPages = $news->NewsByPages($this->idPa, FALSE);
 
         return $newsByPages;
+    }
+
+    public function GetChil()
+    {
+        $parent = $this->idPa;
+        return $this->select($this->TableName, [], "`idGroup` = {$parent} and `isshow` =1");
     }
 
     public function getAllChil($parent, $user_tree_array = [])

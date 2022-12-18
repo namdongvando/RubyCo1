@@ -1,4 +1,7 @@
 <?php
+
+use Model\pages;
+
 $_Pages = new \Model\pages($data["pages"]);
 $indexPage = !empty($data["indexPage"]) ? intval($data["indexPage"]) : 1;
 $number = 12;
@@ -7,50 +10,88 @@ $Model_News = new \Model\news();
 $DanhSachTinMoiNhat = $Model_News->DanhSachTinMoiNhat(6);
 $tong = 0;
 $newsByPage = $Model_News->NewsByPagesLimitNumberPt($_Pages->idPa, $indexPage, $number, $tong);
+$pageChil = $_Pages->GetChil();
+if ($pageChil) {
 ?>
-<div class="container">
-    <div class="">
-        <ul class="breadcrumb" style="margin-top: 10px;">
-            <li><a href="/">Trang Chủ</a></li>
-            <li class="active"><?php echo $_Pages->Name ?></li>
-        </ul>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <h1 class="text-left title-pannel"><span><?php echo $_Pages->Name ?></span></h1>
-            <div class="row">
+    <div class="  fullscreem slider_home ">
+        <div class="container">
+            <div class="row pt-25">
                 <?php
-                if ($newsByPage) {
-                    foreach ($newsByPage as $news) {
-                        $_new = new \Model\news($news);
+                foreach ($pageChil as $key => $p) {
+                    $_p = new pages($p);
                 ?>
-                        <div class="col-md-4">
-                            <a href="<?php echo $_new->linkNewsCurent(); ?>">
-                                <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" />
-                            </a>
-                            <a href="<?php echo $_new->linkNewsCurent(); ?>" class="">
-                                <h3 class="newstitle text-justify"><?php echo $_new->Name ?></h3>
-                            </a>
-                            <p class="hidden"><span><?php echo $_new->NgayDang() ?></span> </p>
-                            <p class="hidden"><?php echo $_new->Summary(); ?></p>
-                            <div class="clearfix"></div>
-                            <hr>
+
+                    <div class="col-md-4">
+                        <div class="slider_home_item">
+                            <div class="item-content">
+                                <em>
+                                    <a class="" href="<?php echo $_p->linkPagesCurent() ?>">
+                                        <div class="item-content-imgages wow slideInRight " data-wow-duration="1s">
+                                            <img src="/public/banner/hexagon-bg_1.png?v=<?php echo filectime('public/banner/hexagon-bg_1.png'); ?>" alt="Thi Công" class="imgages-cut img-responsive">
+                                            <img onerror="this.src='/public/banner/hexagon-bg.png'" src="<?php echo $_p->Urlimages ?>" alt="Thi Công" class="img-responsive">
+                                        </div>
+                                    </a>
+                                </em>
+                                <a class="title-baiviet" href="<?php echo $_p->linkPagesCurent() ?>">
+                                    <h3 class="wow slideInLeft" data-wow-duration="2s"><?php echo $_p->Name; ?></h3>
+                                </a>
+                            </div>
                         </div>
-
+                    </div>
                 <?php
-                    }
                 }
+                ?>
 
-                ?>
-                <div class="clearfix"></div>
-                <?php
-                $tongTrang = ceil($tong / $number);
-                echo \lib\Common::PhanTrang($tongTrang, $indexPage, "[i]");
-                ?>
             </div>
         </div>
-        <div class="col-md-4">
-            
+    </div>
+<?php
+} else {
+?>
+
+    <div class="container">
+        <div class="">
+            <ul class="breadcrumb" style="margin-top: 10px;">
+                <li><a href="/">Trang Chủ</a></li>
+                <li class="active"><?php echo $_Pages->Name ?></li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="text-left title-pannel"><span><?php echo $_Pages->Name ?></span></h1>
+                <div class="row">
+                    <?php
+                    if ($newsByPage) {
+                        foreach ($newsByPage as $news) {
+                            $_new = new \Model\news($news);
+                    ?>
+                            <div class="col-md-4">
+                                <a href="<?php echo $_new->linkNewsCurent(); ?>">
+                                    <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" />
+                                </a>
+                                <a href="<?php echo $_new->linkNewsCurent(); ?>" class="">
+                                    <h3 class="newstitle text-justify"><?php echo $_new->Name ?></h3>
+                                </a>
+                                <p class="hidden"><span><?php echo $_new->NgayDang() ?></span> </p>
+                                <p class="hidden"><?php echo $_new->Summary(); ?></p>
+                                <div class="clearfix"></div>
+                                <hr>
+                            </div>
+
+                    <?php
+                        }
+                    }
+
+                    ?>
+                    <div class="clearfix"></div>
+                    <?php
+                    $tongTrang = ceil($tong / $number);
+                    echo \lib\Common::PhanTrang($tongTrang, $indexPage, "[i]");
+                    ?>
+                </div>
+            </div>
+            <div class="col-md-4">
+
                 <div class="">
                     <h2 class="text-left title-pannel"><span>Danh Mục Bài Viết</span></h2>
                     <div class="d-flex danhmucbaiviet">
@@ -107,13 +148,13 @@ $newsByPage = $Model_News->NewsByPagesLimitNumberPt($_Pages->idPa, $indexPage, $
                     <div class="DanhSachTags ajaxHtml" data-target="#DanhSachTags" id="DanhSachTags" data-url="/index/gettags/">
 
                     </div>
-                    <div class="clearfix" style="margin-bottom: 10px;">
-
+                    <div class="clearfix" style="margin-bottom: 10px;"> #DanhSachTags
                     </div>
-                </div> 
-            <?php
-            include "right.phtml";
-            ?>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+
+<?php
+}
+?>
