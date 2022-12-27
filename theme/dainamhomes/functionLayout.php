@@ -475,7 +475,7 @@ class functionLayout
                 <div class="d-flex" style="margin-top: 10px;margin-bottom: 10px;">
                     <div class="NhanVienHoTro" style="margin-right: 10px" ng-repeat="item in NhanVien| orderBy:'id' ">
                         <p style="margin: 0px" class="">
-                            <a style="color: #66060C;" href="tel:{{item.phone}}"> {{item.phone}}</a>
+                            <a style="color: #66060C;font-size:16px;" href="tel:{{item.phone}}"> {{item.phone}}</a>
                         </p>
                         <p style="margin: 0px" class="">{{item.name}}</p>
                     </div>

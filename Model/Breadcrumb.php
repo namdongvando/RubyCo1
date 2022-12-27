@@ -2,19 +2,22 @@
 
 namespace Model;
 
-class Breadcrumb {
+class Breadcrumb
+{
 
     public static $List;
     public static $MenuActive;
 
-    function setBreadcrumb($array) {
+    function setBreadcrumb($array)
+    {
         self::$List = $array;
     }
 
-    function showBreadcrumb() {
+    function showBreadcrumb()
+    {
         $ds = self::$List;
         $a = [];
-        ?>
+?>
         <div class="breadcrumb clearfix">
             <a class="home" href="/" title="Return to Home">Trang Chủ</a>
             <?php
@@ -23,28 +26,29 @@ class Breadcrumb {
                 unset($ds[count($ds) - 1]);
                 if ($ds)
                     foreach ($ds as $v) {
-                        ?>
-                        <span class="navigation-pipe">&nbsp;</span>
-                        <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
-                        <?php
+            ?>
+                    <span class="navigation-pipe">&nbsp;</span>
+                    <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
+                <?php
                     }
             }
             if ($a) {
                 ?>
                 <span class="navigation-pipe">&nbsp;</span>
                 <span class="navigation_page"><?php echo $a["title"] ?></span>
-                <?php
+            <?php
             }
             ?>
         </div>
 
-        <?php
+    <?php
     }
 
-    function backendBreadcrumb() {
+    function backendBreadcrumb()
+    {
         $ds = self::$List;
         $a = [];
-        ?>
+    ?>
         <div class="breadcrumb clearfix">
             <a class="home" href="/" title="Return to Home">Trang Chủ</a>
             <?php
@@ -53,28 +57,29 @@ class Breadcrumb {
                 unset($ds[count($ds) - 1]);
                 if ($ds)
                     foreach ($ds as $v) {
-                        ?>
-                        <span class="navigation-pipe">&nbsp;</span>
-                        <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
-                        <?php
+            ?>
+                    <span class="navigation-pipe">&nbsp;</span>
+                    <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
+                <?php
                     }
             }
             if ($a) {
                 ?>
                 <span class="navigation-pipe">&nbsp;</span>
                 <span class="navigation_page"><?php echo $a["title"] ?></span>
-                <?php
+            <?php
             }
             ?>
         </div>
 
-        <?php
+    <?php
     }
 
-    function backend() {
+    function backend()
+    {
         $ds = self::$List;
         $a = [];
-        ?>
+    ?>
         <ol class="breadcrumb ">
             <?php
             if ($ds) {
@@ -82,29 +87,31 @@ class Breadcrumb {
                 unset($ds[count($ds) - 1]);
                 if ($ds)
                     foreach ($ds as $v) {
-                        ?>
-                        <li class="active">
-                            <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
-                        </li>
-                        <?php
+            ?>
+                    <li class="active">
+                        <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
+                    </li>
+                <?php
                     }
             }
             if ($a) {
                 ?>
                 <li class="active"><?php echo $a["title"] ?></li>
-                    <?php
-                }
-                ?>
+            <?php
+            }
+            ?>
         </ol>
-        <?php
+<?php
     }
 
-    public static function setMenuAcrive($param0) {
+    public static function setMenuAcrive($param0)
+    {
         self::$MenuActive = md5($param0);
     }
 
-    public static function CheckMenuAcrive($param0) {
+    public static function CheckMenuAcrive($param0)
+    {
+        
         return self::$MenuActive == md5($param0);
     }
-
 }

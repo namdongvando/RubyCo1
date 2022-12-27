@@ -1,42 +1,42 @@
 <?php
 $Product = new \Model\Products();
 ?>
-<ol class="breadcrumb" >
-    <li><a href="/backend/" >Tranh chủ</a></li>
-    <li><a href="/mproduct/index" >Danh Sản Phẩm</a></li>
+<ol class="breadcrumb">
+    <li><a href="/backend/">Tranh chủ</a></li>
+    <li><a href="/mproduct/index">Danh Sản Phẩm</a></li>
     <li>Thêm</li>
 </ol>
-<form action="" method="POST" enctype="multipart/form-data" >
+<form action="" method="POST" enctype="multipart/form-data">
     <div class="container-fluid">
-        <div class="box box-solid "  >
+        <div class="box box-solid ">
             <div class="box-header bg-blue">
                 <h3 class="box-title">Thêm Sản Phẩm</h3>
             </div>
             <div class="box-body">
                 <div class="row">
 
-                    <div class="col-md-9" >
+                    <div class="col-md-9">
                         <?php
-                        Model\ProductsForm::ID($Product->ID)->render();
-                        Model\ProductsForm::nameProduct($Product->nameProduct)->renderHTML();
+                        Model\ProductsForm::ID($Product->Id)->render();
+                        Model\ProductsForm::Name($Product->Name)->renderHTML();
                         Model\ProductsForm::Summary($Product->Summary)->renderHTML();
                         Model\ProductsForm::Content($Product->Content)->renderHTML();
                         ?>
                     </div>
-                    <div class="col-md-3" >
+                    <div class="col-md-3">
 
-                        <div class="" >
-                            <div class="col-md-8" >
-                                <div class="row" >
+                        <div class="">
+                            <div class="col-md-8">
+                                <div class="row">
                                     <?php
                                     Model\ProductsForm::Price($Product->Price)->renderHTML();
                                     ?>
                                 </div>
                             </div>
-                            <div class="col-md-4" >
-                                <div class="row" >
+                            <div class="col-md-4">
+                                <div class="row">
                                     <?php
-                                    Model\ProductsForm::DoVi($Product->Note()->DonVi)->renderHTML();
+                                    Model\ProductsForm::DoViTinh($Product->Note()->DonVi)->renderHTML();
                                     ?>
                                 </div>
                             </div>
@@ -47,10 +47,10 @@ $Product = new \Model\Products();
                         <div class="form-group">
                             <div>
                                 <label>Chọn Hình</label>
-                                <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2" >
-                                    <input style="display: none" onclick="BrowseServer('Images:/bds/', 'UrlHinh')"  type="button" name="btnChonFilBrowseServere" id="btnChonFile" value="Chọn File" />
-                                    <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1" >
-                                        <img id="HinhQuanCao" src="<?php echo $Product->UrlHinh() ?>" style="height: 100px;max-width: 200px"  >
+                                <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2">
+                                    <input style="display: none" onclick="BrowseServer('Images:/bds/', 'UrlHinh')" type="button" name="btnChonFilBrowseServere" id="btnChonFile" value="Chọn File" />
+                                    <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1">
+                                        <img id="HinhQuanCao" src="<?php echo $Product->UrlHinh() ?>" style="height: 100px;max-width: 200px">
                                     </div>
                                 </label>
                                 <div style="clear: both"></div>
@@ -71,7 +71,7 @@ $Product = new \Model\Products();
                         ?>
                         <div class="form-group">
                             <label></label>
-                            <button name="ThemSanPham" style="min-width: 100px" class="btn btn-primary" type="submit" >OK</button>
+                            <button name="ThemSanPham" style="min-width: 100px" class="btn btn-primary" type="submit">OK</button>
                         </div>
                     </div>
                 </div>
@@ -79,4 +79,3 @@ $Product = new \Model\Products();
         </div>
     </div>
 </form>
-

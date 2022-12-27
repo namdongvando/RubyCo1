@@ -25,6 +25,11 @@ class Controller_index extends Application
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
+    public function baogia()
+    {
+        $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
+    }
+
     function index1()
     {
 

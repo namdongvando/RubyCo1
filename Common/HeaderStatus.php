@@ -2,9 +2,11 @@
 
 namespace Common;
 
-class HeaderStatus {
+class HeaderStatus
+{
 
-    static public function GetByCode($num) {
+    static public function GetByCode($num)
+    {
         $http = array(
             100 => 'HTTP/1.1 100 Continue',
             101 => 'HTTP/1.1 101 Switching Protocols',
@@ -53,7 +55,8 @@ class HeaderStatus {
         );
     }
 
-    public static function SetByCode($param0) {
+    public static function SetByCode($num)
+    {
         $http = array(
             100 => 'HTTP/1.1 100 Continue',
             101 => 'HTTP/1.1 101 Switching Protocols',
@@ -104,5 +107,4 @@ class HeaderStatus {
             'error' => $http[$num],
         );
     }
-
 }

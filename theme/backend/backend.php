@@ -2,10 +2,14 @@
 
 namespace theme\backend;
 
-class backend extends \Model\Database {
+use Application;
 
-    function head() {
-        ?>
+class backend extends \Model\Database
+{
+
+    function head()
+    {
+?>
         <link rel="shortcut icon" href="/public/no-image.jpg" />
         <link rel="stylesheet" href="/public/admin/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -19,17 +23,19 @@ class backend extends \Model\Database {
         <link rel="stylesheet" href="/public/admin/plugins/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="/public/admin/plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="/public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-        <link href="/public/admin/plugins/select2/select2.min.css" rel="stylesheet" type="text/css"/>
-        <link href="/public/admin/dist/css/Style.css?v=<?php echo filemtime('public/admin/dist/css/Style.css'); ?>" rel="stylesheet" type="text/css"/>
-        <link href="/public/admin/Customer.css?v=<?php echo filemtime("public/admin/Customer.css"); ?>" rel="stylesheet" type="text/css"/>
+        <link href="/public/admin/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="/public/admin/dist/css/Style.css?v=<?php echo filemtime('public/admin/dist/css/Style.css'); ?>" rel="stylesheet" type="text/css" />
+        <link href="/public/admin/Customer.css?v=<?php echo filemtime("public/admin/Customer.css"); ?>" rel="stylesheet" type="text/css" />
         <script src="/public/ckfinder/ckfinder.js" type="text/javascript"></script>
         <script src="/public/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <?php
+    <?php
     }
 
-    function Menu($_Controller = "mproduct") {
-        ?>
-        <header class="main-header "  ng-controller="bklayoutController" ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
+    function Menu($_Controller = "mproduct")
+    {
+        $_Controller = Application::getController();
+    ?>
+        <header class="main-header " ng-controller="bklayoutController" ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
             <!-- Logo -->
             <a href="/backend/" class="logo">
                 <span class="logo-mini"><b>A</b>LT</span>
@@ -41,7 +47,7 @@ class backend extends \Model\Database {
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li><a href="/" target="_blank"  >Xem Website</a></li>
+                        <li><a href="/" target="_blank">Xem Website</a></li>
 
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -74,7 +80,7 @@ class backend extends \Model\Database {
             </nav>
         </header>
 
-        <aside class="main-sidebar" ng-controller="bklayoutController" ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'  >
+        <aside class="main-sidebar" ng-controller="bklayoutController" ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar ">
                 <!-- Sidebar user panel -->
@@ -99,7 +105,7 @@ class backend extends \Model\Database {
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu ">
-                    <li class="header text-center text-uppercase " style="color: #ddd;" ><b>Chức Năng Chính</b></li>
+                    <li class="header text-center text-uppercase " style="color: #ddd;"><b>Chức Năng Chính</b></li>
 
                     <li class="treeview ">
                         <a href="/mthuvien/index">
@@ -136,25 +142,35 @@ class backend extends \Model\Database {
                             <li><a href="/mnews/addnews"><i class="fa fa-circle-o"></i> Thêm Bài viết</a></li>
                         </ul>
                     </li>
+                    <li class="treeview <?php echo $_Controller == "mproduct" ? 'active' : '' ?>">
+                        <a href="/mproduct/index">
+                            <i class="fa fa-list-alt"></i> <span>Quản Lý Sản Phẩm</span>
+                            <i class="fa fa-angle-right pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="/mproduct/index"><i class="fa fa-circle-o"></i> Sản Phẩm</a></li>
+                            <li><a href="/mproduct/addproduct"><i class="fa fa-circle-o"></i> Thêm Sản Phẩm</a></li>
+                        </ul>
+                    </li>
                     <?php
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                        ?>
+                    ?>
                         <li class="treeview  <?php echo \Model\Breadcrumb::CheckMenuAcrive("Controller_madv") ? 'active' : '' ?>">
                             <a href="/madv/index"><i class="fa fa-home"></i>
                                 <span>Trang Chủ</span>
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu  ">
-                                <li class="active" ><a  href="/madv/homeslide/"><i class="fa fa-circle-o"></i>Quản Lý Banner Động</a></li>
-                                <li class="active" ><a  href="/madv/doitac"><i class="fa fa-circle-o"></i>Đối Tác</a></li>
-                                <li class="active" ><a  href="/madv/khachhang/"><i class="fa fa-circle-o"></i>Ý Kiến Khách Hàng </a></li>
-                                <li class="active" ><a  href="/mtheme/mhome/home"><i class="fa fa-circle-o"></i>Giao Diện</a></li>
+                                <li class="active"><a href="/madv/homeslide/"><i class="fa fa-circle-o"></i>Quản Lý Banner Động</a></li>
+                                <li class="active"><a href="/madv/doitac"><i class="fa fa-circle-o"></i>Đối Tác</a></li>
+                                <li class="active"><a href="/madv/khachhang/"><i class="fa fa-circle-o"></i>Ý Kiến Khách Hàng </a></li>
+                                <li class="active"><a href="/mtheme/mhome/home"><i class="fa fa-circle-o"></i>Giao Diện</a></li>
                             </ul>
                         </li>
-                        <?php
+                    <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                        ?>
+                    ?>
                         <li class="treeview">
                             <a href="/mtheme/thememenu/home/TopMainMenu">
                                 <i class="fa fa-list-alt"></i> <span>Quản Lý Menu</span>
@@ -162,43 +178,44 @@ class backend extends \Model\Database {
                             </a>
 
                         </li>
-                        <?php
+                    <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                        ?>
+                    ?>
                         <li class="treeview ">
                             <a href="/minfor/index/thongtincongty">
                                 <i class="fa fa-list-alt"></i> <span>Thông tin công ty</span>
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
-                        <?php
+                    <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                        ?>
+                    ?>
                         <li class="  treeview  ">
                             <a href="/duser/index/index">
                                 <i class="fa fa-users"></i> <span>Quản Lý User</span>
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
-                        <?php
+                    <?php
                     }
                     ?>
                 </ul>
             </section>
             <!-- /.sidebar -->
         </aside>
-        <?php
+    <?php
     }
 
-    function js() {
-        ?>
+    function js()
+    {
+    ?>
 
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
         <script>
-                            $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.5 -->
         <script src="/public/admin/bootstrap/js/bootstrap.min.js"></script>
@@ -234,128 +251,130 @@ class backend extends \Model\Database {
         <script src="/public/admin/dist/js/demo.js"></script>
         <script src="/public/admin/Javascript.js?<?php echo filemtime('public/admin/Javascript.js'); ?>" type="text/javascript"></script>
         <script>
+            $(function() {
+                $(".xoa").click(function() {
 
-                            $(function() {
-                                $(".xoa").click(function() {
+                });
+                $(".dataTable").each(function() {
+                    var id = "#" + $(this).attr("id");
+                    $(id).dataTable();
+                });
+                setTimeout(function() {
+                    $(".alert").toggle();
+                }, 3000);
 
-                                });
-                                $(".dataTable").each(function() {
-                                    var id = "#" + $(this).attr("id");
-                                    $(id).dataTable();
-                                });
-                                setTimeout(function() {
-                                    $(".alert").toggle();
-                                }, 3000);
+                function password_generator(len) {
+                    var length = (len) ? (len) : (10);
+                    var string = "abcdefghijklmnopqrstuvwxyz"; //to upper
+                    var numeric = '0123456789';
+                    var punctuation = '!@#$%^&*()_+~`|}{[]\:;?><,./-=';
+                    var password = "";
+                    var character = "";
+                    var crunch = true;
+                    while (password.length < length) {
+                        entity1 = Math.ceil(string.length * Math.random() * Math.random());
+                        entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
+                        entity3 = Math.ceil(punctuation.length * Math.random() * Math.random());
+                        hold = string.charAt(entity1);
+                        hold = (password.length % 2 == 0) ? (hold.toUpperCase()) : (hold);
+                        character += hold;
+                        character += numeric.charAt(entity2);
+                        character += punctuation.charAt(entity3);
+                        password = character;
+                    }
+                    password = password.split('').sort(function() {
+                        return 0.5 - Math.random()
+                    }).join('');
+                    return password.substr(0, len);
+                }
+                $("#TaoMatKhau").click(function() {
+                    var self = $(this);
+                    var target = self.data("target");
+                    $(target).val(password_generator());
+                });
+                $(".XemMatKhau").click(function() {
+                    var self = $(this);
+                    var target = self.data("target");
+                    if ($(target).attr("type") == "text") {
+                        $(target).attr("type", "password");
+                    } else {
+                        $(target).attr("type", "text");
+                    }
 
-                                function password_generator(len) {
-                                    var length = (len) ? (len) : (10);
-                                    var string = "abcdefghijklmnopqrstuvwxyz"; //to upper
-                                    var numeric = '0123456789';
-                                    var punctuation = '!@#$%^&*()_+~`|}{[]\:;?><,./-=';
-                                    var password = "";
-                                    var character = "";
-                                    var crunch = true;
-                                    while (password.length < length) {
-                                        entity1 = Math.ceil(string.length * Math.random() * Math.random());
-                                        entity2 = Math.ceil(numeric.length * Math.random() * Math.random());
-                                        entity3 = Math.ceil(punctuation.length * Math.random() * Math.random());
-                                        hold = string.charAt(entity1);
-                                        hold = (password.length % 2 == 0) ? (hold.toUpperCase()) : (hold);
-                                        character += hold;
-                                        character += numeric.charAt(entity2);
-                                        character += punctuation.charAt(entity3);
-                                        password = character;
-                                    }
-                                    password = password.split('').sort(function() {
-                                        return 0.5 - Math.random()
-                                    }).join('');
-                                    return password.substr(0, len);
-                                }
-                                $("#TaoMatKhau").click(function() {
-                                    var self = $(this);
-                                    var target = self.data("target");
-                                    $(target).val(password_generator());
-                                });
-                                $(".XemMatKhau").click(function() {
-                                    var self = $(this);
-                                    var target = self.data("target");
-                                    if ($(target).attr("type") == "text") {
-                                        $(target).attr("type", "password");
-                                    } else {
-                                        $(target).attr("type", "text");
-                                    }
+                });
+            });
 
-                                });
-                            });
+            function BrowseServerShowImg(startupPath, functionData, idimg) {
+                var finder = new CKFinder();
+                finder.BasePath = '<?php echo BASE_URL ?>public/';
+                finder.startupPath = startupPath;
+                finder.selectActionFunction = function(fileUrl, data) {
+                    document.getElementById(data["selectActionData"]).value = fileUrl;
+                    var ID = data["selectActionData"];
+                    console.log(fileUrl);
+                    $('#' + idimg).attr('src', fileUrl);
+                };
+                finder.selectActionData = functionData;
+                finder.selectThumbnailActionFunction = function(fileUrl, data) {
+                    console.log(fileUrl);
+                    $('#' + idimg).attr('src', fileUrl);
+                };
+                finder.popup();
+            }
 
-                            function BrowseServerShowImg(startupPath, functionData, idimg) {
-                                var finder = new CKFinder();
-                                finder.BasePath = '<?php echo BASE_URL ?>public/';
-                                finder.startupPath = startupPath;
-                                finder.selectActionFunction = function(fileUrl, data) {
-                                    document.getElementById(data["selectActionData"]).value = fileUrl;
-                                    var ID = data["selectActionData"];
-                                    console.log(fileUrl);
-                                    $('#' + idimg).attr('src', fileUrl);
-                                };
-                                finder.selectActionData = functionData;
-                                finder.selectThumbnailActionFunction = function(fileUrl, data) {
-                                    console.log(fileUrl);
-                                    $('#' + idimg).attr('src', fileUrl);
-                                };
-                                finder.popup();
-                            }
-                            function BrowseServer(startupPath, functionData) {
-                                var finder = new CKFinder();
-                                finder.BasePath = '<?php echo BASE_URL ?>public/';
-                                finder.startupPath = startupPath;
-                                finder.selectActionFunction = SetFileField;
-                                finder.selectActionData = functionData;
-                                finder.selectThumbnailActionFunction = ShowThumbnails;
-                                finder.popup();
-                            }
-                            function SetFileField(fileUrl, data) {
-                                document.getElementById(data["selectActionData"]).value = fileUrl;
-                                var ID = data["selectActionData"];
-                                hienthumb(fileUrl, ID);
-                            }
-                            function ShowThumbnails(fileUrl, data) {
-                                var sFileName = this.getSelectedFile().name;
+            function BrowseServer(startupPath, functionData) {
+                var finder = new CKFinder();
+                finder.BasePath = '<?php echo BASE_URL ?>public/';
+                finder.startupPath = startupPath;
+                finder.selectActionFunction = SetFileField;
+                finder.selectActionData = functionData;
+                finder.selectThumbnailActionFunction = ShowThumbnails;
+                finder.popup();
+            }
 
-                                document.getElementById('thumbnails').innerHTML +=
-                                        '<div class="thumb">' +
-                                        '<img src="' + fileUrl + '" />' +
-                                        '<div class="caption">' +
-                                        '<a href="' + data["fileUrl"] + '" target="_blank">' + sFileName + '</a> (' + data["fileSize"] + 'KB)' +
-                                        '</div>' +
-                                        '</div>';
-                                document.getElementById('preview').style.display = "";
-                                return false;
+            function SetFileField(fileUrl, data) {
+                document.getElementById(data["selectActionData"]).value = fileUrl;
+                var ID = data["selectActionData"];
+                hienthumb(fileUrl, ID);
+            }
 
-                            }
-                            function hienthumb(fileUrl, ID) {
-                                if (fileUrl != "") {
-                                    $('#HinhQuanCao').attr('src', fileUrl);
-                                    var bien = "<img src='" + fileUrl + "'  height='100'>";
-                                    $('#' + ID).parent().children('label').children('.HinhChon').html(bien);
-                                }
-                                ;
-                            }
+            function ShowThumbnails(fileUrl, data) {
+                var sFileName = this.getSelectedFile().name;
 
+                document.getElementById('thumbnails').innerHTML +=
+                    '<div class="thumb">' +
+                    '<img src="' + fileUrl + '" />' +
+                    '<div class="caption">' +
+                    '<a href="' + data["fileUrl"] + '" target="_blank">' + sFileName + '</a> (' + data["fileSize"] + 'KB)' +
+                    '</div>' +
+                    '</div>';
+                document.getElementById('preview').style.display = "";
+                return false;
 
+            }
+
+            function hienthumb(fileUrl, ID) {
+                if (fileUrl != "") {
+                    $('#HinhQuanCao').attr('src', fileUrl);
+                    var bien = "<img src='" + fileUrl + "'  height='100'>";
+                    $('#' + ID).parent().children('label').children('.HinhChon').html(bien);
+                };
+            }
         </script>
         <script src="https://www.google.com/recaptcha/api.js?render=<?php echo reCAPTCHA; ?>"></script>
-        <?php
+    <?php
     }
 
-    function Breadcrumb() {
+    function Breadcrumb()
+    {
         $brea = new \Model\Breadcrumb();
         $brea->backend();
     }
 
     public
-            function Footer() {
-        ?>
+    function Footer()
+    {
+    ?>
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.3.0
@@ -364,7 +383,6 @@ class backend extends \Model\Database {
         </footer>
         <div class="control-sidebar-bg"></div>
 
-        <?php
+<?php
     }
-
 }
