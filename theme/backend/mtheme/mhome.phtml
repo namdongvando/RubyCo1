@@ -33,15 +33,19 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                         <div class="box-header ">
                             <i class="fa fa-list"></i>
                             <div class="box-tools">
-                                <button type="button" ng-click="AddItemGroups({'Functions': '', 'DanhMuc': '0'}, Home.DanhMucBanner)" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
-                                <button type="submit" name="SaveConfigHome" class="btn btn-sm btn-success"><i class="fa fa-save"></i></button>
+                                <button type="button"
+                                    ng-click="AddItemGroups({'Functions': '', 'DanhMuc': '0'}, Home.DanhMucBanner)"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                <button type="submit" name="SaveConfigHome" class="btn btn-sm btn-success"><i
+                                        class="fa fa-save"></i></button>
                             </div>
                             <h3 class="box-title">Banner Danh Mục</h3>
                         </div>
                         <div class="box-body">
                             <div class="row" ng-repeat="itemhome  in Home.DanhMucBanner">
                                 <div class="col-md-3">
-                                    <button type="button" class="btn btn-danger btn-xs" ng-click="RemoveItemGroups($index, Home.DanhMucBanner)">
+                                    <button type="button" class="btn btn-danger btn-xs"
+                                        ng-click="RemoveItemGroups($index, Home.DanhMucBanner)">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                     <label>Danh Mục</label>
@@ -59,8 +63,11 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                         <div class="box-header">
                             <h3 class="box-title">Trang Chủ</h3>
                             <div class="box-tools">
-                                <button type="button" ng-click="AddItemGroups({'Functions': '', 'DanhMuc': '0'}, Home.TrangChu)" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
-                                <button type="submit" name="SaveConfigHome" class="btn btn-sm btn-success"><i class="fa fa-save"></i></button>
+                                <button type="button"
+                                    ng-click="AddItemGroups({'Functions': '', 'DanhMuc': '0'}, Home.TrangChu)"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                <button type="submit" name="SaveConfigHome" class="btn btn-sm btn-success"><i
+                                        class="fa fa-save"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
@@ -74,7 +81,8 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                                 <div class="col-md-4">
                                     <label>Danh Mục</label>
                                     <select ng-model="itemhome.DanhMuc" class="form-control">
-                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}</option>
+                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
@@ -82,7 +90,8 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                                     <input type="number" ng-model="itemhome.SoLuong" class="form-control">
                                 </div>
                                 <div class="col-md-1">
-                                    <button ng-click="RemoveItemGroups($index, Home.TrangChu)" class="btn btn-sm btn-danger" type="button"><i class="fa fa-minus"></i></button>
+                                    <button ng-click="RemoveItemGroups($index, Home.TrangChu)"
+                                        class="btn btn-sm btn-danger" type="button"><i class="fa fa-minus"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +100,11 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                         <div class="box-header">
                             <h3 class="box-title">Danh Mục</h3>
                             <div class="box-tools">
-                                <button type="button" ng-click="AddItemGroups({'Functions': '', 'DanhMuc': '0'}, Home.TrangChu)" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
-                                <button type="submit" name="SaveConfigHome" class="btn btn-sm btn-success"><i class="fa fa-save"></i></button>
+                                <button type="button"
+                                    ng-click="AddItemGroups({'Functions': '', 'DanhMuc': '0'}, Home.TrangChu)"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button>
+                                <button type="submit" name="SaveConfigHome" class="btn btn-sm btn-success"><i
+                                        class="fa fa-save"></i></button>
                             </div>
                         </div>
                         <div class="box-body">
@@ -100,25 +112,29 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                                 <div class="col-md-3">
                                     <label>Khách Hàng Nói Về Chúng Tôi</label>
                                     <select ng-model="Home.KhachHangNoiVeChungToi" class="form-control">
-                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}</option>
+                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Giới Thiệu Ngắn</label>
                                     <select ng-model="Home.GioiThieuNgan" class="form-control">
-                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}</option>
+                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Thông Tin Cần Biết</label>
                                     <select ng-model="Home.ThongTinCanBiet" class="form-control">
-                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}</option>
+                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-md-3">
                                     <label>Tại Sao Chọn Chúng Tôi</label>
                                     <select ng-model="Home.TaiSaoChonChungToi" class="form-control">
-                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}</option>
+                                        <option value="{{item.idPa}}" ng-repeat="item in ListPages">{{item.Name}}
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -146,14 +162,18 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                                 <div class="form-group hidden">
                                     <label for="">Danh Mục Sản Phẩm</label>
                                     <input ng-model="seach" type="text" class="form-control">
-                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addHomeCategory(item, TypeCatId)" ng-repeat="item in _Categorys| filter :seach">
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button"
+                                        ng-click="addHomeCategory(item, TypeCatId)"
+                                        ng-repeat="item in _Categorys| filter :seach">
                                         {{item.catName}}
                                     </button>
                                 </div>
                                 <div class="form-group  ">
                                     <label for="">Danh Mục Bài Viết </label>
                                     <input ng-model="seach" type="text" class="form-control">
-                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addHomeCategory(item, TypePageId)" ng-repeat="item in ListPages| filter :seach">
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button"
+                                        ng-click="addHomeCategory(item, TypePageId)"
+                                        ng-repeat="item in ListPages| filter :seach">
                                         {{item.Name}}
                                     </button>
                                 </div>
@@ -169,7 +189,8 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                         <div class="box-body connectedSortable">
                             <div class="col-md-6">
                                 <div class="col-md-12" ng-repeat="item in Home.DichVu track by $index">
-                                    <button type="button" class="btn btn-xs" ng-click="removeItemFromList($index, Home.DichVu)">
+                                    <button type="button" class="btn btn-xs"
+                                        ng-click="removeItemFromList($index, Home.DichVu)">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                     <label>
@@ -182,14 +203,18 @@ $a = file_get_contents(ROOT_DIR . "/theme/config/homeconfig.json");
                                 <div class="form-group hidden">
                                     <label for="">Danh Mục Sản Phẩm</label>
                                     <input ng-model="seach" type="text" class="form-control">
-                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addItemToList(item, Home.DichVu)" ng-repeat="item in _Categorys| filter :seach">
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button"
+                                        ng-click="addItemToList(item, Home.DichVu)"
+                                        ng-repeat="item in _Categorys| filter :seach">
                                         {{item.catName}}
                                     </button>
                                 </div>
                                 <div class="form-group  ">
                                     <label for="">Danh Mục Bài Viết </label>
                                     <input ng-model="seachdm" type="text" class="form-control">
-                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button" ng-click="addItemToList(item, Home.DichVu)" ng-repeat="item in ListPages| filter :seachdm">
+                                    <button style="white-space: nowrap;" class="col-md-4 text-left" type="button"
+                                        ng-click="addItemToList(item, Home.DichVu)"
+                                        ng-repeat="item in ListPages| filter :seachdm">
                                         {{item.Name}}
                                     </button>
                                 </div>

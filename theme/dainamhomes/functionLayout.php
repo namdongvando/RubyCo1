@@ -861,6 +861,16 @@ class functionLayout
         <div style="position: fixed;left: 0px;bottom: 30%;z-index: 99999" class="  hidden-xs  phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
             <div class="phonering-alo-ph-circle"></div>
             <div class="phonering-alo-ph-circle-fill"></div>
+            <a href="https://www.facebook.com/inbangronlambanghieu/" class="pps-btn-img" title="Liên hệ">
+                <div class="phonering-alo-ph-img-circle">
+                    <!-- <img style="width: 40px;margin-top: -25px;" src="/public/Icon/messenger.png"> -->
+                    <i style="color: #fff;background-color: #fff0;" class="fa fa-facebook fa-3x"></i>
+                </div>
+            </a>
+        </div>
+        <div style="position: fixed;left: 0px;bottom: 20%;z-index: 99999" class="  hidden-xs  phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon">
+            <div class="phonering-alo-ph-circle"></div>
+            <div class="phonering-alo-ph-circle-fill"></div>
             <a href="https://m.me/__messengerID___" class="pps-btn-img" title="Liên hệ">
                 <div class="phonering-alo-ph-img-circle">
                     <img style="width: 40px;margin-top: -25px;" src="/public/Icon/messenger.png">

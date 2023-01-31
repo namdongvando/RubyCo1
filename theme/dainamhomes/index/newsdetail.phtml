@@ -2,7 +2,7 @@
 $_Pages = new \Model\pages();
 $_News = new Model\news($data["news"]);
 $data["news"]["SoLanXem"] = $data["news"]["SoLanXem"] + 1;
-// $_News->editNews($data["news"]);
+$_News->editNews($data["news"]);
 $DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
 $DanhSachTinMoiNhat = $_News->DanhSachTinMoiNhat(6);
 ?>
@@ -15,7 +15,7 @@ $DanhSachTinMoiNhat = $_News->DanhSachTinMoiNhat(6);
             "@type": "AggregateRating",
             "ratingValue": "5",
             "bestRating": "5",
-            "ratingCount": "100"
+            "ratingCount": "<?php echo $_News->SoLanXem ?>"
         }
     }
 </script>
@@ -127,7 +127,7 @@ $DanhSachTinMoiNhat = $_News->DanhSachTinMoiNhat(6);
                     <div class="clearfix" style="margin-bottom: 10px;">
 
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
 

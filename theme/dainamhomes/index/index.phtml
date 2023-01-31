@@ -1,5 +1,6 @@
 <?php
 
+use Model\adv;
 use Model\pages;
 
 $adv = new \Model\adv();
@@ -16,6 +17,9 @@ $_HomeCategory = array_map(function ($item) {
 $page = new pages();
 $pages = $page->GetPageByList($_HomeCategory);
 
+$_Advs = new adv(); 
+$itemAdv = $_Advs->AdvsByGroup("homeslide",false);
+// var_dump($itemAdv);
 ?>
 <script type="application/ld+json">
     {
@@ -36,21 +40,22 @@ $pages = $page->GetPageByList($_HomeCategory);
         <div class="container">
             <div class="row pt-25 pb-25">
                 <?php
-                foreach ($pages as $p) {
-                    $_p = new pages($p);
+                foreach ($itemAdv as $p) {
+                    $_p = new adv($p);
                 ?>
                     <div class="col-md-4">
                         <div class="slider_home_item">
                             <div class="item-content">
                                 <em>
-                                    <a class="" href="<?php echo $_p->linkPagesCurent() ?>">
+                                    <a class="" href="<?php echo $_p->Link ?>">
                                         <div class="item-content-imgages wow slideInRight " data-wow-duration="1s">
                                             <img src="/public/banner/hexagon-bg_1.png?v=<?php echo filectime('public/banner/hexagon-bg_1.png'); ?>" alt="Thi Công" class="imgages-cut img-responsive">
-                                            <img onerror="this.src='/public/banner/hexagon-bg.png'" src="<?php echo $_p->Urlimages ?>" alt="Thi Công" class="img-responsive">
+                                            <img onerror="this.src='/public/banner/hexagon-bg.png'"
+                                             src="<?php echo $_p->Urlimages ?>?v=<?php echo time(); ?>" alt="<?php echo $_p->Name ?>" class="img-responsive">
                                         </div>
                                     </a>
                                 </em>
-                                <a class="title-baiviet" href="<?php echo $_p->linkPagesCurent() ?>">
+                                <a class="title-baiviet" href="<?php echo $_p->Link ?>">
                                     <h3 class="wow slideInLeft" data-wow-duration="2s"><?php echo $_p->Name; ?></h3>
                                 </a>
                             </div>
