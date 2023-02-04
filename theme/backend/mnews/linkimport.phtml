@@ -1,0 +1,24 @@
+ <div class="row ">
+     <section class="col-md-12">
+         <div class="box box-solid ">
+             <div class="box-header">
+                 <h3 class="box-title">Import link</h3>
+                 <div class="box-tools">
+                     <a class="btn btn-success" href="/mnews/linkimport/">import link</a>
+                 </div>
+             </div>
+             <div class="box-body">
+                 <?php echo $rows; ?>
+                 <form action="" method="post" enctype="multipart/form-data" accept=".xlsx">
+                     <label style="background: #aaa;padding: 10px;cursor: pointer;">
+                         <br>
+                         Chọn file
+                         <input type="file" style="visibility: hidden;" name="import_file" />
+                     </label>
+                     <br>
+                     <input type="submit" name="submit" id="import" class="btn btn-success" value="Import File" />
+                 </form>
+             </div>
+         </div>
+     </section>
+ </div>

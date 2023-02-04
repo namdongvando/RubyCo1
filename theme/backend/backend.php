@@ -120,6 +120,7 @@ class backend extends \Model\Database
                         <ul class="treeview-menu">
                             <li><a href="/mpage/index"><i class="fa fa-circle-o"></i> Danh mục bài biết</a></li>
                             <li><a href="/mnews/index"><i class="fa fa-circle-o"></i> Bài viết</a></li>
+                            <li><a href="/mnews/link"><i class="fa fa-circle-o"></i> QL Link</a></li>
                             <li><a href="/mnews/addnews"><i class="fa fa-circle-o"></i> Thêm Bài viết</a></li>
                             <li><a href="/tags/"><i class="fa fa-circle-o"></i> Tags</a></li>
                         </ul>

@@ -10,6 +10,7 @@
     ],
     "require": {
         "zendframework/zend-db": "^2.11",
+        "phpoffice/phpspreadsheet": "^1.24",
         "namdongvando/rpfbc": "^3.22"
     }
 }

@@ -53,6 +53,28 @@ class news extends \Model\Database
         $this->Stt = $menu['Stt'] ?? null;
     }
 
+    public function UpdateSoLanXem()
+    {
+        $data["SoLanXem"] = $this->SoLanXem + 1;
+        $data["ID"] = $this->ID;
+        $this->Update($this->TableName, $data, "`ID` = '{$data["ID"]}'");
+    }
+    public function UpdateLink()
+    {
+        $data["RedirectLink"] = $this->RedirectLink;
+        $data["ID"] = $this->ID;
+        $this->Update($this->TableName, $data, "`ID` = '{$data["ID"]}'");
+    }
+
+    function GetAllNewsByAlias($alias)
+    {
+        //        reutur array
+        $where = "`Alias` like '%{$alias}%'";
+        $a = $this->select($this->TableName, [], $where);
+        if ($a)
+            return $a[0];
+        return null;
+    }
     function NewsByAliasOnly($alias)
     {
         return $this->GetNewsByAlias($alias);
@@ -110,6 +132,7 @@ class news extends \Model\Database
     function DanhSachTinPT($indexPage, $Number, $Name, &$Tong)
     {
         $DanhMuc = 0;
+        $hasAlias = $Name["hasalias"] ?? null;
         if (!is_array($Name)) {
             $Name = $Name;
         } else {
@@ -120,14 +143,18 @@ class news extends \Model\Database
         if ($DanhMuc > 0) {
             $sqlDanhmuc = " and `PageID` = '{$DanhMuc}'";
         }
+        $sqlHasAlias = "";
+        if ($hasAlias) {
+            $sqlHasAlias = " and `RedirectLink` like '%_%'";
+        }
         $Tong = 0;
         $indexPage = $indexPage - 1;
         $indexPage = max($indexPage, 0);
         $indexPage = $indexPage * $Number;
-        $TongTin = $this->select($this->TableName, [], " `Name` like '%$Name%' and `AnHien` = 1 $sqlDanhmuc");
+        $TongTin = $this->select($this->TableName, [], " `Name` like '%$Name%' and `AnHien` = 1 $sqlDanhmuc $sqlHasAlias");
         if ($TongTin)
             $Tong = count($TongTin);
-        $where = "`Name` like '%$Name%' $sqlDanhmuc order by `NgayDang` desc limit {$indexPage},{$Number}";
+        $where = "`Name` like '%$Name%' $sqlDanhmuc $sqlHasAlias order by `NgayDang` desc limit {$indexPage},{$Number}";
         return $this->select($this->TableName, [], $where);
     }
     function DanhSachIsDelete($indexPage, $Number, $Name, &$Tong)
@@ -164,9 +191,7 @@ class news extends \Model\Database
 
     public static function LinkDetail($param0 = null)
     {
-        if ($param0)
-            return "/mnews/detail/" . $param0 . '/';
-        return "/mnews/detail/" . $this->ID . '/';
+        return "/mnews/detail/" . $param0 . '/';
     }
 
     public function PageID()

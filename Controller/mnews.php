@@ -1,5 +1,9 @@
 <?php
 
+use Model\news;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
+
 class Controller_mnews extends Controller_backend
 {
 
@@ -23,6 +27,52 @@ class Controller_mnews extends Controller_backend
     {
 
         $this->ViewTheme([], Model_ViewTheme::get_viewthene(), "news");
+    }
+    function link()
+    {
+ 
+        $this->ViewTheme([], Model_ViewTheme::get_viewthene(), "news");
+    }
+    function linkimport()
+    {
+        if (isset($_POST["submit"])) {
+            try {
+                // Kiểm tra File đúng định dạng không khi import
+                $allowed_extension = array('xls', 'csv', 'xlsx');
+                $file_array = explode(".", $_FILES["import_file"]["name"]);
+                $file_extension = end($file_array);
+                if (in_array($file_extension, $allowed_extension) == false) {
+                    throw new Exception("File không đúng định dạng");
+                }
+                $file_type =  IOFactory::identify($_FILES['import_file']['tmp_name']);
+                $reader =  IOFactory::createReader($file_type);
+                $spreadsheet = $reader->load($_FILES['import_file']['tmp_name']);
+                $dataSheet0 = $spreadsheet->getSheet(0)->toArray();
+                $row = 0;
+                foreach ($dataSheet0 as $index => $item) {
+                    if ($index > 0) {
+                        if ($item[0] != "") {
+                            $_new = new news();
+                            $oldLink = $item[1];
+                            $oldLink = str_replace("https://www.rubyads.com.vn/", "", $oldLink);
+                            $oldLink = str_replace("https://rubyads.com.vn/", "", $oldLink);
+                            $oldLink = str_replace(".html", "", $oldLink);
+                            $RedirectLink = $item[2];
+                            $_newEdit = $_new->GetAllNewsByAlias($oldLink);
+                            if ($_newEdit) {
+                                $_new = new news($_newEdit);
+                                $_new->RedirectLink = $RedirectLink;
+                                $_new->UpdateLink();
+                                $row++;
+                            }
+                        }
+                    }
+                }
+            } catch (Exception $ex) {
+                echo $ex->getMessage();
+            }
+        }
+        $this->ViewTheme(["rows" => $row ?? 0], Model_ViewTheme::get_viewthene(), "news");
     }
 
     function addnews()

@@ -1,10 +1,12 @@
 <?php
-$_Pages = new \Model\pages();
+
 $_News = new Model\news($data["news"]);
-$data["news"]["SoLanXem"] = $data["news"]["SoLanXem"] + 1;
-$_News->editNews($data["news"]);
-$DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
+// $_News->editNews($data["news"]);
+$_News->UpdateSoLanXem();
 $DanhSachTinMoiNhat = $_News->DanhSachTinMoiNhat(6);
+$_Pages = new \Model\pages();
+$DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
+
 ?>
 <script type="application/ld+json">
     {

@@ -639,7 +639,7 @@ class Database extends \Model\iDatabase
         $sql = "SELECT * FROM `" . table_prefix . "menu` WHERE  `IDMenu` = '{$id}'";
         $this->Query($sql);
         if ($isobj) {
-            return new Model\Menu($this->fetchRow());
+            return new \Model\Menu($this->fetchRow());
         }
         return $this->fetchRow();
     }
