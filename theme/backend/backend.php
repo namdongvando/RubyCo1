@@ -102,8 +102,6 @@ class backend extends \Model\Database
                         </span>
                     </div>
                 </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu ">
                     <li class="header text-center text-uppercase " style="color: #ddd;"><b>Chức Năng Chính</b></li>
 
@@ -120,12 +118,12 @@ class backend extends \Model\Database
                         <ul class="treeview-menu">
                             <li><a href="/mpage/index"><i class="fa fa-circle-o"></i> Danh mục bài biết</a></li>
                             <li><a href="/mnews/index"><i class="fa fa-circle-o"></i> Bài viết</a></li>
+                            <li><a href="/minfor/setting"><i class="fa fa-gears"></i> Cấu hình bài viết</a></li>
                             <li><a href="/mnews/link"><i class="fa fa-circle-o"></i> QL Link</a></li>
                             <li><a href="/mnews/addnews"><i class="fa fa-circle-o"></i> Thêm Bài viết</a></li>
                             <li><a href="/tags/"><i class="fa fa-circle-o"></i> Tags</a></li>
                         </ul>
                     </li>
-
                     <li class="treeview ">
                         <a href="/mtheme/chamsockhachhang/">
                             <i class="fa fa-list-alt"></i> <span>Danh Sách Nhân Viên</span>
@@ -149,6 +147,7 @@ class backend extends \Model\Database
                             <i class="fa fa-angle-right pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="/mcategory/index"><i class="fa fa-circle-o"></i> Danh Mục</a></li>
                             <li><a href="/mproduct/index"><i class="fa fa-circle-o"></i> Sản Phẩm</a></li>
                             <li><a href="/mproduct/addproduct"><i class="fa fa-circle-o"></i> Thêm Sản Phẩm</a></li>
                         </ul>
@@ -189,6 +188,12 @@ class backend extends \Model\Database
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
+                        <li class="treeview ">
+                            <a href="/minfor/index/social">
+                                <i class="fa fa-circle"></i> <span>Trang xã hội</span>
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </a>
+                        </li>
                     <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
@@ -196,6 +201,12 @@ class backend extends \Model\Database
                         <li class="  treeview  ">
                             <a href="/duser/index/index">
                                 <i class="fa fa-users"></i> <span>Quản Lý User</span>
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </a>
+                        </li>
+                        <li class="  treeview  ">
+                            <a href="/options/index">
+                                <i class="fa fa-list"></i> <span>Quản Lý Danh Mục</span>
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
@@ -307,7 +318,7 @@ class backend extends \Model\Database
 
             function BrowseServerShowImg(startupPath, functionData, idimg) {
                 var finder = new CKFinder();
-                finder.BasePath = '<?php echo BASE_URL ?>public/';
+                finder.BasePath = '/public/';
                 finder.startupPath = startupPath;
                 finder.selectActionFunction = function(fileUrl, data) {
                     document.getElementById(data["selectActionData"]).value = fileUrl;
@@ -325,7 +336,7 @@ class backend extends \Model\Database
 
             function BrowseServer(startupPath, functionData) {
                 var finder = new CKFinder();
-                finder.BasePath = '<?php echo BASE_URL ?>public/';
+                finder.BasePath = '/public/';
                 finder.startupPath = startupPath;
                 finder.selectActionFunction = SetFileField;
                 finder.selectActionData = functionData;

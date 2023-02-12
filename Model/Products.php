@@ -8,6 +8,8 @@
 
 namespace Model;
 
+use lib\input;
+
 class Products extends \Model\Database
 {
 
@@ -30,9 +32,11 @@ class Products extends \Model\Database
     public $IsShow;
     public $Serial;
     public $Lang;
+    public static $tableName;
 
     function __construct($product = null)
     {
+        self::$tableName =  table_prefix . "product";
         if (!is_array($product)) {
             $product = $this->GetById($product);
         }
@@ -43,11 +47,11 @@ class Products extends \Model\Database
         $this->CatId = $product["CatId"] ?? null;
         $this->Name = $product["Name"] ?? null;
         $this->Alias = $product["Alias"] ?? null;
-        $this->Price = $product["Price"] ?? null;
+        $this->Price = intval($product["Price"] ?? 0)  ?? null;
         $this->DonViTinh = $product["DonViTinh"] ?? null;
         $this->OldPrice = $product["OldPrice"] ?? null;
-        $this->Summary = $product["Summary"] ?? null;
-        $this->Content = $product["Content"] ?? null;
+        $this->Summary = input::InputTextDecode($product["Summary"] ?? "");
+        $this->Content = input::InputTextDecode($product["Content"] ?? "");
         $this->UrlHinh = $product["UrlHinh"] ?? null;
         $this->DateCreate = $product["DateCreate"] ?? null;
         $this->Number = $product["Number"] ?? null;
@@ -66,6 +70,11 @@ class Products extends \Model\Database
         return new ProductNote();
     }
 
+    public function DonViTinh()
+    {
+        return new OptionsService(OptionsService::GetByKeyVal($this->DonViTinh, "DVT"));
+    }
+
     function Products()
     {
         return parent::Products();
@@ -79,6 +88,12 @@ class Products extends \Model\Database
     function ProductsAllPT($Page = 1, $Number = 20, &$Tong = 0)
     {
         return parent::ProductsAllPT($Page, $Number, $Tong);
+    }
+
+
+    public function BtnGroup()
+    {
+        return $this->btnEdit() . $this->btnDelete();
     }
 
     function showPrice($a)
@@ -108,8 +123,7 @@ class Products extends \Model\Database
 
     function OldPrice()
     {
-        $a = $this->oldPrice;
-        return \lib\Common::MoneyFomat($a);
+        return \lib\Common::MoneyFomat($this->OldPrice);
     }
 
     function CatName($id)
@@ -125,12 +139,13 @@ class Products extends \Model\Database
 
     function EditProducts($Product)
     {
-        return parent::EditProducts($Product);
+        $where = "`Id` = '{$Product["Id"]}'";
+        return $this->update(self::$tableName, $Product, $where);
     }
 
     function AddProducts($Product)
     {
-        return parent::AddProducts($Product);
+        return $this->insert(self::$tableName, $Product);
     }
 
     function linkProduct()
@@ -172,7 +187,7 @@ class Products extends \Model\Database
 
     function imagesDirectory()
     {
-        return "/public/img/images/sanpham/" . $this->ID . "/";
+        return "/public/img/images/sanpham/" . $this->Id . "/";
     }
 
     function imagesDirectory4Product($id)
@@ -198,14 +213,23 @@ class Products extends \Model\Database
         $a = $this->fetchAll();
         return $a;
     }
-
+    public function btnEdit()
+    {
+        $id = $this->Id;
+        return "<a class='btn btn-primary' href='/mproduct/editproduct/{$id}' >Sửa</a>";
+    }
+    public function btnDelete()
+    {
+        $id = $this->Id;
+        return "<a class='btn btn-danger' href='/mproduct/deleteproduct/{$id}' >Xóa</a>";
+    }
     public function Breadcrumb()
     {
         $cat = new Category();
         $a = $cat->Breadcrumb($this->CatId);
         $a[] = [
             "link" => "#",
-            "title" => $this->nameProduct
+            "title" => $this->Name
         ];
 
         return $a;
@@ -272,6 +296,56 @@ class Products extends \Model\Database
     {
         return strip_tags($this->Summary);
     }
+    public function ToRow($index)
+    {
+        $url = $this->UrlHinh;
+        return [
+            "Id" => $index + 1,
+            "UrlHinh" => "<img height='50' class='img img-reponsive' src='{$url}' >",
+            // "Username" => "Tài khoản",
+            "CatId" => $this->DanhMuc()["catName"],
+            "Name" => $this->Name,
+            // "Alias" => "Tên không dấu",
+            "Price" => $this->Price(),
+            "DonViTinh" => $this->DonViTinh()->Name,
+            // "OldPrice" => "Giá cũ",
+            // "Summary" => "Mô tả",
+            // "Content" => "Chi tiết",
 
+            "DateCreate" => date("d-m-Y", strtotime($this->DateCreate)),
+            "Number" => $this->Number,
+            // "Note" => "Ghi chú",
+            "BuyTimes" => $this->BuyTimes,
+            "Views" => $this->Views,
+            "IsShow" => $this->IsShow == 1 ? "Hiện" : "Ẩn",
+            "Serial" => $this->Serial,
+            "Lang" => $this->Lang,
+        ];
+    }
+    public function ColumnsTable()
+    {
+        return [
+            // "Id" => "Mã",
+            "UrlHinh" => "Hình",
+            // "Username" => "Tài khoản", 
+            "Name" => "Tên sản phẩm",
+            "CatId" => "Danh Mục",
+            // "Alias" => "Tên không dấu",
+            "Price" => "Giá",
+            "DonViTinh" => "ĐVT",
+            // "OldPrice" => "Giá cũ",
+            // "Summary" => "Mô tả",
+            // "Content" => "Chi tiết",
+
+            "DateCreate" => "Ngày tạo",
+            "Number" => "Số lượng",
+            // "Note" => "Ghi chú",
+            "BuyTimes" => "Số lần mua",
+            "Views" => "Số lần xem",
+            "IsShow" => "Ẩn hiển",
+            "Serial" => "STT",
+            "Lang" => "Ngôn ngữ"
+        ];
+    }
     //put your code here
 }

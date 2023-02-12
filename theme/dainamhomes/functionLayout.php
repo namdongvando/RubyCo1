@@ -804,13 +804,12 @@ class functionLayout
                     </div>
                     <div class="col-md-4 col-sm-6 pre-footer-col">
                         <h2 class="title" style="background-color: #62060a">Liên Hệ</h2>
-
                         <address class="margin-bottom-40">
-                            <p><i class="fa fa-map-marker"></i> Địa Chỉ: __DiaChi___</p>
-                            <p><i class="fa fa-phone"></i> Phone: __SDT___</p>
-                            <p><i class="fa fa-fax"></i> Fax: __Fax___</p>
-                            <p><i class="fa fa-envelope"></i> Email: <a href="mailto:__Email___">__Email___</a></p>
-                            <p><i class="fa fa-skype"></i> Skype: <a href="skype:__Skyper___">__Skyper___</a></p>
+                            <p>Địa Chỉ: __DiaChi___</p>
+                            <p>Phone: __SDT___</p>
+                            <p>Fax: __Fax___</p>
+                            <p>Email: <a href="mailto:__Email___">__Email___</a></p>
+                            <p>Skype: <a href="skype:__Skyper___">__Skyper___</a></p>
                         </address>
 
                     </div>
@@ -1538,7 +1537,7 @@ class functionLayout
         $advs = $adv->GetSlides();
         ob_start();
     ?>
-        <div class="page-slider margin-bottom-40">
+        <div class="  margin-bottom-40">
             <div id="carousel-example-generic" class="carousel slide carousel-slider">
                 <ol class="carousel-indicators carousel-indicators-frontend">
                     <?php
@@ -1944,39 +1943,37 @@ class functionLayout
         ob_start();
     ?>
         <div class="recent-work ">
-            <div style="background-color: #FFDE76;">
-                <div class="container">
-                    <div class="row pb-4">
-                        <div class="col-md-12">
-                            <h2 class="title-tintuc pt-2">Tin Tức</h2>
-                        </div>
-                        <div class="col-md-6">
-                            <article class="baiviet-chinh pt-4">
-                                <a href="<?php echo $TinChinh->linkNewsCurent(); ?>">
-                                    <img src="<?php echo $TinChinh->UrlHinh(); ?>" class="HinhChuNhat img img img-responsive" alt="<?php echo $TinChinh->Name ?>" title="<?php echo $TinChinh->Name ?>">
-                                    <h2><?php echo $TinChinh->Name ?></h2>
-                                    <p><?php echo $TinChinh->Summary(); ?></p>
-                                </a>
-                            </article>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row pt-4">
-                                <?php
-                                foreach ($DSnews as $news) {
-                                    $TinChinh = new \Model\news($news);
-                                ?>
-                                    <div class="col-md-6">
-                                        <article class="baiviet-chinh-phu">
-                                            <a href="<?php echo $TinChinh->linkNewsCurent(); ?>">
-                                                <img src="<?php echo $TinChinh->UrlHinh(); ?>" class="HinhChuNhat img img img-responsive" alt="<?php echo $TinChinh->Name ?>" title="<?php echo $TinChinh->Name ?>">
-                                                <h2><?php echo $TinChinh->Name ?></h2>
-                                            </a>
-                                        </article>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                            </div>
+            <div class="container" style="background-color: #fff;border-top-left-radius: 10px !important;border-top-right-radius: 10px !important;">
+                <div class="row pb-4">
+                    <div class="col-md-12">
+                        <h2 class="title-tintuc">Tin tức</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <article class="baiviet-chinh pt-4">
+                            <a href="<?php echo $TinChinh->linkNewsCurent(); ?>">
+                                <img src="<?php echo $TinChinh->UrlHinh(); ?>" class="HinhChuNhat img img img-responsive" alt="<?php echo $TinChinh->Name ?>" title="<?php echo $TinChinh->Name ?>">
+                                <h2><?php echo $TinChinh->Name ?></h2>
+                                <p><?php echo $TinChinh->Summary(); ?></p>
+                            </a>
+                        </article>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row pt-4">
+                            <?php
+                            foreach ($DSnews as $news) {
+                                $TinChinh = new \Model\news($news);
+                            ?>
+                                <div class="col-md-6">
+                                    <article class="baiviet-chinh-phu">
+                                        <a href="<?php echo $TinChinh->linkNewsCurent(); ?>">
+                                            <img src="<?php echo $TinChinh->UrlHinh(); ?>" class="HinhChuNhat img img img-responsive" alt="<?php echo $TinChinh->Name ?>" title="<?php echo $TinChinh->Name ?>">
+                                            <h2><?php echo $TinChinh->Name ?></h2>
+                                        </a>
+                                    </article>
+                                </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,9 @@
 
 namespace Model;
 
+use PFBC\Element\Hidden;
+use PFBC\Element\Select;
+
 
 class ProductsForm implements iProductForm
 {
@@ -14,178 +17,41 @@ class ProductsForm implements iProductForm
     {
         self::$FormValue = $value;
     }
-
-    public static function GetValue($name)
+    public function GetName($name)
+    {
+        return  self::formName . "[" . $name . "]";
+    }
+    public function GetValue($name)
     {
         return self::$FormValue[$name] ?? null;
     }
 
-    public static function Alias($val = null)
+    public function Alias($val = null)
     {
         $properties = self::$Option;
         $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $properties["class"] = "editor";
-        $properties["id"] = "BaiViet";
-        $name = "pages[" . __FUNCTION__ . "]";
+        $name = $this->GetName(__FUNCTION__);
         $label = "Bài Viết";
-        return new FormRender(new \PFBC\Element\Textarea($label, $name, $properties));
-    }
-
-    public static function SetName($name)
-    {
-        return self::formName . "[{$name}]";
-    }
-
-    public static function BuyTimes($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Số Lần Mua";
         return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
     }
 
-    public static function Content($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $properties["class"] = "editor";
-        $properties["id"] = "BaiViet";
-        $name = self::SetName(__FUNCTION__);
-        $label = "Bài Viết";
-        return new FormRender(new \PFBC\Element\Textarea($label, $name, $properties));
-    }
-
-    public static function DateCreate($val = null)
-    {
-    }
-
-    public static function Id($val = null)
-    {
-        $val = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        return new FormRender(new \PFBC\Element\Hidden($name, $val));
-    }
-
-    public static function Note($val = null)
-    {
-    }
-
-    public static function DoViTinh($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Đơn Vị";
-        $options = ProductNote::GetList();
-        return new FormRender(new \PFBC\Element\Select($label, $name, $options, $properties));
-    }
-
-    public static function Number($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Số Lượng";
-        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
-    }
-
-    public static function Price($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Giá";
-        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
-    }
-
-    public static function Summary($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $properties["class"] = "editorMini";
-        $properties["id"] = "TomTat";
-        $name = self::SetName(__FUNCTION__);
-        $label = "Mô Tả";
-        return new FormRender(new \PFBC\Element\Textarea($label, $name, $properties));
-    }
-
-    public static function UrlHinh($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $properties["id"] = "UrlHinh";
-        $name = self::SetName(__FUNCTION__);
-        $label = "Số Lượng";
-        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
-    }
-
-    public static function Username($val = null)
-    {
-    }
-
-    public static function Views($val = null)
-    {
-    }
-
-    public static function CatId($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Danh Mục";
-        $options = Category::GetCatBy2Option();
-        return new FormRender(new \PFBC\Element\Select($label, $name, $options, $properties));
-    }
-
-    public static function IsShow($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Hiện Thị";
-        return new FormRender(new \PFBC\Element\Select($label, $name, [1 => "Hiện", 0 => "Ẩn"], $properties));
-    }
-
-    public static function Name($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Tên Sản Phẩm";
-        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
-    }
-
-    public static function OldPrice($val = null)
-    {
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $name = self::SetName(__FUNCTION__);
-        $label = "Giá Cũ";
-        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
-    }
-
-    public static function Lang($val = null)
-    {
-        $isShow = true;
-        $name = self::SetName(__FUNCTION__);
-        $properties = self::$Option;
-        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
-        $label = "Ngôn Ngữ";
-        $options = ProductLang::GetLangsOption();
-        if (count($options) == 1) {
-            $isShow = FALSE;
-        }
-        if ($isShow == FALSE) {
-            return new FormRender(new \PFBC\Element\Hidden($name, ProductLang::Defaut));
-        }
-        return new FormRender(new \PFBC\Element\Select($label, $name, $options, $properties));
-    }
     /**
      * @param mixed $val
      * @return mixed
      */
-    public static function DonViTinh($val = null)
+    public function Id($val = null)
+    {
+        $name = $this->GetName(__FUNCTION__);
+        $val = $val ?? self::GetValue(__FUNCTION__);
+        return new FormRender(new Hidden($name, $val));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Username($val = null)
     {
     }
 
@@ -194,7 +60,219 @@ class ProductsForm implements iProductForm
      * @param mixed $val
      * @return mixed
      */
-    public static function Serial($val = null)
+    public function CatId($val = null)
     {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Danh Mục";
+        $Option = Category::GetCatBy2Option();
+        return new FormRender(new Select($label, $name, $Option, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Name($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Tên Sản Phẩm";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Price($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Giá";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function DonViTinh($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "ĐVT";
+        return new FormRender(new Select($label, $name, OptionsService::ToSelectByGroup("DVT"), $properties));
+    }
+
+    public function OldPrice($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Giá Cũ";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Summary($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $properties["class"] = "editorMini";
+        $properties["id"] = "editorMini" . __FUNCTION__;
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Mô tả";
+        return new FormRender(new \PFBC\Element\Textarea($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Content($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $properties["class"] = "editor";
+        $properties["id"] = "editor" . __FUNCTION__;
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Chi tiết";
+        return new FormRender(new \PFBC\Element\Textarea($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function UrlHinh($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $properties["id"] = __FUNCTION__;
+        $properties[FormRender::readonly] = "true";
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Hình";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function DateCreate($val = null)
+    {
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Number($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Số Lượng";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Note($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Ghi chú";
+        return new FormRender(new \PFBC\Element\Textarea($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function BuyTimes($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Số lần mua";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Views($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Số lần xem";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function IsShow($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Ẩn/Hiện";
+        return new FormRender(new Select($label, $name, [1 => "Hiện", 0 => "Ẩn"], $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Serial($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Thứ tự";
+        return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));
+    }
+
+    /**
+     *
+     * @param mixed $val
+     * @return mixed
+     */
+    public function Lang($val = null)
+    {
+        $properties = self::$Option;
+        $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
+        $name = $this->GetName(__FUNCTION__);
+        $label = "Ngôn ngữ";
+        return new FormRender(new Select($label, $name, \Model\ProductLang::GetLangsOption(), $properties));
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
-class Model_DanhMuc extends Model_TinhThanh {
+class Model_DanhMuc extends Model_TinhThanh
+{
 
     public $MaDanhMuc;
     public $TenDanhMuc;
@@ -28,7 +29,8 @@ class Model_DanhMuc extends Model_TinhThanh {
     public static $DanhMucTinTuc = 1;
     public static $DanhMucSanPham = 2;
 
-    function __construct($DanhMuc = NULL) {
+    function __construct($DanhMuc = NULL)
+    {
 
         if ($DanhMuc) {
             $_TinTuc = new Model_TinTuc();
@@ -59,23 +61,30 @@ class Model_DanhMuc extends Model_TinhThanh {
         parent::__construct();
     }
 
-    public static function DanhMucs($CapCha = 0) {
+    public static function DanhMucs($CapCha = 0)
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `CapCha` = '{$CapCha}' ORDER BY `STT` ASC";
-        $this->Query($sql);
-        return $this->fetchAll();
+        $t = new Model_DanhMuc();
+        $t->Query($sql);
+        return $t->fetchAll();
     }
 
-    function LoaiDanhMucTinTuc() {
+    function LoaiDanhMucTinTuc()
+    {
         return self::$DanhMucTinTuc;
     }
 
-    public static function DanhMucTinTuc() {
+    public static function DanhMucTinTuc()
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `LoaiDanhMuc` = '{$this->LoaiDanhMuc}' ORDER BY `STT` ASC";
-        $this->Query($sql);
-        return $this->fetchAll();
+        $t = new Model_DanhMuc();
+        $t->Query($sql);
+        $t->Query($sql);
+        return $t->fetchAll();
     }
 
-    function TenCapCha($MaDanhMuc) {
+    function TenCapCha($MaDanhMuc)
+    {
         $DM = $this->TimDanhCha($MaDanhMuc);
         if ($DM) {
             return $DM['TenDanhMuc'];
@@ -84,7 +93,8 @@ class Model_DanhMuc extends Model_TinhThanh {
         }
     }
 
-    function TongDanhMucCon($MaDanhMuc) {
+    function TongDanhMucCon($MaDanhMuc)
+    {
         $DSDM = $this->DSDanhMuc($MaDanhMuc);
         if ($DSDM) {
             return count($DSDM);
@@ -93,7 +103,8 @@ class Model_DanhMuc extends Model_TinhThanh {
         }
     }
 
-    function DanhMuc($DanhMuc) {
+    function DanhMuc($DanhMuc)
+    {
         $this->MaDanhMuc = $DanhMuc['MaDanhMuc'];
         $this->TenDanhMuc = $DanhMuc['TenDanhMuc'];
         $this->NoiDung = $DanhMuc['NoiDung'];
@@ -105,60 +116,68 @@ class Model_DanhMuc extends Model_TinhThanh {
         $this->ThuocTinh = json_decode($DanhMuc['ThuocTinh']);
     }
 
-    function DSDanhMuc($maDanhMuc = 0) {
+    function DSDanhMuc($maDanhMuc = 0)
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `CapCha` = '{$maDanhMuc}' ORDER BY `STT` ASC";
         $kq = $this->Query($sql);
         return $this->fetchAll();
     }
 
-    function DSDanhMuc4ThuocTinh($key) {
+    function DSDanhMuc4ThuocTinh($key)
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `ThuocTinh` like '%{$key}%' ORDER BY `STT` ASC";
         $kq = $this->Query($sql);
         return $this->fetchAll();
     }
 
-    function TimDanhCha($maDanhMuc) {
+    function TimDanhCha($maDanhMuc)
+    {
         $maDanhMuc = intval($maDanhMuc);
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `MaDanhMuc` = '{$maDanhMuc}'";
         $this->Query($sql);
         return $this->fetchRow();
     }
 
-    function ChiTietDM($maDanhMuc) {
+    function ChiTietDM($maDanhMuc)
+    {
         $maDanhMuc = intval($maDanhMuc);
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `MaDanhMuc` = '{$maDanhMuc}'";
         $this->Query($sql);
         return $this->fetchRow();
     }
 
-    function TimDanhMucTieuDe($TieuDeKD) {
+    function TimDanhMucTieuDe($TieuDeKD)
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `TenKhongDau` = '{$TieuDeKD}'";
         $this->Query($sql);
         return $this->fetchRow();
     }
 
-    function DSSanPhamDanhMuc($MaDanhMuc) {
+    function DSSanPhamDanhMuc($MaDanhMuc)
+    {
         $sql = "SELECT a.`MaSanPham`, a.`ChuSanPham`, a.`MaDanhMuc`, a.`TenSanPham`, a.`Gia`, a.`MoTa`, a.`UrlHinh`, a.`NgayDang`, a.`SoLanXem`,b.`MaDanhMuc`,b.`TenDanhMuc` FROM `" . table_prefix . "sanpham` as a,`" . table_prefix . "danhmuc` as b WHERE b.`MaDanhMuc` = '{$MaDanhMuc["MaDanhMuc"]}' and a.`MaDanhMuc`=b.`MaDanhMuc` and a.`ChuSanPham` ='{$MaDanhMuc["ChuSanPham"]}'  limit 0,6";
         $this->Query($sql);
         return $this->fetchAll();
     }
 
-    function SuaDanhMuc($DanhMuc) {
+    function SuaDanhMuc($DanhMuc)
+    {
         $sql = "UPDATE `" . table_prefix . "danhmuc` SET "
-                . "`TenDanhMuc` = '{$DanhMuc['TenDanhMuc']}',"
-                . "`ThuocTinh` = '{$DanhMuc['ThuocTinh']}',"
-                . "`LoaiDanhMuc` = '{$DanhMuc['LoaiDanhMuc']}',"
-                . "`TenKhongDau` = '{$DanhMuc['TenKhongDau']}',"
-                . "`UrlHinh` = '{$DanhMuc['UrlHinh']}',"
-                . "`NoiDung` = '{$DanhMuc['NoiDung']}',"
-                . "`STT` = '{$DanhMuc['STT']}',"
-                . "`CapCha` = '{$DanhMuc['CapCha']}' where "
-                . "`MaDanhMuc` = '{$DanhMuc['MaDanhMuc']}'";
+            . "`TenDanhMuc` = '{$DanhMuc['TenDanhMuc']}',"
+            . "`ThuocTinh` = '{$DanhMuc['ThuocTinh']}',"
+            . "`LoaiDanhMuc` = '{$DanhMuc['LoaiDanhMuc']}',"
+            . "`TenKhongDau` = '{$DanhMuc['TenKhongDau']}',"
+            . "`UrlHinh` = '{$DanhMuc['UrlHinh']}',"
+            . "`NoiDung` = '{$DanhMuc['NoiDung']}',"
+            . "`STT` = '{$DanhMuc['STT']}',"
+            . "`CapCha` = '{$DanhMuc['CapCha']}' where "
+            . "`MaDanhMuc` = '{$DanhMuc['MaDanhMuc']}'";
         $this->Query($sql);
         return $this->Luu();
     }
 
-    function SuaTTDanhMuc($MaDanhMuc, $Key, $value) {
+    function SuaTTDanhMuc($MaDanhMuc, $Key, $value)
+    {
         $DanhMucChon = $this->DanhMuc->TimDanhCha($MaDanhMuc);
         $TTDanhMuc = json_decode($DanhMucChon['ThuocTinh']);
         foreach ($TTDanhMuc as $key => $value) {
@@ -172,22 +191,24 @@ class Model_DanhMuc extends Model_TinhThanh {
         return $this->Luu();
     }
 
-    function ThemDanhMuc($DanhMuc) {
+    function ThemDanhMuc($DanhMuc)
+    {
         $sql = "INSERT INTO `" . table_prefix . "danhmuc` SET "
-                . "`TenDanhMuc` = '{$DanhMuc['TenDanhMuc']}',"
-                . "`ThuocTinh` = '{$DanhMuc['ThuocTinh']}',"
-                . "`LoaiDanhMuc` = '{$DanhMuc['LoaiDanhMuc']}',"
-                . "`TenKhongDau` = '{$DanhMuc['TenKhongDau']}',"
-                . "`CapCha` = '{$DanhMuc['CapCha']}',"
-                . "`UrlHinh` = '{$DanhMuc['UrlHinh']}',"
-                . "`NoiDung` = '{$DanhMuc['NoiDung']}',"
-                . "`STT` = '{$DanhMuc['STT']}'";
+            . "`TenDanhMuc` = '{$DanhMuc['TenDanhMuc']}',"
+            . "`ThuocTinh` = '{$DanhMuc['ThuocTinh']}',"
+            . "`LoaiDanhMuc` = '{$DanhMuc['LoaiDanhMuc']}',"
+            . "`TenKhongDau` = '{$DanhMuc['TenKhongDau']}',"
+            . "`CapCha` = '{$DanhMuc['CapCha']}',"
+            . "`UrlHinh` = '{$DanhMuc['UrlHinh']}',"
+            . "`NoiDung` = '{$DanhMuc['NoiDung']}',"
+            . "`STT` = '{$DanhMuc['STT']}'";
 
         $this->Query($sql);
         return $this->Luu();
     }
 
-    function XoaDanhMuc($DanhMuc, $Quyen = FALSE) {
+    function XoaDanhMuc($DanhMuc, $Quyen = FALSE)
+    {
         $DanhMuc = $DanhMuc['MaDanhMuc'];
         if ($Quyen) {
             $DSDanhMucCon = $this->DSDanhMuc($DanhMuc);
@@ -208,19 +229,22 @@ class Model_DanhMuc extends Model_TinhThanh {
         return FALSE;
     }
 
-    function DSDMRaoVat() {
+    function DSDMRaoVat()
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc`";
         $this->Query($sql);
         return $this->fetchAll();
     }
 
-    function DSDanhMucTheoLoai($LoaiDM) {
+    function DSDanhMucTheoLoai($LoaiDM)
+    {
         $sql = "SELECT * FROM `" . table_prefix . "danhmuc` where `LoaiDanhMuc` = '{$LoaiDM}'";
         $this->Query($sql);
         return $this->fetchAll();
     }
 
-    function LayDanhMucLoai($LoaiDM = 1) {
+    function LayDanhMucLoai($LoaiDM = 1)
+    {
         $DSDanhMuc = $this->DSDanhMucTheoLoai($LoaiDM);
         if ($DSDanhMuc) {
             foreach ($DSDanhMuc as $k => $v) {
@@ -235,7 +259,8 @@ class Model_DanhMuc extends Model_TinhThanh {
         return FALSE;
     }
 
-    function LayDanhMucTinTuc() {
+    function LayDanhMucTinTuc()
+    {
         $LoaiDM = self::$DanhMucTinTuc;
         $DSDanhMuc = $this->DSDanhMucTheoLoai($LoaiDM);
         if ($DSDanhMuc) {
@@ -251,7 +276,8 @@ class Model_DanhMuc extends Model_TinhThanh {
         return FALSE;
     }
 
-    function LayDanhMucSanPham() {
+    function LayDanhMucSanPham()
+    {
         $LoaiDM = self::$DanhMucSanPham;
         $DSDanhMuc = $this->DSDanhMucTheoLoai($LoaiDM);
         if ($DSDanhMuc) {
@@ -267,7 +293,8 @@ class Model_DanhMuc extends Model_TinhThanh {
         return FALSE;
     }
 
-    function LayDangMucGoc($MaDanhMuc) {
+    function LayDangMucGoc($MaDanhMuc)
+    {
         $DanhMucCanTim = "";
         $danhmuccon = $this->TimDanhCha($MaDanhMuc);
         while ($danhmuccon['CapCha']) {
@@ -275,7 +302,8 @@ class Model_DanhMuc extends Model_TinhThanh {
         }
     }
 
-    function LayDanhMucDeQuy($maDanhMuc = "NULL", &$DSDanhMuc = array()) {
+    function LayDanhMucDeQuy($maDanhMuc = "NULL", &$DSDanhMuc = array())
+    {
         if ($maDanhMuc != "NULL") {
             foreach ($DSDanhMuc as $k => $DanhMuc) {
                 if ($DanhMuc['MaDanhMuc'] == $maDanhMuc) {
@@ -311,11 +339,13 @@ class Model_DanhMuc extends Model_TinhThanh {
         }
     }
 
-    function TaoTenKhongDau($TenDanhMuc) {
+    function TaoTenKhongDau($TenDanhMuc)
+    {
         return strtolower(bodautv($TenDanhMuc));
     }
 
-    function getLinkDanhMucTinhThanh($KhuVuc) {
+    function getLinkDanhMucTinhThanh($KhuVuc)
+    {
         $TenDm = $this->TenKhongDau;
         if ($this->TenKhongDau == NULL) {
             $TenDm = "all";
@@ -323,16 +353,15 @@ class Model_DanhMuc extends Model_TinhThanh {
         return BASE_DIR . "sangquan/" . $TenDm . "/" . $KhuVuc;
     }
 
-    function export() {
+    function export()
+    {
         $ex = new Model_excell_docexcelldanhmuc();
         return $ex->index();
     }
 
-    function import($file) {
+    function import($file)
+    {
         $ex = new Model_excell_docexcelldanhmuc();
         return $ex->import($file);
     }
-
 }
-
-?>

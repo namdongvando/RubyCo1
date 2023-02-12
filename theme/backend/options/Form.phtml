@@ -1,0 +1,66 @@
+<?php
+
+use Model\FormCommon;
+use Model\FormRender;
+use Model\Role;
+use Model\Translate;
+
+$_Params[0] = $_Params[0] == "" ? "vi" : $_Params[0];
+$lang = $_Params[0] ?? "vi";
+// var_dump($data);
+
+
+$listDefauld = Translate::getTranslateDefault();
+$listLang = Translate::getTranslateByLang($lang);
+?>
+<form action="" enctype="multipart/form-data" method="POST">
+    <table class="table table-responsive">
+        <?php
+        foreach ($listDefauld as $key => $value) {
+        ?>
+            <tr>
+                <td style="width: 25%;text-align: right;"><b><?php echo $key  ?></b></td>
+                <td><?php
+                    FormCommon::TextBox("valu", "translate[{$key}]", ["value" => $listLang[$key] ?? $key, "class" => "form-control"])->render();
+                    ?>
+                </td>
+            </tr>
+        <?php
+        }
+        ?>
+
+        <?php
+        if (
+            \Model\Permission::CheckPremision([
+                \Model\User::Admin,
+                Role::CreateRoleName(\Controller\options::class . "_appsetting")
+            ]) == true
+        ) {
+        ?>
+            <tfoot>
+                <tr>
+                    <td style="width: 25%;text-align: right;">
+                        <?php
+                        FormCommon::TextBox("", "posttranslate[Code]", ["value" => "", "class" => "  form-control"])->render();
+                        ?>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <?php
+                            FormCommon::TextBox("", "posttranslate[Name]", ["value" => "", "class" => "  form-control"])->render();
+                            ?>
+                            <button class="btn btn-primary"><?php echo Translate::Trans("BtnPost"); ?></button>
+                        </div>
+
+                    </td>
+                </tr>
+            </tfoot>
+        <?php
+        }
+        ?>
+
+    </table>
+    <div class="box-footer">
+        <button class="btn btn-success">Lưu</button>
+    </div>
+</form>

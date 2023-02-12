@@ -5,12 +5,13 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 $fileName = __DIR__ . '/../../config.php';
 if (file_exists(__DIR__ . '/../../config.php')) {
-    include_once ($fileName);
+    include_once($fileName);
 } else {
     echo "khong có file";
 }
 
-function CheckAuthentication() {
+function CheckAuthentication()
+{
 
     if (isset($_SESSION['QuanTri_PGV'])) {
         return TRUE;
@@ -31,7 +32,7 @@ if (Model\pathCkFinder::get() != null) {
     $baseUrl = Model\pathCkFinder::get();
 }
 $baseDir = resolveUrl($baseUrl);
-$config['Thumbnails'] = Array(
+$config['Thumbnails'] = array(
     'url' => $baseUrl . '_thumbs',
     'directory' => $baseDir . '_thumbs',
     'enabled' => true,
@@ -39,12 +40,14 @@ $config['Thumbnails'] = Array(
     'maxWidth' => 100,
     'maxHeight' => 100,
     'bmpSupported' => false,
-    'quality' => 80);
+    'quality' => 80
+);
 
-$config['Images'] = Array(
+$config['Images'] = array(
     'maxWidth' => 1600,
     'maxHeight' => 1200,
-    'quality' => 80);
+    'quality' => 80
+);
 
 
 $config['RoleSessionVar'] = 'CKFinder_UserRole';
@@ -52,7 +55,7 @@ $config['RoleSessionVar'] = 'CKFinder_UserRole';
 
 
 if ($_SESSION["QuanTri_PGV"]["Groups"] >= 1) {
-    $config['AccessControl'][] = Array(
+    $config['AccessControl'][] = array(
         'role' => '*',
         'resourceType' => '*',
         'folder' => '/',
@@ -63,9 +66,10 @@ if ($_SESSION["QuanTri_PGV"]["Groups"] >= 1) {
         'fileView' => true,
         'fileUpload' => true,
         'fileRename' => true,
-        'fileDelete' => false);
+        'fileDelete' => false
+    );
 } else {
-    $config['AccessControl'][] = Array(
+    $config['AccessControl'][] = array(
         'role' => '*',
         'resourceType' => '*',
         'folder' => '/',
@@ -76,7 +80,8 @@ if ($_SESSION["QuanTri_PGV"]["Groups"] >= 1) {
         'fileView' => true,
         'fileUpload' => true,
         'fileRename' => true,
-        'fileDelete' => true);
+        'fileDelete' => true
+    );
 }
 
 
@@ -105,37 +110,40 @@ if ($_SESSION["QuanTri_PGV"]["Groups"] >= 1) {
 
 $config['DefaultResourceTypes'] = '';
 
-$config['ResourceType'][] = Array(
+$config['ResourceType'][] = array(
     'name' => 'Files', // Single quotes not allowed
     'url' => $baseUrl . 'files',
     'directory' => $baseDir . 'files',
     'maxSize' => "200M",
     'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
-    'deniedExtensions' => 'php');
+    'deniedExtensions' => 'php'
+);
 
-$config['ResourceType'][] = Array(
+$config['ResourceType'][] = array(
     'name' => 'Images',
     'url' => $baseUrl . 'images',
     'directory' => $baseDir . 'images',
     'maxSize' => "200M",
     'allowedExtensions' => 'bmp,gif,svg,jpeg,jpg,png,mp4',
-    'deniedExtensions' => '');
+    'deniedExtensions' => ''
+);
 
-$config['ResourceType'][] = Array(
+$config['ResourceType'][] = array(
     'name' => 'Flash',
     'url' => $baseUrl . 'flash',
     'directory' => $baseDir . 'flash',
     'maxSize' => "200M",
     'allowedExtensions' => 'swf,flv,mp4',
-    'deniedExtensions' => '');
+    'deniedExtensions' => ''
+);
 $config['CheckDoubleExtension'] = true;
 $config['DisallowUnsafeCharacters'] = false;
 $config['FilesystemEncoding'] = 'UTF-8';
 $config['SecureImageUploads'] = true;
 $config['CheckSizeAfterScaling'] = true;
 $config['HtmlExtensions'] = array('html', 'htm', 'xml', 'js');
-$config['HideFolders'] = Array(".*", "CVS");
-$config['HideFiles'] = Array(".*");
+$config['HideFolders'] = array(".*", "CVS");
+$config['HideFiles'] = array(".*");
 $config['ChmodFiles'] = 0777;
 $config['ChmodFolders'] = 0777;
 
@@ -151,4 +159,3 @@ include_once "plugins/imageresize/plugin.php";
 include_once "plugins/fileeditor/plugin.php";
 include_once "plugins/zip/plugin.php";
 include_once "plugins/fileeditor/plugin.php";
-

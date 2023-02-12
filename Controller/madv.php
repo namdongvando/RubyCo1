@@ -202,5 +202,3 @@ class Controller_madv extends Controller_backend {
     }
 
 }
-
-?>

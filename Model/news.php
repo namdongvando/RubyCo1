@@ -112,6 +112,10 @@ class news extends \Model\Database
 
     function linkFullNewsCurent()
     {
+        if ($this->RedirectLink) {
+            $BASE_URL = substr(BASE_URL, 0, -1);
+            return $BASE_URL . $this->RedirectLink;
+        }
         return BASE_URL . $this->Alias . ".html";
         $p = new pages();
         $_p = $p->PagesById($this->PageID, FALSE);

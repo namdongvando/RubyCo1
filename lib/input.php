@@ -2,13 +2,28 @@
 
 namespace lib;
 
-class input {
+class input
+{
 
-    function __construct() {
-        
+    function __construct()
+    {
     }
 
-    function checkKey($str) {
+    public static function InputText($input)
+    {
+        $input = trim($input);
+        $input = stripslashes($input);
+        $input = htmlspecialchars($input);
+        return $input;
+    }
+    public static function InputTextDecode($input)
+    {
+        $input = htmlspecialchars_decode($input);
+        return $input;
+    }
+
+    function checkKey($str)
+    {
         if (!$str)
             return false;
         $str = str_replace(array(',', '<', '>', '&', '{', '}', "[", "]", '*', '?', '/', '+', '@', '%', '"'), array(' '), $str);
@@ -41,5 +56,4 @@ class input {
         $str = str_replace(" ", "-", $str);
         return $str;
     }
-
 }

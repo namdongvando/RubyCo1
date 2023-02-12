@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+use theme\rubyv2\functionLayout;
+?>
+<html lang="vi">
+
+<head>
+    <?php
+    functionLayout::head();
+    ?>
+</head>
+
+<body class="corporate" ng-cloak="TRUE" ng-init="getMenus()" ng-app="rootApp" ng-controller="homeController">
+    <?php
+    functionLayout::header();
+    include $Content;
+    echo functionLayout::footer();
+    functionLayout::js();
+    ?>
+</body>
+</html>
+<?php
+functionLayout::DecodeHTML();
+?>

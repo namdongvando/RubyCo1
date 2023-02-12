@@ -2,14 +2,16 @@
 
 namespace Model\tags;
 
-class tags extends \Model\DB implements \Model\IModelDB {
+class tags extends \Model\DB implements \Model\IModelDB
+{
 
     public $Id;
     public $Name;
     public $Alias;
     public $Content;
 
-    public function __construct($tag = null) {
+    public function __construct($tag = null)
+    {
         parent::$TableName = table_prefix . "tags";
         parent::__construct();
         if ($tag) {
@@ -25,47 +27,57 @@ class tags extends \Model\DB implements \Model\IModelDB {
         }
     }
 
-    public function Delete($id) {
+    public function Delete($id)
+    {
         $where = "`Id` = '{$id}'";
         return $this->UpdateDB($where);
     }
 
-    public function GetAllPT($name, &$total, $indexPage = 1, $pageNumber = 10) {
+    public function GetAllPT($name, &$total, $indexPage = 1, $pageNumber = 10)
+    {
         $where = "`Name` like '%{$name}%' ";
         return $this->SelectPT($where, $indexPage, $pageNumber, $total);
     }
 
-    public function GetById($id) {
+    public function GetById($id)
+    {
         $where = "`Id` = '{$id}'";
         return $this->SelectRow($where);
     }
 
-    public function Post($model) {
+    public function Post($model)
+    {
         return $this->Insert($model);
     }
 
-    public function Put($model) {
+    public function Put($model)
+    {
 
         return $this->Update($model, "`Id` = '{$model["Id"]}'");
     }
 
-    public static function ToSelect() {
+    public static function ToSelect()
+    {
         $where = "1";
-        return $this->GetToSelect($where, ["Id", "Name"]);
+        $t = new tags();
+        return $t->GetToSelect($where, ["Id", "Name"]);
     }
 
-    public function LinkTags() {
+    public function LinkTags()
+    {
         return BASE_URL . $this->Alias;
     }
 
-    public function GetByAlias($alias) {
+    public function GetByAlias($alias)
+    {
         $where = "`Alias` = '{$alias}'";
         return $this->SelectRow($where);
     }
 
-    public function GetByNameDetail($name) {
+    public function GetByNameDetail($name)
+    {
         $where = "`Name` = '{$name}'";
         return $this->SelectRow($where);
     }
-
+    
 }

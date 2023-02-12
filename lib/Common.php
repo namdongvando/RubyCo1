@@ -8,21 +8,25 @@
 
 namespace lib;
 
-class Common {
+class Common
+{
 
-    static function ToUrl($url = null) {
+    static function ToUrl($url = null)
+    {
         if ($url == null)
             $url = $_SERVER["HTTP_REFERER"];
         header("Location: " . $url);
     }
 
-    static function MapArray($array, &$array1) {
+    static function MapArray($array, &$array1)
+    {
         foreach ($array1 as $k => $v) {
             $array1[$k] = $array[$k];
         }
     }
 
-    static function bodautv($str) {
+    static function bodautv($str)
+    {
         if (!$str)
             return false;
 
@@ -57,34 +61,39 @@ class Common {
         return $str;
     }
 
-    public static function MoneyFomat($a) {
+    public static function MoneyFomat($a)
+    {
         if ($a > 0)
             return number_format($a, 2, '.', ',') . "";
         return "Liên Hệ";
     }
 
-    public static function DateFormat() {
+    public static function DateFormat()
+    {
         return "Y-m-d H:i:s";
     }
 
-    public static function ShowDateFormat() {
+    public static function ShowDateFormat()
+    {
         return "H:i:s d-m-Y";
     }
 
-    static function getGUID() {
-        mt_srand((double) microtime() * 10000); //optional for php 4.2.0 and up.
+    static function getGUID()
+    {
+        mt_srand((float) microtime() * 10000); //optional for php 4.2.0 and up.
         $charid = strtoupper(md5(uniqid(rand(), true)));
         $hyphen = chr(45); // "-"
         $uuid = substr($charid, 0, 8) . $hyphen
-                . substr($charid, 8, 4) . $hyphen
-                . substr($charid, 12, 4) . $hyphen
-                . substr($charid, 16, 4) . $hyphen
-                . substr($charid, 20, 12);
+            . substr($charid, 8, 4) . $hyphen
+            . substr($charid, 12, 4) . $hyphen
+            . substr($charid, 16, 4) . $hyphen
+            . substr($charid, 20, 12);
 
         return $uuid;
     }
 
-    static function PhanTrangIndex($index, $number, $indexPages) {
+    static function PhanTrangIndex($index, $number, $indexPages)
+    {
         $indexPages = $indexPages - 1;
         $indexPages = max($indexPages, 0);
         return $number * ($indexPages) + $index + 1;
@@ -94,7 +103,8 @@ class Common {
      * Phân Trang Datatable
      * @param {type} parameter
      */
-    static function PhanTrang($TongTrang, $TrangHienTai, $DuongDan = '[i]') {
+    static function PhanTrang($TongTrang, $TrangHienTai, $DuongDan = '[i]')
+    {
         $PhanTrang = ' <ul class="pagination">';
         $PhanTrang .= " <li ><a>{$TrangHienTai}/{$TongTrang}</a></li>";
 
@@ -131,5 +141,4 @@ class Common {
         $PhanTrang .= '</ul>';
         return $PhanTrang;
     }
-
 }

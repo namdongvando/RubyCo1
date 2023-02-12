@@ -1,0 +1,63 @@
+<?php
+$itemGroups = new \Model\OptionsService();
+$item = $itemGroups->GetByKeyValue($_Params[0] ?? "setting", "NameFunction");
+$item = new \Model\OptionsService($item);
+?>
+<div class="container-fluid">
+    <form method="get" action="">
+        <div class="form-group d-flex">
+        </div>
+    </form>
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Cài Đặt</h3>
+            <div class="box-tools">
+                <a href="/options/post/<?php echo $data["param"][0] ?? "setting"; ?>/" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px;"># </th>
+                            <th style="width: 300px;">Mã </th>
+                            <th>Tên</th>
+                            <th>STT</th>
+                            <th style="width: 150px;">Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if ($Items) {
+                            foreach ($Items as $k => $item) {
+                                $_item = new Model\OptionsService($item);
+                        ?>
+                                <tr>
+                                    <th><?php echo $k + 1 ?></th>
+                                    <th><?php echo $_item->Val ?></th>
+                                    <th><?php echo $_item->Name ?></th>
+                                    <th><?php echo $_item->STT ?></th>
+                                    <th>
+                                        <a class="btn btn-primary" href="/options/put/<?php echo $_item->Id ?>">Sửa</a>
+                                        <a class="btn btn-danger" href="/options/delete/?id=<?php echo $_item->Id ?>">Xóa</a>
+                                    </th>
+                                </tr>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="d-flex">
+                <?php
+                $linkPhanTrang = "/options/index/?keyword={$params["keyword"]}&GroupsId={$params['GroupsId']}&indexPage=[i]&pageNumber={$pageNumber}";
+                echo \Model\Common::PhanTrang($total, $indexPage, $pageNumber, $linkPhanTrang);
+                ?>
+            </div>
+        </div>
+    </div>
+</div>

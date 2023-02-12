@@ -8,9 +8,7 @@ class Controller_createclass extends Application {
         
         $a = new \lib\database2class();
         $a->MapingClass();
-        
-        
-        
+          
     }
 
 } ?>

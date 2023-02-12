@@ -13,7 +13,7 @@ class Controller_index extends Application
         $this->param = $this->getParam();
         $this->Pages = new \Model\pages();
         $this->News = new \Model\news();
-        Model_ViewTheme::set_viewthene("dainamhomes");
+        Model_ViewTheme::set_viewthene("rubyv2");
     }
 
     function index()
@@ -43,7 +43,7 @@ class Controller_index extends Application
     function settheme()
     {
         ob_start();
-        $_SESSION["Theme"] = "kimsanews";
+        $_SESSION["Theme"] = "rubyv2";
         \lib\Common::ToUrl("/");
         die();
     }

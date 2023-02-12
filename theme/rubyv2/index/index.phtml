@@ -1,0 +1,82 @@
+<?php
+
+use Model\adv;
+use Model\pages;
+
+
+$adv = new \Model\adv();
+$_homeslide = $adv->AdvsByGroup("homeslide", FALSE);
+$_homeslideClass = ["carousel-item-eight", "carousel-item-nine", "carousel-item-ten"];
+$HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
+$_HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::HomeCategory);
+$DichVus = array_map(function ($item) {
+    return $item["idPa"];
+}, $HomeCategory);
+$_HomeCategory = array_map(function ($item) {
+    return $item["Id"];
+}, $_HomeCategory);
+$page = new pages();
+$pages = $page->GetPageByList($_HomeCategory);
+
+$_Advs = new adv();
+$itemAdv = $_Advs->AdvsByGroup("homeslide", false);
+// var_dump($itemAdv); 
+?>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "CreativeWorkSeries",
+        "name": "<?php echo Model_Seo::$Title ?>",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "ratingCount": "1000"
+        }
+    }
+</script>
+<div class="main" style="padding-top: 15px;">
+    <div class="">
+        <div class="container ">
+            <div class="row">
+                <?php
+                echo theme\dainamhomes\functionLayout::HomeSlide();
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="">
+
+
+        <div class="container" style="
+        background-color: #fff;
+        border-radius: 7px !important; 
+        margin-bottom: 15px;
+        margin-top: 20px;
+        ">
+            <ng-san-pham-pho-bien title="Sản phẩm phổ biến"></ng-san-pham-pho-bien>
+        </div>
+
+
+        <?php
+        echo theme\dainamhomes\functionLayout::TinTuc();
+        ?>
+        <div class="container" style="
+        background-color: #fff;
+        border-radius: 7px !important; 
+        margin-bottom: 15px;
+        margin-top: 20px;
+        ">
+            <ng-tai-sao-chon-chung-toi title="Tại sao chọn chúng tôi"></ng-tai-sao-chon-chung-toi>
+        </div>
+        <div class="container" style="
+        background-color: #fff;
+        border-radius: 7px !important; 
+        margin-bottom: 15px;
+        margin-top: 20px;
+        ">
+            <ng-doi-tac title="Đối tác thương hiệu"></ng-doi-tac>
+        </div>
+
+    </div>
+</div>

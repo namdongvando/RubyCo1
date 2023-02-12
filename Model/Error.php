@@ -2,12 +2,17 @@
 
 namespace Model;
 
-class Error {
-
+class Error
+{
+    const success = "success";
+    const danger = "danger";
+    const info = "info";
+    const warning = "warning";
     static public $type;
     static public $Content;
 
-    function __construct($aContent) {
+    function __construct($aContent)
+    {
         $type = $aContent["type"];
         $content = $aContent["content"];
         self::$type = $type;
@@ -16,14 +21,16 @@ class Error {
         $_SESSION["Error"]["content"] = $content;
     }
 
-    function setError($content, $type) {
+    function setError($content, $type)
+    {
         self::$type = $type;
         self::$Content = $content;
         $_SESSION["Error"]["type"] = $type;
         $_SESSION["Error"]["content"] = $content;
     }
 
-    static function getAllError() {
+    static function getAllError()
+    {
         $content = self::$Content;
         $type = self::$type;
         $type = isset($_SESSION["Error"]["type"]) ? $_SESSION["Error"]["type"] : "";
@@ -36,12 +43,12 @@ class Error {
         }
 
         return [
-            "Content" => $content
-            , "Type" => $type
+            "Content" => $content, "Type" => $type
         ];
     }
 
-    function getError() {
+    function getError()
+    {
         $content = self::$Content;
         $type = self::$type;
         $type = $_SESSION["Error"]["type"];
@@ -50,10 +57,9 @@ class Error {
         self::$Content = NULL;
         self::$type = NULL;
         return [
-            "Content" => $content
-            , "Type" => $type
+            "Content" => $content, "Type" => $type
         ];
     }
 
-//put your code here
+    //put your code here
 }

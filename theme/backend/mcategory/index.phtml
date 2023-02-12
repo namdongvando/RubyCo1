@@ -1,6 +1,5 @@
-
 <div class="container-fluid">
-    <section class="" >
+    <section class="">
         <div class="box box-solid ">
             <div class="box-header bg-green">
                 <i class="fa fa-book"></i>
@@ -11,8 +10,8 @@
                 </div>
             </div>
             <div class="box-body no-padding ">
-                <div class="" ng-controller="listcategorysController" >
-                    <form action="/mcategory/editorderby/" method="POST" enctype="multipart/form-data" >
+                <div class="" ng-controller="listcategorysController">
+                    <form action="/mcategory/editorderby/" method="POST" enctype="multipart/form-data">
                         <div class="modal fade" id="SapXep">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -22,7 +21,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <ul class="todo-list ui-sortable">
-                                            <li  ng-repeat="item in ListCategory" class="" style="">
+                                            <li ng-repeat="item in ListCategory" class="" style="">
                                                 {{$index + 1}}
                                                 <span class="handle ui-sortable-handle">
                                                     <i class="fa fa-ellipsis-v"></i>
@@ -50,28 +49,28 @@
                                     <h4 class="modal-title">Danh Mục</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="box-body bakco-formcategory" ng-init="formcategoryInit(_CategoryDetail.catID, true)" >
+                                    <div class="box-body bakco-formcategory" ng-init="formcategoryInit(_CategoryDetail.catID, true)">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 " >
-                        <table class="table " >
+                    <div class="col-md-12 ">
+                        <table class="table ">
                             <tr>
-                                <th><input class="form-control" ng-model="Timkiem.catName" placeholder="Tên Danh Mục" ></th>
+                                <th><input class="form-control" ng-model="Timkiem.catName" placeholder="Tên Danh Mục"></th>
                                 <th>
-                                    <select ng-model="Timkiem.parentCatID" class="form-control select2" >
-                                        <option value="" >Tất cả</option>
-                                        <option ng-repeat="item in ListCategory" value="{{item.catID}}" >{{item.catName}}</option>
+                                    <select ng-model="Timkiem.parentCatID" class="form-control select2">
+                                        <option value="">Tất cả</option>
+                                        <option ng-repeat="item in ListCategory" value="{{item.catID}}">{{item.catName}}</option>
                                     </select>
 
                                 </th>
                             </tr>
                         </table>
-                        <div class="clearfix" ></div>
-                        <div class="  table-responsive"  >
-                            <table class="table table-bordered table-hover"  >
+                        <div class="clearfix"></div>
+                        <div class="  table-responsive">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>STT</th>
@@ -84,30 +83,30 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody  style="height: 500px;" >
-                                    <tr ng-repeat="item in ListCategory| filter : Timkiem" >
+                                <tbody style="height: 500px;">
+                                    <tr ng-repeat="item in ListCategory| filter : Timkiem">
                                         <td>{{$index + 1}}</td>
                                         <td>
                                             {{item.catID}}
                                         </td>
                                         <td>
-                                            <a href="/mproduct/index/{{item.catID}}"  ><b>{{item.catName}}</b></a>
+                                            <a href="/mproduct/index/{{item.catID}}"><b>{{item.catName}}</b></a>
                                         </td>
                                         <td><b>{{item.Path}}</b>
 
                                         </td>
                                         <td>
-                                            <a ng-show="item.parentCatID != 0" href="/mcategory/detail/{{item.parentCatID}}"  >{{showNameCategory(item.parentCatID)}}</a>
-                                            <a ng-show="item.parentCatID == 0" >{{showNameCategory(item.parentCatID)}}</a>
+                                            <a ng-show="item.parentCatID != 0" href="/mcategory/detail/{{item.parentCatID}}">{{showNameCategory(item.parentCatID)}}</a>
+                                            <a ng-show="item.parentCatID == 0">{{showNameCategory(item.parentCatID)}}</a>
                                         </td>
 
                                         <td>{{item.Serial}}</td>
                                         <td>{{item.Public==1?"Hiện":"Ẩn"}}</td>
                                         <td>
-                                            <div  class="btn-group btn-group-sm" >
-                                                <a class="btn btn-sm btn-danger xoa" onclick="return confirm('Xóa Danh Mục Này?')" href="/mcategory/deleteid/{{item.catID}}" >Delete</a>
+                                            <div class="btn-group btn-group-sm">
+                                                <a class="btn btn-sm btn-danger xoa" onclick="return confirm('Xóa Danh Mục Này?')" href="/mcategory/deleteid/{{item.catID}}">Delete</a>
                                                 <a class="btn btn-primary" data-toggle="modal" ng-click="selectCategory(item.catID)" href='#modal-id'>Chọn</a>
-                                                <a class="btn btn-sm btn-success" type="button" href="/mcategory/copy/{{item.catID}}" >Copy</a>
+                                                <a class="btn btn-sm btn-success" type="button" href="/mcategory/copy/{{item.catID}}">Copy</a>
                                             </div>
                                         </td>
                                     </tr>

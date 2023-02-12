@@ -1,22 +1,25 @@
 <?php
 
-class Controller_index extends Application {
+class Controller_index extends Application
+{
 
     public $param;
     public $ViewTheme;
     public $Pages;
     public $News;
 
-    function __construct() {
+    function __construct()
+    {
         $this->param = $this->getParam();
         $this->Pages = new \Model\pages();
         $this->News = new \Model\news();
-//        Model_ViewTheme::set_viewthene("luatkimsa");
-//        if (isset($_SESSION["Theme"]))
+        //        Model_ViewTheme::set_viewthene("luatkimsa");
+        //        if (isset($_SESSION["Theme"]))
         Model_ViewTheme::set_viewthene("dainamhomes");
     }
 
-    function index() {
+    function index()
+    {
 
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
@@ -24,40 +27,43 @@ class Controller_index extends Application {
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 
-    function settheme() {
+    function settheme()
+    {
         ob_start();
         $_SESSION["Theme"] = "kimsanews";
         \lib\Common::ToUrl("/");
         die();
     }
 
-    function sanpham() {
+    function sanpham()
+    {
 
         Model_Seo::$Title = "Sản Phẩm";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__SEO_Keyword___";
         $bre = new Model\Breadcrumb();
         $abre[] = [
-            "link" => "#"
-            , "title" => "Sản Phẩm"
+            "link" => "#", "title" => "Sản Phẩm"
         ];
 
         $bre->setBreadcrumb($abre);
         $this->ViewTheme([], Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function syspage($url) {
+    function syspage($url)
+    {
         $Category = new Model\Category();
-//        var_dump($url);
+        //        var_dump($url);
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function categorypt() {
+    function categorypt()
+    {
 
         var_dump($this->getParam());
         var_dump($_POST["page"]);
         $Category = new Model\Category();
-//        lấy danh ra
+        //        lấy danh ra
 
         $linkDanhMuc = $url[2][0];
 
@@ -79,23 +85,24 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function category($url) {
+    function category($url)
+    {
 
         $Category = new Model\Category();
-//        lấy danh ra
-//        var_dump($url);
+        //        lấy danh ra
+        //        var_dump($url);
 
         $linkDanhMuc = $url[1][0];
         $curentpages = isset($url[2][0]) ? $url[2][0] : 1;
         $pathCat = $Category->getCategoryFromLink($linkDanhMuc);
-//        var_dump($pathCat);
-//        $pathCat = $Category->getCategoryFromPath($linkDanhMuc);
-//        $catCurent = $Category->Category4Path($pathCat);
+        //        var_dump($pathCat);
+        //        $pathCat = $Category->getCategoryFromPath($linkDanhMuc);
+        //        $catCurent = $Category->Category4Path($pathCat);
         $catCurent = new \Model\Category($pathCat);
         $bre = new Model\Breadcrumb();
         $abre = $Category->Breadcrumb($catCurent->catID);
         $bre->setBreadcrumb($abre);
-//        $Pages = isset($url[2]) ? $url[2] : 1;
+        //        $Pages = isset($url[2]) ? $url[2] : 1;
         $data["Category"] = $catCurent;
         $data["Pages"] = $curentpages;
 
@@ -105,7 +112,8 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function news($url) {
+    function news($url)
+    {
         $aliasPages = $url[1][0];
         $aliasNews = $url[2][0];
         $Page = $this->Pages->PagesByAlias($aliasPages, FALSE);
@@ -133,7 +141,8 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function pages($url) {
+    function pages($url)
+    {
 
         $pages = new \Model\pages();
         $_Pages = $pages->PagesByAlias($url[1][0], FALSE);
@@ -145,13 +154,14 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "pages");
     }
 
-    function product($url) {
+    function product($url)
+    {
 
         $mp = new Model\Products();
         $p = $mp->ProductsByAlias($url[2][0], FALSE);
 
         $data["p"] = $p;
-//        var_dump($p);
+        //        var_dump($p);
         $p["Views"] = $p["Views"] + 1;
         $mp->EditProducts($p);
         $p = new Model\Products($p);
@@ -165,14 +175,15 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "product");
     }
 
-    function chitietsanpham() {
+    function chitietsanpham()
+    {
 
         $mp = new Model\Products();
         $p = $mp->ProductsByAlias($_GET["alias"], FALSE);
-//        var_dump($p);
+        //        var_dump($p);
 
         $data["p"] = $p;
-//        var_dump($p);
+        //        var_dump($p);
         $p["Views"] = $p["Views"] + 1;
         $mp->EditProducts($p);
         $p = new Model\Products($p);
@@ -186,7 +197,8 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "product");
     }
 
-    function pagesdetail($url) {
+    function pagesdetail($url)
+    {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
@@ -204,7 +216,8 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "pages");
     }
 
-    function syspagedetail($Url) {
+    function syspagedetail($Url)
+    {
         $data["Page"] = $this->Pages->TimPages4TieuDeKD($Url[1][0]);
         $p = new Model_Pages($data["Page"]);
         Model_Seo::$Title = $p->Title;
@@ -213,7 +226,8 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function seach() {
+    function seach()
+    {
 
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
@@ -222,21 +236,24 @@ class Controller_index extends Application {
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
-    function lienhe() {
+    function lienhe()
+    {
         Model_Seo::$Title = "Liên Hệ";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__Keyword___";
         $this->ViewTheme(null, Model_ViewTheme::get_viewthene(), "pages");
     }
 
-    function thuvien() {
+    function thuvien()
+    {
         Model_Seo::$Title = "Thư Viện Hình Ảnh";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__Keyword___";
         $this->ViewTheme(null, Model_ViewTheme::get_viewthene(), "pages");
     }
 
-    function Code() {
+    function Code()
+    {
         $a = "
  [MauBietThuDep]
  [FormLienHe]
@@ -249,7 +266,4 @@ class Controller_index extends Application {
  [HomeSlide]
  [GioiThieuNgan]";
     }
-
 }
-?>
-

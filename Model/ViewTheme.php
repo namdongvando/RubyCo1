@@ -1,28 +1,28 @@
 <?php
 
-class Model_ViewTheme {
+class Model_ViewTheme
+{
 
     static public $ViewTheme;
 
-    function __construct() {
-        
+    function __construct()
+    {
     }
 
-    static public function set_viewthene($view) {
+    static public function set_viewthene($view)
+    {
         self::$ViewTheme = $view;
     }
 
-    static public function get_viewthene() {
+    static public function get_viewthene()
+    {
         if (self::$ViewTheme) {
-            if(is_dir("theme/".self::$ViewTheme)) {
+            if (is_dir("theme/" . self::$ViewTheme)) {
                 return self::$ViewTheme;
             } else {
-                return "home";
+                return "dainamhomes";
             }
         }
-        return "home";
+        return "dainamhomes";
     }
-
 }
-
-?>

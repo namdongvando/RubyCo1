@@ -1,1 +1,46 @@
-<?php$Order = new Module\cart\Model\Order();$_Param[0] = isset($_Param[0]) ? intval($_Param[0]) : 1;$number = 20;$sum = 0;$Orders = $Order->ordersStatusPt($_Param[0], $number, 4, $sum);?><div  >    <div class="panel-heading">        <h3 class="panel-title">Danh sách đơn hàng mới đặt</h3>    </div>    <div class="panel-body" style="padding-top: 0px;padding-bottom: 0px;" >        <table class="table table-bordered" >            <thead>                <tr>                    <th>#</th>                    <th>Mã đơn hàng</th>                    <th>Số điện thoại</th>                    <th>Email</th>                    <th>Tình Trạng</th>                    <th></th>                </tr>            </thead>            <tbody>                <?php                if ($Orders)                    foreach ($Orders as $value) {                        $Od = new Module\cart\Model\Order($value);                        ?>                        <tr>                            <td><?php echo $Od->Id; ?></td>                            <td><?php echo $Od->Name; ?></td>                            <td><?php echo $Od->Phone; ?></td>                            <td><?php echo $Od->Email; ?></td>                            <td><?php echo $Od->Status(); ?></td>                            <td style="display: table" >                                <div class="btnn-group btn-group-sm" >                                    <a href="/cart/vieworder/orderdetail/<?php echo $Od->Id; ?>" class="btn btn-primary" >Xem</a>                                </div>                            </td>                        </tr>                        <?php                    }                ?>            </tbody>        </table>        <div style="position: fixed;bottom: 0px;" >            <?php            $pages = ceil($sum / $number);            $Order->PhanTrang($pages, $_Param[0], '/cart/vieworder/dsorderifame/[i]');            ?>        </div>    </div></div>
+<?php
+$Order = new Module\cart\Model\Order();
+$_Param[0] = isset($_Param[0]) ? intval($_Param[0]) : 1;
+$number = 20;
+$sum = 0;
+$Orders = $Order->ordersStatusPt($_Param[0], $number, 4, $sum); ?><div>
+    <div class="panel-heading">
+        <h3 class="panel-title">Danh sách đơn hàng mới đặt</h3>
+    </div>
+    <div class="panel-body" style="padding-top: 0px;padding-bottom: 0px;">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Tình Trạng</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($Orders)
+                    foreach ($Orders as $value) {
+                        $Od = new Module\cart\Model\Order($value);                        ?> <tr>
+                        <td><?php echo $Od->Id; ?></td>
+                        <td><?php echo $Od->Name; ?></td>
+                        <td><?php echo $Od->Phone; ?></td>
+                        <td><?php echo $Od->Email; ?></td>
+                        <td><?php echo $Od->Status(); ?></td>
+                        <td style="display: table">
+                            <div class="btnn-group btn-group-sm"> <a href="/cart/vieworder/orderdetail/<?php echo $Od->Id; ?>" class="btn btn-primary">Xem</a> </div>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                ?>
+            </tbody>
+        </table>
+        <div style="position: fixed;bottom: 0px;">
+            <?php $pages = ceil($sum / $number);
+            $Order->PhanTrang($pages, $_Param[0], '/cart/vieworder/dsorderifame/[i]');
+            ?>
+        </div>
+    </div>
+</div>

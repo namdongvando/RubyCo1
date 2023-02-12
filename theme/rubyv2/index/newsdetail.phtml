@@ -1,0 +1,152 @@
+<?php
+
+$_News = new Model\news($data["news"]);
+// $_News->editNews($data["news"]);
+$_News->UpdateSoLanXem();
+$DanhSachTinMoiNhat = $_News->DanhSachTinMoiNhat(6);
+$_Pages = new \Model\pages();
+$DanhMucBaiViet = $_Pages->PagesByType(1, FALSE);
+
+?>
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "CreativeWorkSeries",
+        "name": "<?php echo Model_Seo::$Title ?>",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "ratingCount": "<?php echo $_News->SoLanXem ?>"
+        }
+    }
+</script>
+
+<div class="container">
+    <ul class="breadcrumb pull-right">
+        <li><a href="/">Trang Chủ</a></li>
+        <li><a href="<?php echo $_News->PageID()->linkPagesCurent(); ?>"><?php echo $_News->PageID()->Name; ?></a></li>
+        <li class="active"><?php echo $_News->Name ?></li>
+    </ul>
+    <?php
+    if (isset($_SESSION[QuanTri])) {
+    ?>
+        <a href="/mnews/editnews/<?php echo $_News->ID; ?>" class="btn btn-primary pull-right">Sửa</a>
+    <?php
+    }
+    ?>
+</div>
+<div class="">
+    <div class="container Main-Content" style="padding-top: 15px;padding-bottom: 15px;">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="text-left text-uppercase text-bold" style="font-size: 24px;"><?php echo $_News->Name ?></h1>
+                <p>
+                    <i class="fa fa-calendar"></i> <?php echo $_News->NgayDang() ?>
+                    <i class="fa fa-eye"></i> <?php echo $_News->SoLanXem ?>
+                </p>
+                <hr>
+                <?php echo $_News->Content; ?>
+                <hr>
+                Tags:
+                <?php
+                $tagsDetail = new Model\tags\tagsDetail();
+                $tagsDetailBynews = $tagsDetail->GetByNewsId($_News->ID);
+                if ($tagsDetailBynews) {
+                    foreach ($tagsDetailBynews as $tagsBynews) {
+                        $_tagDetai = new Model\tags\tagsDetail($tagsBynews);
+                ?>
+                        <a href="<?php echo $_tagDetai->Tags()->LinkTags(); ?>">
+                            <label class="btn btn-default">
+                                <?php echo $_tagDetai->Name; ?>
+                            </label>
+                        </a>
+                <?php
+                    }
+                }
+                ?>
+                <hr>
+                Chia Sẻ: <div class="sharethis-inline-share-buttons"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="">
+                    <h2 class="text-left title-pannel"><span>Danh Mục Bài Viết</span></h2>
+                    <div class="d-flex danhmucbaiviet">
+                        <a href="" data-target=".backdrop,.MenuMobie" class="btn-toggle hidden-lg hidden-md hidden-sm btn btn-default">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <div class="backdrop btn-toggle" data-target=".backdrop,.MenuMobie">
+                    </div>
+                    <div class="MenuMobie ">
+                        <ul class="list-group margin-bottom-25 sidebar-menu">
+                            <?php
+                            if ($DanhMucBaiViet) {
+                                foreach ($DanhMucBaiViet as $page) {
+                                    $_page = new Model\pages($page);
+                            ?>
+                                    <li class="list-group-item clearfix"><a href="<?php echo $_page->linkPagesCurent() ?>"><i class="fa fa-angle-right"></i> <?php echo $_page->Name ?></a></li>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </ul>
+                    </div>
+
+                    <h2 class="text-left title-pannel"><span>Tin Mới Nhất</span></h2>
+                    <?php
+                    if ($DanhSachTinMoiNhat) {
+                        foreach ($DanhSachTinMoiNhat as $news) {
+                            $_new = new \Model\news($news);
+                    ?>
+                            <div class=" ">
+                                <div class="col-xs-4">
+                                    <div class="row">
+                                        <a href="<?php echo $_new->linkNewsCurent(); ?>">
+                                            <img style="min-width: 100%;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img HinhChuNhat img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8">
+                                    <a href="<?php echo $_new->linkNewsCurent(); ?>" class="">
+                                        <h3 style="font-size: 14px;" class="text-bold text-justify"><?php echo $_new->Name ?></h3>
+                                    </a>
+                                    <p><span><?php echo $_new->NgayDang() ?></span></p>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr style="margin: 10px">
+                            </div>
+
+                    <?php
+                        }
+                    }
+                    ?>
+                    <h2 class="text-left title-pannel"><span>Tags</span></h2>
+                    <div class="DanhSachTags ajaxHtml" data-target="#DanhSachTags" id="DanhSachTags" data-url="/index/gettags/"></div>
+                    <div class="clearfix" style="margin-bottom: 10px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr>
+<div class="container Main-Content" style="margin-bottom: 15px;padding-top: 10px;">
+    <h2 style="font-size: 16px;font-weight: bold;text-transform: uppercase;" class="text-left ">
+        <span>Bài Viết Liên Quan </span>
+    </h2>
+    <ul class="dsbaivietlienquan">
+        <?php
+        $newsLienQuan = $_News->BaiVietLienQuan();
+        if ($newsLienQuan)
+            foreach ($newsLienQuan as $key => $value) {
+                $_news = new \Model\news($value);
+        ?>
+            <li><a href="<?php echo $_news->linkNewsCurent(); ?>"> <?php echo $_news->Name; ?></a></li>
+        <?php
+            }
+        ?>
+    </ul>
+</div>

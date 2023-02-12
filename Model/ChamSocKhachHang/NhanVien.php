@@ -2,7 +2,8 @@
 
 namespace Model\ChamSocKhachHang;
 
-class NhanVien {
+class NhanVien
+{
 
     static $filename;
     public $id;
@@ -12,22 +13,23 @@ class NhanVien {
     public $sky;
     public $facebook;
 
-    public function __construct($nhanVien = null) {
-        if ($nhanVien) {
-            $this->id = isset($nhanVien["id"]) ? $nhanVien["id"] : null;
-            $this->name = isset($nhanVien["name"]) ? $nhanVien["name"] : null;
-            $this->phone = isset($nhanVien["phone"]) ? $nhanVien["phone"] : null;
-            $this->email = isset($nhanVien["email"]) ? $nhanVien["email"] : null;
-            $this->sky = isset($nhanVien["sky"]) ? $nhanVien["sky"] : null;
-            $this->facebook = isset($nhanVien["facebook"]) ? $nhanVien["facebook"] : null;
-        }
+    public function __construct($nhanVien = null)
+    {
+        $this->id = $nhanVien["id"] ?? null;
+        $this->name = $nhanVien["name"] ?? null;
+        $this->phone = $nhanVien["phone"] ?? null;
+        $this->email = $nhanVien["email"] ?? null;
+        $this->sky = $nhanVien["sky"] ?? null;
+        $this->facebook = $nhanVien["facebook"] ?? null;
     }
 
-    private static function GetPath() {
+    private static function GetPath()
+    {
         return ROOT_DIR . "/data/chamsockhachhang/NhanVien.json";
     }
 
-    static function Save($DataList) {
+    static function Save($DataList)
+    {
         $filename = self::GetPath();
         $string = $DataList;
         if (is_array($DataList)) {
@@ -39,14 +41,15 @@ class NhanVien {
         }
     }
 
-    static function GetToString() {
+    static function GetToString()
+    {
         $fileName = self::GetPath();
         return file_get_contents($fileName);
     }
 
-    static function GetToArray() {
+    static function GetToArray()
+    {
         $string = self::GetToString();
         return json_decode($string, JSON_OBJECT_AS_ARRAY);
     }
-
 }

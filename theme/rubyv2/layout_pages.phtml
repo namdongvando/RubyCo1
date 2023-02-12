@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<?php
+
+use theme\rubyv2\functionLayout;
+?>
+<html lang="vi" ng-cloak="TRUE" ng-app="rootApp"   ng-controller="homeController"  >
+    <head>
+        <?php
+        functionLayout::head();
+        ?>
+    </head>
+    <body class="corporate">
+
+        <?php
+        functionLayout::header();
+        include $Content;
+        echo functionLayout::footer();
+        functionLayout::js();
+        ?>
+
+    </body>
+</html>
+<?php
+functionLayout::DecodeHTML();
+?>

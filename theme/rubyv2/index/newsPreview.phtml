@@ -1,0 +1,50 @@
+<?php
+$_News = new Model\news($data["news"]);
+?>
+
+
+
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="/">Trang Chủ</a></li>
+        <li><a href="<?php echo $_News->PageID()->linkPagesCurent(); ?>"><?php echo $_News->PageID()->Name; ?></a></li>
+        <li class="active"><?php echo $_News->Name ?></li>
+    </ul>
+    <?php
+    if (isset($_SESSION[QuanTri])) {
+        ?>
+        <a href="/mnews/editnews/<?php echo $_News->ID; ?>" class="btn btn-primary pull-right" >Sửa</a>
+        <?php
+    }
+    ?>
+</div>
+<div class="Main-Content" >
+    <div class="container" >
+        <h2 class="text-left text-uppercase text-bold"  ><?php echo $_News->Name ?></h2>
+        <p>
+            <i class="fa fa-calendar" ></i> <?php echo $_News->NgayDang() ?>
+            <i class="fa fa-eye" ></i> <?php echo $_News->SoLanXem ?>
+        </p>
+        <hr>
+        <?php
+        echo Model\MucLuc::add_table_of_content($_News->Content);
+        ?>
+        <?php echo $_News->Content; ?>
+    </div>
+</div>
+<hr>
+<div class="container">
+    <h2 class="text-left title-pannel " ><span>Bài Viết Liên Quan</span></h2>
+    <ul class="dsbaivietlienquan" >
+        <?php
+        $newsLienQuan = $_News->BaiVietLienQuan();
+        if ($newsLienQuan)
+            foreach ($newsLienQuan as $key => $value) {
+                $_news = new \Model\news($value);
+                ?>
+                <li><a href = "<?php echo $_news->linkNewsCurent(); ?>" > <?php echo $_news->Name; ?></a></li>
+                <?php
+            }
+        ?>
+    </ul>
+</div>

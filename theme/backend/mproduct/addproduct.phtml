@@ -1,5 +1,10 @@
 <?php
-$Product = new \Model\Products();
+
+use Model\Products;
+use Model\ProductsForm;
+
+$Product = new  Products();
+$productsForm = new ProductsForm((array) $Product);
 ?>
 <ol class="breadcrumb">
     <li><a href="/backend/">Tranh chủ</a></li>
@@ -17,61 +22,51 @@ $Product = new \Model\Products();
 
                     <div class="col-md-9">
                         <?php
-                        Model\ProductsForm::ID($Product->Id)->render();
-                        Model\ProductsForm::Name($Product->Name)->renderHTML();
-                        Model\ProductsForm::Summary($Product->Summary)->renderHTML();
-                        Model\ProductsForm::Content($Product->Content)->renderHTML();
+                        $productsForm->Id()->render();
+                        $productsForm->Name()->renderHTML();
+                        $productsForm->Summary()->renderHTML();
+                        $productsForm->Content()->renderHTML();
                         ?>
                     </div>
                     <div class="col-md-3">
-
                         <div class="">
                             <div class="col-md-8">
                                 <div class="row">
                                     <?php
-                                    Model\ProductsForm::Price($Product->Price)->renderHTML();
+                                    $productsForm->Price()->renderHTML();
                                     ?>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="row">
                                     <?php
-                                    Model\ProductsForm::DoViTinh($Product->Note()->DonVi)->renderHTML();
+                                    $productsForm->DonViTinh()->renderHTML();
                                     ?>
                                 </div>
                             </div>
-                        </div>
-                        <div class="clearfix">
-
                         </div>
                         <div class="form-group">
                             <div>
                                 <label>Chọn Hình</label>
                                 <label style="border: 1px solid #000;background-color: rgba(0, 0, 0, 0.34);color: #fff;text-align: center;position: relative;height: 105px;display: block;z-index: 2">
-                                    <input style="display: none" onclick="BrowseServer('Images:/bds/', 'UrlHinh')" type="button" name="btnChonFilBrowseServere" id="btnChonFile" value="Chọn File" />
+                                    <input style="display: none" onclick="BrowseServer('Images:/sanpham/', 'UrlHinh')" type="button" name="btnChonFilBrowseServere" id="btnChonFile" value="Chọn File" />
                                     <div class="HinhChon" style="position: absolute;top: 0px;z-index: 1">
                                         <img id="HinhQuanCao" src="<?php echo $Product->UrlHinh() ?>" style="height: 100px;max-width: 200px">
                                     </div>
                                 </label>
                                 <div style="clear: both"></div>
                                 <?php
-                                Model\ProductsForm::UrlHinh($Product->UrlHinh())->render();
+                                $productsForm->UrlHinh()->render();
                                 ?>
                             </div>
                         </div>
                         <?php
-                        Model\ProductsForm::catID($Product->catID)->renderHTML();
-                        Model\ProductsForm::isShow($Product->isShow)->renderHTML();
-
-                        if (count(\Model\ProductLang::GetLangsOption()) > 1) {
-                            Model\ProductsForm::lang($Product->lang)->renderHTML();
-                        } else {
-                            Model\ProductsForm::lang($Product->lang)->render();
-                        }
+                        $productsForm->catID()->renderHTML();
+                        $productsForm->isShow()->renderHTML();
+                        $productsForm->lang()->renderHTML();
                         ?>
-                        <div class="form-group">
-                            <label></label>
-                            <button name="ThemSanPham" style="min-width: 100px" class="btn btn-primary" type="submit">OK</button>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <button name="ThemSanPham" style="min-width: 100px" class="btn btn-primary" type="submit">Lưu Sản Phẩm</button>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,25 @@
+<div class="TaiSaoChonChungToi_Content">
+    <div class="title-tintuc">
+        <h2>{{title}}</h2>
+    </div>
+    <div class="TaiSaoChonChungToi">
+        <?php
+
+        use Model\adv;
+
+        $adv = new adv();
+        $a = $adv->AdvsByGroup("DoiTac", FALSE);
+        if ($a) {
+            foreach ($a as $key => $value) {
+                $_item = new adv($value);
+        ?>
+                <div class="item">
+                    <img class="img img-responsive" src="/public/no-image.jpg" ng-src="<?php echo $_item->Urlimages; ?>" alt="<?php echo $_item->Name; ?>">
+                </div>
+        <?php
+            }
+        }
+        ?>
+
+    </div>
+</div>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0c186e2031b6678adc6fc75d4479f8a",
+    "content-hash": "cb9b30d56bd141cfbad58de11db87ccb",
     "packages": [
         {
             "name": "ezyang/htmlpurifier",
@@ -314,6 +314,54 @@
                 }
             ],
             "time": "2022-08-04T09:53:51+00:00"
+        },
+        {
+            "name": "namdongvando/phpdatatable",
+            "version": "1.31",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/namdongvando/PHPDatatable.git",
+                "reference": "f19949bf33f4332bb6829cd5190d6c2ad7ade2cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/namdongvando/PHPDatatable/zipball/f19949bf33f4332bb6829cd5190d6c2ad7ade2cc",
+                "reference": "f19949bf33f4332bb6829cd5190d6c2ad7ade2cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Datatable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "email": "namdong92@gmail.com",
+                    "role": "Owner"
+                },
+                {
+                    "email": "namdong92@gmail.com",
+                    "role": "Committer"
+                }
+            ],
+            "description": "phpdatatable",
+            "keywords": [
+                "php",
+                "php datatable"
+            ],
+            "support": {
+                "issues": "https://github.com/namdongvando/PHPDatatable/issues",
+                "source": "https://github.com/namdongvando/PHPDatatable/tree/1.31"
+            },
+            "time": "2023-02-02T09:03:32+00:00"
         },
         {
             "name": "namdongvando/rpfbc",

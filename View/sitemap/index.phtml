@@ -1,10 +1,7 @@
 <?php
 header("Content-type: text/xml");
 ?>
-<urlset
-    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc><?php echo BASE_URL; ?></loc>
@@ -17,13 +14,13 @@ header("Content-type: text/xml");
     if ($DSDanhMuc)
         foreach ($DSDanhMuc as $DanhMuc) {
             $_DanhMuc = new Model\pages($DanhMuc);
-            ?>
-            <url>
-                <loc><?php echo $_DanhMuc->linkFullPagesCurent() ?></loc>
-                <lastmod><?php echo date("Y-m-d", time() - 3600) ?></lastmod>
-                <priority>0.90</priority>
-            </url>
-            <?php
+    ?>
+        <url>
+            <loc><?php echo $_DanhMuc->linkFullPagesCurent() ?></loc>
+            <lastmod><?php echo date("Y-m-d", time() - 3600) ?></lastmod>
+            <priority>0.90</priority>
+        </url>
+    <?php
         }
     ?>
     <?php
@@ -32,13 +29,13 @@ header("Content-type: text/xml");
     if ($DSNews)
         foreach ($DSNews as $news) {
             $_news = new Model\news($news);
-            ?>
-            <url>
-                <loc><?php echo $_news->linkFullNewsCurent(); ?></loc>
-                <lastmod><?php echo date("Y-m-d", strtotime($_news->NgayDang)); ?></lastmod>
-                <priority>0.80</priority>
-            </url>
-            <?php
+    ?>
+        <url>
+            <loc><?php echo $_news->linkFullNewsCurent(); ?></loc>
+            <lastmod><?php echo date("Y-m-d", strtotime($_news->NgayDang)); ?></lastmod>
+            <priority>0.80</priority>
+        </url>
+    <?php
         }
     ?>
 

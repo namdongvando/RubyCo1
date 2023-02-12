@@ -1,0 +1,73 @@
+<?php
+
+use Model\FormCommon;
+use Model\Translate;
+use Model\AppSetting;
+use Model\Role;
+
+$Items = AppSetting::Get();
+?>
+<ol class="breadcrumb">
+    <li><a href="/backend">Dashboard</a></li>
+    <li>Cài Đặt Chung </li>
+</ol>
+<div class="container-fluid">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Cài Đặt Chung</h3>
+        </div>
+        <div class="box-body">
+            <form action="" enctype="multipart/form-data" method="POST">
+                <table class="table table-responsive">
+                    <?php
+                    if ($Items) {
+                        foreach ($Items as $key => $value) {
+                    ?>
+                            <tr>
+                                <td style="width: 25%;text-align: right;"><b><?php echo $key  ?></b></td>
+                                <td><?php
+                                    FormCommon::TextBox("valu", "appsetting[{$key}]", ["value" => $value ?? $key, "class" => "  form-control"])->render();
+                                    ?>
+                                </td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                    <?php
+                    if (\Model\Permission::CheckPremision([
+                        \Model\User::Admin,
+                        Role::CreateRoleName(\Controller\options::class . "_appsetting")
+                    ]) == true) {
+                    ?>
+                        <tfoot>
+                            <tr>
+                                <td style="width: 25%;text-align: right;">
+                                    <?php
+                                    FormCommon::TextBox("", "postappsetting[Code]", ["value" => "", "class" => "  form-control"])->render();
+                                    ?>
+                                </td>
+                                <td>
+                                    <div class="d-flex">
+                                        <?php
+                                        FormCommon::TextBox("", "postappsetting[Name]", ["value" => "", "class" => "  form-control"])->render();
+                                        ?>
+                                        <button class="btn btn-primary"><?php echo Translate::Trans("BtnPost"); ?></button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tfoot>
+
+                    <?php
+                    }
+                    ?>
+
+                </table>
+                <div class="box-footer">
+                    <button class="btn btn-success">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

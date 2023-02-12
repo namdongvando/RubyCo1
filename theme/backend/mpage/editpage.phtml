@@ -3,15 +3,15 @@ $a = new Model_Adapter();
 ob_start();
 $_Pages = new \Model\pages($data["p"]);
 ?>
-<div class="row   "  ng-controller="editpageController"  >
-    <section class="col-md-12" >
+<div class="row   " ng-controller="editpageController">
+    <section class="col-md-12">
         <div class="box box-solid ">
             <div class="box-header bg-green-gradient">
                 <h3 class="box-title">Quản Lý Trang </h3>
             </div><!-- /.box-header -->
             <div class="box-body ">
-                <form action="" method="POST" enctype="multipart/form-data" >
-                    <div class="col-md-3" >
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <div class="col-md-3">
                         <?php
                         Model\PagesForm::Name($_Pages->Name)->renderHTML();
                         Model\PagesForm::Title($_Pages->Title)->renderHTML();
@@ -25,60 +25,60 @@ $_Pages = new \Model\pages($data["p"]);
                         Model\PagesForm::OrderBy($_Pages->OrderBy)->renderHTML();
                         ?>
                         <div class="form-group">
-                            <img src="<?php echo $_Pages->Urlimages ?>" style="max-height: 100px;" class="img img-responsive" >
-                            <button type="button" onclick="BrowseServer('Images:/pages/', 'txtUrlimages')" >Chọn Hình</button>
+                            <img src="<?php echo $_Pages->Urlimages ?>" style="max-height: 100px;" class="img img-responsive">
+                            <button type="button" onclick="BrowseServer('Images:/pages/', 'txtUrlimages')">Chọn Hình</button>
                             <?php
                             Model\PagesForm::Urlimages($_Pages->Urlimages)->renderHTML();
                             ?>
                         </div>
-                        <button name="SuaPage" class=" btn btn-success btn-lg  " >Lưu</button>
+                        <button name="SuaPage" class=" btn btn-success btn-lg  ">Lưu</button>
                     </div>
-                    <div class="col-md-9" >
+                    <div class="col-md-9">
                         <?php
                         Model\PagesForm::Summary($_Pages->Summary)->renderHTML();
                         Model\PagesForm::Content($_Pages->Content)->renderHTML();
                         ?>
                         <div class="panel panel-default">
-                            <div class="panel-heading" >
-                                <h3 class="panel-title" >Cấu Hình</h3>
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Cấu Hình</h3>
                             </div>
                             <div class="panel-body ">
                                 <div class="form-group ">
                                     <label for="">Link</label>
-                                    <div class="form-inline" >
+                                    <div class="form-inline">
                                         <input style="min-width: 90%;" id="copyLink" type="text" class="form-control" value="<?php echo $_Pages->linkPagesCurent() ?>" placeholder="...">
-                                        <button class="btn btn-success" type="button" onclick="copytext()" >Copy</button>
+                                        <button class="btn btn-success" type="button" onclick="copytext()">Copy</button>
                                     </div>
                                 </div>
-                                <table class="hidden table table-bordered" >
+                                <table class="hidden table table-bordered">
                                     <tr>
                                         <td>Key</td>
                                         <td>Value</td>
                                     </tr>
-                                    <tr >
+                                    <tr>
                                         <td>
                                             Là Thông Tin Dịch Vụ
                                         </td>
                                         <td>
-                                            <select class="form-control" ng-model="itemPage.Note.IsSevicer"    >
-                                                <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0" >Không</option>
-                                                <option ng-selected="itemPage.Note.IsSevicer == '1'" value="1" >Có</option>
+                                            <select class="form-control" ng-model="itemPage.Note.IsSevicer">
+                                                <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0">Không</option>
+                                                <option ng-selected="itemPage.Note.IsSevicer == '1'" value="1">Có</option>
                                             </select>
                                         </td>
                                     </tr>
-                                    <tr >
+                                    <tr>
                                         <td>
                                             Hiển Thị Các Dự Án Đã Làm
                                         </td>
                                         <td>
-                                            <select class="form-control" ng-model="itemPage.Note.IsSevicer"    >
-                                                <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0" >Không</option>
-                                                <option ng-selected="itemPage.Note.Show == '1'" value="1" >Có</option>
+                                            <select class="form-control" ng-model="itemPage.Note.IsSevicer">
+                                                <option ng-selected="itemPage.Note.IsSevicer == '0'" value="0">Không</option>
+                                                <option ng-selected="itemPage.Note.Show == '1'" value="1">Có</option>
                                             </select>
                                         </td>
                                     </tr>
                                 </table>
-                                <textarea class="hidden form-control " name="Note"  class="form-control"  rows="10" >{{itemPage.Note}}</textarea>
+                                <textarea class="hidden form-control " name="Note" class="form-control" rows="10">{{itemPage.Note}}</textarea>
                             </div>
 
                         </div>

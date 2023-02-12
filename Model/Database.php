@@ -190,8 +190,9 @@ class Database extends \Model\iDatabase
     public function ProductsAllPT($Page = 1, $Number = 20, &$Tong = 0)
     {
         $Page = intval($Page);
-        $Page = min($Page, 1);
+        $Page = max($Page, 1);
         $start = ($Page - 1) * $Number;
+        $start = max($start, 0);
         $sql = "SELECT count(*) as `Tong` FROM `" . table_prefix . "product` where 1";
         $this->Query($sql);
         $a = $this->fetchRow();
@@ -270,7 +271,7 @@ class Database extends \Model\iDatabase
         return $this->Luu();
     }
 
-    protected function ProductsByName($Name, $page, $number, &$sum)
+    public function ProductsByName($Name, $page, $number, &$sum)
     {
         $page = intval($page);
         $page = max(1, $page);
@@ -317,9 +318,8 @@ class Database extends \Model\iDatabase
 
     public function ProductsByID($Id, $isobj = true)
     {
-        $sql = "SELECT * FROM `" . table_prefix . "product` where `ID` = '{$Id}'";
+        $sql = "SELECT * FROM `" . table_prefix . "product` where `Id` = '{$Id}'";
         $this->Query($sql);
-
         if ($isobj) {
             return new \Model\Products($this->fetchRow());
         }
@@ -731,7 +731,6 @@ class Database extends \Model\iDatabase
             $fields[] = sprintf("`%s` = '%s'", $key, $this->BoHieuUngSQL($value));
         }
         $sql = sprintf("UPDATE `%s` SET %s WHERE %s", $tableName, implode(', ', $fields), $pk);
-
         $this->Query($sql);
         return $this->Luu();
     }
@@ -746,6 +745,22 @@ class Database extends \Model\iDatabase
 
         $this->Query($sql);
         return $this->SaveInsert();
+    }
+
+    public function selectRow($tableName, $listColum = [], $pk = "1", $className = "")
+    {
+        $select = " * ";
+        if ($listColum) {
+            $fields = [];
+            foreach ($listColum as $value) {
+                $fields[] = sprintf("`%s`", $value);
+            }
+            $select = implode(",", $fields);
+        }
+        $sql = sprintf("SELECT %s FROM `%s` WHERE %s ", $select, $tableName, $pk);
+        //        echo sprintf("SELECT %s FROM `%s` WHERE %s ", $select, $tableName, $pk);
+        $this->Query($sql);
+        return $this->fetchRow();
     }
 
     function select($tableName, $listColum = [], $pk = "1", $className = "")

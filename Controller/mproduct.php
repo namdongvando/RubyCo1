@@ -1,5 +1,10 @@
 <?php
 
+use Datatable\Response;
+use lib\input;
+use Model\Products;
+use Model\ProductsForm;
+
 class Controller_mproduct extends Controller_backend
 {
 
@@ -12,12 +17,33 @@ class Controller_mproduct extends Controller_backend
         error_reporting(E_ALL);
         $this->Product = new \Model\Products();
         parent::__construct();
+        $path = "/public/img/";
+        Model\pathCkFinder::set($path);
     }
-
     function index()
     {
+        $indexPage = $_REQUEST["indexPage"] ?? 1;
+        $pageNumber = $_REQUEST["pageNumber"] ?? 10;
+        $Name = $_REQUEST["Name"] ?? '';
+        $params["Name"] = $Name;
+        $params["indexPage"] = $indexPage;
+        $params["pageNumber"] = $pageNumber;
+        $ModelProducts = new Model\Products();
+        $Tong = 0;
+        $data = $ModelProducts->ProductsAllPT($indexPage, $pageNumber, $Tong);
+        $respon = new Response();
+        $respon->rows = $data;
+        $respon->items = $data;
+        $respon->params = $params;
+        $respon->mess = "";
+        $respon->status = Response::OK;
+        $respon->indexPage = $indexPage;
+        $respon->number = $pageNumber;
+        $respon->columns = $ModelProducts->ColumnsTable();
+        $respon->totalrows = $Tong;
+        $respon->totalPage = ceil($Tong / $pageNumber);
 
-        $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "mproduct");
+        $this->ViewTheme(["DataTable" => $respon], Model_ViewTheme::get_viewthene(), "mproduct");
     }
 
     function GetProductPT()
@@ -82,20 +108,21 @@ class Controller_mproduct extends Controller_backend
     {
 
         if (isset($_POST["LuuSanPham"])) {
-            $Product = $_POST["Product"];
-            $editP = $this->Product->ProductsByID($Product['ID'], FALSE);
-            $editP['nameProduct'] = $Product["nameProduct"];
-            $editP['Alias'] = $this->Product->bodautv($Product["nameProduct"]);
-            $editP['catID'] = $Product["catID"];
-            $editP['Price'] = $Product["Price"];
-            $editP['Summary'] = $Product["Summary"];
-            $editP['Content'] = $Product["Content"];
-            $editP['UrlHinh'] = $Product['UrlHinh'];
-            $editP['Note'] = json_encode($Product["Note"]);
-            $editP['isShow'] = intval($Product["isShow"]);
-
-            $this->Product->EditProducts($editP);
-            //            $this->Product->_header("/mproduct/detailproduct/" . $editP["ID"]);
+            $SanPham = $_POST[ProductsForm::formName];
+            $editP = new Products($SanPham['Id']);
+            foreach ((array)$editP as $key => $value) {
+                $editP->$key = input::InputText($SanPham[$key] ?? "");
+            }
+            $editP->OldPrice = floatval($SanPham["OldPrice"] ?? 0);
+            $editP->Alias = $this->Product->bodautv($SanPham["Name"]);
+            $editP->Price = floatval($SanPham["Price"] ?? 0);
+            $editP->Number = floatval($SanPham["Number"] ?? 0);
+            $editP->BuyTimes = floatval($SanPham["BuyTimes"] ?? 0);
+            $editP->Views = floatval($SanPham["Views"] ?? 0);
+            $editP->Serial = floatval($SanPham["Serial"] ?? 0);
+            $editP->DateCreate = date("Y-m-d", time());
+            $products = new Products();
+            $products->EditProducts((array)$editP);
         }
 
         $data["p"] = $this->Product->ProductsByID($this->param[0], FALSE);
@@ -105,35 +132,28 @@ class Controller_mproduct extends Controller_backend
     function copyproduct()
     {
         if (isset($_POST["LuuSanPham"])) {
-            $_POST['ID'] = $this->Product->bodautv($_POST['nameProduct']);
-            $editP = $this->Product->ProductsByID(intval($_POST['ID']), FALSE);
-            if (!$editP) {
-                $editP['ID'] = $_POST["ID"];
-                $editP['nameProduct'] = $_POST["nameProduct"];
-                $editP['Alias'] = $this->Product->bodautv($_POST["nameProduct"]);
-                $editP['Username'] = $_SESSION[QuanTri]["Username"];
-                $editP['catID'] = $_POST["catID"];
-                $editP['Price'] = $_POST["Price"];
-                $editP['oldPrice'] = $_POST["oldPrice"];
-                $editP['Summary'] = $_POST["Summary"];
-                $editP['Content'] = $_POST["Content"];
-                $img = explode("/images/sanpham/", $_POST["UrlHinh"]);
-                $editP['UrlHinh'] = end($img);
-                $editP['DateCreate'] = date("Y-m-d H:i:s", time());
-                $editP['Number'] = 1;
-                $editP['Note'] = $_POST["Note"];
-                $editP['BuyTimes'] = 0;
-                $editP['isShow'] = isset($_POST["isShow"]) ? 1 : 0;
-                $editP['lang'] = "vi";
-                if (isset($_FILES["fileImages"])) {
-                    if ($_FILES["fileImages"]["error"][0] == 0) {
-                        $img = $this->Product->upload_multi_image($_FILES["fileImages"], "public/img/images/sanpham/" . $editP["ID"] . "/", $editP["ID"] . "-");
-                        $img = "/" . $img;
-                    }
+            try {
+                $SanPham = $_POST[ProductsForm::formName];
+                $id = time();
+                $modelProducts = new Products();
+                foreach ((array)$modelProducts as $key => $value) {
+                    $modelProducts->$key = input::InputText($SanPham[$key] ?? "");
                 }
-                $this->Product->AddProducts($editP);
+                $modelProducts->Id = $id;
+                $modelProducts->OldPrice = floatval($SanPham["OldPrice"] ?? 0);
+                $modelProducts->Price = floatval($SanPham["Price"] ?? 0);
+                $modelProducts->Alias = $this->Product->bodautv($SanPham["Name"]);
+                $modelProducts->Number = floatval($SanPham["Number"] ?? 0);
+                $modelProducts->BuyTimes = floatval($SanPham["BuyTimes"] ?? 0);
+                $modelProducts->Views = floatval($SanPham["Views"] ?? 0);
+                $modelProducts->Serial = floatval($SanPham["Serial"] ?? 0);
+                $modelProducts->DateCreate = date("Y-m-d", time());
+                $products = new Products();
+                $products->AddProducts((array)$modelProducts);
+                $products->_header("/mproduct/editproduct/" . $modelProducts->Id);
+            } catch (Exception $exc) {
+                echo $exc->getMessage();
             }
-            $this->Product->_header("/mproduct/detailproduct/" . $editP["ID"]);
         }
         $data["p"] = $this->Product->ProductsByID($this->param[0], FALSE);
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "mproduct");
@@ -159,38 +179,29 @@ class Controller_mproduct extends Controller_backend
     {
         if (isset($_POST["ThemSanPham"])) {
             try {
-                $SanPham = $_POST["Product"];
+                $SanPham = $_POST[ProductsForm::formName];
                 $id = time();
-                $addP = $this->Product->ProductsByID($id, FALSE);
-                if ($addP) {
-                    throw new Exception("Đã Có Sản Phẩm Này");
+                $modelProducts = new Products();
+                foreach ((array)$modelProducts as $key => $value) {
+                    $modelProducts->$key = input::InputText($SanPham[$key] ?? "");
                 }
-                $addP['ID'] = $id;
-                $addP['nameProduct'] = $SanPham["nameProduct"];
-                $addP['Alias'] = $this->Product->bodautv($SanPham["nameProduct"]);
-                $addP['Username'] = $_SESSION[QuanTri]["Username"];
-                $addP['catID'] = $SanPham["catID"];
-                $addP['Price'] = $SanPham["Price"];
-                $addP['oldPrice'] = 0;
-                $addP['Views'] = 0;
-                $addP['Summary'] = $SanPham["Summary"];
-                $addP['Content'] = $SanPham["Content"];
-                if (isset($SanPham['UrlHinh']))
-                    $addP['UrlHinh'] = $SanPham['UrlHinh'];
-                $addP['DateCreate'] = date("Y-m-d H:i:s", time());
-                $addP['Number'] = 1;
-                $addP['Serial'] = 1;
-                $addP['Note'] = $SanPham["Note"];
-                $addP['BuyTimes'] = 0;
-                $addP['isShow'] = intval($addP['isShow']);
-                $addP['lang'] = $addP['lang'];
-
-                $this->Product->AddProducts($addP);
-                $this->Product->_header("/mproduct/editproduct/" . $addP["ID"]);
-            } catch (Throwable $exc) {
-                $exc->getMessage();
+                $modelProducts->Id = $id;
+                $modelProducts->OldPrice = floatval($SanPham["OldPrice"] ?? 0);
+                $modelProducts->Alias = $this->Product->bodautv($SanPham["Name"]);
+                $modelProducts->Price = floatval($SanPham["Price"] ?? 0);
+                $modelProducts->Number = floatval($SanPham["Number"] ?? 0);
+                $modelProducts->BuyTimes = floatval($SanPham["BuyTimes"] ?? 0);
+                $modelProducts->Views = floatval($SanPham["Views"] ?? 0);
+                $modelProducts->Serial = floatval($SanPham["Serial"] ?? 0);
+                $modelProducts->DateCreate = date("Y-m-d", time());
+                $products = new Products();
+                $products->AddProducts((array)$modelProducts);
+                $products->_header("/mproduct/editproduct/" . $modelProducts->Id);
+            } catch (Exception $exc) {
+                echo $exc->getMessage();
             }
         }
+
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "mproduct");
     }
 

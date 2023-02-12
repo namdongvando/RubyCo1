@@ -19,7 +19,7 @@ class Controller_mcategory extends Controller_backend
     {
         $this->Bread[] = [
             "title" => "Danh Mục Sản Phẩn",
-            "link" => "/mpage/"
+            "link" => "/mcategory/index/"
         ];
         $Bread = new \Model\Breadcrumb();
         $Bread->setBreadcrumb($this->Bread);

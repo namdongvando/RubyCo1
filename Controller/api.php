@@ -1,32 +1,37 @@
 <?php
 
 // api này không cần dang nhap
-class Controller_api extends Controller_index {
+class Controller_api extends Controller_index
+{
 
     public $param;
     public $Menu;
     static private $version = "111";
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->Menu = new \Model\Menu();
         $this->param = $this->getParam();
     }
 
-    function getNhanVien() {
+    function getNhanVien()
+    {
         header('Content-Type: application/json');
         $NhaVien = new Model\ChamSocKhachHang\NhanVien();
         echo $NhaVien->GetToString();
     }
 
-    function version() {
+    function version()
+    {
         $a = ["Version" => session_id()];
         $a = ["Version" => time()];
         $lib = new \lib\APIs();
         $lib->ArrayToApi($a);
     }
 
-    function baivietmoinhat() {
+    function baivietmoinhat()
+    {
         $news = new Model\news();
         $DanhSachTinMoiNhat = $news->DanhSachTinMoiNhat();
         $data = [];
@@ -39,7 +44,8 @@ class Controller_api extends Controller_index {
         $Api->ArrayToApi($data);
     }
 
-    function VanBanPhapLuat() {
+    function VanBanPhapLuat()
+    {
 
         $TaiSao = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::VanBanPhapLuat);
 
@@ -59,7 +65,8 @@ class Controller_api extends Controller_index {
         $Api->ArrayToApi($data);
     }
 
-    function TaiSaoChonChungToi() {
+    function TaiSaoChonChungToi()
+    {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
@@ -81,7 +88,8 @@ class Controller_api extends Controller_index {
         $Api->ArrayToApi($data);
     }
 
-    function baivietnoibat() {
+    function baivietnoibat()
+    {
         $news = new Model\news();
         $DanhSachTinMoiNhat = $news->DanhSachTinNoiBat(10);
         $data = [];
@@ -93,13 +101,15 @@ class Controller_api extends Controller_index {
         $Api->ArrayToApi($data);
     }
 
-    function index() {
+    function index()
+    {
         $cat = new Model\Category();
         $a = $cat->Categorys4IDParent(0);
         $cat->_encode($a);
     }
 
-    function getMainMenu() {
+    function getMainMenu()
+    {
         $cat = new Model\Category();
         $a = $cat->Categorys4IDParent(0);
         if ($a)
@@ -113,51 +123,64 @@ class Controller_api extends Controller_index {
         echo $cat->_encode($a);
     }
 
-    function getMenus() {
+    function getMenus()
+    {
         $Menu = [];
         $a = $this->Menu->MenuByGroupThemeParent("home", "TopMainMenu", 0, FALSE);
         $lib = new \lib\APIs();
-        foreach ($a as $key => $value) {
-            $a[$key]["Id"] = $value["IDMenu"];
-            $b = $this->Menu->MenuByGroupThemeParent("home", "TopMainMenu", $a[$key]["Id"], FALSE);
-            foreach ($b as $kb => $vb) {
-                $b[$kb]["Id"] = $vb["IDMenu"];
-                $c = $this->Menu->MenuByGroupThemeParent("home", "TopMainMenu", $b[$kb]["Id"], FALSE);
-                $b[$kb]["submenu"] = $c;
+        if ($a) {
+            foreach ($a as $key => $value) {
+                $a[$key]["Id"] = $value["IDMenu"];
+                $b = $this->Menu->MenuByGroupThemeParent("home", "TopMainMenu", $a[$key]["Id"], FALSE);
+                if ($b) {
+                    foreach ($b as $kb => $vb) {
+                        $b[$kb]["Id"] = $vb["IDMenu"];
+                        $c = $this->Menu->MenuByGroupThemeParent("home", "TopMainMenu", $b[$kb]["Id"], FALSE);
+                        $b[$kb]["submenu"] = $c;
+                    }
+                    $a[$key]["submenu"] = $b;
+                }
             }
-            $a[$key]["submenu"] = $b;
         }
-
-
         $Menu["TopMainMenu"] = $a;
 
         $a = $this->Menu->MenuByGroupThemeParent("home", "FooterMenu", 0, FALSE);
         $lib = new \lib\APIs();
-        foreach ($a as $key => $value) {
-            $a[$key]["Id"] = $value["IDMenu"];
+        if ($a) {
+            foreach ($a as $key => $value) {
+                $a[$key]["Id"] = $value["IDMenu"];
+            }
         }
+
         $Menu["FooterMenu"] = $a;
         $a = $this->Menu->MenuByGroupThemeParent("home", "FooterMenuCongTy", 0, FALSE);
         $lib = new \lib\APIs();
-        foreach ($a as $key => $value) {
-            $a[$key]["Id"] = $value["IDMenu"];
+        if ($a) {
+            foreach ($a as $key => $value) {
+                $a[$key]["Id"] = $value["IDMenu"];
+            }
         }
         $Menu["FooterMenuCongTy"] = $a;
 
         $a = $this->Menu->MenuByGroupThemeParent("home", "FooterMenuHoTro", 0, FALSE);
         $lib = new \lib\APIs();
-        foreach ($a as $key => $value) {
-            $a[$key]["Id"] = $value["IDMenu"];
+        if ($a) {
+            foreach ($a as $key => $value) {
+                $a[$key]["Id"] = $value["IDMenu"];
+            }
         }
+
         $Menu["FooterMenuHoTro"] = $a;
 
         $a = $this->Menu->MenuByGroupThemeParent("home", "FooterMenuDichVu", 0, FALSE);
         $lib = new \lib\APIs();
-        foreach ($a as $key => $value) {
-            $a[$key]["Id"] = $value["IDMenu"];
+        if ($a) {
+            foreach ($a as $key => $value) {
+                $a[$key]["Id"] = $value["IDMenu"];
+            }
         }
-        $Menu["FooterMenuDichVu"] = $a;
 
+        $Menu["FooterMenuDichVu"] = $a;
         $cat = new Model\Category();
         $a = $cat->Categorys4IDParent(0);
         if ($a) {
@@ -170,15 +193,16 @@ class Controller_api extends Controller_index {
             }
         }
         $Menu["LeftMenu"] = $a;
-//        $this->TopMainMenu = $this->Menu->_encode($this->TopMainMenu["body"]);
-//        $this->FooterMenu = $this->Menu->_encode($this->FooterMenu["body"]);
-//        $this->FooterMenuCongTy = $this->Menu->_encode($this->FooterMenuCongTy["body"]);
-//        $this->FooterMenuHoTro = $this->Menu->_encode($this->FooterMenuHoTro["body"]);
-//        $this->FooterMenuDichVu = $this->Menu->_encode($this->FooterMenuDichVu["body"]);
+        //        $this->TopMainMenu = $this->Menu->_encode($this->TopMainMenu["body"]);
+        //        $this->FooterMenu = $this->Menu->_encode($this->FooterMenu["body"]);
+        //        $this->FooterMenuCongTy = $this->Menu->_encode($this->FooterMenuCongTy["body"]);
+        //        $this->FooterMenuHoTro = $this->Menu->_encode($this->FooterMenuHoTro["body"]);
+        //        $this->FooterMenuDichVu = $this->Menu->_encode($this->FooterMenuDichVu["body"]);
         $lib->ArrayToApi($Menu);
     }
 
-    function getMenuTopMainMenu() {
+    function getMenuTopMainMenu()
+    {
         $Menu = [];
         $a = $this->Menu->MenuByGroupThemeParent("home", "TopMainMenu", 0, FALSE);
 
@@ -201,7 +225,8 @@ class Controller_api extends Controller_index {
         $lib->ArrayToApi($Menu);
     }
 
-    function getProductByID() {
+    function getProductByID()
+    {
         $Produc = new Model\Products();
         $_p = $Produc->ProductsByID($this->param[0], FALSE);
         $_p["Content"] = "";
@@ -209,24 +234,27 @@ class Controller_api extends Controller_index {
         print_r($Produc->_encode($_p));
     }
 
-    function getAdvByGroup() {
+    function getAdvByGroup()
+    {
         $cat = new \Model\adv();
         $a = $cat->AdvsByGroup($this->param[0], FALSE);
         echo $cat->_encode($a);
     }
 
-    function getPages() {
+    function getPages()
+    {
         $Pa = new \Model\pages();
         $Apis = new \lib\APIs();
         $a = $Pa->PagesByType(1, FALSE);
         $Apis->ArrayToApi($a);
     }
 
-    function getMainMenuThong($param) {
-
+    function getMainMenuThong($param)
+    {
     }
 
-    function getPagesLink() {
+    function getPagesLink()
+    {
         $M_Pages = new \Model\pages();
         $lib = new lib\APIs();
         $a = $M_Pages->PagesMin(FALSE);
@@ -238,7 +266,8 @@ class Controller_api extends Controller_index {
         $lib->ArrayToApi($a);
     }
 
-    function getDanhMucLink() {
+    function getDanhMucLink()
+    {
         $M_Pages = new Model\Category();
         $lib = new lib\APIs();
         $a = $M_Pages->AllCategorys(FALSE);
@@ -251,7 +280,8 @@ class Controller_api extends Controller_index {
         $lib->ArrayToApi($a);
     }
 
-    function getProductsHot() {
+    function getProductsHot()
+    {
         $Produc = new Model\Products();
         $Ps = $Produc->ProductsHotNew(12, FALSE);
         foreach ($Ps as $key => $_ps) {
@@ -266,7 +296,8 @@ class Controller_api extends Controller_index {
         $lib->ArrayToApi($Ps);
     }
 
-    function getProductsHotView() {
+    function getProductsHotView()
+    {
         $Produc = new Model\Products();
         $Ps = $Produc->ProductsHotView(12, FALSE);
         foreach ($Ps as $key => $_ps) {
@@ -281,7 +312,8 @@ class Controller_api extends Controller_index {
         $lib->ArrayToApi($Ps);
     }
 
-    function gettintuchot() {
+    function gettintuchot()
+    {
         $News = new Model\news();
         $Ps = $News->NewsHot();
         foreach ($Ps as $k => $new) {
@@ -295,7 +327,8 @@ class Controller_api extends Controller_index {
         $lib->ArrayToApi($Ps);
     }
 
-    function updateHomeSlide() {
+    function updateHomeSlide()
+    {
         $a = new \Model\adv();
         $libImg = new \lib\imageComp();
         $DS = $a->AdvsByGroup("homeslide", FALSE);
@@ -314,7 +347,8 @@ class Controller_api extends Controller_index {
         $this->homeslide();
     }
 
-    function homeslide() {
+    function homeslide()
+    {
         $io = new \lib\io();
         $fileName = "cache/homeslide.json";
         if (file_exists($fileName)) {
@@ -323,7 +357,8 @@ class Controller_api extends Controller_index {
         }
     }
 
-    function danhmucnoibat() {
+    function danhmucnoibat()
+    {
         $io = new \lib\io();
         $fileName = "cache/danhmucnoibat.json";
         if (file_exists($fileName)) {
@@ -344,13 +379,15 @@ class Controller_api extends Controller_index {
         $io->writeFile($fileName, $content);
     }
 
-    function homeconfig() {
+    function homeconfig()
+    {
         $lib = new \lib\io();
         $a = $lib->readFile(ROOT_DIR . "/theme/config/homeconfig.json");
         echo $a;
     }
 
-    function linkLienKet() {
+    function linkLienKet()
+    {
         $menu = new Model\Menu();
         $a = $menu->MenusByGroup("LinkLienKet", FALSE);
         $data["Menus"] = $a;
@@ -359,7 +396,8 @@ class Controller_api extends Controller_index {
         $api->ArrayToApi($data);
     }
 
-    function listProductsSale() {
+    function listProductsSale()
+    {
         $pro = new Model\Products();
         $ps = $pro->ProductsSale(15);
         foreach ($ps as $key => $value) {
@@ -370,7 +408,8 @@ class Controller_api extends Controller_index {
         exit();
     }
 
-    private function ProductToApi($value) {
+    private function ProductToApi($value)
+    {
         $va = new Model\Products($value);
         $value["UrlHinh"] = $va->UrlHinh();
         $value["PriceVnd"] = $va->Price();
@@ -383,7 +422,8 @@ class Controller_api extends Controller_index {
         return $value;
     }
 
-    function listNewsProducts() {
+    function listNewsProducts()
+    {
         $pro = new Model\Products();
         $ps = $pro->ProductsHotNew(15);
         foreach ($ps as $key => $value) {
@@ -394,7 +434,8 @@ class Controller_api extends Controller_index {
         exit();
     }
 
-    function productCatHome() {
+    function productCatHome()
+    {
         $pro = new Model\Products();
         $CatId = $this->getParam()[0];
         $sum = 0;
@@ -407,14 +448,16 @@ class Controller_api extends Controller_index {
         exit();
     }
 
-    function AdvByProduct() {
+    function AdvByProduct()
+    {
         $adv = new \Model\adv();
         $product = $adv->AdvsByGroup("product");
         $api = new lib\APIs();
         return $api->ArrayToApi($product);
     }
 
-    function danhmucsanpham() {
+    function danhmucsanpham()
+    {
         $Cat = new Model\Category();
         $Cats = $Cat->getCategorys(FALSE);
         $b = [];
@@ -429,14 +472,12 @@ class Controller_api extends Controller_index {
         $api->ArrayToApi($b);
     }
 
-    function GetFunctions() {
+    function GetFunctions()
+    {
         $themeName = Model_ViewTheme::get_viewthene();
         $funsName = "theme\\{$themeName}\\functionLayout";
         $b = $funsName::functionsName();
         $api = new lib\APIs();
         $api->ArrayToApi($b);
     }
-
 }
-
-?>

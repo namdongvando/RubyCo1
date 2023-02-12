@@ -1,0 +1,4 @@
+ <h2 class="Title_widget" ng-show="{{title}}">{{title}}</h2>
+ <ul class="HuongDanThongTin">
+     <li ng-repeat="item in menuItem | orderBy:Serial"><a href="{{item.Link}}">{{item.Name}}</a></li>
+ </ul>

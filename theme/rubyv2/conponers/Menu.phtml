@@ -1,0 +1,14 @@
+ <h2 class="Title_widget" ng-show="{{title}}">{{title}}</h2>
+ <ul class="MenuItem">
+     <?php
+        if ($ItemsMenu) {
+            foreach ($ItemsMenu as $key => $value) {
+        ?>
+             <li>
+                 <a href="<?php echo $value["Link"] ?>"><?php echo $value["Name"] ?></a>
+             </li>
+     <?php
+            }
+        }
+        ?>
+ </ul>

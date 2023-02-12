@@ -1,18 +1,21 @@
 <?php
 
-class Model_Adapter {
+class Model_Adapter
+{
 
     static public $_conn = "";
     static protected $_result = "";
     static protected $_Query = "";
 
-    public function __construct() { // Kết nối csdl đầu tiên
+    public function __construct()
+    { // Kết nối csdl đầu tiên
         global $INI;
         self::$_conn = mysqli_connect($INI['host'], $INI['username'], $INI['password'], $INI['DBname']) or mysqli_errno("Can't connect database");
         mysqli_query(self::$_conn, "SET NAMES utf8"); // Chuyển dữ liệu trả về sang kiểu utf8
     }
 
-    public function ThemTable($tablename, $row) {
+    public function ThemTable($tablename, $row)
+    {
         $sql = "INSERT INTO `$tablename` SET ";
         $content = null;
         $table = $this->Table($tablename, $row);
@@ -34,7 +37,8 @@ class Model_Adapter {
         self::$_Query = $sql;
     }
 
-    public function _createDir($StringPath, $SubString = '/') {
+    public function _createDir($StringPath, $SubString = '/')
+    {
 
         $Dir = explode($SubString, $StringPath);
         $root = reset($Dir) . $SubString;
@@ -52,40 +56,45 @@ class Model_Adapter {
         }
     }
 
-    public function _createFile($StringPathFile, $NoiDung) {
+    public function _createFile($StringPathFile, $NoiDung)
+    {
         $myfile = fopen($StringPathFile, "w") or die("Unable to open file!");
         fwrite($myfile, $NoiDung);
         fclose($myfile);
     }
 
-    public function Query($sql) {
+    public function Query($sql)
+    {
         self::$_Query = $sql;
     }
 
-    public function Bokytusql($str) {
+    public function Bokytusql($str)
+    {
         $str = addslashes($str);
         return $str;
     }
 
-    function getGUID() {
+    function getGUID()
+    {
         if (function_exists('com_create_guid')) {
             return com_create_guid();
         } else {
-            mt_srand((double) microtime() * 10000); //optional for php 4.2.0 and up.
+            mt_srand((float) microtime() * 10000); //optional for php 4.2.0 and up.
             $charid = strtoupper(md5(uniqid(rand(), true)));
             $hyphen = chr(45); // "-"
-            $uuid = chr(123)// "{"
-                    . substr($charid, 0, 8) . $hyphen
-                    . substr($charid, 8, 4) . $hyphen
-                    . substr($charid, 12, 4) . $hyphen
-                    . substr($charid, 16, 4) . $hyphen
-                    . substr($charid, 20, 12)
-                    . chr(125); // "}"
+            $uuid = chr(123) // "{"
+                . substr($charid, 0, 8) . $hyphen
+                . substr($charid, 8, 4) . $hyphen
+                . substr($charid, 12, 4) . $hyphen
+                . substr($charid, 16, 4) . $hyphen
+                . substr($charid, 20, 12)
+                . chr(125); // "}"
             return $uuid;
         }
     }
 
-    public function fetchArrayByColum($colum) {
+    public function fetchArrayByColum($colum)
+    {
         $list = $this->Tim();
         $data = NULL;
         if ($list) {
@@ -96,7 +105,8 @@ class Model_Adapter {
         return $data;
     }
 
-    public function fetchAll() {
+    public function fetchAll()
+    {
         $list = $this->Tim();
         $data = NULL;
         if ($list) {
@@ -107,7 +117,8 @@ class Model_Adapter {
         return $data;
     }
 
-    public function fetchAllObj($classname) {
+    public function fetchAllObj($classname)
+    {
         $list = $this->Tim();
         $data = NULL;
         if ($list) {
@@ -118,7 +129,8 @@ class Model_Adapter {
         return $data;
     }
 
-    public function fetchArray() {
+    public function fetchArray()
+    {
         $list = $this->Tim();
         $data = NULL;
         if ($list) {
@@ -129,7 +141,8 @@ class Model_Adapter {
         return $data;
     }
 
-    function ToOption($col, $data) {
+    function ToOption($col, $data)
+    {
         $d = [];
         foreach ($data as $value) {
             if (isset($columns[2])) {
@@ -140,7 +153,8 @@ class Model_Adapter {
         }
     }
 
-    public function fetch2Option($columns) {
+    public function fetch2Option($columns)
+    {
         $data = $this->fetchAll();
         $d = [];
         foreach ($data as $value) {
@@ -153,30 +167,33 @@ class Model_Adapter {
         return $d;
     }
 
-    public function fetchRow() {
+    public function fetchRow()
+    {
         $list = $this->Tim();
         if ($list)
             return mysqli_fetch_assoc($list);
         return FALSE;
     }
 
-    public static function Luu() {
+    public static function Luu()
+    {
         if (self::$_conn) { // nếu đã kết nối csdl
             self::$_result = mysqli_query(self::$_conn, self::$_Query);
             if (self::$_result) {
                 return self::$_result;
             } else {
                 echo mysqli_error(self::$_conn);
-//                echo self::$_Query;
-//                header("Location: " . $_SERVER["HTTP_REFERER"]);
-//                die();
+                //                echo self::$_Query;
+                //                header("Location: " . $_SERVER["HTTP_REFERER"]);
+                //                die();
                 return FALSE;
             }
             return FALSE;
         }
     }
 
-    public static function SaveInsert() {
+    public static function SaveInsert()
+    {
         if (self::$_conn) { // nếu đã kết nối csdl
             self::$_result = mysqli_query(self::$_conn, self::$_Query);
             if (self::$_result) {
@@ -188,7 +205,8 @@ class Model_Adapter {
         }
     }
 
-    public static function Tim() {
+    public static function Tim()
+    {
         if (self::$_conn) { // nếu đã kết nối csdl
             self::$_result = mysqli_query(self::$_conn, self::$_Query);
             if (self::$_result) {
@@ -198,26 +216,30 @@ class Model_Adapter {
         }
     }
 
-    public function GetID() {
+    public function GetID()
+    {
         if (self::$_result) {
             return intval(mysqli_insert_id());
         }
     }
 
-    public function GetQuery() {
+    public function GetQuery()
+    {
         print_r(self::$_Query);
     }
 
-    public function GetNumRow() {
+    public function GetNumRow()
+    {
         if (self::$_Query) {
-//            echo self::$_Query;
+            //            echo self::$_Query;
             $kq = mysqli_query(self::$_conn, self::$_Query) or mysqli_errno(self::$_conn);
             return intval($kq->num_rows);
         }
         return 0;
     }
 
-    public function LuuXoa() {
+    public function LuuXoa()
+    {
         if (self::$_conn) { // nếu đã kết nối csdl
             self::$_result = mysqli_query(self::$_conn, self::$_Query); /* Gán kết quả trả về của câu truy
               vấn cho biến $_result */
@@ -229,20 +251,21 @@ class Model_Adapter {
         return FALSE;
     }
 
-    function guimail($NoiDungMail) {
-//      $tennguoigui = trim(strip_tags($NoiDungMail['tennguoigui']));
+    function guimail($NoiDungMail)
+    {
+        //      $tennguoigui = trim(strip_tags($NoiDungMail['tennguoigui']));
         $tennguoigui = $NoiDungMail['NguoiGui'];
         // mail nguoi nhan
         $to_email = $NoiDungMail['ToMail'];
-//      $from_email = trim(strip_tags($NoiDungMail['emailgui']));
-//      mail gửi/
+        //      $from_email = trim(strip_tags($NoiDungMail['emailgui']));
+        //      mail gửi/
         $from_email = $NoiDungMail['FromMail'];
 
-//      Tiêu đề mail
+        //      Tiêu đề mail
         $tieude = $NoiDungMail['TieuDe'];
-//      nội dung mail
+        //      nội dung mail
         $noidung = $NoiDungMail['NoiDung'];
-//
+        //
         $username = $NoiDungMail['FromMail']; // Tài khoản gmail dùng để gửi thư
         $password = $NoiDungMail['PassWord']; // mật khẩu của tài khoản gửi mail
         require_once 'PHPMailerAutoload.php';
@@ -269,11 +292,13 @@ class Model_Adapter {
             return "Đã gửi mail";
     }
 
-    function _header($url) {
+    function _header($url)
+    {
         header("Location: " . $url);
     }
 
-    function bodautv($str) {
+    function bodautv($str)
+    {
         if (!$str)
             return false;
 
@@ -308,20 +333,25 @@ class Model_Adapter {
         return $str;
     }
 
-    function _decode($stringJSon) {
+    function _decode($stringJSon)
+    {
+        $stringJSon = htmlspecialchars_decode($stringJSon);
         return json_decode($stringJSon);
     }
 
-    function _encode($array) {
+    function _encode($array)
+    {
         $a = json_encode($array, JSON_UNESCAPED_UNICODE);
         return html_entity_decode($a);
     }
 
-    function _subStringUnicode($str, $SL) {
+    function _subStringUnicode($str, $SL)
+    {
         return mb_substr($str, 0, $SL, 'UTF-8');
     }
 
-    function PhanTrang($TongTrang = 3, $TrangHienTai, $DuongDan) {
+    function PhanTrang($TongTrang = 3, $TrangHienTai, $DuongDan)
+    {
         $PhanTrang = ' <ul class="pagination">';
 
         $tu = $TrangHienTai - 4;
@@ -358,15 +388,18 @@ class Model_Adapter {
         return $PhanTrang;
     }
 
-    function getconn() {
+    function getconn()
+    {
         return self::$_conn;
     }
 
-    function BoHieuUngSQL($v) {
+    function BoHieuUngSQL($v)
+    {
         return $v;
     }
 
-    function upload_image($file, $extension, $folder, $tienTo) {
+    function upload_image($file, $extension, $folder, $tienTo)
+    {
         $ext = trim(substr($file["type"], 6, strlen($file["type"])));
         $name = basename($file['name'], '.' . $ext);
         $extension = "jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF";
@@ -386,7 +419,8 @@ class Model_Adapter {
         return $file['name'];
     }
 
-    function mkdir_r($dirName, $rights = 0777) {
+    function mkdir_r($dirName, $rights = 0777)
+    {
         $dirs = explode('/', $dirName);
         $dir = '';
         foreach ($dirs as $part) {
@@ -396,7 +430,8 @@ class Model_Adapter {
         }
     }
 
-    function upload_image1($file, $folder, $tt = "sp-", $isNameFile = false) {
+    function upload_image1($file, $folder, $tt = "sp-", $isNameFile = false)
+    {
         $this->mkdir_r($folder);
         if (!is_dir($folder)) {
             mkdir($folder, 0777);
@@ -425,7 +460,8 @@ class Model_Adapter {
         return $file['name'];
     }
 
-    function upload_multi_image($file, $folder, $tt = "sp-", $isNameFile = false) {
+    function upload_multi_image($file, $folder, $tt = "sp-", $isNameFile = false)
+    {
         $this->mkdir_r($folder);
         $extension = "jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF";
         $listName = array();
@@ -456,12 +492,10 @@ class Model_Adapter {
         return $listName;
     }
 
-    function RandomString($a) {
+    function RandomString($a)
+    {
         $md5_hash = md5(rand(0, 9999) . time());
         $security_code = substr($md5_hash, 2, 10);
         return $security_code;
     }
-
 }
-
-?>

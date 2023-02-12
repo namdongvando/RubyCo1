@@ -1,0 +1,82 @@
+<?php
+$Category = $data["Category"];
+$Pages = intval($data["Pages"]);
+$Pages = max($Pages, 1);
+
+$cat = new \Model\Category();
+$listCatID = [$Category->catID];
+$cat->AllCategoryByParentID([$Category->catID], $listCatID);
+$product = new \Model\Products();
+$number = 21;
+$sum = 0;
+$DSProduct = $product->ProductsByCatID($listCatID, $Pages, $number, $sum);
+?>
+
+<!-- view-product-list-->
+<div style="margin-top: 0px;" id="view-product-list" class="container view-product-list">
+    <div class="" >
+        <ul class="breadcrumb">
+            <li><a href="/">Trang Chủ</a></li>
+            <li class="active"><?php echo $Category->catName ?></li>
+        </ul>
+    </div>
+    <h1 class="title-pannel text-left">
+        <span class="text-uppercase "><?php echo $Category->catName; ?></span>
+    </h1>
+    <div class="row product-list grid">
+        <?php
+        if ($DSProduct)
+            foreach ($DSProduct as $_Poroduct) {
+                $_Product = new Model\Products($_Poroduct);
+                ?>
+                <div class="col-xs-6 col-md-4">
+                    <div class="row">
+
+                        <div class="col-md-12 text-center" >
+                            <a href="<?php echo $_Product->linkProduct(); ?>"  >
+                                <img style="height: 200px;width: 100%;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_Product->UrlHinh(); ?>" alt="<?php echo $_Product->nameProduct ?>"/>
+                            </a>
+                        </div>
+                        <div class="col-md-12" >
+                            <a href="<?php echo $_Product->linkProduct(); ?>" class="" >
+                                <h3 style="margin-top: 10px;overflow: hidden;height: 40px;line-height: 20px;font-size: 18px;" class="newstitle text-justify" ><?php echo $_Product->nameProduct; ?></h3>
+                            </a>
+                            <p><strong><span style="color: red;" ><?php echo $_Product->PriceShow(); ?></span> </strong> </p>
+                            <p class="text-justify" style="overflow: hidden;height: 100px;" ><?php echo $_Product->Summary(); ?></p>
+                        </div>
+                    </div>
+                    <div class="clearfix" ></div>
+                    <hr>
+                </div>
+                <?php
+            }
+        ?>
+    </div>
+</div>
+<div class="sortPagiBar container ">
+    <div class="">
+        <?php
+        $TongTrang = ceil($sum / $number);
+        echo $product->PhanTrang($TongTrang, $Pages, $Category->Link . "/pages-[i]");
+        ?>
+    </div>
+    <div class="hidden show-product-item">
+        <select name="">
+            <option value="">Show 21</option>
+            <option value="">Show 42</option>
+            <option value="">Show 63</option>
+            <option value="">Show 84</option>
+        </select>
+    </div>
+    <div class="hidden sort-product">
+        <select>
+            <option value="">Product Name</option>
+            <option value="">Price</option>
+        </select>
+        <div class="sort-product-icon">
+            <i class="fa fa-sort-alpha-asc"></i>
+        </div>
+    </div>
+    <div class="clearfix" ></div>
+
+</div>

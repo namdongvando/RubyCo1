@@ -31,7 +31,7 @@ class pathCkFinder
 
     static function get()
     {
-        return $_SESSION[self::pathCkFinder] ?? "pubic/img/images/";
+        return $_SESSION[self::pathCkFinder] ?? "/public/img/";
     }
 
     function getPath()

@@ -127,9 +127,12 @@ class Controller_mtheme extends Controller_backend
     {
         $a["IDMenu"] = time();
         $a["Theme"] = $this->param[0];
+        $a["Name"] = "";
+        $a["Link"] = "#";
         $a["Groups"] = $this->param[1];
         $a["Parent"] = 0;
-        $a["OrderBy"] = 0;
+        $a["Note"] = "";
+        $a["OrderBy"] = time();
         $a["createDate"] = date("Y-m-d H:i:s", time());
         $a["UpdateDate"] = date("Y-m-d H:i:s", time());
         $this->menu->AddMenu($a);

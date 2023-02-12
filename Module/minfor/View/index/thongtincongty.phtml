@@ -2,14 +2,19 @@
 $Minfor = new \Module\minfor\Model\infor();
 $infors = $Minfor->infors();
 ?>
-<div class="container-fluid" >
+<div class="container-fluid">
+    <div class="box-tool">
+        <a class="btn btn-primary" href="/minfor/index/footer/">Footer</a>
+        <a class="btn btn-primary" href="/minfor/index/social/">Trang xã hội</a>
+    </div>
     <div class="no-border-radius panel panel-primary">
+
         <div class="panel-heading">
             <h3 class="panel-title">Thông Tin Công Ty</h3>
         </div>
         <div class="panel-body">
-            <form action="" enctype="multipart/form-data" method="POST" >
-                <table class="table table-bordered" >
+            <form action="" enctype="multipart/form-data" method="POST">
+                <table class="table table-bordered">
                     <tbody>
                         <tr>
                             <td>STT</td>
@@ -21,34 +26,34 @@ $infors = $Minfor->infors();
                         <?php
                         foreach ($infors as $k => $_in) {
                             $_Config = $Minfor->_decode($_in["Config"]);
-                            ?>
+                        ?>
                             <tr>
                                 <td><?php echo $k + 1; ?></td>
-                                <td class="" >__<?php echo $_in["Name"] ?>___</td>
-                                <td  >
+                                <td class="">__<?php echo $_in["Name"] ?>___</td>
+                                <td>
                                     <?php echo $_in["Title"] ?>
                                 </td>
                                 <td>
                                     <?php
                                     if ($_Config->Type == "file") {
-                                        ?>
-                                        <img src="<?php echo $_in["Content"] ?>" style="height: 100px;" class="img img-responsive" >
-                                        <button type="button" onclick="BrowseServer('Images:/information/', 'Content<?php echo $_in["ID"] ?>')" >Chọn File</button>
-                                        <?php
+                                    ?>
+                                        <img src="<?php echo $_in["Content"] ?>" style="height: 100px;" class="img img-responsive">
+                                        <button type="button" onclick="BrowseServer('Images:/information/', 'Content<?php echo $_in["ID"] ?>')">Chọn File</button>
+                                    <?php
                                     }
                                     ?>
-                                    <textarea id="Content<?php echo $_in["ID"] ?>" class="form-control" name="Content[<?php echo $_in["ID"] ?>]" ><?php echo $_in["Content"] ?></textarea>
+                                    <textarea id="Content<?php echo $_in["ID"] ?>" class="form-control" name="Content[<?php echo $_in["ID"] ?>]"><?php echo $_in["Content"] ?></textarea>
                                 </td>
                                 <td>
-                                    <button name="Luu" class="btn btn-success pull-right" value="Luu"  type="submit" >Lưu</button>
+                                    <button name="Luu" class="btn btn-success pull-right" value="Luu" type="submit">Lưu</button>
                                 </td>
                             </tr>
-                            <?php
+                        <?php
                         }
                         ?>
                     </tbody>
                 </table>
-                <button name="Luu" class="btn btn-success pull-right" value="Luu"  type="submit" >Lưu</button>
+                <button name="Luu" class="btn btn-success pull-right" value="Luu" type="submit">Lưu</button>
             </form>
 
         </div>
