@@ -12,7 +12,7 @@ $table->setPropTable(
         "thead" => ["class" => "bg-primary"]
     ]
 );
-$params =  $DataTable->params ?? [];
+$params = $DataTable->params ?? [];
 // var_dump($params);
 ?>
 <ol class="breadcrumb">
@@ -22,20 +22,20 @@ $params =  $DataTable->params ?? [];
 <div class="container-fluid ">
     <section class="">
         <div class="box box-solid ">
-            <div class="box-header bg-blue">
+            <div class="box-header">
                 <i class="fa fa-list-ol"></i>
                 <h3 class="box-title">Danh Sách Sản Phẩm</h3>
                 <div class="box-tools">
                     <a href="/mproduct/addproduct/" class="btn btn-success">Thêm Sản Phẩm</a>
                 </div>
             </div>
-            <div class="box-body connectedSortable">
+            <div class="box-body ">
                 <div>
                     <form action="/mproduct/index/" method="get">
-                        <div class="input-group  " style="width: 250px;" >
+                        <div class="input-group  " style="width: 250px;">
                             <?php
                             FormCommon::Hidden("indexPage", 1)->render();
-                            FormCommon::Hidden("pageNumber",  $DataTable->pageNumber ?? 10)->render();
+                            FormCommon::Hidden("pageNumber", $DataTable->pageNumber ?? 10)->render();
                             FormCommon::Name("", "Name", $params["Name"] ?? "")->render();
                             ?>
                             <div class="input-group-btn">
@@ -46,7 +46,7 @@ $params =  $DataTable->params ?? [];
 
                     <?php
                     $table->RenderHtml();
-                    echo $table->PaginationWidthData((array)$DataTable, "/mproduct/index/");
+                    echo $table->PaginationWidthData((array) $DataTable, "/mproduct/index/");
                     ?>
                 </div>
             </div>

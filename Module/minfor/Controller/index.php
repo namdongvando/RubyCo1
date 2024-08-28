@@ -61,6 +61,18 @@ class index extends \Controller_backend
         $this->Breadcrumb->setBreadcrumb($this->Bread);
         $this->ViewThemeModule();
     }
+    public function widgets()
+    {
+        if (isset($_POST["Content"])) {
+            foreach ($_POST["Content"] as $ID => $value) {
+                $In = $this->infor->inforById($ID);
+                $In["Content"] = $value;
+                $this->infor->editinfor($In);
+            }
+        }
+        $this->Breadcrumb->setBreadcrumb($this->Bread);
+        $this->ViewThemeModule();
+    }
     public function footer()
     {
         if (isset($_POST["Content"])) {

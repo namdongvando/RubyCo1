@@ -64,7 +64,7 @@ class Common
     public static function MoneyFomat($a)
     {
         if ($a > 0)
-            return number_format($a, 2, '.', ',') . "";
+            return number_format($a, 0, '.', ',') . "";
         return "Liên Hệ";
     }
 

@@ -36,7 +36,7 @@ class Products extends \Model\Database
 
     function __construct($product = null)
     {
-        self::$tableName =  table_prefix . "product";
+        self::$tableName = table_prefix . "product";
         if (!is_array($product)) {
             $product = $this->GetById($product);
         }
@@ -47,7 +47,7 @@ class Products extends \Model\Database
         $this->CatId = $product["CatId"] ?? null;
         $this->Name = $product["Name"] ?? null;
         $this->Alias = $product["Alias"] ?? null;
-        $this->Price = intval($product["Price"] ?? 0)  ?? null;
+        $this->Price = intval($product["Price"] ?? 0) ?? null;
         $this->DonViTinh = $product["DonViTinh"] ?? null;
         $this->OldPrice = $product["OldPrice"] ?? null;
         $this->Summary = input::InputTextDecode($product["Summary"] ?? "");
@@ -118,7 +118,7 @@ class Products extends \Model\Database
         if ($a == 0) {
             return $this->Price();
         }
-        return $this->Price() . " " . $this->Note()->TenDonVi();
+        return $this->Price();
     }
 
     function OldPrice()
@@ -273,6 +273,25 @@ class Products extends \Model\Database
         $sql = "SELECT `Id`, `Username`, `CatId`,`Alias`, `nameProduct`, `Price`, `oldPrice`, `UrlHinh`, `DateCreate`, `Number`, `Note`, `BuyTimes`, `Views`, `isShow`, `lang` "
             . "FROM `" . table_prefix . "product` "
             . "where `CatId` in ({$CatId}) and (`Alias` like '%{$Name}%' or `nameProduct` like '%{$Name}%' or `Id` like '%{$Name}%') order by `CatId`  limit {$start},{$number} ";
+        $this->Query($sql);
+        return $this->fetchAll();
+    }
+    public function ProductsByName($Name, $page, $number, &$sum)
+    {
+        $start = ($page - 1) * $number;
+        $start = max(0, $start);
+
+        $sql = "SELECT `Id` "
+            . "FROM `" . table_prefix . "product` "
+            . "where  (`Alias` like '%{$Name}%' or `nameProduct` like '%{$Name}%' or `Id` like '%{$Name}%')";
+        $this->Query($sql);
+        $a = $this->fetchAll();
+        if ($a) {
+            $sum = count($a);
+        }
+        $sql = "SELECT `Id`, `Username`, `CatId`,`Alias`, `nameProduct`, `Price`, `oldPrice`, `UrlHinh`, `DateCreate`, `Number`, `Note`, `BuyTimes`, `Views`, `isShow`, `lang` "
+            . "FROM `" . table_prefix . "product` "
+            . "where (`Alias` like '%{$Name}%' or `nameProduct` like '%{$Name}%' or `Id` like '%{$Name}%') order by `CatId`  limit {$start},{$number} ";
         $this->Query($sql);
         return $this->fetchAll();
     }

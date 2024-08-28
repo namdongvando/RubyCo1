@@ -1,0 +1,14 @@
+<?php
+$_Pages = new \Model\pages($data["pages"]);
+$Model_News = new \Model\news();
+$newsByPage = $Model_News->NewsByPagesLimitNumber($_Pages->idPa, 9, FALSE);
+?>
+<div class="container">
+    <ul class="breadcrumb">
+        <li><a href="/">Trang Chủ</a></li>
+        <li class="active"><?php echo $_Pages->Name ?></li>
+    </ul>
+</div>
+<!-- view-product-list-->
+<?php echo $_Pages->Content ?>
+<!-- ./view-product-list-->

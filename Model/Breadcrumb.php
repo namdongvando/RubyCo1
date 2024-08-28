@@ -12,12 +12,16 @@ class Breadcrumb
     {
         self::$List = $array;
     }
+    public static function AddBreadcrumb($array)
+    {
+        self::$List[] = $array;
+    }
 
     function showBreadcrumb()
     {
         $ds = self::$List;
         $a = [];
-?>
+        ?>
         <div class="breadcrumb clearfix">
             <a class="home" href="/" title="Return to Home">Trang Chủ</a>
             <?php
@@ -26,29 +30,33 @@ class Breadcrumb
                 unset($ds[count($ds) - 1]);
                 if ($ds)
                     foreach ($ds as $v) {
-            ?>
-                    <span class="navigation-pipe">&nbsp;</span>
-                    <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
-                <?php
+                        ?>
+                        <span class="navigation-pipe">&nbsp;</span>
+                        <a href="<?php echo $v["link"] ?>">
+                            <?php echo $v["title"] ?>
+                        </a>
+                        <?php
                     }
             }
             if ($a) {
                 ?>
                 <span class="navigation-pipe">&nbsp;</span>
-                <span class="navigation_page"><?php echo $a["title"] ?></span>
-            <?php
+                <span class="navigation_page">
+                    <?php echo $a["title"] ?>
+                </span>
+                <?php
             }
             ?>
         </div>
 
-    <?php
+        <?php
     }
 
     function backendBreadcrumb()
     {
         $ds = self::$List;
         $a = [];
-    ?>
+        ?>
         <div class="breadcrumb clearfix">
             <a class="home" href="/" title="Return to Home">Trang Chủ</a>
             <?php
@@ -57,29 +65,33 @@ class Breadcrumb
                 unset($ds[count($ds) - 1]);
                 if ($ds)
                     foreach ($ds as $v) {
-            ?>
-                    <span class="navigation-pipe">&nbsp;</span>
-                    <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
-                <?php
+                        ?>
+                        <span class="navigation-pipe">&nbsp;</span>
+                        <a href="<?php echo $v["link"] ?>">
+                            <?php echo $v["title"] ?>
+                        </a>
+                        <?php
                     }
             }
             if ($a) {
                 ?>
                 <span class="navigation-pipe">&nbsp;</span>
-                <span class="navigation_page"><?php echo $a["title"] ?></span>
-            <?php
+                <span class="navigation_page">
+                    <?php echo $a["title"] ?>
+                </span>
+                <?php
             }
             ?>
         </div>
 
-    <?php
+        <?php
     }
 
     function backend()
     {
         $ds = self::$List;
         $a = [];
-    ?>
+        ?>
         <ol class="breadcrumb ">
             <?php
             if ($ds) {
@@ -87,21 +99,25 @@ class Breadcrumb
                 unset($ds[count($ds) - 1]);
                 if ($ds)
                     foreach ($ds as $v) {
-            ?>
-                    <li class="active">
-                        <a href="<?php echo $v["link"] ?>"><?php echo $v["title"] ?></a>
-                    </li>
-                <?php
+                        ?>
+                        <li class="active">
+                            <a href="<?php echo $v["link"] ?>">
+                                <?php echo $v["title"] ?>
+                            </a>
+                        </li>
+                        <?php
                     }
             }
             if ($a) {
                 ?>
-                <li class="active"><?php echo $a["title"] ?></li>
-            <?php
+                <li class="active">
+                    <?php echo $a["title"] ?>
+                </li>
+                <?php
             }
             ?>
         </ol>
-<?php
+        <?php
     }
 
     public static function setMenuAcrive($param0)
@@ -111,7 +127,7 @@ class Breadcrumb
 
     public static function CheckMenuAcrive($param0)
     {
-        
+
         return self::$MenuActive == md5($param0);
     }
 }

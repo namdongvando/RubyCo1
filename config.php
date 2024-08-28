@@ -22,7 +22,7 @@ $INI['username'] = $config[ENV]["database"]["username"];
 $INI['password'] = $config[ENV]["database"]["password"];
 $INI['DBname'] = $config[ENV]["database"]["DBname"];
 
-spl_autoload_register(function($class) {
+spl_autoload_register(function ($class) {
     $class = str_replace("\\", "_", $class);
     $class = str_replace("_", "/", $class) . ".php";
     $class = __DIR__ . "/" . $class;
@@ -31,4 +31,3 @@ spl_autoload_register(function($class) {
     }
 });
 ?>
-

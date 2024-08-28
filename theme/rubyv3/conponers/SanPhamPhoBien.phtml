@@ -1,0 +1,32 @@
+<?php
+
+use Model\Products;
+
+$model_Product = new Products();
+$ps = $model_Product->ProductsHotNew(15);
+?>
+<h2 class="title-tintuc" ng-show="{{title}}">{{title}}</h2>
+<div style="clear: both;"></div>
+<div class="DanhSachSanPham">
+    <?php
+    if ($ps) {
+        foreach ($ps as $key => $value) {
+            $_product = new Products($value);
+    ?>
+            <div class="SanPham">
+                <div class="SanPham_img">
+                    <a href="<?php echo $_product->linkProduct() ?>">
+                        <img onerror="this.src='/public/no-image.jpg'" src="/public/no-image.jpg" ng-src="<?php echo $_product->UrlHinh() ?>" alt="<?php echo $_product->Name ?>">
+                    </a>
+                </div>
+                <span class="SanPham_cat"> <?php echo $_product->Name; ?></span>
+                <a href="<?php echo $_product->linkProduct() ?>">
+                    <h2 class="SanPham_name"><?php echo $_product->Name ?></h2>
+                </a>
+                <span class="SanPham_price"><?php echo $_product->Price(); ?>/<?php echo $_product->DonViTinh()->Name; ?></span>
+            </div>
+    <?php
+        }
+    }
+    ?>
+</div>

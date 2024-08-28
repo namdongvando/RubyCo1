@@ -65,7 +65,13 @@ class Application
     {
         if (self::$params) {
             foreach (self::$params as $v => $param) {
-                self::$params[$v] = self::BokyTuDacBietPaRam(self::$params[$v]);
+                if (is_array($param)) {
+                    foreach ($param as $key => $value) {
+                        self::$params[$v][$key] = self::BokyTuDacBietPaRam($value);
+                    }
+                } else {
+                    self::$params[$v] = self::BokyTuDacBietPaRam(self::$params[$v]);
+                }
             }
             return self::$params;
         } else {
@@ -150,8 +156,7 @@ class Application
                         $_FILES[$file]['name'] = $name . $i . '.' . $ext;
                         break;
                     }
-                }
-            else {
+                } else {
                 $_FILES[$file]['name'] = $newname . '.' . $ext;
             }
 
@@ -168,7 +173,8 @@ class Application
     public function KiemTraFileHinh($Hinh, $size, $nameHinh, $path)
     {
 
-        if (($Hinh["type"] == "image/gif") ||
+        if (
+            ($Hinh["type"] == "image/gif") ||
             ($Hinh["type"] == "image/jpeg") ||
             ($Hinh["type"] == "image/jpg") ||
             ($Hinh["type"] == "image/png") &&
@@ -538,11 +544,12 @@ class Application
                 "/\/page-(.*)\/(.*)/i",
                 "/\/page-(.*)\/(.*)\//i",
                 "/\/page-(.*)/i",
-            ], 
+            ],
             "product" => [
                 "/\/(.*)\/(.*)(\.html)(.*)$/i",
                 "/\/(.*)\/(.*)(\.html)$/i",
-            ], "tags" => array(
+            ],
+            "category" => array(
                 "/\/(.*)\/(.*)/i",
                 "/\/(.*)/i",
                 "/\/(.*)\//i",

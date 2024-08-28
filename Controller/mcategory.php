@@ -1,5 +1,8 @@
 <?php
 
+use Datatable\Response;
+use Model\CategoryForm;
+
 class Controller_mcategory extends Controller_backend
 {
 
@@ -17,13 +20,28 @@ class Controller_mcategory extends Controller_backend
 
     function index()
     {
-        $this->Bread[] = [
-            "title" => "Danh Mục Sản Phẩn",
-            "link" => "/mcategory/index/"
-        ];
-        $Bread = new \Model\Breadcrumb();
-        $Bread->setBreadcrumb($this->Bread);
-        $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
+        $indexPage = $_REQUEST["indexPage"] ?? 1;
+        $pageNumber = $_REQUEST["pageNumber"] ?? 10;
+        $Name = $_REQUEST["Name"] ?? '';
+        $params["Name"] = $Name;
+        $params["indexPage"] = $indexPage;
+        $params["pageNumber"] = $pageNumber;
+        $ModelCategorys = new Model\Category();
+        $Tong = 0;
+        $data = $ModelCategorys->GetItems($params, $indexPage, $pageNumber, $Tong);
+
+        $respon = new Response();
+        $respon->rows = $data;
+        $respon->items = $data;
+        $respon->params = $params;
+        $respon->mess = "";
+        $respon->status = Response::OK;
+        $respon->indexPage = $indexPage;
+        $respon->number = $pageNumber;
+        $respon->columns = $ModelCategorys->ColumnsTable();
+        $respon->totalrows = $Tong;
+        $respon->totalPage = ceil($Tong / $pageNumber);
+        $this->ViewTheme(["DataTable" => $respon], Model_ViewTheme::get_viewthene(), "mproduct");
     }
 
     function detail()
@@ -47,29 +65,31 @@ class Controller_mcategory extends Controller_backend
 
     function edit()
     {
-        if (isset($_POST["SuaDanhMuc"])) {
-            $Cat = $this->Category->Category4Id($_POST["catID"], FALSE);
+        if (isset($_POST[CategoryForm::FormNanme])) {
+            $dataPost = $_POST[CategoryForm::FormNanme];
+            $Cat = $this->Category->Category4Id($dataPost["catID"], FALSE);
             $_cat = new \Model\Category($Cat);
-            $Cat["catName"] = $this->Category->Bokytusql($_POST["catName"]);
-            $Cat["Note"] = $this->Category->Bokytusql($_POST["Note"]);
+            $Cat["catName"] = $this->Category->Bokytusql($dataPost["catName"]);
+            $Cat["Note"] = $this->Category->Bokytusql($dataPost["Note"]);
             $Cat["Lang"] = "vi";
-            $Cat["parentCatID"] = intval($_POST["parentCatID"]);
-            $Cat["Serial"] = $_POST["Serial"];
-            $Cat["banner"] = $_POST["banner"];
-            $Cat["Public"] = isset($_POST["Public"]) ? 1 : 0;
-            $kt = $this->Category->EditCategory($Cat);
-            if ($kt > 0) {
-                $Cat["Link"] = $_cat->linkCurentCategory();
-                $this->Category->EditCategory($Cat);
-                //                $this->Category->_header("/mcategory/detail/" . $_POST["catID"]);
-                lib\Common::ToUrl($_SERVER["HTTP_REFERER"]);
-            } else {
-                $M_error = new \Model\Error([]);
-                $M_error->setError($this->Category->getError($kt), 'danger');
-            }
+            $Cat["parentCatID"] = intval($dataPost["parentCatID"]);
+            $Cat["Serial"] = $dataPost["Serial"];
+            $Cat["banner"] = $dataPost["banner"];
+            $Cat["Public"] = intval($dataPost["Public"]);
+            $this->Category->EditCategory($Cat);
+            $Cat["Link"] = $_cat->linkCurentCategory();
+            $this->Category->EditCategory($Cat);
+            lib\Common::ToUrl($_SERVER["HTTP_REFERER"]);
         }
-
-        $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
+        Model\Breadcrumb::AddBreadcrumb([
+            "link" => "/mcategory/index/",
+            "title" => "Danh sách danh mục"
+        ]);
+        Model\Breadcrumb::AddBreadcrumb([
+            "link" => "/mcategory/edit/",
+            "title" => "Sửa"
+        ]);
+        $this->ViewTheme(["id" => $this->getParam()[0]], Model_ViewTheme::get_viewthene(), "");
     }
 
     function copy()
@@ -104,27 +124,33 @@ class Controller_mcategory extends Controller_backend
     function add()
     {
 
-        if (isset($_POST["ThemDanhMuc"])) {
-            $Cat["catName"] = $this->Category->Bokytusql($_POST["catName"]);
-            $Cat["Note"] = $this->Category->Bokytusql($_POST["Note"]);
-            $Cat["parentCatID"] = intval($_POST["parentCatID"]);
+        if (isset($_POST[CategoryForm::FormNanme])) {
+            $dataPost = $_POST[CategoryForm::FormNanme];
+            $Cat["catName"] = $this->Category->Bokytusql($dataPost["catName"]);
+            $Cat["Note"] = $this->Category->Bokytusql($dataPost["Note"]);
+            $Cat["parentCatID"] = intval($dataPost["parentCatID"]);
             $Cat["Path"] = $this->Category->bodautv($Cat["catName"]);
             $Cat["Link"] = "";
             $Cat["Lang"] = "vi";
-            $Cat["banner"] = "";
-            $Cat["Serial"] = intval($_POST["Serial"]);
-            $Cat["Public"] = isset($_POST["Public"]) ? 1 : 0;
+            $Cat["banner"] = $dataPost["banner"];
+            $Cat["Serial"] = intval($dataPost["Serial"]);
+            $Cat["Public"] = isset($dataPost["Public"]) ? 1 : 0;
             $Cat = $this->Category->AddCategory($Cat);
             if ($Cat) {
                 $_cat = new \Model\Category($Cat);
                 $Cat["Link"] = $_cat->linkCurentCategory();
                 $this->Category->EditCategory($Cat);
-                $this->Category->_header("/mcategory/detail/" . $Cat["catID"]);
-            } else {
-                $M_error = new \Model\Error();
-                $M_error->setError($this->Category->getError($kt), 'danger');
+                $this->Category->_header("/mcategory/edit/" . $Cat["catID"]);
             }
         }
+        Model\Breadcrumb::AddBreadcrumb([
+            "link" => "/mcategory/index/",
+            "title" => "Danh sách danh mục"
+        ]);
+        Model\Breadcrumb::AddBreadcrumb([
+            "link" => "/mcategory/add/",
+            "title" => "Thêm"
+        ]);
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "");
     }
 

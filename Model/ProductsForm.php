@@ -19,7 +19,7 @@ class ProductsForm implements iProductForm
     }
     public function GetName($name)
     {
-        return  self::formName . "[" . $name . "]";
+        return self::formName . "[" . $name . "]";
     }
     public function GetValue($name)
     {
@@ -163,7 +163,7 @@ class ProductsForm implements iProductForm
         $properties = self::$Option;
         $properties["value"] = $val ?? self::GetValue(__FUNCTION__);
         $properties["id"] = __FUNCTION__;
-        $properties[FormRender::readonly] = "true";
+        $properties[FormRender::readonly ] = "true";
         $name = $this->GetName(__FUNCTION__);
         $label = "Hình";
         return new FormRender(new \PFBC\Element\Textbox($label, $name, $properties));

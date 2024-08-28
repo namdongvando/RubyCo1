@@ -1,0 +1,54 @@
+ 
+<div class="row ">
+    <section class="col-md-6  ">
+        <form action="" method="POST">
+            <div class="box box-solid ">
+                <div class="box-header ">
+                    <i class="fa fa-list"></i>
+                    <h3 class="box-title">Menu </h3>
+                </div>
+                <div class="box-body table-responsive">
+                    <?php 
+                    use Model\FormRender;
+                    use Model\Menu;
+                    use Model\MenuForm; 
+                    $menuDetail = new Menu($Id);
+                    $formPut = new MenuForm((array) $menuDetail);
+                    $formPut->IDMenu([FormRender::readonly => ""])->renderHTML();
+                    $formPut->Name()->renderHTML();
+                    $formPut->Link()->renderHTML();
+                    $formPut->OrderBy()->renderHTML();
+                    ?>
+                    <img style="height: 70px;" src="<?php echo $menuDetail->Note; ?>" id="imgShow">
+                    <div>
+                        <div class="d-flex">
+                            <div style="width: 100%;">
+                                <?php
+                                $formPut->Note([
+                                    "id" => "UrlHinh",
+                                    FormRender::readonly => ""
+                                ])->renderHTML();
+                                ?>
+                            </div>
+                            <div style="padding-top: 25px;">
+                                <button type="button" class="btn btn-success"
+                                    onclick="BrowseServerShowImg('Images:/', 'UrlHinh', 'imgShow')">Chọn
+                                    Hình</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="d-flex">
+                        <a href="/mtheme/thememenu/home/<?php echo $menuDetail->Groups ?>" class="btn btn-primary">Quay
+                            lại</a>
+                        <div class="text-right" style="width: 100%;">
+                            <button class="btn btn-primary">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </section>
+</div>

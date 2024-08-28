@@ -1,0 +1,39 @@
+<?php
+use Model\news;
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+use Model\adv;
+use theme\rubyv3\functionLayout;
+
+$_Advs = new adv();
+$itemAdv = $_Advs->AdvsByGroup("homeslide", false);
+
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <?php
+    functionLayout::head();
+    ?>
+</head>
+
+<body class="">
+    <?php
+    echo functionLayout::header();
+    include_once $Content;
+    echo functionLayout::footer();
+    ?>
+    <a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>
+    <?php
+    echo functionLayout::js();
+    ?>
+</body>
+
+</html>
+<?php
+functionLayout::DecodeHTML();
+?>

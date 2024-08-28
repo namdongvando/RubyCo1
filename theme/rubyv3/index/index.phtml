@@ -1,0 +1,244 @@
+<?php
+
+use Model\adv;
+use Model\Category;
+use Model\Menu;
+use Model\news;
+use Model\pages;
+
+
+$adv = new \Model\adv();
+$_homeslide = $adv->AdvsByGroup("homeslide", FALSE);
+$_homeslideClass = ["carousel-item-eight", "carousel-item-nine", "carousel-item-ten"];
+$HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::DichVu);
+$_HomeCategory = \theme\ThemeConfig::getThemConfigByKey(\theme\ThemeConfig::HomeCategory);
+$DichVus = array_map(function ($item) {
+    return $item["idPa"];
+}, $HomeCategory);
+$_HomeCategory = array_map(function ($item) {
+    return $item["Id"];
+}, $_HomeCategory);
+$page = new pages();
+$pages = $page->GetPageByList($_HomeCategory);
+
+$_Advs = new adv();
+$itemAdv = $_Advs->AdvsByGroup("homeslide", false);
+// var_dump($itemAdv); 
+?>
+<div id="home-slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 carousel-container" style="">
+                <div id="carousel-id" class="my-carousel carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner">
+                        <?php
+                        foreach ($itemAdv as $key => $value) {
+                            $active = $key == 0 ? "active" : "";
+                            echo <<<HTML
+                                <div class="item {$active}">
+                                    <img alt="{$value['Name']}" style="width: 100%" src="{$value['Urlimages']}?v=12" />
+                                </div>
+
+HTML;
+                        }
+                        ?>
+                    </div>
+                    <a class="left carousel-control" href="#carousel-id" data-slide="prev"><span
+                            class="glyphicon glyphicon-chevron-left"></span></a>
+                    <a class="right carousel-control" href="#carousel-id" data-slide="next"><span
+                            class="glyphicon glyphicon-chevron-right"></span></a>
+
+                </div>
+                <ol class="hidden carousel-indicators-my">
+                    <?php
+                    foreach ($itemAdv as $key => $value) {
+                        $active = $key == 0 ? "active" : "";
+                        echo <<<HTML
+                                <li data-target="#carousel-id" data-slide-to="{$key}" class="{$active}">
+                                    <p>{$value["Name"]}</p>
+                                </li>
+HTML;
+                    }
+                    ?>
+                </ol>
+            </div>
+            <div class="col-md-6 rightbanner-container ">
+                <div class="d-flex rightbanner" style="">
+                    <?php
+                    $doiTac = $_Advs->AdvsByGroup("taisaochonchungtoi", false);
+                    foreach ($doiTac as $key => $value) {
+                        $_item = new adv($value);
+                        ?>
+                        <div class="header-banner banner-opacity" style="">
+                            <a href="<?php echo $_item->Link ?>">
+                                <img alt="<?php echo $_item->Name ?>" src="<?php echo $_item->Urlimages ?>" />
+                            </a>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="panel my-panel panel-default" style="margin-top: 20px;">
+                    <div class="panel-heading">
+                        <h2 class="panel-title text-center">
+                            Danh Mục Sản Phẩm
+                        </h2>
+                    </div>
+                    <div class=" " >
+                        <div class="DangMucLogo">
+                            <ul>
+                                <?php
+                                $cat = new Category();
+                                $items = $cat->GetItems(["ispublic" => 1], 1, 100, $tong);
+                                foreach ($items as $key => $value) {
+                                    $_cat = new Category($value);
+                                    ?>
+                                    <li>
+                                        <a href="<?php echo $_cat->linkCurentCategory() ?>">
+                                            <img onerror="this.src='/public/no-image.jpg'"
+                                                src="<?php echo $_cat->banner; ?>" alt="<?php echo $_cat->catName; ?>" />
+                                        </a>
+                                        <p class="catName">
+                                            <?php echo $_cat->catName; ?>
+                                        </p>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /.container -->
+</section>
+
+<section class="hidden">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="panel my-panel green panel-default" style="margin-top: 20px;">
+                    <div class="panel-heading">
+                        <h2 class="panel-title text-center">
+                            Sản Phẩm
+                        </h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="DangMucLogo Product">
+                            <ul>
+                                <?php
+                                $Mn = new Menu();
+                                $itenm = $Mn->MenusByGroup("DanhMucUaChuong", false);
+                                if ($itenm) {
+                                    foreach ($itenm as $key => $value) {
+                                        $_item = new Menu($value);
+                                        echo <<<HTML
+                                        <li>
+                                            <a href="{$_item->Link}">
+                                                <div class="image-content">
+                                                    <img src="{$_item->Note}" alt="{$_item->Name}" />
+                                                </div>
+                                                <h2>{$_item->Name}</h2>
+                                            </a>
+                                        </li>
+    
+HTML;
+                                    }
+                                }
+                                ?>
+
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<?php
+$doiTac = $_Advs->AdvsByGroup("doitac", false);
+?>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div class="panel my-panel green panel-default" style="margin-top: 20px;">
+                    <div class="panel-heading">
+                        <h2 class="panel-title text-center">
+                            Đối tác thương hiệu
+                        </h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="owl-custom DanhSachDoiTac owl-carousel owl-theme"
+                            data-responsive='{"380":{"items":2},"600":{"items":4},"1000":{"items":6}}'
+                            data-dots-each="true" data-dots="false" data-loop="true" data-nav="true" data-margin="10">
+                            <?php
+                            foreach ($doiTac as $key => $value) {
+                                $_item = new adv($value);
+                                ?>
+                                <div class="item ">
+                                    <a href="<?php echo $_item->Link ?>">
+                                        <img style="height:100px" class="" src="<?php echo $_item->Urlimages ?>"
+                                            alt="<?php echo $_item->Name ?>">
+                                    </a>
+                                </div>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <h2 class="text-center">Tại sao chọn chúng tôi</h2>
+<div class="container" style="
+        background-color: #fff;
+        border-radius: 7px !important; 
+        margin-bottom: 15px;
+        margin-top: 20px;
+        ">
+    <div class="TaiSaoChonChungToi_Content">
+        <div class="title-tintuc">
+        </div>
+        <div class="TaiSaoChonChungToi">
+            <?php
+            $doiTac = $_Advs->AdvsByGroup("taisaochonchungtoi", false);
+            if ($doiTac) {
+                foreach ($doiTac as $key => $value) {
+                    $_item = new adv($value);
+                    ?>
+                    <div class="item ">
+                        <a href="<?php echo $_item->Link ?>">
+                            <img style="height:100px" class="" src="<?php echo $_item->Urlimages ?>"
+                                alt="<?php echo $_item->Name ?>">
+                        </a>
+                        <h2>
+                            <?php echo $_item->Name ?>
+                        </h2>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+
+        </div>
+    </div>
+</div> -->

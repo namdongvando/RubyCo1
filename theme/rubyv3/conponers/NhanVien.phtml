@@ -1,0 +1,23 @@
+ <h2 class="Title_widget" ng-show="{{title}}">{{title}}</h2>
+ <div class="NhanVienBanHang">
+     <?php
+
+        use Model\ChamSocKhachHang\NhanVien;
+
+        if ($NhanViens) {
+            foreach ($NhanViens as $key => $value) {
+                $_nv = new NhanVien($value);
+        ?>
+             <div class="NhanVien">
+                 <span class="NhanVien_name"><?php echo $_nv->name ?></span>
+                 <a class="NhanVien_phone" href="tel:<?php echo $_nv->phone ?>">
+                     <?php echo $_nv->phone ?>
+
+                 </a>
+
+             </div>
+     <?php
+            }
+        }
+        ?>
+ </div>

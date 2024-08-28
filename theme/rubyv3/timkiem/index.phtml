@@ -1,0 +1,52 @@
+<?php
+$Produc = new Model\Products();
+$news = new Model\news();
+$number = 30;
+$Pages = !empty($_GET["pages"]) ? intval($_GET["pages"]) : 1;
+$Pages = max($Pages, 1);
+$keyword = $_GET["keyword"];
+//var_dump($_Param[0]);
+$DSSP = $news->NewsByName($keyword, $Pages, $number, $sum);
+//$DSSP = $Produc->getProductsByName($keyword, $Pages, $number, $sum);
+?>
+<div class="content-page" style="background-color: #fff;" >
+    <div class="container" >
+        <div class="category-featured fashion">
+            <div class="product-featured clearfix">
+                <div class=" ">
+                    <h3 class="text-left" style="padding: 15px;font-size: 18px;" >Kết quả tìm kiếm "<?php echo $keyword; ?>" (<?php echo $sum; ?>)</h3>
+                    <div class="col-right-tab">
+                        <div class="product-featured-tab-content">
+                            <div class="product-list  "  >
+                                <?php
+                                if ($DSSP)
+                                    foreach ($DSSP as $SP) {
+                                        $_SP = new \Model\news($SP);
+                                        ?>
+                                        <div class="row" style="margin-bottom: 10px;"  >
+                                            <div class="left-block col-md-2">
+                                                <a href="<?php echo $_SP->linkNewsCurent() ?>">
+                                                    <img onerror="this.src='/public/no-image.jpg'"  class="img-product img-responsive" alt="<?php echo $_SP->Name ?>" src="<?php echo $_SP->UrlHinh; ?>" />
+                                                </a>
+                                            </div>
+                                            <div class="right-block col-md-10"  >
+                                                <h3 class="product-name" >
+                                                    <a style="font-weight: bold;color: #000;font-size: 1em;" href="<?php echo $_SP->linkNewsCurent(); ?>"><?php echo $_SP->Name ?></a>
+                                                </h3>
+
+                                                <p><?php echo $_SP->NgayDang(); ?></p>
+                                                <p><?php echo $_SP->Summary(); ?></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <?php
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

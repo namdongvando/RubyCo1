@@ -1,0 +1,922 @@
+body {
+    background-color: #fafafa;
+    /* text-shadow: 0px 0px 1px #444; */
+    color: #444;
+}
+
+.Main-Content {
+    background-color: #fff;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-shadow: 0px 0px 10px #f3f3f3;
+}
+
+#navbar li a {
+    text-transform: uppercase;
+}
+
+#main-menu .navbar .navbar-nav>li:hover>a,
+#main-menu .navbar .navbar-nav>li.active>a {
+    color: #aaa;
+}
+
+.carousel-indicators-my li:last-child {
+    border-right: 0px solid #aaa;
+}
+
+.my-carousel .carousel-control {
+    height: 50px;
+    width: 50px;
+    top: 45%;
+    border-radius: 100px;
+    background-image: none;
+    background-color: #fff6;
+    color: #0002;
+
+}
+
+.my-carousel {
+    /* border-radius: 7px !important; */
+    /* box-shadow: 0 10px 10px #aaa !important; */
+}
+
+.my-carousel .carousel-inner .item img {
+    height: 332px;
+    border-radius: 7px !important;
+}
+
+#home-slider .rightbanner .header-banner {
+    width: calc(50% - 5px);
+}
+
+#home-slider .rightbanner-container {
+    padding-right: 0px;
+
+}
+
+#home-slider .rightbanner {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+#home-slider .carousel-container {
+    margin-right: -20px;
+}
+
+.ListNews li a:hover {
+    color: #00AFF2;
+
+}
+
+.ListNews li a {
+    display: block;
+    color: #444;
+    line-height: 35px;
+    font-size: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.my-panel .panel-body {
+    /* padding: 15px 10px; */
+    border-radius: 7px;
+}
+
+.my-panel {
+    box-shadow: 0px 4px 10px #ddd;
+}
+
+.my-panel,
+.my-panel * {
+    border: none;
+}
+
+.my-panel {
+    border-radius: 7px !important;
+}
+
+.carousel-indicators-my li:hover {
+    background-color: #aaa2;
+}
+
+.carousel-indicators-my li {
+    height: 50px;
+    cursor: pointer;
+    width: 100%;
+    background-color: #fff;
+    color: #000;
+    border-left: 1px solid #aaa0;
+    border-bottom: 1px solid #aaa0;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.carousel-indicators-my {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.scroll_top::before {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.main-header .header-search-box .form-inline .input-serach {
+    border: 1px solid #00AFF2;
+    border-radius: 100px;
+    display: flex;
+    box-sizing: border-box;
+}
+
+
+.scroll_top {
+    background-color: #aaa;
+    display: block;
+    line-height: 60px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.scroll_top:hover {
+    background-color: #C22222;
+}
+
+.top-header * {
+    color: #aaa;
+}
+
+.main-header .logo {
+    text-align: center;
+}
+
+.nav-ontop #box-vertical-megamenus .title {
+    background-color: #C22222;
+    color: #fff;
+}
+
+.nav-ontop #box-vertical-megamenus .title.active {
+    background-color: #C22222;
+}
+
+.top-header {
+    background-color: #fff;
+    border-bottom: 1px #aaa solid;
+}
+
+.main-header {
+    background-color: #fff;
+}
+
+.top-header .support-link {
+    display: flex;
+}
+
+.top-header a {
+    padding: 7px 15px;
+    border: none;
+    display: block;
+}
+
+.Main_logo {
+    border-radius: 4px;
+    max-height: 80px;
+    width: auto;
+}
+
+.Supper-Title a span {
+    display: block;
+    text-align: center;
+    color: #444;
+}
+
+.Supper-Title img {
+    max-height: 40px;
+    width: auto;
+}
+
+.Supper-Title {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mybtn-search {
+    background-color: transparent;
+    color: #00AFF2;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    padding-left: 20px;
+    display: block;
+    padding-right: 20px;
+    border-radius: 100px;
+}
+
+.form-search .input-serach input {
+    line-height: 45px;
+}
+
+.form-search .input-serach {
+    width: 100% !important;
+    font-size: 20px;
+}
+
+.form-search {
+    border: 0px solid #fff;
+    background-color: #fff;
+    height: 50px;
+    padding-bottom: 0px;
+    display: flex;
+    border-radius: 26px;
+}
+
+.main-header .header-search-box .form-inline {
+    border: 0px;
+}
+
+.box-vertical-megamenus .title {
+    background-color: #C22222;
+}
+
+#main-menu .navbar .navbar-nav>li>a {
+    display: block;
+    margin: 0px;
+    padding: 15px;
+}
+
+#main-menu .navbar .navbar-nav>li:hover,
+#main-menu .navbar .navbar-nav>li.active {
+    background-color: #aaa2;
+    color: #000;
+}
+
+.d-flex {
+    display: flex;
+}
+
+#home-slider {
+    margin-top: 15px;
+}
+
+.header-banner-main img {
+    border-radius: 6px;
+}
+
+.header-banner img {
+    height: auto;
+    max-height: 160px;
+    width: 100%;
+    border-radius: 6px;
+}
+
+.header-banner a {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.DangMucLogo ul li img {
+    width: 100%;
+    height: 170px;
+}
+
+.DangMucLogo ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-start;
+}
+
+.DangMucLogo ul li p {
+    text-align: left;
+    margin: 0px;
+    color: #222;
+    font-weight: normal;
+    text-shadow: 0px 0px 1px #aaa;
+}
+
+.DangMucLogo ul li a {
+    display: block;
+}
+
+.DangMucLogo ul li .catName {
+    font-size: 1.3em;
+    color: #0F825F;
+    line-height: 1.3;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.DangMucLogo ul li {
+    width: 20%;
+    padding: 10px;
+}
+
+
+.my-panel {
+    background-color: #fff;
+    border: 0px;
+    border-radius: 0px;
+}
+
+.my-panel .panel-heading {
+    background-color: #fff;
+    border-bottom: #C22222 2px solid;
+}
+
+.service {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.DangMucLogo.Product ul li {
+    width: 20%;
+    padding: 7px;
+    margin-bottom: 10px;
+}
+
+.my-panel.green .panel-heading {
+    border-top: 2px solid #C22222;
+    border-bottom: 1px solid #aaa;
+}
+
+.my-panel.green .panel-title {
+    color: #C22222;
+}
+
+.my-panel .panel-title {
+    font-size: 1.3em;
+    text-transform: uppercase;
+    padding: 7px 5px;
+}
+
+.DangMucLogo.Product ul li h2 {
+    text-align: center;
+    font-size: 1.3em;
+    text-transform: uppercase;
+}
+
+.DangMucLogo.Product ul li .image-content img {
+    border-radius: 1px;
+}
+
+
+.DangMucLogo.Product ul li .image-content {
+    margin-bottom: 7px;
+    border: #aaa5 5px solid;
+    border-radius: 0px;
+}
+
+#footer * {
+    color: #404040 !important;
+}
+
+#footer {
+    background-color: #f4f4f4;
+}
+
+.Logo-footer {
+    border-radius: 5px;
+}
+
+.scwhyus-lists {
+    display: flex;
+}
+
+.scwhyus-lists .box .content {
+    text-align: center;
+}
+
+.scwhyus-lists .box .img {
+    width: 60%;
+    margin: auto;
+}
+
+.scwhyus-lists .box {
+    padding: 10px;
+}
+
+#introduce-box h2 {
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#introduce-box ul li {
+    line-height: 32px;
+}
+
+.nav-top-menu {
+    border-top: 1px solid #0002;
+    background-color: #fff;
+    box-shadow: 0px 4px 4px #0002;
+}
+
+#main-menu .navbar .navbar-nav>li>a {
+    border-right: 1px solid #fff;
+    font-size: 14px;
+}
+
+#introduce-box {
+    display: flex;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+
+.box-vertical-megamenus .vertical-menu-content {
+    border-top: 3px solid #C22222;
+}
+
+.box-vertical-megamenus .vertical-menu-list>li:hover {
+    background-color: #C22222;
+}
+
+.box-vertical-megamenus .title .btn-open-mobile {
+    font-size: 25px;
+}
+
+.main-header .header-search-box .form-inline .input-serach input {
+    font-size: 14px;
+}
+
+
+
+.TaiSaoChonChungToi .item img {
+    width: 70%;
+    margin: auto;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.TaiSaoChonChungToi .item {
+    width: 20%;
+    padding: 5px;
+}
+
+.TaiSaoChonChungToi .item h2 {
+    color: #0F825F;
+    text-shadow: 0 0 1px #0F825F;
+    font-size: 14px;
+    text-align: center;
+}
+
+.TaiSaoChonChungToi .item h3 {
+    color: #666;
+    text-shadow: 0 0 1px #666;
+    font-size: 14px;
+    text-align: center;
+}
+
+.TaiSaoChonChungToi {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.TaiSaoChonChungToi_Header h2 {
+    color: #666;
+    text-transform: uppercase;
+    text-shadow: 0 0 1px #666;
+    font-size: 20px;
+    padding: 15px 10px;
+}
+
+.title-tintuc h2,
+.title-tintuc {
+    padding-top: 5px;
+    padding-bottom: 7px;
+    font-size: 22px !important;
+    font-weight: normal;
+    color: #666;
+    text-shadow: 0px 0px 1px #666;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .top-header * {
+        color: #aaa;
+    }
+
+    #home-slider .carousel-container {
+        margin-right: 0px;
+    }
+
+    .top-header {
+        background-color: #fff;
+        border-bottom: 1px #aaa solid;
+    }
+
+    .main-header {
+        background-color: #fff;
+    }
+
+    .top-header .support-link {
+        display: flex;
+    }
+
+    .top-header a {
+        padding: 7px 15px;
+        border: none;
+        display: block;
+    }
+
+    .Main_logo {
+        border-radius: 4px;
+        max-height: 80px;
+        width: auto;
+    }
+
+    .Supper-Title a span {
+        display: block;
+        text-align: center;
+    }
+
+    .Supper-Title img {
+        max-height: 40px;
+        width: 40px;
+        margin: auto;
+    }
+
+    .Supper-Title {
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-end
+    }
+
+    .mybtn-search {
+        background-color: #fff0;
+        height: 45px;
+        border-radius: 0px;
+        color: #C22222;
+        margin-top: 0px;
+        margin-bottom: 1px;
+        padding-left: 20px;
+        display: block;
+        padding-right: 20px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    .form-search .input-serach input {
+        line-height: 45px;
+    }
+
+    .form-search .input-serach {
+        width: 100% !important;
+        font-size: 20px;
+    }
+
+    .form-search {
+        border: 0px solid #fff;
+        background-color: #fff;
+        height: 45px;
+        padding-bottom: 2px;
+        display: flex;
+        border-radius: 5px;
+    }
+
+    .main-header .header-search-box .form-inline {
+        border: 0px;
+    }
+
+    .box-vertical-megamenus .title {
+        background-color: #C22222;
+    }
+
+    #main-menu .navbar .navbar-nav>li>a {
+        display: block;
+        margin: 0px;
+        padding: 15px;
+    }
+
+    #main-menu .navbar .navbar-nav>li:hover,
+    #main-menu .navbar .navbar-nav>li.active {
+        background-color: #aaa2;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+
+    #home-slider {
+        margin-top: 15px;
+    }
+
+    .header-banner-main img {
+        border-radius: 6px;
+    }
+
+    .header-banner img {
+        height: auto;
+        max-height: 160px;
+        width: 100%;
+        border-radius: 6px;
+    }
+
+    .header-banner a {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .DangMucLogo ul li img {
+        width: 100%;
+        height: auto;
+
+    }
+
+    .DangMucLogo ul {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-content: center;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .DangMucLogo ul li p {
+        text-align: center;
+        margin: 0px;
+    }
+
+    .DangMucLogo ul li a {
+        display: block;
+    }
+
+    .DangMucLogo ul li {
+        width: 50%;
+    }
+
+    .my-panel {
+        background-color: #fff;
+        border: 0px;
+        border-radius: 0px;
+    }
+
+    .my-panel .panel-heading {
+        background-color: #fff;
+        border-bottom: #C22222 2px solid;
+    }
+
+    .service {
+        background-color: #fff;
+        border-radius: 10px;
+    }
+
+    .DangMucLogo.Product ul li {
+        width: 50%;
+        padding: 7px;
+        margin-bottom: 10px;
+    }
+
+    .my-panel.green .panel-heading {
+        border-top: 2px solid #C22222;
+        border-bottom: 1px solid #aaa;
+    }
+
+    .my-panel.green .panel-title {
+        color: #C22222;
+    }
+
+    .my-panel .panel-title {
+        font-size: 18px;
+        padding: 7px 5px;
+    }
+
+    .DangMucLogo.Product ul li h2 {
+        text-align: center;
+        font-size: 1em;
+        text-transform: uppercase;
+    }
+
+    .DangMucLogo.Product ul li .image-content img {
+        border-radius: 1px;
+    }
+
+
+    .DangMucLogo.Product ul li .image-content {
+        margin-bottom: 7px;
+        border: #aaa 5px solid;
+        border-radius: 6px;
+    }
+
+    #footer {
+        background-color: #fff;
+    }
+
+    .Logo-footer {
+        border-radius: 5px;
+    }
+
+    .scwhyus-lists {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .scwhyus-lists .box .content {
+        text-align: center;
+    }
+
+    .scwhyus-lists .box .img {
+        width: 60%;
+        margin: auto;
+    }
+
+    .scwhyus-lists .box {
+        padding: 10px;
+        width: 50%;
+    }
+
+    #introduce-box h2 {
+        font-size: 1em;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    #introduce-box ul li {
+        line-height: 32px;
+    }
+
+    .nav-top-menu {
+        background-color: #fff;
+        box-shadow: 0px 4px 4px #0002;
+    }
+
+    #main-menu .navbar .navbar-nav>li>a {
+        border-right: 1px solid #fff;
+        font-weight: 500;
+        font-size: 14px;
+        text-transform: capitalize !important;
+    }
+
+}
+
+@media (max-width: 480px) {
+    #home-slider .header-banner {
+        display: block;
+        margin-top: 10px;
+    }
+
+    #home-slider .rightbanner-container {
+        padding-right: 15px;
+    }
+
+    .main-header .header-search-box .form-inline .input-serach {
+        padding-top: 0px;
+        height: 48px;
+    }
+
+    .main-header .header-search-box {
+        margin-top: 15px;
+    }
+
+    .main-header .logo {
+        margin-top: 0px;
+
+    }
+
+    #main-menu .navbar-header {
+        background-color: #C22222;
+    }
+
+    #main-menu .container-fluid {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #main-menu .navbar-header .navbar-toggle {
+        padding: 10px 15px;
+        border: #aaa 1px solid;
+        margin-top: 5px;
+    }
+
+    .DanhSachBaiViet [class^='col'] img {
+        width: 100%;
+        height: auto !important;
+    }
+
+    .DanhSachBaiViet [class^='col'] {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .DanhSachBaiViet {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .DanhSachBaiViet {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    #main-menu .navbar-header {
+        display: block;
+        margin: 0;
+        background: #C22222;
+        color: #fff;
+        margin-left: 15px;
+    }
+
+    #main-menu .navbar-header .navbar-toggle {
+        padding: 10px 15px;
+        border: #aaa 1px solid;
+        margin-top: 5px;
+    }
+
+    #main-menu .container-fluid {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .main-header .logo {
+        width: auto;
+        text-align: center;
+    }
+
+    .Supper-Title {
+        width: 33%;
+        margin-top: 15px;
+    }
+
+    .main-header {
+        padding: 10px 0 10px 0;
+    }
+
+    .header-banner-main img {
+        height: 235px;
+    }
+}
+
+@media (min-width: 1300px) {
+    .container {
+        width: 1220px;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        width: 1320px;
+    }
+}
+
+h2.title-pannel,
+h1.title-pannel {
+    font-size: 1.5em;
+}
+
+.title-pannel {
+    margin-bottom: 15px;
+
+}
+
+.MenuMobie .list-group-item {
+    border: 0px;
+    border-bottom: 1px dashed #aaa !important;
+    display: block;
+    font-size: 1.1em;
+    line-height: 1.1em;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.breadcrumb {
+    margin-top: 15px !important;
+    color: #f4f4f4 !important;
+}
+
+.DanhSachBaiViet {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+.newstitle {
+    padding-top: 10px;
+}

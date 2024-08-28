@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row ">
+        <form action="" method="POST" enctype="multipart/form-data">
+            <section class="col-md-12 ">
+                <div class="box box-solid ">
+                    <div class="box-header ">
+                        <h3 class="box-title">Danh Mục </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+
+                            <?php
+                            use Model\CategoryForm;
+
+                            $f = new CategoryForm();
+                            // $f->catID(["label" => "Mã Danh Mục"])->renderHTML("col-md-4");
+                            $f->catName(["label" => "Tên Danh Mục"])->renderHTML("col-md-4");
+                            $f->parentCatID(["label" => "Cấp Cha"])->renderHTML("col-md-4");
+                            ?>
+                            <div class="col-md-4" style="display: flex;">
+                                <div style="width: 100%;">
+                                    <?php
+                                    $f->banner(["label" => "Banner", "id" => "Banner"])->renderHTML();
+                                    ?>
+                                </div>
+                                <div>
+                                    <div style="padding-top: 25px;">
+                                        <button class="btn btn-success" type="button"
+                                            onclick="BrowseServer('Images:/', 'Banner')">Chọn
+                                            Hình</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            $f->Public(["label" => "Public"])->renderHTML("col-md-4");
+                            $f->Path(["label" => "Đường dẫn"])->renderHTML("col-md-4");
+                            $f->Link(["label" => "Link"])->renderHTML("col-md-4");
+                            $f->Serial(["label" => "Thứ tự"])->renderHTML("col-md-4");
+                            $f->Note(["label" => "Ghi Chú"])->renderHTML("col-md-12");
+                            ?>
+                        </div>
+
+                    </div>
+                    <div class="box-footer text-right">
+                        <button class="btn btn-primary" type="reset">Nhập lại</button>
+
+                        <button class="btn btn-success" type="submit" name="SuaDanhMuc">
+                            Thêm mới</button>
+                    </div>
+
+                </div>
+            </section>
+        </form>
+    </div>
+</div>

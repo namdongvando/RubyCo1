@@ -19,7 +19,7 @@ class ProductNote
     function TenDonVi()
     {
         $list = $this->ListDonVi();
-        return $list[$this->DonVi];
+        return $list[$this->DonVi??[]];
     }
 
     function JsonDecode($string)

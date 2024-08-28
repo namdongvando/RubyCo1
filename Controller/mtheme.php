@@ -1,5 +1,9 @@
 <?php
 
+use Model\Common;
+use Model\Menu;
+use Model\MenuForm;
+
 class Controller_mtheme extends Controller_backend
 {
 
@@ -82,6 +86,22 @@ class Controller_mtheme extends Controller_backend
         }
 
         $this->ViewTheme("", Model_ViewTheme::get_viewthene(), "theme");
+    }
+
+    function put()
+    {
+        if (isset($_POST[MenuForm::formName])) {
+            $dataForm = $_POST[MenuForm::formName];
+            foreach ($dataForm as $key => $value) {
+                $dataForm[$key] = Common::TextInput($value);
+            }
+            $Menu = new Menu();
+            $Menu->EditMenu($dataForm);
+            Common::GoBack();
+        }
+
+        $id = $this->getParam()[0];
+        $this->ViewTheme(["Id" => $id], Model_ViewTheme::get_viewthene(), "theme");
     }
 
     function mhome()

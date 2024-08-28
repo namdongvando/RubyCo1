@@ -1,35 +1,46 @@
-<div class="clearfix" ></div>
+<div class="clearfix"></div>
 <div class="row ">
 
     <div class="container-fluid ">
-        <section class="" ng-controller="madvController"  >
+        <section class="" ng-controller="madvController">
             <div class="box box-solid ">
                 <div class="box-body ">
-                    <form  action="/madv/editadv/" method="POST" enctype="multipart/form-data" >
+                    <form action="/madv/editadv/" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="">Tên Quảng Cáo</label>
-                            <input type="text" class="form-control" value="<?php echo $adv->Name; ?>"  name="Name"  placeholder="Tên Quản Cáo">
-                            <input type="hidden" class="form-control" value="<?php echo $adv->ID; ?>" name="ID"  >
-                            <input type="hidden" class="form-control" value="<?php echo $adv->Group; ?>" name="Group"  >
+                            <input type="text" class="form-control" value="<?php echo $adv->Name; ?>" name="Name"
+                                placeholder="Tên Quản Cáo">
+                            <input type="hidden" class="form-control" value="<?php echo $adv->ID; ?>" name="ID">
+                            <input type="hidden" class="form-control" value="<?php echo $adv->Group; ?>" name="Group">
                         </div>
                         <div class="form-group">
                             <label for="">Đường Dẫn</label>
-                            <input type="text" value="<?php echo $adv->Link; ?>" class="form-control"  name="Link"  placeholder="...">
+                            <input type="text" value="<?php echo $adv->Link; ?>" class="form-control" name="Link"
+                                placeholder="...">
                         </div>
                         <div class="form-group">
                             <p for=""><b>Hình Ảnh</b></p>
-                            <img style="background-color: #fff;height: 100px;" src="<?php echo $adv->Urlimages; ?>"  >
-                            <input class="" name="UrlImage" type="file"  >
+                            <img style="background-color: #fff;height: 100px;" src="<?php echo $adv->Urlimages; ?>">
+                            <input class="" name="UrlImage" type="file">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nhóm</label>
+                            <select class="form-control" name="Group">
+                                <option ng-repeat="item in _GroupsAdv" value="{{item.Group}}">{{item.Group}}
+                                </option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="">Nội Dung</label>
-                            <textarea class="editor form-control" id="NoiDung" name="Content"  placeholder="Nội Dung Quảng Cáo"><?php echo $adv->Content; ?></textarea>
+                            <textarea class="editor form-control" id="NoiDung" name="Content"
+                                placeholder="Nội Dung Quảng Cáo"><?php echo $adv->Content; ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="">STT</label>
-                            <input value="<?php echo $adv->isShow; ?>" class="form-control" name="isShow"  placeholder="Nội Dung Quảng Cáo">
+                            <input value="<?php echo $adv->isShow; ?>" class="form-control" name="isShow"
+                                placeholder="Nội Dung Quảng Cáo">
                         </div>
-                        <button type="submit" class="btn btn-success" name="EditAdv" >Sửa Quảng Cáo</button>
+                        <button type="submit" class="btn btn-success" name="EditAdv">Sửa Quảng Cáo</button>
                     </form>
                     <!--hết tao quản cáo -->
                 </div><!-- /.box-body -->
@@ -37,4 +48,3 @@
         </section>
     </div>
 </div>
-

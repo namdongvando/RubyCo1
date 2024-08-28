@@ -1,12 +1,14 @@
 <div class="clearfix"></div>
-<div class="row " ng-controller="thememenuController" ng-init="thememenuInit('<?php echo $_Param[0] ?>', '<?php echo $_Param[1] ?>')">
+<div class="row " ng-controller="thememenuController"
+    ng-init="thememenuInit('<?php echo $_Param[0] ?>', '<?php echo $_Param[1] ?>')">
 
     <section class="col-md-12  ">
         <div class="col-md-3">
             <div class="row">
                 <select onchange="window.location.href = '/mtheme/thememenu/home/' + this.value" class="form-control">
                     <option value="">__Chọn Menu__</option>
-                    <option ng-selected="{{item11.Groups == '<?php echo $_Param[1]; ?>'}}" value="{{item11.Groups}}" ng-repeat="item11 in _MenusByThemeId">{{item11.Groups}}</option>
+                    <option ng-selected="{{item11.Groups == '<?php echo $_Param[1]; ?>'}}" value="{{item11.Groups}}"
+                        ng-repeat="item11 in _MenusByThemeId">{{item11.Groups}}</option>
                 </select>
             </div>
         </div>
@@ -34,7 +36,8 @@
                                         <th>{{linkPages.Name}}</th>
                                         <th>
                                             <div class="form-inline">
-                                                <input style="min-width: 80%;" id="copyLink" type="text" class="form-control" value="{{linkPages.link}}" placeholder="...">
+                                                <input style="min-width: 80%;" id="copyLink" type="text"
+                                                    class="form-control" value="{{linkPages.link}}" placeholder="...">
                                             </div>
                                         </th>
                                     </tr>
@@ -76,7 +79,8 @@
                                         <th>{{linkPages.Name}}</th>
                                         <th>
                                             <div class="form-inline">
-                                                <input style="min-width: 80%;" id="copyLink" type="text" class="form-control" value="{{linkPages.link}}" placeholder="...">
+                                                <input style="min-width: 80%;" id="copyLink" type="text"
+                                                    class="form-control" value="{{linkPages.link}}" placeholder="...">
                                             </div>
                                         </th>
                                     </tr>
@@ -98,76 +102,81 @@
         </div>
         <div class="clearfix"></div>
         <div class="box box-solid ">
-            <div class="box-header bg-green-gradient">
+            <div class="box-header ">
                 <i class="fa fa-list"></i>
-                <h3 class="box-title">Menu of Theme</h3>
+                <h3 class="box-title">Menu </h3>
             </div>
             <div class="box-body table-responsive">
                 <form action="" method="POST">
                     <table class="table table-bordered">
                         <tr>
-                            <td>#</td>
-                            <td>
-                                Tiêu Đề
-                            </td>
-                            <td>
-                                Link
-                            </td>
-                            <td>
-                                Tên Menu
-                            </td>
-                            <td style="width: 200px;">
-                                Cấp Cha
-                            </td>
-                            <td>
-                                Thứ Tự
-                            </td>
-                            <td>
-
-                            </td>
+                            <th>#</th>
+                            <th>Hình</th>
+                            <th>Mã</th>
+                            <th> Tiêu Đề </th>
+                            <th> Link </th>
+                            <th> Tên Menu </th>
+                            <th style="width: 200px;"> Cấp Cha </th>
+                            <th>Thứ Tự</th>
+                            <th>Thao tác</th>
                         </tr>
                         <tr ng-repeat="menu in _MenuByThemeAndGroup| orderBy: 'OrderBy' ">
+                            <td>{{$index+1}}</td>
+                            <td>
+                                <a href="/mtheme/put/{{menu.IDMenu}}">
+                                    <img src="{{menu.Note}}" style="height: 50px;width: auto" alt="{{menu.Name}}">
+                                </a>
+                            </td>
                             <td>{{menu.IDMenu}}</td>
                             <td>
-
-                                <input class="form-control" type="hidden" name="IDMenu[{{menu.IDMenu}}]" value="{{menu.IDMenu}}">
-                                <input class="form-control" required="required" name="Name[{{menu.IDMenu}}]" value="{{menu.Name}}">
+                                <input class="form-control" type="hidden" name="IDMenu[{{menu.IDMenu}}]"
+                                    value="{{menu.IDMenu}}">
+                                <input class="form-control" required="required" name="Name[{{menu.IDMenu}}]"
+                                    value="{{menu.Name}}">
                             </td>
                             <td>
-                                <input class="form-control" required="required" name="Link[{{menu.IDMenu}}]" value="{{menu.Link}}">
+                                <input class="form-control" required="required" name="Link[{{menu.IDMenu}}]"
+                                    value="{{menu.Link}}">
                             </td>
                             <td style="width: 150px">
-                                <input class="form-control" required="required" name="Groups[{{menu.IDMenu}}]" value="{{menu.Groups}}">
+                                <input class="form-control" required="required" name="Groups[{{menu.IDMenu}}]"
+                                    value="{{menu.Groups}}">
                             </td>
                             <td style="width: 100px">
                                 <select name="Parent[{{menu.IDMenu}}]" ng-model="menu.Parent" class="form-control">
                                     <option value="0">Cấp 1</option>
-                                    <option value="{{item11.IDMenu}}" ng-repeat="item11 in _MenuByThemeAndGroup| orderBy: 'OrderBy'">{{item11.Name}}</option>
+                                    <option value="{{item11.IDMenu}}"
+                                        ng-repeat="item11 in _MenuByThemeAndGroup| orderBy: 'OrderBy'">{{item11.Name}}
+                                    </option>
                                 </select>
                             </td>
-                            <td style="width: 100px">
-                                <input class="form-control" required="required" name="OrderBy[{{menu.IDMenu}}]" value="{{menu.OrderBy}}">
+                            <td style="width: 150px">
+                                <input class="form-control" required="required" name="OrderBy[{{menu.IDMenu}}]"
+                                    value="{{menu.OrderBy}}">
                             </td>
-                            <td style="width: 50px">
-                                <a href="/mtheme/deletemenu/{{menu.IDMenu}}" data-confirm="Xóa" class="xoa btn-sm btn btn-danger">
+                            <td style="width: 200px">
+                                <a class="btn-sm btn btn-success" href="/mtheme/put/{{menu.IDMenu}}">
+                                    Sửa
+                                </a>
+                                <a href="/mtheme/deletemenu/{{menu.IDMenu}}" data-confirm="Xóa"
+                                    class="xoa btn-sm btn btn-danger">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7">
-                                <button type="button" ng-click="AddItemMenu('<?php echo $_Param[0] ?>', '<?php echo $_Param[1] ?>')" class="btn btn-success pull-right" ng-show="_MenuByThemeAndGroup">Thêm Menu</button>
-                                <button name="SaveMenu" ng-show="_MenuByThemeAndGroup" type="submit" class="btn btn-success">Lưu</button>
+                            <td colspan="8">
+                                <button type="button"
+                                    ng-click="AddItemMenu('<?php echo $_Param[0] ?>', '<?php echo $_Param[1] ?>')"
+                                    class="btn btn-success pull-right" ng-show="_MenuByThemeAndGroup">Thêm Menu</button>
+                                <button name="SaveMenu" ng-show="_MenuByThemeAndGroup" type="submit"
+                                    class="btn btn-success">Lưu</button>
                             </td>
                         </tr>
-
-
                     </table>
                 </form>
-
 
             </div>
         </div>
     </section>
-
 </div>

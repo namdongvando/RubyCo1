@@ -1,0 +1,47 @@
+<script type="text/javascript">
+    app.controller("nhanvienController",
+        function($scope, $rootScope, $http, $routeParams) {
+            $scope.IsShowInFor = true;
+            $scope.onToggle = function() {
+                $scope.IsShowInFor = !$scope.IsShowInFor;
+            };
+            $scope.CSKHInit = function() {
+                $http.get("/api/getNhanVien/").then((res) => {
+                    $scope.NhanVien = res.data.NhanVien;
+                    console.log($scope.NhanVien);
+                });
+            };
+        });
+</script>
+<div class="clearfix"></div>
+<div class=""> 
+    <div ng-init="CSKHInit()" ng-controller="nhanvienController" style="width: 300px;z-index: 9999;position: fixed;right: 0px;top: 30%;">
+        <button ng-click="onToggle()" ng-show="IsShowInFor==false" class="btn-lienhe btn btn-primary">
+            <i class="fa fa-phone"></i> Liên Hệ
+        </button>
+        <div class="DSNhanVienHoTro" ng-show="IsShowInFor==true">
+            <div class="pull-right btn-actions">
+                <button ng-click="onToggle()" ng-show="IsShowInFor==true" class="btn btn-primary">Đóng Lại
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+            <h3 class="panel-title " style="margin-bottom: 10px;">Hỗ trợ khách hàng</h3>
+            <hr style="border: 1px dasher;">
+            <div style="margin-bottom: 10px;" class="NhanVienHoTro" ng-repeat="item in NhanVien| orderBy:'id' ">
+                <h3 class="name">{{item.name}}</h3>
+                <p class="phone"><i class="fa fa-phone"></i> {{item.phone}}</p>
+                <p>
+                <ul class="social-footer list-unstyled list-inline">
+                    <li class="btn-group btn-group-social d-flex">
+                        <a class="btn-social" href="tell:{{item.phone}}"><i class="fa fa-phone"></i></a>
+                        <!-- <a class="btn-social" href="{{item.facebook}}"><i class="fa fa-facebook"></i></a> -->
+                        <a class="btn-social" href="mailto:{{item.email}}"><i class="fa fa-envelope"></i></a>
+                        <!-- <a class="btn-social" href="skyper:{{item.sky}}"><i class="fa fa-skype"></i></a> -->
+                    </li>
+                </ul>
+                </p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

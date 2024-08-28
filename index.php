@@ -10,12 +10,14 @@ function minify_output($buffer)
     $search = array(
         '/\>[^\S ]+/s',
         '/[^\S ]+\</s',
-        '/(\s)+/s', '/<!--(.|\s)*?-->/'
+        '/(\s)+/s',
+        '/<!--(.|\s)*?-->/'
     );
     $replace = array(
         '>',
         '<',
-        '\\1', ''
+        '\\1',
+        ''
     );
     if (preg_match("/\<html/i", $buffer) == 1 && preg_match("/\<\/html\>/i", $buffer) == 1) {
         $buffer = preg_replace($search, $replace, $buffer);
@@ -25,7 +27,7 @@ function minify_output($buffer)
 
 $url = $_SERVER['REQUEST_URI'];
 session_start();
-ob_start();
+ob_start("minify_output");
 
 if (file_exists("./vendor/autoload.php")) {
     include './vendor/autoload.php';
@@ -46,7 +48,7 @@ if (isset($_GET["ctrl"])) {
     $cname = "Controller_" . $cnameV;
     $action = $_GET["action"];
     $Application->setAction($action);
-    $Application->setParam($_GET["param"]);
+    $Application->setParam($_GET["param"] ?? []);
 } else {
     $Module = $Application->getModule();
     $cnameV = $Application->getController();

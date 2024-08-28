@@ -428,8 +428,8 @@ class functionLayout
         <link href="/public/bdsltp/public/theme/assets/corporate/css/themes/blue.css" rel="stylesheet" id="style-color">
         <link href="/public/rubyv2/custom.css?v=<?php echo filemtime('public/rubyv2/custom.css'); ?>" rel="stylesheet" type="text/css" />
         <link href="/public/Phonering/phonering.css?v=<?php echo filemtime('public/Phonering/phonering.css'); ?>" rel="stylesheet" type="text/css" />
-        <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
         <link href="/public/rubyv2/style.css?v=<?php echo filemtime("public/bdsltp/dainam/style.css"); ?>" rel="stylesheet" type="text/css" />
+        <script src="/public/partials/loaderpartials/home/homeconfig.js?v=<?php echo fileatime("public/partials/loaderpartials/home/homeconfig.js"); ?>"></script>
         <link href="/public/wowjs/animate.min.css<?php echo filemtime("public/wowjs/animate.min.css"); ?>" rel="stylesheet" type="text/css" />
         <script type="text/javascript">
             app.controller("nhanvienController",
@@ -818,36 +818,21 @@ class functionLayout
         $adv = new \Model\adv();
         ob_start();
     ?>
-        <!-- BEGIN PRE-FOOTER -->
         <div class="pre-footer" style="background-color: #fff;margin-top:15px">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3 col-sm-6 pre-footer-col">
-                        <div class="hidden-xs text-center">
-                            <img class="FooterLogo img img-responsive" style="max-height: 150px;
-                            margin: auto;
-                            border-radius: 10px !important;
-                            margin-bottom: 10px;" src="__Logo___" alt="__webName___">
-                        </div>
-                        <p class="text-justify">
-                            __GioiThieuFooter___
-                        </p>
-                        <p class="text-justify">
-                            __ThoiGianLamViec___
-                        </p>
+                        __footer1___
+                        
                     </div>
                     <div class="col-md-3 col-sm-6 pre-footer-col">
-                        <ng-huong-dan-thong-tin title="Hướng dẫn thông tin"></ng-huong-dan-thong-tin>
-                        <ng-chinh-sach title="Chính Sách"></ng-chinh-sach>
-                        <ng-hop-tac-tai-tro title="Hợp tác" /></ng-hop-tac-tai-tro>
+                        __footer2___
                     </div>
                     <div class="col-md-3 col-sm-6 pre-footer-col">
-                        <ng-about title="Liên Hệ"></ng-about>
+                        __footer3___
                     </div>
                     <div class="col-md-3 col-sm-6 pre-footer-col">
-                        <ng-nhan-vien title="Nhân viên hỗ trợ"></ng-nhan-vien>
-                        <ng-hotline has-img="{true}"></ng-hotline>
-                        <ng-btn-social-groups title="Trang xã hội"></ng-btn-social-groups>
+                        __footer4___
                     </div>
                     <div class="col-md-12">
                         <div class="row">

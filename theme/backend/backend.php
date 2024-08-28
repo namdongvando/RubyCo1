@@ -9,7 +9,7 @@ class backend extends \Model\Database
 
     function head()
     {
-?>
+        ?>
         <link rel="shortcut icon" href="/public/no-image.jpg" />
         <link rel="stylesheet" href="/public/admin/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -24,18 +24,23 @@ class backend extends \Model\Database
         <link rel="stylesheet" href="/public/admin/plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="/public/admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
         <link href="/public/admin/plugins/select2/select2.min.css" rel="stylesheet" type="text/css" />
-        <link href="/public/admin/dist/css/Style.css?v=<?php echo filemtime('public/admin/dist/css/Style.css'); ?>" rel="stylesheet" type="text/css" />
-        <link href="/public/admin/Customer.css?v=<?php echo filemtime("public/admin/Customer.css"); ?>" rel="stylesheet" type="text/css" />
+        <link href="/public/admin/dist/css/Style.css?v=<?php echo filemtime('public/admin/dist/css/Style.css'); ?>"
+            rel="stylesheet" type="text/css" />
+        <link href="/public/admin/Customer.css?v=<?php echo filemtime("public/admin/Customer.css"); ?>" rel="stylesheet"
+            type="text/css" />
+        <link href="/public/App.css?v=<?php echo filemtime("public/App.css"); ?>" rel="stylesheet" type="text/css" />
         <script src="/public/ckfinder/ckfinder.js" type="text/javascript"></script>
         <script src="/public/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <?php
+
+        <?php
     }
 
     function Menu($_Controller = "mproduct")
     {
         $_Controller = Application::getController();
-    ?>
-        <header class="main-header " ng-controller="bklayoutController" ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
+        ?>
+        <header class="main-header " ng-controller="bklayoutController"
+            ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
             <!-- Logo -->
             <a href="/backend/" class="logo">
                 <span class="logo-mini"><b>A</b>LT</span>
@@ -80,7 +85,8 @@ class backend extends \Model\Database
             </nav>
         </header>
 
-        <aside class="main-sidebar" ng-controller="bklayoutController" ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
+        <aside class="main-sidebar" ng-controller="bklayoutController"
+            ng-init='bklayoutInit(<?php echo $this->_encode($_SESSION[QuanTri]); ?>)'>
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar ">
                 <!-- Sidebar user panel -->
@@ -98,7 +104,8 @@ class backend extends \Model\Database
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control" placeholder="Tìm Kiếm...">
                         <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                                    class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </form>
@@ -154,23 +161,25 @@ class backend extends \Model\Database
                     </li>
                     <?php
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                    ?>
+                        ?>
                         <li class="treeview  <?php echo \Model\Breadcrumb::CheckMenuAcrive("Controller_madv") ? 'active' : '' ?>">
                             <a href="/madv/index"><i class="fa fa-home"></i>
                                 <span>Trang Chủ</span>
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                             <ul class="treeview-menu  ">
-                                <li class="active"><a href="/madv/homeslide/"><i class="fa fa-circle-o"></i>Quản Lý Banner Động</a></li>
+                                <li class="active"><a href="/madv/homeslide/"><i class="fa fa-circle-o"></i>Quản Lý Banner Động</a>
+                                </li>
                                 <li class="active"><a href="/madv/doitac"><i class="fa fa-circle-o"></i>Đối Tác</a></li>
-                                <li class="active"><a href="/madv/khachhang/"><i class="fa fa-circle-o"></i>Ý Kiến Khách Hàng </a></li>
+                                <li class="active"><a href="/madv/khachhang/"><i class="fa fa-circle-o"></i>Ý Kiến Khách Hàng </a>
+                                </li>
                                 <li class="active"><a href="/mtheme/mhome/home"><i class="fa fa-circle-o"></i>Giao Diện</a></li>
                             </ul>
                         </li>
-                    <?php
+                        <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                    ?>
+                        ?>
                         <li class="treeview">
                             <a href="/mtheme/thememenu/home/TopMainMenu">
                                 <i class="fa fa-list-alt"></i> <span>Quản Lý Menu</span>
@@ -178,10 +187,10 @@ class backend extends \Model\Database
                             </a>
 
                         </li>
-                    <?php
+                        <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                    ?>
+                        ?>
                         <li class="treeview ">
                             <a href="/minfor/index/thongtincongty">
                                 <i class="fa fa-list-alt"></i> <span>Thông tin công ty</span>
@@ -194,10 +203,10 @@ class backend extends \Model\Database
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
-                    <?php
+                        <?php
                     }
                     if (\Module\duser\Model\Duser::CheckQuyen([\Module\duser\Model\Duser::CodeSuperAdmin, \Module\duser\Model\Duser::$CodeAdmin])) {
-                    ?>
+                        ?>
                         <li class="  treeview  ">
                             <a href="/duser/index/index">
                                 <i class="fa fa-users"></i> <span>Quản Lý User</span>
@@ -210,19 +219,19 @@ class backend extends \Model\Database
                                 <i class="fa fa-angle-right pull-right"></i>
                             </a>
                         </li>
-                    <?php
+                        <?php
                     }
                     ?>
                 </ul>
             </section>
             <!-- /.sidebar -->
         </aside>
-    <?php
+        <?php
     }
 
     function js()
     {
-    ?>
+        ?>
 
         <!-- jQuery UI 1.11.4 -->
         <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -261,17 +270,36 @@ class backend extends \Model\Database
         <script src="/public/admin/dist/js/app.min.js"></script>
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="/public/admin/dist/js/demo.js"></script>
-        <script src="/public/admin/Javascript.js?<?php echo filemtime('public/admin/Javascript.js'); ?>" type="text/javascript"></script>
+        <script src="/public/admin/Javascript.js?<?php echo filemtime('public/admin/Javascript.js'); ?>"
+            type="text/javascript"></script>
+        <script src="/public/admin/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
         <script>
-            $(function() {
-                $(".xoa").click(function() {
+            $(function () {
+
+                $(".editor").each(function (index, el) {
+                    CKEDITOR.replace($(this).attr("id"), {
+                        height: "500px"
+                    });
+                });
+                $('.editorMini').each(function () {
+                    var id = $(this).attr("id");
+                    CKEDITOR.replace(id, {
+                        toolbar: [
+                            { name: 'document', items: ['Source',] },
+                            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat'] }, { name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+                            { name: 'insert', items: ['Image', 'Smiley', 'SpecialChar',] },
+                        ],
+
+                    });
+                });
+                $(".xoa").click(function () {
 
                 });
-                $(".dataTable").each(function() {
+                $(".dataTable").each(function () {
                     var id = "#" + $(this).attr("id");
                     $(id).dataTable();
                 });
-                setTimeout(function() {
+                setTimeout(function () {
                     $(".alert").toggle();
                 }, 3000);
 
@@ -294,17 +322,17 @@ class backend extends \Model\Database
                         character += punctuation.charAt(entity3);
                         password = character;
                     }
-                    password = password.split('').sort(function() {
+                    password = password.split('').sort(function () {
                         return 0.5 - Math.random()
                     }).join('');
                     return password.substr(0, len);
                 }
-                $("#TaoMatKhau").click(function() {
+                $("#TaoMatKhau").click(function () {
                     var self = $(this);
                     var target = self.data("target");
                     $(target).val(password_generator());
                 });
-                $(".XemMatKhau").click(function() {
+                $(".XemMatKhau").click(function () {
                     var self = $(this);
                     var target = self.data("target");
                     if ($(target).attr("type") == "text") {
@@ -320,14 +348,14 @@ class backend extends \Model\Database
                 var finder = new CKFinder();
                 finder.BasePath = '/public/';
                 finder.startupPath = startupPath;
-                finder.selectActionFunction = function(fileUrl, data) {
+                finder.selectActionFunction = function (fileUrl, data) {
                     document.getElementById(data["selectActionData"]).value = fileUrl;
                     var ID = data["selectActionData"];
                     console.log(fileUrl);
                     $('#' + idimg).attr('src', fileUrl);
                 };
                 finder.selectActionData = functionData;
-                finder.selectThumbnailActionFunction = function(fileUrl, data) {
+                finder.selectThumbnailActionFunction = function (fileUrl, data) {
                     console.log(fileUrl);
                     $('#' + idimg).attr('src', fileUrl);
                 };
@@ -374,7 +402,7 @@ class backend extends \Model\Database
             }
         </script>
         <script src="https://www.google.com/recaptcha/api.js?render=<?php echo reCAPTCHA; ?>"></script>
-    <?php
+        <?php
     }
 
     function Breadcrumb()
@@ -384,17 +412,19 @@ class backend extends \Model\Database
     }
 
     public
-    function Footer()
-    {
-    ?>
+        function Footer(
+    ) {
+        ?>
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
                 <b>Version</b> 2.3.0
             </div>
-            <strong>Copyright &copy; <?php echo date("Y", time()); ?> <a href="https://nguyenvando.net">nguyenvando.net</a>.</strong>
+            <strong>Copyright &copy;
+                <?php echo date("Y", time()); ?> <a href="https://nguyenvando.net">nguyenvando.net</a>.
+            </strong>
         </footer>
         <div class="control-sidebar-bg"></div>
 
-<?php
+        <?php
     }
 }

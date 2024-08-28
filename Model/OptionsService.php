@@ -114,7 +114,7 @@ class OptionsService extends DB
     }
     public static function GetByKeyVal($val, $idGroups)
     {
-        $op = new OptionsService(); 
+        $op = new OptionsService();
         return $op->GetByKeyValue($val, $idGroups);
     }
 }

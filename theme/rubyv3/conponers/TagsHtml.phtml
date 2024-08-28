@@ -1,0 +1,20 @@
+<h2 class="Title_widget" ng-show="{{title}}">{{title}}</h2>
+<div class="listtags">
+    <?php
+
+    use Model\tags\tags;
+
+    $modelTags = new tags();
+    $total = 0;
+    $tags = $modelTags->GetAllPT("", $total, 1, 100);
+    $strTag = "";
+    foreach ($tags as $value) {
+        $_value = new tags($value);
+        $strTag .= <<<TAGS
+
+            <a href="{$_value->LinkTags()}" >{$_value->Name}</a>
+TAGS;
+    }
+    echo $strTag;
+    ?>
+</div>

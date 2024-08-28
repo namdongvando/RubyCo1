@@ -22,7 +22,7 @@ $Cats = $Category->getCategorys(false);
 ?>
 
 <div class="row ">
-    <section class="col-md-12" >
+    <section class="col-md-12">
         <div class="box box-solid ">
             <div class="box-header bg-green-gradient">
                 <i class="fa fa-book"></i>
@@ -38,37 +38,51 @@ $Cats = $Category->getCategorys(false);
             </div><!-- /.box-header -->
             <div class="box-body no-padding ">
 
-                <div class="col-md-4"  >
-                    <form action="" method="POST" enctype="multipart/form-data" >
+                <div class="col-md-4">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         <?php
                         if ($a)
                             foreach ($a as $key => $value) {
                                 $b[$value] = isset($b[$value]) ? $b[$value] : 0;
-                                ?> 
+                                ?>
                                 <div class="col-md-12 form-group">
-                                    <label for=""><?php echo $value ?></label>
-                                    <input type="text" data-link="/laytin/importbycatid/<?php echo $value ?>" class="ajaxClass form-control" value="<?php echo isset($b[$value]) ? $b[$value] : 0 ?>" name="name[<?php echo $value ?>]" >
-                                    <input type="button" data-link="/laytin/importbyname/" data-method="post" data-datapost='{"catid":"<?php echo $b[$value]; ?>","fileName":"<?php echo $value; ?>"}' class="btnajaxClass btn btn-success" value="rawdata" >
+                                    <label for="">
+                                        <?php echo $value ?>
+                                    </label>
+                                    <input type="text" data-link="/laytin/importbycatid/<?php echo $value ?>"
+                                        class="ajaxClass form-control" value="<?php echo isset($b[$value]) ? $b[$value] : 0 ?>"
+                                        name="name[<?php echo $value ?>]">
+                                    <input type="button" data-link="/laytin/importbyname/" data-method="post"
+                                        data-datapost='{"catid":"<?php echo $b[$value]; ?>","fileName":"<?php echo $value; ?>"}'
+                                        class="btnajaxClass btn btn-success" value="rawdata">
                                 </div>
                                 <?php
                             }
                         ?>
-                        <input value="save" type="submit" name="SaveJsoncat" >
+                        <input value="save" type="submit" name="SaveJsoncat">
                         <!--<input value="Drove Data" type="button" id="SaveJsoncat" name="SaveJsoncat" >-->
 
                     </form>
                 </div>
-                <div class="col-md-4" >
-                    <table class="table table-responsive" >
+                <div class="col-md-4">
+                    <table class="table table-responsive">
                         <?php
                         foreach ($Cats as $key => $value) {
                             $value = new \Model\Category($value);
-                            ?> 
-                            <tr> 
-                                <td><?php echo $value->catID ?></td>
-                                <td><?php echo $value->Path ?></td>
-                                <td><?php echo $value->catName ?></td>
-                                <td><?php echo $value->parentCatID ?></td>
+                            ?>
+                            <tr>
+                                <td>
+                                    <?php echo $value->catID ?>
+                                </td>
+                                <td>
+                                    <?php echo $value->Path ?>
+                                </td>
+                                <td>
+                                    <?php echo $value->catName ?>
+                                </td>
+                                <td>
+                                    <?php echo $value->parentCatID ?>
+                                </td>
                             </tr>
                             <?php
                         }
@@ -83,21 +97,25 @@ $Cats = $Category->getCategorys(false);
     </section>
 </div>
 <script src="/public/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-<script type="text/javascript" >
-    $(function() {
-        $(".btnajaxClass").click(function() {
+<script type="text/javascript">
+    $(function () {
+        $(".btnajaxClass").click(function () {
             var data = $(this).data();
             console.log(data);
-            $.ajax({url: data.link, method: data.method, data: $.param(data.datapost), success: function(res) {
+            $.ajax({
+                url: data.link, method: data.method, data: $.param(data.datapost), success: function (res) {
                     console.log(res);
-                }});
+                }
+            });
         });
-        $("#SaveJsoncat").click(function() {
-            $(".ajaxClass").each(function() {
+        $("#SaveJsoncat").click(function () {
+            $(".ajaxClass").each(function () {
                 var data = $(this).data();
-                $.ajax({url: data.link, success: function(result) {
+                $.ajax({
+                    url: data.link, success: function (result) {
                         console.log(result);
-                    }});
+                    }
+                });
             });
 
         });

@@ -85,7 +85,11 @@ class Database extends \Model\iDatabase
     static function listerror()
     {
         return [
-            -101 => "Mã danh mục và mã danh mục cha trùng nhau", -102 => "Mã danh mục không thể là con của danh mục con", -201 => "Bạn không có quền xóa danh mục này", -202 => "Bạn không thể xóa danh mục có danh mục con", -203 => "Danh mục đang có sản phẩm không thể xóa"
+            -101 => "Mã danh mục và mã danh mục cha trùng nhau",
+            -102 => "Mã danh mục không thể là con của danh mục con",
+            -201 => "Bạn không có quền xóa danh mục này",
+            -202 => "Bạn không thể xóa danh mục có danh mục con",
+            -203 => "Danh mục đang có sản phẩm không thể xóa"
         ];
     }
 
@@ -303,12 +307,12 @@ class Database extends \Model\iDatabase
             . "where `catID` in ({$CatId})";
         $this->Query($sql);
         $a = $this->fetchAll();
-        if (!$a["Tong"] == 0) {
+        if ($a == false) {
             $sum = 0;
             return null;
         }
 
-        $sum = $a["Tong"];
+        $sum = $a[0]["Tong"];
         $sql = "SELECT *"
             . "FROM `" . table_prefix . "product` "
             . "where `catID` in ({$CatId}) order by `catID` limit {$start},{$number} ";

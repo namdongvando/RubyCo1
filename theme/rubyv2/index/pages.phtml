@@ -12,14 +12,14 @@ $tong = 0;
 $newsByPage = $Model_News->NewsByPagesLimitNumberPt($_Pages->idPa, $indexPage, $number, $tong);
 $pageChil = $_Pages->GetChil();
 if ($pageChil) {
-?>
+    ?>
     <div class=" fullscreem slider_home ">
         <div class="container Main-Content">
             <div class="row pt-25">
                 <?php
                 foreach ($pageChil as $key => $p) {
                     $_p = new pages($p);
-                ?>
+                    ?>
 
                     <div class="col-md-4">
                         <div class="slider_home_item">
@@ -27,58 +27,74 @@ if ($pageChil) {
                                 <em>
                                     <a class="" href="<?php echo $_p->linkPagesCurent() ?>">
                                         <div class="item-content-imgages wow slideInRight " data-wow-duration="1s">
-                                            <img src="/public/banner/hexagon-bg_1.png?v=<?php echo filectime('public/banner/hexagon-bg_1.png'); ?>" alt="Thi Công" class="imgages-cut img-responsive">
-                                            <img onerror="this.src='/public/banner/hexagon-bg.png'" src="<?php echo $_p->Urlimages ?>" alt="Thi Công" class="img-responsive">
+                                            <img src="/public/banner/hexagon-bg_1.png?v=<?php echo filectime('public/banner/hexagon-bg_1.png'); ?>"
+                                                alt="Thi Công" class="imgages-cut img-responsive">
+                                            <img onerror="this.src='/public/banner/hexagon-bg.png'"
+                                                src="<?php echo $_p->Urlimages ?>" alt="Thi Công" class="img-responsive">
                                         </div>
                                     </a>
                                 </em>
                                 <a class="title-baiviet" href="<?php echo $_p->linkPagesCurent() ?>">
-                                    <h3 class="wow slideInLeft" data-wow-duration="2s"><?php echo $_p->Name; ?></h3>
+                                    <h3 class="wow slideInLeft" data-wow-duration="2s">
+                                        <?php echo $_p->Name; ?>
+                                    </h3>
                                 </a>
                             </div>
                         </div>
                     </div>
-                <?php
+                    <?php
                 }
                 ?>
 
             </div>
         </div>
     </div>
-<?php
+    <?php
 } else {
-?>
+    ?>
     <div class="container">
         <ul class="breadcrumb pull-right" style="margin-top: 10px;">
             <li><a href="/">Trang Chủ</a></li>
-            <li class="active"><?php echo $_Pages->Name ?></li>
+            <li class="active">
+                <?php echo $_Pages->Name ?>
+            </li>
         </ul>
     </div>
     <div class="container Main-Content" style="padding-top: 10px;">
 
         <div class="row">
             <div class="col-md-8">
-                <h1 class="text-left title-pannel"><span><?php echo $_Pages->Name ?></span></h1>
+                <h1 class="text-left title-pannel"><span>
+                        <?php echo $_Pages->Name ?>
+                    </span></h1>
                 <div class="row">
                     <?php
                     if ($newsByPage) {
                         foreach ($newsByPage as $news) {
                             $_new = new \Model\news($news);
-                    ?>
+                            ?>
                             <div class="col-md-4">
                                 <a href="<?php echo $_new->linkNewsCurent(); ?>">
-                                    <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" />
+                                    <img style="height: 200px;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'"
+                                        class="img img-responsive" src="<?php echo $_new->UrlHinh ?>"
+                                        alt="<?php echo $_new->Name ?>" />
                                 </a>
                                 <a href="<?php echo $_new->linkNewsCurent(); ?>" class="">
-                                    <h3 class="newstitle text-justify"><?php echo $_new->Name ?></h3>
+                                    <h3 class="newstitle text-justify">
+                                        <?php echo $_new->Name ?>
+                                    </h3>
                                 </a>
-                                <p class="hidden"><span><?php echo $_new->NgayDang() ?></span> </p>
-                                <p class="hidden"><?php echo $_new->Summary(); ?></p>
+                                <p class="hidden"><span>
+                                        <?php echo $_new->NgayDang() ?>
+                                    </span> </p>
+                                <p class="hidden">
+                                    <?php echo $_new->Summary(); ?>
+                                </p>
                                 <div class="clearfix"></div>
                                 <hr>
                             </div>
 
-                    <?php
+                            <?php
                         }
                     }
 
@@ -95,7 +111,8 @@ if ($pageChil) {
                 <div class="">
                     <h2 class="text-left title-pannel"><span>Danh Mục Bài Viết</span></h2>
                     <div class="d-flex danhmucbaiviet">
-                        <a href="" data-target=".backdrop,.MenuMobie" class="btn-toggle hidden-lg hidden-md hidden-sm btn btn-default">
+                        <a href="" data-target=".backdrop,.MenuMobie"
+                            class="btn-toggle hidden-lg hidden-md hidden-sm btn btn-default">
                             <i class="fa fa-bars"></i>
                         </a>
                     </div>
@@ -107,9 +124,12 @@ if ($pageChil) {
                             if ($DanhMucBaiViet) {
                                 foreach ($DanhMucBaiViet as $page) {
                                     $_page = new Model\pages($page);
-                            ?>
-                                    <li class="list-group-item clearfix"><a href="<?php echo $_page->linkPagesCurent() ?>"><i class="fa fa-angle-right"></i> <?php echo $_page->Name ?></a></li>
-                            <?php
+                                    ?>
+                                    <li class="list-group-item clearfix"><a href="<?php echo $_page->linkPagesCurent() ?>"><i
+                                                class="fa fa-angle-right"></i>
+                                            <?php echo $_page->Name ?>
+                                        </a></li>
+                                    <?php
                                 }
                             }
                             ?>
@@ -121,31 +141,38 @@ if ($pageChil) {
                     if ($DanhSachTinMoiNhat) {
                         foreach ($DanhSachTinMoiNhat as $news) {
                             $_new = new \Model\news($news);
-                    ?>
+                            ?>
                             <div class=" ">
                                 <div class="col-xs-4">
                                     <div class="row">
                                         <a href="<?php echo $_new->linkNewsCurent(); ?>">
-                                            <img style="min-width: 100%;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'" class="img HinhChuNhat img-responsive" src="<?php echo $_new->UrlHinh ?>" alt="<?php echo $_new->Name ?>" />
+                                            <img style="min-width: 100%;" onerror="this.src='/public/lawkimsa/Images/h1.jpg'"
+                                                class="img HinhChuNhat img-responsive" src="<?php echo $_new->UrlHinh ?>"
+                                                alt="<?php echo $_new->Name ?>" />
                                         </a>
                                     </div>
                                 </div>
                                 <div class="col-xs-8">
                                     <a href="<?php echo $_new->linkNewsCurent(); ?>" class="">
-                                        <h3 style="font-size: 14px;" class="text-bold text-justify"><?php echo $_new->Name ?></h3>
+                                        <h3 style="font-size: 14px;" class="text-bold text-justify">
+                                            <?php echo $_new->Name ?>
+                                        </h3>
                                     </a>
-                                    <p><span><?php echo $_new->NgayDang() ?></span></p>
+                                    <p><span>
+                                            <?php echo $_new->NgayDang() ?>
+                                        </span></p>
                                 </div>
                                 <div class="clearfix"></div>
                                 <hr style="margin: 10px">
                             </div>
 
-                    <?php
+                            <?php
                         }
                     }
                     ?>
                     <h2 class="text-left title-pannel"><span>Tags</span></h2>
-                    <div class="DanhSachTags ajaxHtml" data-target="#DanhSachTags" id="DanhSachTags" data-url="/index/gettags/">
+                    <div class="DanhSachTags ajaxHtml" data-target="#DanhSachTags" id="DanhSachTags"
+                        data-url="/index/gettags/">
 
                     </div>
                     <div class="clearfix" style="margin-bottom: 10px;"></div>
@@ -154,6 +181,6 @@ if ($pageChil) {
         </div>
     </div>
 
-<?php
+    <?php
 }
 ?>

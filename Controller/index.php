@@ -13,8 +13,11 @@ class Controller_index extends Application
         $this->param = $this->getParam();
         $this->Pages = new \Model\pages();
         $this->News = new \Model\news();
-        Model_ViewTheme::set_viewthene("rubyv2");
+        Model_ViewTheme::set_viewthene("rubyv3");
     }
+
+
+
 
     function index()
     {
@@ -43,20 +46,25 @@ class Controller_index extends Application
     function settheme()
     {
         ob_start();
-        $_SESSION["Theme"] = "rubyv2";
+        $_SESSION["Theme"] = "rubyv3";
         \lib\Common::ToUrl("/");
         die();
     }
 
     function sanpham()
     {
+        // var_dump($_GET["param"]);
+        // echo $_GET["danhmuc"] ?? "___";
+        // echo $_GET["param"] ?? "___";
+        // echo $_GET["sanpham"] ?? "___";
 
         Model_Seo::$Title = "Sản Phẩm";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__SEO_Keyword___";
         $bre = new Model\Breadcrumb();
         $abre[] = [
-            "link" => "#", "title" => "Sản Phẩm"
+            "link" => "#",
+            "title" => "Sản Phẩm"
         ];
 
         $bre->setBreadcrumb($abre);
@@ -101,15 +109,13 @@ class Controller_index extends Application
 
     function category($url)
     {
+        // var_dump($_SERVER["REQUEST_URI"]);
 
         $Category = new Model\Category();
-        //        lấy danh ra
-        //        var_dump($url);
-
         $linkDanhMuc = $url[1][0];
         $curentpages = isset($url[2][0]) ? intval($url[2][0]) : 1;
         $linkDanhMuc = \Model\CheckInput::ChekInput($linkDanhMuc);
-        $pathCat = $Category->getCategoryFromLink($linkDanhMuc);
+        $pathCat = $Category->getCategoryFromLink($_SERVER["REQUEST_URI"]);
         if ($pathCat == null) {
             die("Lỗi 404");
         }
@@ -131,9 +137,7 @@ class Controller_index extends Application
     {
         $RedirectLink = $_SERVER['REQUEST_URI'];
         $alias = Model\CheckInput::ChekInput($this->getParam()[0]);
-
         $news = $this->News->GetNewsByAlias($alias, 1);
-
         if ($news == null) {
             // \lib\Common::ToUrl("/");
             $news = $this->News->GetNewsByRedirectLink($RedirectLink, 1);
@@ -265,7 +269,7 @@ class Controller_index extends Application
         $bre = new \Model\Breadcrumb();
         $abre = $p->Breadcrumb();
         $bre->setBreadcrumb($abre);
-        Model_Seo::$Title = $p->nameProduct;
+        Model_Seo::$Title = $p->Name;
         Model_Seo::$des = $p->Summary;
         Model_Seo::$key = $p->Summary;
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "product");
@@ -315,7 +319,16 @@ class Controller_index extends Application
         Model_Seo::$Title = "__Title___";
         Model_Seo::$des = "__Des___";
         Model_Seo::$key = "__SEO_Keyword___";
-        $data = $_REQUEST["seach"];
+        $data["seach"] = $_REQUEST["seach"];
+        $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
+    }
+    function search()
+    {
+
+        Model_Seo::$Title = "__Title___";
+        Model_Seo::$des = "__Des___";
+        Model_Seo::$key = "__SEO_Keyword___";
+        $data["seach"] = $_REQUEST["seach"];
         $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "danhmuc");
     }
 
