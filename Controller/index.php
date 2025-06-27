@@ -18,7 +18,6 @@ class Controller_index extends Application
 
 
 
-
     function index()
     {
         Model_Seo::$Title = "__Title___";
@@ -219,11 +218,10 @@ class Controller_index extends Application
         $pages = new \Model\pages();
         $alias = \Model\CheckInput::ChekInput($url[1][0]);
         $_Pages = $pages->PagesByAliasIsShow($alias, FALSE);
-
         if ($_Pages == null) {
             header('HTTP/1.1 404 Not Found');
         }
-        $indexPage = $url[2][0];
+        $indexPage = $url[2][0] ?? 1;
 
         $Pages = new \Model\pages($_Pages);
         Model_Seo::$Title = $Pages->Title;
@@ -232,7 +230,12 @@ class Controller_index extends Application
         Model_Seo::$Images = $Pages->Urlimages;
         $data["pages"] = $_Pages;
         $data["indexPage"] = $indexPage;
-        $this->ViewTheme($data, Model_ViewTheme::get_viewthene(), "pages");
+        // var_dump($_Pages);
+        $this->ViewTheme(
+            $data,
+            Model_ViewTheme::get_viewthene(),
+            "pages"
+        );
     }
 
     function product($url)

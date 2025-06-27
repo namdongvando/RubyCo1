@@ -25,7 +25,13 @@ $itemAdv = $_Advs->AdvsByGroup("homeslide", false);
 
     <?php
     echo functionLayout::header();
-    include_once $Content;
+    ?>
+    <div class="page_content">
+        <?php
+        include_once $Content;
+        ?>
+    </div>
+    <?php
     echo functionLayout::footer();
     ?>
     <a href="#" class="scroll_top" title="Scroll to Top" style="display: inline;">Scroll</a>

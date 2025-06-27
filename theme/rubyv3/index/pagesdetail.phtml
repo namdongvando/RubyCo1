@@ -9,6 +9,9 @@ $newsByPage = $Model_News->NewsByPagesLimitNumber($_Pages->idPa, 9, FALSE);
         <li class="active"><?php echo $_Pages->Name ?></li>
     </ul>
 </div>
-<!-- view-product-list-->
-<?php echo $_Pages->Content ?>
-<!-- ./view-product-list-->
+
+<div id="page_content_detail">
+    <!-- view-product-list-->
+    <?php echo $_Pages->Content ?>
+    <!-- ./view-product-list-->
+</div>

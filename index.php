@@ -95,4 +95,6 @@ if (isset($_GET["debug"])) {
     echo $Application->getController();
     echo $Application->getAction();
 }
+// echo $Application->getController();
+// echo $Application->getAction();
 //echo $etime - $stime;

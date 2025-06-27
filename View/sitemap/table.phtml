@@ -1,0 +1,17 @@
+<table>
+    <?php
+    $newModel = new \Model\news();
+    $DSNews = $newModel->NewsIsShow(FALSE);
+    if ($DSNews)
+        foreach ($DSNews as $i => $news) {
+            $_news = new Model\news($news);
+            ?>
+            <tr>
+                <td><?php echo $i + 1; ?></td>
+                <td><?php echo $_news->Name; ?></td>
+                <td><?php echo $_news->linkFullNewsCurent(); ?></td>
+            </tr>
+            <?php
+        }
+    ?>
+</table>

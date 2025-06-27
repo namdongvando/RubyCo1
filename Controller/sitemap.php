@@ -1,16 +1,24 @@
 <?php
 
-class Controller_sitemap extends Controller_index {
+class Controller_sitemap extends Controller_index
+{
 
-    function __construct() {
+    function __construct()
+    {
 
     }
 
-    function index() {
+    function index()
+    {
+        $this->AView("");
+    }
+    function table()
+    {
         $this->AView("");
     }
 
-    function rss() {
+    function rss()
+    {
         $this->AView("");
     }
 

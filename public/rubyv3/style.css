@@ -128,7 +128,7 @@ body {
 }
 
 .main-header .header-search-box .form-inline .input-serach {
-    border: 1px solid #00AFF2;
+    border: 1px solid #C22222;
     border-radius: 100px;
     display: flex;
     box-sizing: border-box;
@@ -209,7 +209,7 @@ body {
 
 .mybtn-search {
     background-color: transparent;
-    color: #00AFF2;
+    color: #C22222;
     margin-top: 0px;
     margin-bottom: 1px;
     padding-left: 20px;
@@ -248,7 +248,10 @@ body {
     display: block;
     margin: 0px;
     padding: 15px;
+    font-size: 15px;
+    font-weight: 600;
 }
+
 
 #main-menu .navbar .navbar-nav>li:hover,
 #main-menu .navbar .navbar-nav>li.active {
@@ -919,4 +922,18 @@ h1.title-pannel {
 
 .newstitle {
     padding-top: 10px;
+}
+.Supper-Title{
+    margin-top: 2em;
+}
+.Supper-Title .hotline,.Supper-Title .hotline a {
+    color: #c22222 !important;
+}
+
+.Supper-Title .email,.Supper-Title .email a {
+    color: #c22222 !important;
+}
+#page_content_detail .container{
+    background-color: #fff;
+    padding: 10px
 }
