@@ -833,7 +833,7 @@ class Database extends \Model\iDatabase
     function GetNewsByAlias($alias, $ishow = 0)
     {
         //        reutur array
-        $where = "`Alias` = '{$alias}' and `NgayDang` < NOW() and `AnHien` = '{$ishow}' ";
+        $where = "`Alias` = '{$alias}' and  `AnHien` = '{$ishow}' ";
         $a = $this->select(table_prefix . "news", [], $where);
         if ($a)
             return $a[0];

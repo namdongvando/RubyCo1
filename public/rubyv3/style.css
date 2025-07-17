@@ -4,6 +4,8 @@ body {
     color: #444;
 }
 
+
+
 .Main-Content {
     background-color: #fff;
     padding-left: 15px;
@@ -923,17 +925,33 @@ h1.title-pannel {
 .newstitle {
     padding-top: 10px;
 }
-.Supper-Title{
+
+.Supper-Title {
     margin-top: 2em;
 }
-.Supper-Title .hotline,.Supper-Title .hotline a {
+
+.Supper-Title .hotline,
+.Supper-Title .hotline a {
     color: #c22222 !important;
 }
 
-.Supper-Title .email,.Supper-Title .email a {
+.Supper-Title .email,
+.Supper-Title .email a {
     color: #c22222 !important;
 }
-#page_content_detail .container{
+
+#page_content_detail .container {
     background-color: #fff;
     padding: 10px
+}
+
+@media only screen and (max-width: 600px) {
+    .Main-Content * {
+        max-width: 100%;
+    }
+
+    .Main-Content img {
+        max-width: 100%;
+        height: auto !important;
+    }
 }

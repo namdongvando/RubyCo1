@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,15 +9,9 @@ header("X-XSS-Protection: 1; mode=block");
 function minify_output($buffer)
 {
     $search = array(
-        '/\>[^\S ]+/s',
-        '/[^\S ]+\</s',
-        '/(\s)+/s',
         '/<!--(.|\s)*?-->/'
     );
     $replace = array(
-        '>',
-        '<',
-        '\\1',
         ''
     );
     if (preg_match("/\<html/i", $buffer) == 1 && preg_match("/\<\/html\>/i", $buffer) == 1) {

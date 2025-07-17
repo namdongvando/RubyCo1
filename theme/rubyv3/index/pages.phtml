@@ -60,7 +60,7 @@ $pageChil = $_Pages->GetChil();
                             <?php
                         }
                         ?>
-                        <div class="clearfix"></div>
+
 
                         <?php
                     } else {
@@ -97,9 +97,13 @@ $pageChil = $_Pages->GetChil();
                         }
                     }
 
-                    $tongTrang = ceil($tong / $number);
-                    echo \lib\Common::PhanTrang($tongTrang, $indexPage, "[i]");
                     ?>
+                    <div class=" col-md-12 clearfix">
+                        <?php
+                        $tongTrang = ceil($tong / $number);
+                        echo \lib\Common::PhanTrang($tongTrang, $indexPage, "[i]");
+                        ?>
+                    </div>
 
                 </div>
             </div>

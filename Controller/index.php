@@ -136,7 +136,10 @@ class Controller_index extends Application
     {
         $RedirectLink = $_SERVER['REQUEST_URI'];
         $alias = Model\CheckInput::ChekInput($this->getParam()[0]);
+
         $news = $this->News->GetNewsByAlias($alias, 1);
+
+
         if ($news == null) {
             // \lib\Common::ToUrl("/");
             $news = $this->News->GetNewsByRedirectLink($RedirectLink, 1);
